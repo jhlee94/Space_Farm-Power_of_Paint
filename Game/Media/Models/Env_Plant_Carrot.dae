@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>B6041269</author>
+      <authoring_tool>Maya2017 | ColladaMaya v3.04C PhyreEngine(TM) 3.18.0.0</authoring_tool>
+      <comments>Collada Maya Export Options: bakeTransforms=1;exportPolygonMeshes=1;relativePaths=1;bakeLighting=0;isSampling=1;
+curveConstrainSampling=0;removeStaticCurves=0;exportCameraAsLookat=0;
+exportLights=1;exportCameras=1;exportDefaultCameras=0;exportJointsAndSkin=1;
+exportAnimations=1;exportTriangles=0;exportInvisibleNodes=0;
+exportNormals=1;exportTexCoords=1;
+exportVertexColors=1;exportVertexColorsAnimation=0;exportTangents=0;
+exportTexTangents=1;exportConstraints=0;exportPhysics=1;exportXRefs=0;instanceDuplicateCurves=1;
+dereferenceXRefs=1;cameraXFov=0;cameraYFov=1;
+animationTime=0.041667</comments>
+      <source_data>file:///H:/maya/projects/default/untitled</source_data>
+    </contributor>
+    <created>2017-03-12T19:50:49Z</created>
+    <modified>2017-03-12T19:50:49Z</modified>
+    <unit meter="0.0099999997764825" name="centimeter"/>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_animations>
+    <animation id="Env_Plant_Carrot.matrix">
+      <source id="Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-input">
+        <float_array id="Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-input-array" count="2">0.0416666679084301 8.333333015441895</float_array>
+        <technique_common>
+          <accessor source="#Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-input-array" count="2" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+        <technique profile="MAYA">
+          <pre_infinity>CONSTANT</pre_infinity>
+          <post_infinity>CONSTANT</post_infinity>
+        </technique>
+      </source>
+      <source id="Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-output">
+        <float_array id="Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-output-array" count="32">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float_array>
+        <technique_common>
+          <accessor source="#Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-output-array" count="2" stride="16">
+            <param name="TRANSFORM" type="float4x4"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-interpolations">
+        <Name_array id="Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-interpolations-array" count="2">LINEAR LINEAR</Name_array>
+        <technique_common>
+          <accessor source="#Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-interpolations-array" count="2" stride="1">
+            <param name="INTERPOLATION" type="Name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-sampler">
+        <input semantic="INPUT" source="#Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-input"/>
+        <input semantic="OUTPUT" source="#Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-output"/>
+        <input semantic="INTERPOLATION" source="#Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-interpolations"/>
+      </sampler>
+      <channel source="#Env_Plant_Carrot.matrix_Env_Plant_Carrot_transform-sampler" target="Env_Plant_Carrot/transform"/>
+    </animation>
+  </library_animations>
+  <library_physics_materials>
+    <physics_material id="rigidBody1-material" name="rigidBody1-material">
+      <technique_common>
+        <dynamic_friction>0.2000000029802322</dynamic_friction>
+        <restitution>0.6000000238418579</restitution>
+        <static_friction>0.2000000029802322</static_friction>
+      </technique_common>
+    </physics_material>
+  </library_physics_materials>
+  <library_physics_models>
+    <physics_model id="MayaNativePhysicsModel">
+      <rigid_body name="rigidBody1" sid="rigidBody1">
+        <technique_common>
+          <dynamic>0</dynamic>
+          <mass>1</mass>
+          <mass_frame>
+            <translate>0 0.2502748966217041 0</translate>
+            <rotate>1 0 0 0</rotate>
+          </mass_frame>
+          <instance_physics_material url="#rigidBody1-material"/>
+          <shape>
+            <hollow>true</hollow>
+            <mass>1</mass>
+            <instance_geometry url="#Env_Plant_CarrotShape"/>
+          </shape>
+        </technique_common>
+        <technique profile="MAYA">
+          <damping>0</damping>
+        </technique>
+      </rigid_body>
+    </physics_model>
+  </library_physics_models>
+  <library_physics_scenes>
+    <physics_scene id="MayaNativePhysicsScene">
+      <instance_physics_model url="#MayaNativePhysicsModel">
+        <instance_rigid_body target="#Env_Plant_Carrot" body="rigidBody1">
+          <technique_common>
+            <angular_velocity>0 0 0</angular_velocity>
+            <velocity>0 0 0</velocity>
+            <dynamic>0</dynamic>
+            <mass>1</mass>
+            <mass_frame>
+              <translate>0 0.2502748966217041 0</translate>
+              <rotate>1 0 0 0</rotate>
+            </mass_frame>
+          </technique_common>
+          <technique profile="MAYA">
+            <damping>0</damping>
+          </technique>
+        </instance_rigid_body>
+      </instance_physics_model>
+      <technique_common>
+        <gravity>0 -980 0</gravity>
+        <time_step>0.0299999993294477</time_step>
+      </technique_common>
+    </physics_scene>
+  </library_physics_scenes>
+  <library_images>
+    <image id="tweaks_file1" name="tweaks_file1">
+      <init_from>file:///E:/GoogleDrive/_SyntyStudios/SimpleFarm/SimpleFarm_4.5/Assets/SimpleFarm/Textures/SimpleFarm.png</init_from>
+      <extra>
+        <technique profile="MAYA">
+          <dgnode_type>kFile</dgnode_type>
+          <image_sequence>0</image_sequence>
+        </technique>
+      </extra>
+    </image>
+    <image id="file1" name="file1">
+      <init_from>file:///E:/FarmModels/SimpleFarm.png</init_from>
+      <extra>
+        <technique profile="MAYA">
+          <dgnode_type>kFile</dgnode_type>
+          <image_sequence>0</image_sequence>
+        </technique>
+      </extra>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="tweaks_farmShader" name="tweaks_farmShader">
+      <instance_effect url="#tweaks_farmShader-fx"/>
+    </material>
+    <material id="lambert2" name="lambert2">
+      <instance_effect url="#lambert2-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="tweaks_farmShader-fx">
+      <profile_COMMON>
+        <newparam sid="tweaks_file1-surface">
+          <surface type="2D">
+            <init_from>tweaks_file1</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="tweaks_file1-sampler">
+          <sampler2D>
+            <source>tweaks_file1-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+            <max_anisotropy>0</max_anisotropy>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="tweaks_file1-sampler" texcoord="TEX0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <coverageU>1</coverageU>
+                    <coverageV>1</coverageV>
+                    <translateFrameU>0</translateFrameU>
+                    <translateFrameV>0</translateFrameV>
+                    <rotateFrame>0</rotateFrame>
+                    <stagger>0</stagger>
+                    <fast>0</fast>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                    <rotateUV>0</rotateUV>
+                    <noiseU>0</noiseU>
+                    <noiseV>0</noiseV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <transparent opaque="RGB_ZERO">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </lambert>
+          <extra>
+            <technique profile="FCOLLADA"/>
+          </extra>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="lambert2-fx">
+      <profile_COMMON>
+        <newparam sid="file1-surface">
+          <surface type="2D">
+            <init_from>file1</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="file1-sampler">
+          <sampler2D>
+            <source>file1-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+            <max_anisotropy>0</max_anisotropy>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="file1-sampler" texcoord="TEX0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <coverageU>1</coverageU>
+                    <coverageV>1</coverageV>
+                    <translateFrameU>0</translateFrameU>
+                    <translateFrameV>0</translateFrameV>
+                    <rotateFrame>0</rotateFrame>
+                    <stagger>0</stagger>
+                    <fast>0</fast>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                    <rotateUV>0</rotateUV>
+                    <noiseU>0</noiseU>
+                    <noiseV>0</noiseV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <transparent opaque="RGB_ZERO">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </lambert>
+          <extra>
+            <technique profile="FCOLLADA"/>
+          </extra>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="Env_Plant_CarrotShape" name="Env_Plant_CarrotShape">
+      <mesh>
+        <source id="Env_Plant_CarrotShape-positions" name="position">
+          <float_array id="Env_Plant_CarrotShape-positions-array" count="60">-0.0515542030334472 -0.3370362520217896 0.0515542030334472 0.0515542030334472 -0.3370362520217896 0.0515542030334472 -0.164736270904541 0.509718656539917 0.1647357940673828 0.164736270904541 0.509718656539917 0.1647357940673828 -0.164736270904541 0.509718656539917 -0.1647357940673828 0.164736270904541 0.509718656539917 -0.1647357940673828 -0.0515542030334472 -0.3370362520217896 -0.0515542030334472 0.0515542030334472 -0.3370362520217896 -0.0515542030334472 -0.0810656547546386 0.509718656539917 0.0810661315917968 0.0810656547546386 0.509718656539917 0.0810661315917968 0.0810656547546386 0.509718656539917 -0.0810661315917968 -0.0810656547546386 0.509718656539917 -0.0810661315917968 -0.1709885597229004 0.8375860452651978 0.1709885597229004 0.1709885597229004 0.8375860452651978 0.1709885597229004 0.1709885597229004 0.8375860452651978 -0.1709885597229004 -0.1709885597229004 0.8375860452651978 -0.1709885597229004 0.089390754699707 0 0.089390754699707 0.089390754699707 0 -0.089390754699707 -0.089390754699707 0 -0.089390754699707 -0.089390754699707 0 0.089390754699707</float_array>
+          <technique_common>
+            <accessor source="#Env_Plant_CarrotShape-positions-array" count="20" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Env_Plant_CarrotShape-normals" name="normal">
+          <float_array id="Env_Plant_CarrotShape-normals-array" count="216">0 -0.1462275981903076 0.9892508387565613 0 -0.1462275981903076 0.9892508387565613 0 -0.1115617454051971 0.9937573671340942 0 -0.1115617454051971 0.9937573671340942 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 -0.1462275832891464 -0.9892508387565613 0 -0.1462275832891464 -0.9892508387565613 0 -0.146228015422821 -0.9892508983612061 0 -0.146228015422821 -0.9892508983612061 0.989250659942627 -0.1462289392948151 0 0.989250659942627 -0.1462289392948151 0 0.9892505407333374 -0.146230086684227 0 0.9892505407333374 -0.146230086684227 0 -0.989250659942627 -0.1462289392948151 0 -0.989250659942627 -0.1462289392948151 0 -0.9892506003379822 -0.1462291777133942 0 -0.9892506003379822 -0.1462291777133942 0 0 0.9999999403953552 0.0000005434105219 0 0.9999999403953552 0.0000005434105219 0 0.9999999403953552 0.0000005434105219 0 0.9999999403953552 0.0000005434105219 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 -0.0000005434105219 0 0.9999999403953552 -0.0000005434105219 0 0.9999999403953552 -0.0000005434105219 0 0.9999999403953552 -0.0000005434105219 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 -0.2644971013069153 0.9643863439559937 0 -0.2644971013069153 0.9643863439559937 0 -0.2644971013069153 0.9643864035606384 0 -0.2644971013069153 0.9643864035606384 0.9643864631652832 -0.264496773481369 0 0.9643864631652832 -0.264496773481369 0 0.9643864631652832 -0.264496773481369 0 0.9643864631652832 -0.264496773481369 0 0 -0.2644971013069153 -0.9643863439559937 0 -0.2644971013069153 -0.9643863439559937 0 -0.2644971013069153 -0.9643864035606384 0 -0.2644971013069153 -0.9643864035606384 -0.964385986328125 -0.2644987404346466 0 -0.964385986328125 -0.2644987404346466 0 -0.964385986328125 -0.2644987404346466 0 -0.964385986328125 -0.2644987404346466 0 0.9892505407333374 -0.1462301015853882 0 0.9892505407333374 -0.1462301015853882 0 0.9937573671340942 -0.1115617454051971 0 0.9937573671340942 -0.1115617454051971 0 0 -0.1115617528557777 -0.9937573671340942 0 -0.1115617528557777 -0.9937573671340942 0 -0.1462275981903076 -0.9892508387565613 0 -0.1462275981903076 -0.9892508387565613 -0.989250659942627 -0.1462291926145554 0 -0.989250659942627 -0.1462291926145554 0 -0.9937573671340942 -0.1115617454051971 0 -0.9937573671340942 -0.1115617454051971 0 0 -0.146228015422821 0.9892508983612061 0 -0.146228015422821 0.9892508983612061 0 -0.1462275832891464 0.9892508387565613 0 -0.1462275832891464 0.9892508387565613 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0</float_array>
+          <technique_common>
+            <accessor source="#Env_Plant_CarrotShape-normals-array" count="72" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Env_Plant_CarrotShape-map1" name="map1">
+          <float_array id="Env_Plant_CarrotShape-map1-array" count="112">0.2382628619670868 0.3796974420547485 0.2382628619670868 0.3796974420547485 0.2382628619670868 0.3796974420547485 0.2382628619670868 0.3796974420547485 0.2991141676902771 0.4224741160869598 0.2991141676902771 0.4224741160869598 0.2991141676902771 0.4224741160869598 0.2991141676902771 0.4224741160869598 0.2382628619670868 0.3796974420547485 0.2382628619670868 0.3796974420547485 0.2382628619670868 0.3796974420547485 0.2382628619670868 0.3796974420547485 0.2069334387779236 0.3796974420547485 0.206933468580246 0.3796974420547485 0.206933468580246 0.3796974420547485 0.2069334387779236 0.3796974420547485 0.2069334387779236 0.3796974420547485 0.2069334387779236 0.3796974420547485 0.2069334387779236 0.3796974420547485 0.2069334387779236 0.3796974420547485 0.2942942976951599 0.3748775124549866 0.2942942976951599 0.3748775124549866 0.2942942976951599 0.3748775124549866 0.2942942976951599 0.3748775124549866 0.2942942976951599 0.3748775124549866 0.2942942976951599 0.3748775124549866 0.2942942976951599 0.3748775124549866 0.2942942976951599 0.3748775124549866 0.261759877204895 0.4224741160869598 0.261759877204895 0.4224741160869598 0.261759877204895 0.4224741160869598 0.261759877204895 0.4224741160869598 0.2304304540157318 0.4224741160869598 0.2304304540157318 0.4224741160869598 0.2304304540157318 0.4224741160869598 0.2304304540157318 0.4224741160869598 0.261759877204895 0.4224741160869598 0.261759877204895 0.4224741160869598 0.261759877204895 0.4224741160869598 0.261759877204895 0.4224741160869598 0.2304304540157318 0.4224741160869598 0.2304304540157318 0.4224741160869598 0.2304304540157318 0.4224741160869598 0.2304304540157318 0.4224741160869598 0.2382628619670868 0.3796974420547485 0.2069334387779236 0.3796974420547485 0.2382628619670868 0.3796974420547485 0.2069334536790848 0.3796974420547485 0.2382628619670868 0.3796974420547485 0.2069334387779236 0.3796974420547485 0.2382628619670868 0.3796974420547485 0.2069334387779236 0.3796974420547485 0.2718137502670288 0.1143919602036476 0.2617794871330261 0.1143919602036476 0.2618771195411682 0.1038787439465523 0.2717505097389221 0.1037706062197685</float_array>
+          <technique_common>
+            <accessor source="#Env_Plant_CarrotShape-map1-array" count="56" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Env_Plant_CarrotShape-map1-tangents">
+          <float_array id="Env_Plant_CarrotShape-map1-tangents-array" count="216">0.9999999403953552 0 0 -0.1409840881824493 0.9793702363967896 0.1447670608758926 -0.9999999403953552 0 0 0.2498090714216232 -0.9622505307197571 -0.1080247014760971 0.9999999403953552 0 0 -0.3826833963394165 0 -0.9238794445991516 -0.9999999403953552 0 0 0.3826833963394165 0 0.9238794445991516 0.9999999403953552 0 0 -0.2971419394016266 -0.9445697069168091 0.1396229565143585 -0.9999999403953552 0 0 0.1558601260185242 0.9771613478660584 -0.1444409787654877 0 0 -0.9999999403953552 0.1444418877363205 0.9771611094474793 0.1558601707220078 0 0 0.9999999403953552 -0.1396253854036331 -0.9445697069168091 -0.2971411347389221 0 0 0.9999999403953552 -0.1444418877363205 0.9771611094474793 -0.1558601707220078 0 0 -0.9999999403953552 0.1396245509386063 -0.9445698261260986 0.2971411347389221 0.9999999403953552 0 0 -0.8489810228347778 0.0000002871507831 -0.5284233093261719 -0.9999999403953552 0 0 0.2266630232334137 -0.0000005292673108 0.973973274230957 0 0 -0.9999999403953552 -0.5284296274185181 0 0.8489770293235779 0 0 0.9999999403953552 0.9739723205566406 0 -0.2266668677330017 -0.9999999403953552 0 0 0.8489810228347778 0.0000002871507831 0.5284233093261719 0.9999999403953552 0 0 -0.2266630232334137 -0.0000005292673108 -0.973973274230957 0 0 0.9999999403953552 0.5284296274185181 0 -0.8489770293235779 0 0 -0.9999999403953552 -0.9739723205566406 0 0.2266668677330017 0.9999999403953552 0 0 -0.1885598450899124 0.9470869898796082 0.2597525119781494 -0.9999999403953552 0 0 0.4334093928337097 -0.8691022992134094 -0.2383640259504318 0 0 -0.9999999403953552 0.2597521245479584 0.9470868706703186 0.1885608732700348 0 0 0.9999999403953552 -0.2383638173341751 -0.8691025972366333 -0.4334090948104858 -0.9999999403953552 0 0 0.1885598450899124 0.9470869898796082 -0.2597525119781494 0.9999999403953552 0 0 -0.4334093928337097 -0.8691022992134094 0.2383640259504318 0 0 0.9999999403953552 -0.2597540318965912 0.9470864534378052 -0.1885609030723572 0 0 -0.9999999403953552 0.2383655607700348 -0.8691021203994751 0.4334090948104858 0 0 -0.9999999403953552 0.144769549369812 0.9793698191642761 0.1409840732812882 0 0 0.9999999403953552 -0.1080247163772583 -0.9622505903244019 -0.2498090863227844 0.9999999403953552 0 0 -0.2498090714216232 -0.9622505307197571 0.1080247014760971 -0.9999999403953552 0 0 0.1409840881824493 0.9793702363967896 -0.1447670608758926 0 0 0.9999999403953552 -0.1447686553001404 0.9793699979782105 -0.1409840732812882 0 0 -0.9999999403953552 0.1080247163772583 -0.9622505903244019 0.2498090863227844 0.9999999403953552 0 0 -0.1558601260185242 0.9771613478660584 0.1444409787654877 -0.9999999403953552 0 0 0.2971419394016266 -0.9445697069168091 -0.1396229565143585 -0.9999999403953552 0 0 -0.9999867677688599 0 -0.0051427381113171 -0.9999470710754395 0 -0.0102853393182158 -0.9999867677688599 0 -0.0051427381113171</float_array>
+          <technique_common>
+            <accessor source="#Env_Plant_CarrotShape-map1-tangents-array" count="72" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Env_Plant_CarrotShape-map1-binormals">
+          <float_array id="Env_Plant_CarrotShape-map1-binormals-array" count="216">0 0.9892510175704956 0.1462276130914688 -0.9900118708610535 -0.139468640089035 -0.0206157658249139 0 -0.9937575459480286 -0.1115617677569389 0.9682950973510742 0.2482496351003647 0.0278691388666629 0 0 -1 -0.9238796234130859 0 0.3826834559440613 0 0 1 0.9238796234130859 0 -0.3826834559440613 0 -0.9892510175704956 0.1462275981903076 -0.9548333287239075 0.2939479649066925 -0.0434503592550754 0 0.9892509579658508 -0.146228015422821 0.9877792000770569 -0.1541847884654999 0.0227911192923784 0.1462289541959763 0.9892508387565613 0 -0.0227912757545709 -0.1541848331689835 0.9877792000770569 -0.146230086684227 -0.9892506003379822 0 0.0434509739279747 0.2939470410346985 -0.9548335671424866 -0.1462289541959763 0.9892508387565613 0 0.0227912757545709 -0.1541848331689835 -0.9877792000770569 0.1462291926145554 -0.9892507791519165 0 -0.0434507057070732 0.2939470708370209 0.9548336267471314 0 0.0000005434105219 -1 -0.5284233093261719 -0.0000004613452802 0.8489810824394226 0 -0.0000005434105219 1 0.9739733338356018 0.0000001231710911 -0.2266630381345749 -1 0 0 0.8489771485328674 0 0.5284296870231628 1 0 0 -0.2266668826341629 0 -0.9739723801612854 0 0.0000005434105219 1 0.5284233093261719 -0.0000004613452802 -0.8489810824394226 0 -0.0000005434105219 -1 -0.9739733338356018 0.0000001231710911 0.2266630381345749 1 0 0 -0.8489771485328674 0 -0.5284296870231628 -1 0 0 0.2266668826341629 0 0.9739723801612854 0 0.964386522769928 0.2644971311092377 -0.9820617437362671 -0.1818445771932602 -0.0498735420405864 0 -0.9643865823745728 -0.2644971311092377 0.9011971354484558 0.4179741740226746 0.1146355420351028 0.2644968032836914 0.9643866419792175 0 -0.0498737543821334 -0.1818456053733826 0.9820615649223328 -0.2644968032836914 -0.9643866419792175 0 0.1146353185176849 0.4179739356040955 -0.9011973738670349 0 0.964386522769928 -0.2644971311092377 0.9820617437362671 -0.1818445771932602 0.0498735420405864 0 -0.9643865823745728 0.2644971311092377 -0.9011971354484558 0.4179741740226746 -0.1146355420351028 -0.2644987404346466 0.9643860459327698 0 0.049874123185873 -0.181845486164093 -0.982061505317688 0.2644987404346466 -0.9643860459327698 0 -0.1146361604332924 0.417973667383194 0.9011973142623901 0.1462301015853882 0.9892506003379822 0 -0.0206161178648471 -0.1394685804843903 0.9900119304656982 -0.1115617677569389 -0.9937575459480286 0 0.0278691407293081 0.2482496500015259 -0.968295156955719 0 -0.9937575459480286 0.1115617752075195 -0.9682950973510742 0.2482496351003647 -0.0278691407293081 0 0.9892510175704956 -0.1462276130914688 0.9900118708610535 -0.139468640089035 0.0206157658249139 -0.1462291926145554 0.9892507195472717 0 0.0206159893423318 -0.1394685953855515 -0.9900119304656982 0.1115617677569389 -0.9937575459480286 0 -0.0278691407293081 0.2482496500015259 0.968295156955719 0 0.9892509579658508 0.146228015422821 -0.9877792000770569 -0.1541847884654999 -0.0227911192923784 0 -0.9892510175704956 -0.1462275981903076 0.9548333287239075 0.2939479649066925 0.0434503592550754 0 0 -1 0.0051427381113171 0 -0.9999868273735046 0.0102853393182158 0 -0.9999471306800842 0.0051427381113171 0 -0.9999868273735046</float_array>
+          <technique_common>
+            <accessor source="#Env_Plant_CarrotShape-map1-binormals-array" count="72" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Env_Plant_CarrotShape-vertices">
+          <input semantic="POSITION" source="#Env_Plant_CarrotShape-positions"/>
+        </vertices>
+        <polylist material="lambert2SG" count="18">
+          <input semantic="VERTEX" source="#Env_Plant_CarrotShape-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Env_Plant_CarrotShape-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Env_Plant_CarrotShape-map1" offset="2" set="0"/>
+          <input semantic="TEXTANGENT" source="#Env_Plant_CarrotShape-map1-tangents" offset="3" set="0"/>
+          <input semantic="TEXBINORMAL" source="#Env_Plant_CarrotShape-map1-binormals" offset="4" set="0"/>
+          <vcount>4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4</vcount>
+          <p>0 0 0 0 0 1 1 1 1 1 16 2 44 2 2 19 3 50 3 3 12 4 4 4 4 13 5 5 5 5 14 6 6 6 6 15 7 7 7 7 4 8 8 8 8 5 9 9 9 9 17 10 46 10 10 18 11 48 11 11 16 12 45 12 12 17 13 47 13 13 5 14 14 14 14 3 15 15 15 15 18 16 49 16 16 19 17 51 17 17 2 18 18 18 18 4 19 19 19 19 2 20 20 20 20 3 21 21 21 21 9 22 22 22 22 8 23 23 23 23 3 24 21 24 24 5 25 24 25 25 10 26 25 26 26 9 27 22 27 27 5 28 24 28 28 4 29 26 29 29 11 30 27 30 30 10 31 25 31 31 4 32 26 32 32 2 33 20 33 33 8 34 23 34 34 11 35 27 35 35 8 36 28 36 36 9 37 29 37 37 13 38 30 38 38 12 39 31 39 39 9 40 32 40 40 10 41 33 41 41 14 42 34 42 42 13 43 35 43 43 10 44 36 44 44 11 45 37 45 45 15 46 38 46 46 14 47 39 47 47 11 48 40 48 48 8 49 41 49 49 12 50 42 50 50 15 51 43 51 51 1 52 12 52 52 7 53 13 53 53 17 54 47 54 54 16 55 45 55 55 18 56 48 56 56 17 57 46 57 57 7 58 10 58 58 6 59 11 59 59 6 60 16 60 60 0 61 17 61 61 19 62 51 62 62 18 63 49 63 63 19 64 50 64 64 16 65 44 65 65 3 66 2 66 66 2 67 3 67 67 6 68 52 68 68 7 69 53 69 69 1 70 54 70 70 0 71 55 71 71</p>
+        </polylist>
+      </mesh>
+      <extra>
+        <technique profile="MAYA">
+          <double_sided>1</double_sided>
+        </technique>
+      </extra>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="VisualSceneNode" name="untitled">
+      <node id="Env_Plant_Carrot" name="Env_Plant_Carrot" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <extra>
+          <technique profile="PSSG">
+            <translate_keyed/>
+            <rotate_keyed/>
+          </technique>
+        </extra>
+        <instance_geometry url="#Env_Plant_CarrotShape">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="lambert2SG" target="#lambert2">
+                <bind_vertex_input semantic="TEX0" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+          <extra>
+            <technique profile="PHYRE">
+              <object_render_properties castsShadows="1" receiveShadows="1" visibleInReflections="1" visibleInRefractions="1" motionBlurEnabled="1"/>
+            </technique>
+          </extra>
+        </instance_geometry>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0.0416666679084301</start_time>
+          <end_time>8.333333015441895</end_time>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_physics_scene url="#MayaNativePhysicsScene"/>
+    <instance_visual_scene url="#VisualSceneNode"/>
+  </scene>
+</COLLADA>

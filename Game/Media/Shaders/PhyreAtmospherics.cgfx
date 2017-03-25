@@ -1,0 +1,89 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+
+sampler2D ColorBuffer;
+
+struct FullscreenVertexIn
+{
+	float3 vertex			: POSITION;
+	float2 uv				: TEXCOORD0;
+};
+
+struct FullscreenVertexOut
+{
+	float4 position			: POSITION;
+	float2 uv				: TEXCOORD0;
+};
+
+struct FullscreenFragIn
+{
+	float2 uv				: TEXCOORD0;
+};
+
+FullscreenVertexOut FullscreenVP( FullscreenVertexIn input )
+{
+	FullscreenVertexOut output;
+	output.position = float4( input.vertex.xy, 1, 1 );
+	output.uv = input.uv;
+	return output;
+}
+FullscreenVertexOut FullscreenInvertedVP( FullscreenVertexIn input )
+{
+	FullscreenVertexOut output;
+	output.position = float4( input.vertex.xy, 1, 1 );
+	output.uv = input.uv;
+	output.uv.y = 1-output.uv.y;
+	return output;
+}
+
+float4 PassThroughFP( FullscreenFragIn input ) : FRAG_OUTPUT_COLOR
+{
+	return h4tex2D( ColorBuffer, input.uv );
+}
+
+technique RenderTextures
+{
+	pass mainRender
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 PassThroughFP();
+		colorMask = bool4( true, true, true, true );
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+	}
+}
+
+technique RenderAtmosphere
+{
+	pass mainRender
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 PassThroughFP();
+		colorMask = bool4( true, true, true, true );
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+	}
+}
+technique RenderAtmosphereInverted
+{
+	pass mainRender
+	{
+		VertexProgram = compile arbvp1 FullscreenInvertedVP();
+		FragmentProgram = compile arbfp1 PassThroughFP();
+		colorMask = bool4( true, true, true, true );
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+	}
+}

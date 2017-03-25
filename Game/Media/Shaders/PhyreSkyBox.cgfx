@@ -1,0 +1,123 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+// Shaders for rendering skyboxes.
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+#include "PhyreShaderDefs.h"
+
+//////////////////////
+// SkyBox rendering //
+//////////////////////
+
+struct SkyBoxIn
+{
+	float3	Position			: POSITION;
+};
+
+struct SkyBoxOut
+{
+	float4	Position			: POSITION;
+	float3	Direction			: TEXCOORD0;
+};
+
+samplerCUBE SkyBoxSampler;
+float4x4 ProjInverse : ProjInverse;
+
+SkyBoxOut SkyBoxVS(SkyBoxIn IN)
+{
+	// Generate 3 verts for triangle covering the screen.
+	SkyBoxOut OUT;
+
+	float2 tex = IN.Position.xy;
+	OUT.Position = float4(tex * float2(2.0f, -2.0f) + float2(-1.0f, 1.0f), 1.0f, 1.0f);
+
+	float3 viewplanePos = float3(OUT.Position.xy, -1);
+	float4 p1 = mul(ProjInverse, float4(viewplanePos, 1));
+	float4 worldViewDir = mul(scene.ViewInverse, float4(p1.xyz, 0));
+
+	OUT.Direction = worldViewDir.xyz;
+
+	return OUT;
+}
+
+float4 SkyBoxPS(SkyBoxOut IN) : FRAG_OUTPUT_COLOR0
+{
+	// Look up the cubemap.
+	float4 lightProbeLookup = texCUBE(SkyBoxSampler, IN.Direction);
+
+	// Render it.
+	return lightProbeLookup;
+}
+
+// Deferred rendering
+#ifdef __psp2__
+__nativecolor __regformat half4 SkyBoxDeferredPS(SkyBoxOut IN)
+#else //! __psp2__
+PSDeferredOutput SkyBoxDeferredPS(SkyBoxOut IN, float4 ScreenPosition : WPOS) 
+#endif //! __psp2__
+{
+	// Look up the cubemap.
+	float4 lightProbeLookup = texCUBE(SkyBoxSampler, IN.Direction);
+
+#ifdef __psp2__
+	
+	unsigned char4 out0 = unsigned char4(lightProbeLookup * 255.0);
+ 	unsigned char4 out1 = unsigned char4(0,0,0,0);
+
+	unsigned int2 outputValue =  unsigned int2(bit_cast<unsigned int>(out0), bit_cast<unsigned int>(out1));		
+	return bit_cast<half4>(outputValue);
+		
+#else //! __psp2__
+
+	PSDeferredOutput OUT;
+	OUT.Colour = lightProbeLookup;
+	OUT.NormalDepth = float4(0,0,0,0);
+	return OUT;	
+#endif //! __psp2__
+
+}
+
+technique ForwardRender
+<
+	string PhyreRenderPass = "Opaque";
+>
+{
+	pass
+	{
+		DepthTestEnable=true;
+		DepthFunc = LEqual;
+		DepthMask = false;	
+		BlendEnable = false;
+		ColorMask = bool4(true,true,true,true);
+		CullFaceEnable = false;
+
+		VertexProgram = compile vp40 SkyBoxVS();
+		FragmentProgram = compile fp40 SkyBoxPS();
+	}
+}
+	
+technique DeferredRender
+<
+	string PhyreRenderPass = "DeferredRender";
+>
+{
+	pass
+	{
+		DepthTestEnable=true;
+		DepthFunc = LEqual;
+		DepthMask = true;	
+		ColorMask = bool4(true,true,true,true);
+		CullFaceEnable = false;
+		CullFace = back;
+		StencilFunc = {always, 0, 0xff};
+		StencilOp = {replace,keep,replace};
+
+		VertexProgram = compile vp40 SkyBoxVS();
+		FragmentProgram = compile fp40 SkyBoxDeferredPS();
+	}
+}

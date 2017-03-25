@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>B6041269</author>
+      <authoring_tool>Maya2017 | ColladaMaya v3.04C PhyreEngine(TM) 3.18.0.0</authoring_tool>
+      <comments>Collada Maya Export Options: bakeTransforms=1;exportPolygonMeshes=1;relativePaths=1;bakeLighting=0;isSampling=1;
+curveConstrainSampling=0;removeStaticCurves=0;exportCameraAsLookat=0;
+exportLights=1;exportCameras=1;exportDefaultCameras=0;exportJointsAndSkin=1;
+exportAnimations=1;exportTriangles=0;exportInvisibleNodes=0;
+exportNormals=1;exportTexCoords=1;
+exportVertexColors=1;exportVertexColorsAnimation=0;exportTangents=0;
+exportTexTangents=1;exportConstraints=0;exportPhysics=1;exportXRefs=0;instanceDuplicateCurves=1;
+dereferenceXRefs=1;cameraXFov=0;cameraYFov=1;
+animationTime=0.041667</comments>
+      <source_data>file:///D:/Work/Team Projects/CSC8506/GameProject/Game/Media/Models/Env_Grass.dae</source_data>
+    </contributor>
+    <created>2017-03-12T19:46:52Z</created>
+    <modified>2017-03-12T19:46:53Z</modified>
+    <unit meter="0.0099999997764825" name="centimeter"/>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_animations>
+    <animation id="Env_Grass.matrix">
+      <source id="Env_Grass.matrix_Env_Grass_transform-input">
+        <float_array id="Env_Grass.matrix_Env_Grass_transform-input-array" count="2">0.0416666679084301 8.333333015441895</float_array>
+        <technique_common>
+          <accessor source="#Env_Grass.matrix_Env_Grass_transform-input-array" count="2" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+        <technique profile="MAYA">
+          <pre_infinity>CONSTANT</pre_infinity>
+          <post_infinity>CONSTANT</post_infinity>
+        </technique>
+      </source>
+      <source id="Env_Grass.matrix_Env_Grass_transform-output">
+        <float_array id="Env_Grass.matrix_Env_Grass_transform-output-array" count="32">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float_array>
+        <technique_common>
+          <accessor source="#Env_Grass.matrix_Env_Grass_transform-output-array" count="2" stride="16">
+            <param name="TRANSFORM" type="float4x4"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Env_Grass.matrix_Env_Grass_transform-interpolations">
+        <Name_array id="Env_Grass.matrix_Env_Grass_transform-interpolations-array" count="2">LINEAR LINEAR</Name_array>
+        <technique_common>
+          <accessor source="#Env_Grass.matrix_Env_Grass_transform-interpolations-array" count="2" stride="1">
+            <param name="INTERPOLATION" type="Name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Env_Grass.matrix_Env_Grass_transform-sampler">
+        <input semantic="INPUT" source="#Env_Grass.matrix_Env_Grass_transform-input"/>
+        <input semantic="OUTPUT" source="#Env_Grass.matrix_Env_Grass_transform-output"/>
+        <input semantic="INTERPOLATION" source="#Env_Grass.matrix_Env_Grass_transform-interpolations"/>
+      </sampler>
+      <channel source="#Env_Grass.matrix_Env_Grass_transform-sampler" target="Env_Grass/transform"/>
+    </animation>
+  </library_animations>
+  <library_physics_materials>
+    <physics_material id="rigidBody1-material" name="rigidBody1-material">
+      <technique_common>
+        <dynamic_friction>0.2000000029802322</dynamic_friction>
+        <restitution>0.6000000238418579</restitution>
+        <static_friction>0.2000000029802322</static_friction>
+      </technique_common>
+    </physics_material>
+  </library_physics_materials>
+  <library_physics_models>
+    <physics_model id="MayaNativePhysicsModel">
+      <rigid_body name="rigidBody1" sid="rigidBody1">
+        <technique_common>
+          <dynamic>0</dynamic>
+          <mass>1</mass>
+          <mass_frame>
+            <translate>5 0.0049999998882412 -5</translate>
+            <rotate>1 0 0 0</rotate>
+          </mass_frame>
+          <instance_physics_material url="#rigidBody1-material"/>
+          <shape>
+            <hollow>true</hollow>
+            <mass>1</mass>
+            <instance_geometry url="#Env_GrassShape"/>
+          </shape>
+        </technique_common>
+        <technique profile="MAYA">
+          <damping>0</damping>
+        </technique>
+      </rigid_body>
+    </physics_model>
+  </library_physics_models>
+  <library_physics_scenes>
+    <physics_scene id="MayaNativePhysicsScene">
+      <instance_physics_model url="#MayaNativePhysicsModel">
+        <instance_rigid_body target="#Env_Grass" body="rigidBody1">
+          <technique_common>
+            <angular_velocity>0 0 0</angular_velocity>
+            <velocity>0 0 0</velocity>
+            <dynamic>0</dynamic>
+            <mass>1</mass>
+            <mass_frame>
+              <translate>5 0.0049999998882412 -5</translate>
+              <rotate>1 0 0 0</rotate>
+            </mass_frame>
+          </technique_common>
+          <technique profile="MAYA">
+            <damping>0</damping>
+          </technique>
+        </instance_rigid_body>
+      </instance_physics_model>
+      <technique_common>
+        <gravity>0 -980 0</gravity>
+        <time_step>0.0299999993294477</time_step>
+      </technique_common>
+    </physics_scene>
+  </library_physics_scenes>
+  <library_images>
+    <image id="file1" name="file1">
+      <init_from>../Textures/SimpleFarm.png</init_from>
+      <extra>
+        <technique profile="MAYA">
+          <dgnode_type>kFile</dgnode_type>
+          <image_sequence>0</image_sequence>
+        </technique>
+      </extra>
+    </image>
+    <image id="file2" name="file2">
+      <init_from>../Textures/SimpleFarm.png</init_from>
+      <extra>
+        <technique profile="MAYA">
+          <dgnode_type>kFile</dgnode_type>
+          <image_sequence>0</image_sequence>
+        </technique>
+      </extra>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="farmShader" name="farmShader">
+      <instance_effect url="#farmShader-fx"/>
+    </material>
+    <material id="lambert2" name="lambert2">
+      <instance_effect url="#lambert2-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="farmShader-fx">
+      <profile_COMMON>
+        <newparam sid="file1-surface">
+          <surface type="2D">
+            <init_from>file1</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="file1-sampler">
+          <sampler2D>
+            <source>file1-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+            <max_anisotropy>0</max_anisotropy>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="file1-sampler" texcoord="TEX0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <coverageU>1</coverageU>
+                    <coverageV>1</coverageV>
+                    <translateFrameU>0</translateFrameU>
+                    <translateFrameV>0</translateFrameV>
+                    <rotateFrame>0</rotateFrame>
+                    <stagger>0</stagger>
+                    <fast>0</fast>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                    <rotateUV>0</rotateUV>
+                    <noiseU>0</noiseU>
+                    <noiseV>0</noiseV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <transparent opaque="RGB_ZERO">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </lambert>
+          <extra>
+            <technique profile="FCOLLADA"/>
+          </extra>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="lambert2-fx">
+      <profile_COMMON>
+        <newparam sid="file2-surface">
+          <surface type="2D">
+            <init_from>file2</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="file2-sampler">
+          <sampler2D>
+            <source>file2-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+            <max_anisotropy>0</max_anisotropy>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="file2-sampler" texcoord="TEX0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <coverageU>1</coverageU>
+                    <coverageV>1</coverageV>
+                    <translateFrameU>0</translateFrameU>
+                    <translateFrameV>0</translateFrameV>
+                    <rotateFrame>0</rotateFrame>
+                    <stagger>0</stagger>
+                    <fast>0</fast>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                    <rotateUV>0</rotateUV>
+                    <noiseU>0</noiseU>
+                    <noiseV>0</noiseV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <transparent opaque="RGB_ZERO">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </lambert>
+          <extra>
+            <technique profile="FCOLLADA"/>
+          </extra>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="Env_GrassShape" name="Env_GrassShape">
+      <mesh>
+        <source id="Env_GrassShape-positions" name="position">
+          <float_array id="Env_GrassShape-positions-array" count="12">0.0000004768371582 0 0 10 0 0 0.0000004768371582 0 -10 10 0 -10</float_array>
+          <technique_common>
+            <accessor source="#Env_GrassShape-positions-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Env_GrassShape-normals" name="normal">
+          <float_array id="Env_GrassShape-normals-array" count="12">0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0</float_array>
+          <technique_common>
+            <accessor source="#Env_GrassShape-normals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Env_GrassShape-map1" name="map1">
+          <float_array id="Env_GrassShape-map1-array" count="8">0.2359883189201355 0.1536069512367249 0.2359883189201355 0.1536069512367249 0.2359883189201355 0.1536069512367249 0.2359883189201355 0.1536069512367249</float_array>
+          <technique_common>
+            <accessor source="#Env_GrassShape-map1-array" count="4" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Env_GrassShape-map1-tangents">
+          <float_array id="Env_GrassShape-map1-tangents-array" count="12">0.9999999403953552 0 0 -0.3826834559440613 0 -0.9238796234130859 -0.9999999403953552 0 0 0.3826834559440613 0 0.9238796234130859</float_array>
+          <technique_common>
+            <accessor source="#Env_GrassShape-map1-tangents-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Env_GrassShape-map1-binormals">
+          <float_array id="Env_GrassShape-map1-binormals-array" count="12">0 0 -1 -0.9238795638084412 0 0.3826834261417389 0 0 1 0.9238795638084412 0 -0.3826834261417389</float_array>
+          <technique_common>
+            <accessor source="#Env_GrassShape-map1-binormals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Env_GrassShape-vertices">
+          <input semantic="POSITION" source="#Env_GrassShape-positions"/>
+          <input semantic="NORMAL" source="#Env_GrassShape-normals"/>
+        </vertices>
+        <polylist material="lambert2SG" count="1">
+          <input semantic="VERTEX" source="#Env_GrassShape-vertices" offset="0"/>
+          <input semantic="TEXCOORD" source="#Env_GrassShape-map1" offset="1" set="0"/>
+          <input semantic="TEXTANGENT" source="#Env_GrassShape-map1-tangents" offset="2" set="0"/>
+          <input semantic="TEXBINORMAL" source="#Env_GrassShape-map1-binormals" offset="3" set="0"/>
+          <vcount>4</vcount>
+          <p>0 0 0 0 1 1 1 1 3 3 2 2 2 2 3 3</p>
+        </polylist>
+      </mesh>
+      <extra>
+        <technique profile="MAYA">
+          <double_sided>1</double_sided>
+        </technique>
+      </extra>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="VisualSceneNode" name="untitled">
+      <node id="Env_Grass" name="Env_Grass" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <extra>
+          <technique profile="PSSG">
+            <translate_keyed/>
+            <rotate_keyed/>
+          </technique>
+        </extra>
+        <instance_geometry url="#Env_GrassShape">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="lambert2SG" target="#lambert2">
+                <bind_vertex_input semantic="TEX0" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+          <extra>
+            <technique profile="PHYRE">
+              <object_render_properties castsShadows="1" receiveShadows="1" visibleInReflections="1" visibleInRefractions="1" motionBlurEnabled="1"/>
+            </technique>
+          </extra>
+        </instance_geometry>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0.0416666679084301</start_time>
+          <end_time>8.333333015441895</end_time>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_physics_scene url="#MayaNativePhysicsScene"/>
+    <instance_visual_scene url="#VisualSceneNode"/>
+  </scene>
+</COLLADA>

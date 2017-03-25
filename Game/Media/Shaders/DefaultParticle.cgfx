@@ -1,0 +1,138 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+// Default implementation of a shader required by a sprite particle emitter.
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+
+// Context switches
+bool PhyreContextSwitches 
+< 
+string ContextSwitchNames[] = {"LOW_RES_PARTICLES"}; 
+>;
+
+bool PhyreMaterialSwitches 
+< 
+string MaterialSwitchNames[] = {"RENDER_AS_LOW_RES"}; 
+string MaterialSwitchUiNames[] = {"Render at Lower Resolution"}; 
+string MaterialSwitchDefaultValues[] = {""};
+>;
+
+float4x4 WorldViewProjection		: WorldViewProjection;	
+float4 ParticleColor = float4(1);
+
+// If the top-level RENDER_AS_LOW_RES material switch hasn't been set, LOW_RES_PARTICLES cannot be supported
+#ifndef RENDER_AS_LOW_RES
+	#undef LOW_RES_PARTICLES
+#endif // LOW_RES_PARTICLES
+
+float SoftDepthScale <float UIMin = 0.0001; float UIMax = 1.0; string UIName = "Soft Depth Scale"; string UILabel = "The scale for difference in depth between the particle and scene when softening particles.";> = 0.9f;
+
+///////////////////////////////////////////////////////////////
+// structures /////////////////////
+///////////////////////////////////////////////////////////////
+
+struct ParticleVertexIn
+{
+	float3 Position		: POSITION;
+	float2 Texcoord 	: TEXCOORD0;
+};
+
+struct ParticleVertexOut
+{
+	float4 position		: POSITION;
+	float2 Texcoord 	: TEXCOORD0;	
+	
+#ifdef LOW_RES_PARTICLES
+	float3 DepthTexCoord: TEXCOORD1;
+#endif // LOW_RES_PARTICLES
+};
+
+struct ParticleFragIn
+{
+	float4 position		: POSITION;
+	float2 Texcoord 	: TEXCOORD0;
+	
+#ifdef LOW_RES_PARTICLES
+	float3 DepthTexCoord: TEXCOORD1;
+#endif // LOW_RES_PARTICLES
+};
+
+// Convert a depth value from post projection space to view space. 
+float ConvertDepth(float depth)
+{				
+#ifdef ORTHO_CAMERA
+	float viewSpaceZ = -(depth * scene.cameraFarMinusNear + scene.cameraNearFar.x);
+#else //! ORTHO_CAMERA
+	float viewSpaceZ = -(scene.cameraNearTimesFar / (depth * scene.cameraFarMinusNear - scene.cameraNearFar.y));
+#endif //! ORTHO_CAMERA
+	return viewSpaceZ;
+}
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+ParticleVertexOut RenderParticlesVP(ParticleVertexIn input)
+{
+	ParticleVertexOut output;
+	float4 localPosition = float4(input.Position.xyz,1.0f);	
+	
+	output.position = mul(WorldViewProjection, localPosition);
+	output.Texcoord = input.Texcoord;
+
+#ifdef LOW_RES_PARTICLES
+	output.DepthTexCoord.xy = (output.position.xy / output.position.w) * 0.5f + 0.5f;
+	output.DepthTexCoord.z = output.position.z;
+#endif // LOW_RES_PARTICLES
+
+	return output;
+}
+
+half4 RenderParticlesFP(ParticleFragIn input) : FRAG_OUTPUT_COLOR0
+{
+	half2 p = input.Texcoord * 2.0f - 1.0f;
+	half a = length(p * 0.7f);
+	a = saturate(1.0 - a);
+	a = a * a;
+	a = a * a;
+	
+#ifdef LOW_RES_PARTICLES
+	float sceneDepth = abs(ConvertDepth(tex2D(LowResDepthTexture, input.DepthTexCoord.xy).x));
+	float particleDepth = input.DepthTexCoord.z;
+	float diff = saturate(SoftDepthScale * (sceneDepth - particleDepth));
+	return ParticleColor * half4(1.0,1.0,1.0,diff *a);
+#else // LOW_RES_PARTICLES
+	return ParticleColor * half4(1.0,1.0,1.0,a);
+#endif // LOW_RES_PARTICLES
+}
+
+#ifdef RENDER_AS_LOW_RES
+technique LowResParticles
+#else // RENDER_AS_LOW_RES
+technique Transparent
+#endif // RENDER_AS_LOW_RES
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 RenderParticlesVP();
+		FragmentProgram = compile fp40 RenderParticlesFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = true;
+		depthFunc = lessEqual;
+		depthMask = true;
+		blendEnable = true;
+#ifdef RENDER_AS_LOW_RES
+		BlendFuncSeparate = {srcalpha, oneminussrcalpha, zero, oneminussrcalpha};
+#else // RENDER_AS_LOW_RES
+		BlendFunc = {srcAlpha,oneMinusSrcAlpha};
+#endif // RENDER_AS_LOW_RES
+	}
+}
+
+

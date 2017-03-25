@@ -1,0 +1,985 @@
+/* SCE CONFIDENTIAL
+PhyreEngine(TM) Package 3.10.0.0
+* Copyright (C) 2014 Sony Computer Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreShaderCommon.h"
+
+// An implementation of the default COLLADA shader - for Maya lamberts.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The maximum number of lights this shader supports.
+#define MAX_NUM_LIGHTS 3
+
+// Switches. 
+// Context switches
+bool PhyreContextSwitches 
+< 
+string ContextSwitchNames[] = {"NUM_LIGHTS", "LOD_BLEND", "INSTANCING_ENABLED"}; 
+int MaxNumLights = MAX_NUM_LIGHTS; 
+string SupportedLightTypes[] = {"DirectionalLight","PointLight","SpotLight"};
+string SupportedShadowTypes[] = {"PCFShadowMap", "CascadedShadowMap", "CombinedCascadedShadowMap"};
+>;
+
+// Material switch definitions. These are the material switches this shader exposes.
+bool PhyreMaterialSwitches 
+< 
+string MaterialSwitchNames[] = {"LAYERED_TEXTURE_MODE_OVER_NONE_ENABLED", "MULTIPLE_UVS_ENABLED", "VERTEX_COLOR_ENABLED", "TEXTURE_ENABLED", "NORMAL_MAPPING_ENABLED", "SPECULAR_ENABLED", "CASTS_SHADOWS", "ALPHA_ENABLED", "RECEIVE_SHADOWS"}; 
+string MaterialSwitchUiNames[] = {"Layered Texture Mode Over None", "Enable Multiple UVs", "Enable Vertex Color", "Enable Texture",  "Enable Normal Mapping", "Enable Specular", "Casts Shadows", "Alpha Enabled", "Receive Shadows"}; 
+>;
+
+#include "PhyreSceneWideParameters.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Preprocessing of switches. 
+// Setup macros for common combinations of switches
+#ifdef NUM_LIGHTS
+#if NUM_LIGHTS > MAX_NUM_LIGHTS
+#error Maximum number of supported lights exceeded.
+#endif //! NUM_LIGHTS > MAX_NUM_LIGHTS
+#else //! NUM_LIGHTS
+#define NUM_LIGHTS 0
+#endif //! NUM_LIGHTS
+
+#if defined(NORMAL_MAPPING_ENABLED)
+#define USE_TANGENTS
+#endif //! defined(NORMAL_MAPPING_ENABLED)
+
+#if NUM_LIGHTS > 0
+#define USE_NORMALS
+#endif //! NUM_LIGHTS > 0
+
+#if defined(ALPHA_ENABLED) && defined(TEXTURE_ENABLED)
+#define SHADOW_TEXTURE_SAMPLING_ENABLED
+#define ZPREPASS_TEXTURE_SAMPLING_ENABLED
+#endif
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Global shader parameters.
+
+// Un-tweakables
+float4x4 World					: World;		
+float4x4 WorldView				: WorldView;		
+float4x4 WorldInverse			: WorldInverse;
+float4x4 WorldViewProjection	: WorldViewProjection;	
+float4x4 WorldViewInverse		: WorldViewInverse;	
+
+#ifdef SKINNING_ENABLED
+#ifndef NUM_SKIN_TRANSFORMS
+	#define NUM_SKIN_TRANSFORMS 80 // Note: This number is mirrored in Core as PD_MATERIAL_SKINNING_MAX_GPU_BONE_COUNT
+#endif // NUM_SKIN_TRANSFORMS
+float3x4 BoneTransforms[NUM_SKIN_TRANSFORMS] : BONETRANSFORMS;
+#endif //! SKINNING_ENABLED
+
+// Material Parameters
+half4 MaterialColor : MATERIALCOLOR = half4(1.0f,1.0f,1.0f,1.0f);
+half4 MaterialTransparency : MATERIALTRANSPARENCY = half4(0,0,0,0);
+half4 MaterialAmbient : MATERIALAMBIENT = half4(0,0,0,0);
+half4 MaterialEmission : MATERIALEMISSION = half4(0,0,0,0);
+half4 MaterialDiffuse : MATERIALDIFFUSE = half4(1,1,1,1);
+
+#ifdef SPECULAR_ENABLED
+half4 MaterialSpecular : MATERIALSPECULAR = half4(2,2,2,2);
+
+float SpecularPower : SpecularPower = 32.0f;
+float FresnelPower : FresnelPower = 1.0f;
+#endif //! SPECULAR_ENABLED
+
+#if defined(TEXTURE_ENABLED) || defined(NORMAL_MAPPING_ENABLED)
+// UV animation
+float TextureOffsetU : TEXTUREOFFSETU = 0.0f;
+float TextureOffsetV : TEXTUREOFFSETV = 0.0f;
+float TextureScaleU	 : TEXTURESCALEU = 1.0f;
+float TextureScaleV	 : TEXTURESCALEV = 1.0f;
+half AlphaGain : ALPHAGAIN = 1.0f;
+#endif //! defined(TEXTURE_ENABLED) || defined(NORMAL_MAPPING_ENABLED)
+
+// Engine-supplied lighting parameters
+
+#if NUM_LIGHTS > 0
+LIGHTTYPE_0 Light0 : LIGHT0;
+#ifndef SHADOWTYPE_0
+#define LightShadow0 0.0f
+#else //! SHADOWTYPE_0
+SHADOWTYPE_0 LightShadow0 : LIGHTSHADOW0;
+#endif //! SHADOWTYPE_0
+#endif //! NUM_LIGHTS > 0
+
+#if NUM_LIGHTS > 1
+LIGHTTYPE_1 Light1 : LIGHT1;
+#ifndef SHADOWTYPE_1
+#define LightShadow1 0.0f
+#else //! SHADOWTYPE_1
+SHADOWTYPE_1 LightShadow1 : LIGHTSHADOW1;
+#endif //! SHADOWTYPE_1
+#endif //! NUM_LIGHTS > 1
+
+#if NUM_LIGHTS > 2
+LIGHTTYPE_2 Light2 : LIGHT2;
+#ifndef SHADOWTYPE_2
+#define LightShadow2 0.0f
+#else //! SHADOWTYPE_2
+SHADOWTYPE_2 LightShadow2 : LIGHTSHADOW2;
+#endif //! SHADOWTYPE_2
+#endif //! NUM_LIGHTS > 2
+
+#if NUM_LIGHTS > 3
+LIGHTTYPE_3 Light3 : LIGHT3;
+#ifndef SHADOWTYPE_3
+#define LightShadow3 0.0f
+#else //! SHADOWTYPE_3
+SHADOWTYPE_3 LightShadow3 : LIGHTSHADOW3;
+#endif //! SHADOWTYPE_3
+#endif //! NUM_LIGHTS > 3
+
+// Textures
+#ifdef TEXTURE_ENABLED
+sampler2D TextureSampler;
+#ifdef MULTIPLE_UVS_ENABLED
+sampler2D TextureSampler1;
+#endif //! MULTIPLE_UVS_ENABLED
+#endif //! TEXTURE_ENABLED
+
+#ifdef NORMAL_MAPPING_ENABLED
+sampler2D NormalMapSampler;
+#endif //! NORMAL_MAPPING_ENABLED
+
+#ifdef LIGHTPREPASS_ENABLED
+sampler2D LightPrepassSampler;
+#endif //! LIGHTPREPASS_ENABLED
+
+#ifdef LOD_BLEND
+float LodBlendValue : LodBlendValue;
+#endif //! LOD_BLEND
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Global shader parameters.
+
+#ifdef INSTANCING_ENABLED
+struct InstancingInput
+{
+	float4	InstanceTransform0	: ATTR13;
+	float4	InstanceTransform1	: ATTR14;
+	float4	InstanceTransform2	: ATTR15;
+};
+#endif //! INSTANCING_ENABLED
+
+struct ZVSInput
+{
+#ifdef SKINNING_ENABLED
+	float3 SkinnableVertex : POSITION;
+	float4 SkinIndices : COLOR1;
+	float4 SkinWeights : TEXCOORD2;
+#else //! SKINNING_ENABLED
+	float4 Position	: POSITION;
+#endif //! SKINNING_ENABLED
+#ifdef INSTANCING_ENABLED
+	InstancingInput instancingInput;
+#endif //! INSTANCING_ENABLED
+};
+
+
+struct ShadowTransparentVSInput
+{
+#ifdef SKINNING_ENABLED
+	float3 SkinnableVertex : POSITION;
+	float4 SkinIndices : COLOR1;
+	float4 SkinWeights : TEXCOORD2;
+#else //! SKINNING_ENABLED
+	float4 Position	: POSITION;
+#endif //! SKINNING_ENABLED
+#ifdef INSTANCING_ENABLED
+	InstancingInput instancingInput;
+#endif //! INSTANCING_ENABLED
+#if defined(TEXTURE_ENABLED)
+	float2 Uv	: TEXCOORD0;
+#endif //! TEXTURE_ENABLED
+};
+
+
+struct DefaultVSInput
+{
+#ifdef VERTEX_COLOR_ENABLED
+	float4 Color : COLOR0;
+#endif //! VERTEX_COLOR_ENABLED
+#ifdef SKINNING_ENABLED
+
+	float3 SkinnableVertex : POSITION;
+#ifdef USE_NORMALS
+	float3 SkinnableNormal	: NORMAL; 	
+#endif //! USE_NORMALS
+
+#else //! SKINNING_ENABLED
+
+	float4 Position	: POSITION;
+#ifdef USE_NORMALS
+	float3 Normal	: NORMAL; 	
+#endif //! USE_NORMALS
+
+#endif //! SKINNING_ENABLED
+	
+#if defined(TEXTURE_ENABLED) || defined(NORMAL_MAPPING_ENABLED)
+	float2 Uv	: TEXCOORD0;
+#ifdef USE_TANGENTS
+#ifdef SKINNING_ENABLED
+	float3 SkinnableTangent	: TEXCOORD1;
+#else //! SKINNING_ENABLED
+	float3 Tangent	: TEXCOORD1;
+#endif //! SKINNING_ENABLED
+#endif //! USE_TANGENTS
+#endif //! defined(TEXTURE_ENABLED) || defined(NORMAL_MAPPING_ENABLED)
+
+#ifdef SKINNING_ENABLED
+	float4 SkinIndices : COLOR1;
+	float4 SkinWeights : TEXCOORD2;
+#endif //! SKINNING_ENABLED
+#ifdef MULTIPLE_UVS_ENABLED
+	float2 Uv1	: TEXCOORD3;
+#endif //! MULTIPLE_UVS_ENABLED
+
+#ifdef INSTANCING_ENABLED
+	InstancingInput instancingInput;
+#endif //! INSTANCING_ENABLED
+};
+
+struct ShadowTransparentVSOutput
+{
+	float4 Position	: POSITION;	
+#if defined(TEXTURE_ENABLED)
+	float2 Uv	: TEXCOORD0;
+#endif //! TEXTURE_ENABLED
+};
+
+struct DefaultVSForwardRenderOutput
+{
+#ifdef VERTEX_COLOR_ENABLED
+	float4 Color : COLOR0;
+#endif //! VERTEX_COLOR_ENABLED
+	float4 Position	: POSITION;	
+	
+	float2 Uv	: TEXCOORD0;
+	float4 NormalDepth	: TEXCOORD1; 	
+	float3 WorldPosition : TEXCOORD2;
+#ifdef USE_TANGENTS
+	float3 Tangent	: TEXCOORD3;
+#endif //! USE_TANGENTS
+#ifdef MULTIPLE_UVS_ENABLED
+	float2 Uv1	: TEXCOORD4;
+#endif //! MULTIPLE_UVS_ENABLED
+};
+
+struct DefaultPSLightPrepassRenderInput
+{
+#ifdef VERTEX_COLOR_ENABLED
+	float4 Color : COLOR0;
+#endif //! VERTEX_COLOR_ENABLED
+	float4 Position	: POSITION;	
+	float2 Uv	: TEXCOORD0;
+	float4 NormalDepth	: TEXCOORD1; 	
+	float3 WorldPosition : TEXCOORD2;
+#ifdef USE_TANGENTS
+	float3 Tangent	: TEXCOORD3;
+#endif //! USE_TANGENTS
+#ifdef MULTIPLE_UVS_ENABLED
+	float2 Uv1	: TEXCOORD4;
+#endif //! MULTIPLE_UVS_ENABLED
+
+	float4 ScreenPosition : WPOS;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Vertex shaders
+
+#ifdef INSTANCING_ENABLED
+void ApplyInstanceTransformVertex(InstancingInput IN, inout float3 toTransform)
+{
+	float3 instanceTransformedPosition;
+	instanceTransformedPosition.x = dot(IN.InstanceTransform0, float4(toTransform,1));
+	instanceTransformedPosition.y = dot(IN.InstanceTransform1, float4(toTransform,1));
+	instanceTransformedPosition.z = dot(IN.InstanceTransform2, float4(toTransform,1));
+	toTransform = instanceTransformedPosition;
+}
+
+void ApplyInstanceTransformNormal(InstancingInput IN, inout float3 toTransform)
+{
+	float3 instanceTransformedNormal;
+	instanceTransformedNormal.x = dot(IN.InstanceTransform0.xyz, toTransform);
+	instanceTransformedNormal.y = dot(IN.InstanceTransform1.xyz, toTransform);
+	instanceTransformedNormal.z = dot(IN.InstanceTransform2.xyz, toTransform);
+	toTransform = instanceTransformedNormal;
+}
+#endif //! INSTANCING_ENABLED
+
+// Default shadow vertex shader.
+float4 DefaultShadowVS(ZVSInput IN) : POSITION
+{
+#ifdef SKINNING_ENABLED
+	float3 position = IN.SkinnableVertex;
+	float4 skinIndices = IN.SkinIndices;
+	UNNORMALIZE_SKININDICES(skinIndices);
+	float4 skinWeights = IN.SkinWeights;
+	EvaluateSkinPosition4Bones(position, skinWeights, skinIndices, BoneTransforms);
+#ifdef INSTANCING_ENABLED
+	ApplyInstanceTransformVertex(IN.instancingInput, position.xyz);
+#endif //! INSTANCING_ENABLED
+	return mul(scene.ViewProjection, float4(position.xyz,1));	
+#else //! SKINNING_ENABLED
+	float3 position = IN.Position.xyz;
+#ifdef INSTANCING_ENABLED
+	ApplyInstanceTransformVertex(IN.instancingInput, position.xyz);
+#endif //! INSTANCING_ENABLED
+	return mul(WorldViewProjection, float4(position.xyz,1));
+#endif //! SKINNING_ENABLED
+}
+
+// Transparent shadow vertex shader.
+ShadowTransparentVSOutput ShadowTransparentVS(ShadowTransparentVSInput IN) : POSITION
+{
+	ShadowTransparentVSOutput Out;
+#ifdef TEXTURE_ENABLED
+	Out.Uv = IN.Uv;
+#endif //! TEXTURE_ENABLED
+#ifdef SKINNING_ENABLED
+	float3 position = IN.SkinnableVertex;
+	float4 skinIndices = IN.SkinIndices;
+	UNNORMALIZE_SKININDICES(skinIndices);
+	float4 skinWeights = IN.SkinWeights;
+	EvaluateSkinPosition4Bones(position, skinWeights, skinIndices, BoneTransforms);
+#ifdef INSTANCING_ENABLED
+	ApplyInstanceTransformVertex(IN.instancingInput, position.xyz);
+#endif //! INSTANCING_ENABLED
+	Out.Position = mul(scene.ViewProjection, float4(position.xyz,1));	
+#else //! SKINNING_ENABLED
+	float3 position = IN.Position.xyz;
+#ifdef INSTANCING_ENABLED
+	ApplyInstanceTransformVertex(IN.instancingInput, position.xyz);
+#endif //! INSTANCING_ENABLED
+	Out.Position = mul(WorldViewProjection, float4(position.xyz,1));
+#endif //! SKINNING_ENABLED
+	return Out;
+}
+
+
+// Default Z prepass vertex shader.
+float4 DefaultZPrePassVS(ZVSInput IN) : POSITION
+{
+#ifdef SKINNING_ENABLED
+	float3 position = IN.SkinnableVertex;
+	float4 skinIndices = IN.SkinIndices;
+	UNNORMALIZE_SKININDICES(skinIndices);
+	float4 skinWeights = IN.SkinWeights;
+	EvaluateSkinPosition4Bones(position, skinWeights, skinIndices, BoneTransforms);
+#ifdef INSTANCING_ENABLED
+	ApplyInstanceTransformVertex(IN.instancingInput, position.xyz);
+#endif //! INSTANCING_ENABLED
+	return mul(scene.ViewProjection, float4(position.xyz,1));	
+#else //! SKINNING_ENABLED
+	float3 position = IN.Position.xyz;
+#ifdef INSTANCING_ENABLED
+	ApplyInstanceTransformVertex(IN.instancingInput, position.xyz);
+#endif //! INSTANCING_ENABLED
+	return mul(WorldViewProjection, float4(position.xyz,1));
+#endif //! SKINNING_ENABLED
+}
+
+// Default forward render vertex shader
+DefaultVSForwardRenderOutput DefaultForwardRenderVS(DefaultVSInput IN)
+{
+	DefaultVSForwardRenderOutput OUT;
+
+	// Grab tangent
+#ifdef USE_TANGENTS
+#ifdef SKINNING_ENABLED
+	float3 tangent = IN.SkinnableTangent;
+#else //! SKINNING_ENABLED
+	float3 tangent = IN.Tangent;
+#endif //! SKINNING_ENABLED
+#endif //! USE_TANGENTS
+
+	// Get normal
+	float3 normal = 1.0f;
+#ifdef USE_NORMALS
+#ifdef SKINNING_ENABLED
+	normal = IN.SkinnableNormal;
+#else //! SKINNING_ENABLED
+	normal = IN.Normal;
+#endif //! SKINNING_ENABLED
+#endif //! USE_NORMALS
+
+	// Get position.
+#ifdef SKINNING_ENABLED
+	float3 position = IN.SkinnableVertex.xyz;
+#else //! SKINNING_ENABLED
+	float3 position = IN.Position.xyz;
+#endif //! SKINNING_ENABLED
+
+#ifdef SKINNING_ENABLED
+	float4 skinIndices = IN.SkinIndices;
+	UNNORMALIZE_SKININDICES(skinIndices);
+	float4 skinWeights = IN.SkinWeights;
+
+#if defined(USE_NORMALS) && defined(USE_TANGENTS)
+	EvaluateSkinPositionNormalTangent4Bones(position, normal, tangent, skinWeights, skinIndices, BoneTransforms );
+#elif defined(USE_NORMALS)
+	EvaluateSkinPositionNormal4Bones(position, normal, skinWeights, skinIndices, BoneTransforms );
+#elif defined(USE_TANGENTS)
+	EvaluateSkinPositionNormal4Bones(position, tangent, skinWeights, skinIndices, BoneTransforms );
+#else //! USE_TANGENTS
+	EvaluateSkinPosition4Bones(position, skinWeights, skinIndices, BoneTransforms );
+#endif //! USE_NORMALS && USE_TANGENTS
+#endif //! SKINNING_ENABLED
+
+#ifdef INSTANCING_ENABLED
+	ApplyInstanceTransformVertex(IN.instancingInput, position.xyz);
+#ifdef USE_NORMALS
+	ApplyInstanceTransformNormal(IN.instancingInput, normal.xyz);
+#endif //! USE_NORMALS
+#ifdef USE_TANGENTS
+	ApplyInstanceTransformNormal(IN.instancingInput, tangent.xyz);
+#endif //! USE_TANGENTS
+#endif //! INSTANCING_ENABLED
+
+#ifdef SKINNING_ENABLED
+	OUT.WorldPosition = position;
+#else //! SKINNING_ENABLED
+	OUT.WorldPosition = mul(World, float4(position,1.0f)).xyz;
+#endif //! SKINNING_ENABLED
+	OUT.Position = mul(scene.ViewProjection, float4(OUT.WorldPosition,1.0f));
+#if defined(TEXTURE_ENABLED) || defined(NORMAL_MAPPING_ENABLED)
+	OUT.Uv.xy = IN.Uv * float2(TextureScaleU, TextureScaleV) + float2(TextureOffsetU, TextureOffsetV);
+#else //! defined(TEXTURE_ENABLED) || defined(NORMAL_MAPPING_ENABLED)
+	OUT.Uv.xy = 0;
+#endif //! defined(TEXTURE_ENABLED) || defined(NORMAL_MAPPING_ENABLED)
+#if defined(TEXTURE_ENABLED) && defined(MULTIPLE_UVS_ENABLED)
+	OUT.Uv1.xy = IN.Uv1;
+#endif //! defined(TEXTURE_ENABLED) && defined(MULTIPLE_UVS_ENABLED)
+
+#ifndef SKINNING_ENABLED
+	#ifdef USE_NORMALS
+		normal = normalize(mul(World, float4(normal,0)).xyz);		// Put normal in world space.
+	#endif //! USE_NORMALS
+	#ifdef USE_TANGENTS
+		tangent = normalize(mul(World, float4(tangent,0)).xyz);
+	#endif //! USE_TANGENTS
+#endif //! SKINNING_ENABLED
+
+#ifdef SKINNING_ENABLED
+	OUT.NormalDepth = float4(normal, -mul(scene.View, float4(position,1.0f)).z);
+#else //! SKINNING_ENABLED
+	OUT.NormalDepth = float4(normal, -mul(WorldView, float4(position,1.0f)).z);
+#endif //! SKINNING_ENABLED
+#ifdef USE_TANGENTS
+	OUT.Tangent = tangent;
+#endif //! USE_TANGENTS
+  
+#ifdef VERTEX_COLOR_ENABLED
+	OUT.Color = IN.Color;
+#endif //! VERTEX_COLOR_ENABLED
+	return OUT;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Fragment utility macros. Just make the fragment shader code a bit neater by hiding some of the combination handling / argument passing here.
+
+#if defined(NORMAL_MAPPING_ENABLED)
+#define EvaluateNormal(In) EvaluateNormalMapNormal(In.NormalDepth.xyz,In.Uv,In.Tangent, NormalMapSampler)
+#else //! defined(NORMAL_MAPPING_ENABLED)
+#define EvaluateNormal(In) EvaluateStandardNormal(In.NormalDepth.xyz)
+#endif //! defined(NORMAL_MAPPING_ENABLED)
+
+#ifdef RECEIVE_SHADOWS
+#define EvaluateShadowValue(LightId, LightShadowId, worldPos, viewDepth) EvaluateShadow(LightId, LightShadowId, worldPos, viewDepth).x
+#else //! RECEIVE_SHADOWS
+#define EvaluateShadowValue(LightId, LightShadowId, worldPos, viewDepth) 1.0f
+#endif //! RECEIVE_SHADOWS
+
+#ifdef SPECULAR_ENABLED
+#define EvaluateLightFunction(LightIndex) \
+	{ \
+		half shad = EvaluateShadowValue(Light##LightIndex, LightShadow##LightIndex, worldPosition, In.NormalDepth.w); \
+		lightResult += EvaluateLight(Light##LightIndex, worldPosition,normal,-eyeDirection, shad, MaterialSpecular.x,SpecularPower /*,FresnelPower*/); \
+	}
+#else //! SPECULAR_ENABLED
+#define EvaluateLightFunction(LightIndex) \
+	{ \
+		half shad = EvaluateShadowValue(Light##LightIndex, LightShadow##LightIndex, worldPosition, In.NormalDepth.w); \
+		lightResult += EvaluateLight(Light##LightIndex, worldPosition,normal, shad); \
+	}
+#endif //! SPECULAR_ENABLED
+
+
+#ifdef LOD_BLEND
+half GetLODDitherValue(float2 screenUv)
+{
+	half4 ditherValue = tex2D(DitherNoiseTexture, screenUv);
+	half threshold = (1.0f-abs(LodBlendValue));
+
+	half rslt = LodBlendValue >= 0 ? ((ditherValue.x >= threshold) ? 1.0f : -1.0f) : ((ditherValue.x < threshold) ? 1.0f : -1.0f);
+	return rslt;
+}
+#endif //! LOD_BLEND
+
+half4 PackNormalAndViewSpaceDepth(half3 normal, float viewSpaceZ)
+{
+	float normalizedViewZ = viewSpaceZ / scene.cameraNearFar.y;
+
+	// Depth is packed into z, w.  W = Most sigificant bits, Z = Least significant bits.
+	// We don't use full range on W so that initial value of 1.0 is clearly beyond far plane.
+	half2 depthPacked = half2(frac(normalizedViewZ * 256.0f), floor(normalizedViewZ * 256.0f) / 255.0f);
+
+	half4 rslt = half4(normal.xy, depthPacked);
+	return rslt;
+}
+half4 PackNormalAndDepth(half3 normal, float depth)
+{
+	float viewSpaceZ = -(scene.cameraNearTimesFar / (depth * scene.cameraFarMinusNear - scene.cameraNearFar.y));
+	return PackNormalAndViewSpaceDepth(normal,viewSpaceZ);
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Fragment shaders
+
+// Default fragment shader. 
+float4 DefaultUnshadedFP(float4 ScreenPosition : WPOS) : FRAG_OUTPUT_COLOR0
+{
+#ifdef LOD_BLEND
+	clip(GetLODDitherValue(ScreenPosition.xy * (1.0f/256.0f)));
+#endif //! LOD_BLEND
+	return 1;
+}
+
+// Transparent shadow fragment shader. 
+float4 ShadowTransparentFP(ShadowTransparentVSOutput In) : FRAG_OUTPUT_COLOR0
+{
+#ifdef TEXTURE_ENABLED
+	half4 textureColour = h4tex2D(TextureSampler, In.Uv);
+	clip(textureColour.w - 0.75f);
+#endif //! TEXTURE_ENABLED
+	return 1;
+}
+
+
+// Default light pre pass first pass shader. Outputs normal and defaulted specular power only.
+
+#ifdef __psp2__
+__nativecolor __regformat half4 DefaultLightPrepassFP(DefaultVSForwardRenderOutput In) : FRAG_OUTPUT_COLOR0
+#else //! __psp2__
+half4 DefaultLightPrepassFP(DefaultVSForwardRenderOutput In) : FRAG_OUTPUT_COLOR0
+#endif //! __psp2__
+{		
+	half3 normal = EvaluateNormal(In);
+
+#ifdef SPECULAR_ENABLED
+	// could vary by pixel with a texture lookup
+	half specPower = SpecularPower;
+	half gloss = 1;
+#else //! SPECULAR_ENABLED
+	half specPower = 0;
+	half gloss = 0;
+#endif //! SPECULAR_ENABLED
+
+	half3 viewSpaceNormal = normalize(mul(scene.View, float4(normal.xyz,0)).xyz);
+		
+#ifdef __psp2__
+
+	unsigned char4 out1 = unsigned char4(half4(viewSpaceNormal.xyz * 0.5 + 0.5, gloss) * 255.0);
+
+	unsigned int2 outputValue =  unsigned int2(bit_cast<unsigned int>(out1), bit_cast<unsigned int>(out1));		
+	return bit_cast<half4>(outputValue);
+	
+#else //! __psp2__
+	half4 Out = PackNormalAndViewSpaceDepth(half3(viewSpaceNormal.xy*0.5f+0.5f,0), In.NormalDepth.w);
+	return Out;	
+#endif //! __psp2__
+	
+}
+
+half3 EvaluateLightingDefault( DefaultVSForwardRenderOutput In, float3 worldPosition, half3 normal)
+{		
+	// Lighting
+	half3 lightResult = 1;
+	half3 eyeDirection = normalize(worldPosition - scene.EyePosition.xyz);
+	lightResult = scene.GlobalAmbientColor;
+	
+#if NUM_LIGHTS > 0
+	EvaluateLightFunction(0);
+#endif //! NUM_LIGHTS > 0
+
+#if NUM_LIGHTS > 1
+	EvaluateLightFunction(1);
+#endif //! NUM_LIGHTS > 1
+
+#if NUM_LIGHTS > 2
+	EvaluateLightFunction(2);
+#endif //! NUM_LIGHTS > 2
+
+#if NUM_LIGHTS > 3
+	EvaluateLightFunction(3);
+#endif //! NUM_LIGHTS > 3
+
+	return lightResult;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Structures
+// Dont need any - use the defaults.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Vertex shaders
+// Dont need any - use the defaults.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Fragment shaders.
+
+// Forward render fragment shader
+half4 ForwardRenderFP(DefaultVSForwardRenderOutput In, float4 ScreenPosition : WPOS) : FRAG_OUTPUT_COLOR0
+{
+	half3 normal = EvaluateNormal(In);
+		
+
+#ifdef VERTEX_COLOR_ENABLED
+	half4 shadingResult = In.Color;
+#else //! VERTEX_COLOR_ENABLED
+	half4 shadingResult = MaterialColor;
+#endif //! VERTEX_COLOR_ENABLED
+
+#if defined(TEXTURE_ENABLED) && defined(MULTIPLE_UVS_ENABLED)
+#ifdef LAYERED_TEXTURE_MODE_OVER_NONE_ENABLED
+	// Need to handle the texture ordering in reverse for layered textures.
+	shadingResult *= h4tex2D(TextureSampler1, In.Uv1);
+	float4 tex2 = h4tex2D(TextureSampler, In.Uv);
+	float3 fc = shadingResult.xyz;
+	float  fa = shadingResult.w;
+	float3 bc = tex2.xyz;
+	float  ba = tex2.w;
+	shadingResult.xyz = fc * fa + (bc * (1.0f - fa));
+	shadingResult.w = 1.0f - ((1.0f - ba) * (1.0f - fa));
+#endif //! LAYERED_TEXTURE_MODE_OVER_NONE_ENABLED
+#elif defined(TEXTURE_ENABLED)
+	shadingResult *= h4tex2D(TextureSampler, In.Uv) * half4(1.0,1.0,1.0,AlphaGain);
+#endif //! defined(TEXTURE_ENABLED) && defined(MULTIPLE_UVS_ENABLED)
+
+	// Lighting
+	half3 lightResult = EvaluateLightingDefault(In, In.WorldPosition, normal);
+
+#ifndef VERTEX_COLOR_ENABLED
+	lightResult *= MaterialDiffuse.xyz;
+#endif //! VERTEX_COLOR_ENABLED
+
+	lightResult += MaterialAmbient.xyz;
+	shadingResult.xyz *= lightResult.xyz;
+	shadingResult.xyz += MaterialEmission.xyz;
+	
+#ifdef LOD_BLEND
+	clip(GetLODDitherValue(ScreenPosition.xy * (1.0f/256.0f)));
+#endif //! LOD_BLEND
+
+#ifdef ALPHA_ENABLED
+	shadingResult.w *= 1 - MaterialTransparency.x;
+#endif //! ALPHA_ENABLED
+
+	return shadingResult;
+}
+
+// Light pre pass second pass shader. Samples the light prepass buffer.
+#ifdef __psp2__
+__nativecolor __regformat unsigned char4 LightPrepassApplyFP(DefaultVSForwardRenderOutput In, __regformat unsigned char4 fragColour : FRAGCOLOR) : FRAG_OUTPUT_COLOR0
+#else //! __psp2__
+half4 LightPrepassApplyFP(DefaultPSLightPrepassRenderInput In) : FRAG_OUTPUT_COLOR0
+#endif //! __psp2__
+{
+	half3 normal = EvaluateNormal(In);
+	float3 worldPosition = In.WorldPosition;
+	half3 eyeDirection = normalize(worldPosition - scene.EyePosition.xyz);
+	
+#ifdef VERTEX_COLOR_ENABLED
+	half4 shadingResult = In.Color;
+#else //! VERTEX_COLOR_ENABLED
+	half4 shadingResult = MaterialColor;
+#endif //! VERTEX_COLOR_ENABLED
+#ifdef TEXTURE_ENABLED
+	shadingResult *= h4tex2D(TextureSampler, In.Uv);
+#ifdef MULTIPLE_UVS_ENABLED
+#endif //! MULTIPLE_UVS_ENABLED
+#endif //! TEXTURE_ENABLED
+	half alphaValue = shadingResult.w;
+
+#ifdef __psp2__
+	half3 lightResult = fragColour.xyz;
+#else //! __psp2__
+
+#ifdef LIGHTPREPASS_ENABLED
+	// Lighting
+	float2 screenUv = In.ScreenPosition.xy * scene.screenWidthHeightInv;
+	half3 lightResult = tex2D(LightPrepassSampler, screenUv).xyz;
+#else //! LIGHTPREPASS_ENABLED
+	half3 lightResult = 1;
+#endif //! LIGHTPREPASS_ENABLED
+
+#endif //! __psp2__
+
+	lightResult *= MaterialDiffuse.xyz;
+	lightResult += MaterialAmbient.xyz;
+	shadingResult.xyz *= lightResult;
+	shadingResult.xyz += MaterialEmission.xyz;
+
+	return shadingResult;
+}
+
+// Deferred rendering
+#ifdef __psp2__
+__nativecolor __regformat half4 DefaultDeferredRenderFP(DefaultVSForwardRenderOutput In, float4 ScreenPosition : WPOS) 
+#else //! __psp2__
+PSDeferredOutput DefaultDeferredRenderFP(DefaultVSForwardRenderOutput In, float4 ScreenPosition : WPOS) 
+#endif //! __psp2__
+{
+	half3 normal = EvaluateNormal(In);
+
+#ifdef VERTEX_COLOR_ENABLED
+	float4 colour = In.Color;
+#else //! VERTEX_COLOR_ENABLED
+	float4 colour = MaterialColor;
+#endif //! VERTEX_COLOR_ENABLED
+
+	colour.xyz *= MaterialDiffuse.xyz;
+#ifdef TEXTURE_ENABLED
+	colour *= h4tex2D(TextureSampler, In.Uv);
+#ifdef MULTIPLE_UVS_ENABLED
+#endif //! MULTIPLE_UVS_ENABLED
+#endif //! TEXTURE_ENABLED
+
+#ifndef SPECULAR_ENABLED
+	colour.w = 0.0;
+#endif //! SPECULAR_ENABLED
+	
+	half3 viewSpaceNormal = normalize(mul(scene.View, float4(normal.xyz,0)).xyz);
+		
+#ifdef __psp2__
+	
+	unsigned char4 out0 = unsigned char4(colour * 255.0);
+	
+	char4 viewNormali = char4(viewSpaceNormal.xyzz * 127.0);
+	unsigned char4 out1 = bit_cast<unsigned char4>(viewNormali);
+
+	unsigned int2 outputValue =  unsigned int2(bit_cast<unsigned int>(out0), bit_cast<unsigned int>(out1));		
+	return bit_cast<half4>(outputValue);
+	
+#else //! __psp2__
+
+#ifdef LOD_BLEND
+	clip(GetLODDitherValue(ScreenPosition.xy * (1.0f/256.0f)));
+#endif //! LOD_BLEND
+	PSDeferredOutput Out;
+	Out.Colour = colour;
+	Out.NormalDepth = PackNormalAndViewSpaceDepth(half3(viewSpaceNormal.xy*0.5f+0.5f,0), In.NormalDepth.w);
+	return Out;	
+#endif //! __psp2__
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Techniques.
+
+#ifndef ALPHA_ENABLED
+
+technique ForwardRender
+<
+	string PhyreRenderPass = "Opaque";
+	string VpIgnoreContextSwitches[] = {"LOD_BLEND"};
+>
+{
+	pass pass0
+	{
+		DepthTestEnable=true;
+		DepthFunc = LEqual;
+#ifdef ZPREPASS_ENABLED
+		DepthMask = false;
+#else //! ZPREPASS_ENABLED
+		DepthMask = true;	
+#endif //! ZPREPASS_ENABLED
+		BlendEnable = false;
+		ColorMask = bool4(true,true,true,true);
+		VertexProgram = compile vp40 DefaultForwardRenderVS();
+		FragmentProgram = compile fp40 ForwardRenderFP();
+	}
+}
+
+#endif //! ALPHA_ENABLED
+
+#ifdef ALPHA_ENABLED
+
+technique ForwardRenderAlpha
+<
+	string PhyreRenderPass = "Transparent";
+	string VpIgnoreContextSwitches[] = {"LOD_BLEND"};
+>
+{
+	pass pass0
+	{
+		DepthTestEnable=true;
+		DepthFunc = LEqual;
+#ifdef ZPREPASS_ENABLED
+		DepthMask = false;
+#else //! ZPREPASS_ENABLED
+		DepthMask = true;	
+#endif //! ZPREPASS_ENABLED
+		CullFaceEnable = true;
+		CullFace = back;
+		BlendEnable = true;
+		BlendFunc = {srcAlpha,oneMinusSrcAlpha};
+		ColorMask = bool4(true,true,true,true);
+		VertexProgram = compile vp40 DefaultForwardRenderVS();
+		FragmentProgram = compile fp40 ForwardRenderFP();
+	}
+}
+
+#endif //! ALPHA_ENABLED
+
+#ifdef CASTS_SHADOWS
+
+
+#ifdef ALPHA_ENABLED
+
+technique ShadowTransparent
+<
+	string PhyreRenderPass = "ShadowTransparent";
+	string VpIgnoreContextSwitches[] = {"LOD_BLEND"};
+	string FpIgnoreContextSwitches[] = {"NUM_LIGHTS"};
+>
+{
+	pass p0
+	{
+		DepthTestEnable=true;
+		DepthMask = true;
+		DepthFunc = LEqual;
+		ColorMask = bool4(false,false,false,false);
+		VertexProgram = compile vp40 ShadowTransparentVS();
+		FragmentProgram = compile fp40 ShadowTransparentFP();
+	}
+}
+
+#else //! ALPHA_ENABLED
+
+technique Shadow
+<
+	string PhyreRenderPass = "Shadow";
+	string VpIgnoreContextSwitches[] = {"LOD_BLEND"};
+	string FpIgnoreContextSwitches[] = {"NUM_LIGHTS"};
+>
+{
+	pass p0
+	{
+		DepthTestEnable=true;
+		DepthMask = true;
+		DepthFunc = LEqual;
+		ColorMask = bool4(false,false,false,false);
+		VertexProgram = compile vp40 DefaultShadowVS();
+		FragmentProgram = compile fp40 DefaultUnshadedFP();
+	}
+}
+
+#endif //! ALPHA_ENABLED
+
+#endif //! CASTS_SHADOWS
+
+#ifndef ALPHA_ENABLED
+
+technique ZPrePass
+<
+	string PhyreRenderPass = "ZPrePass";
+	string VpIgnoreContextSwitches[] = {"LOD_BLEND"};
+	string FpIgnoreContextSwitches[] = {"NUM_LIGHTS"};
+>
+{
+	pass p0
+	{
+		DepthTestEnable=true;
+		DepthMask = true;
+		DepthFunc = LEqual;
+		ColorMask = bool4(false,false,false,false);
+		VertexProgram = compile vp40 DefaultZPrePassVS();
+		FragmentProgram = compile fp40 DefaultUnshadedFP();
+	}
+}
+
+#endif //! ALPHA_ENABLED
+
+
+#ifndef ALPHA_ENABLED
+
+technique LightPrePass
+<
+	string PhyreRenderPass = "LightPrePass";
+	string VpIgnoreContextSwitches[] = {"LOD_BLEND"};
+	string FpIgnoreContextSwitches[] = {"NUM_LIGHTS"};
+>
+{
+	pass p0
+	{
+		DepthTestEnable=true;
+#ifdef ZPREPASS_ENABLED
+		DepthMask = false;
+#else //! ZPREPASS_ENABLED
+		DepthMask = true;	
+#endif //! ZPREPASS_ENABLED
+		DepthFunc = LEqual;
+		ColorMask = bool4(true,true,true,true);
+		VertexProgram = compile vp40 DefaultForwardRenderVS();
+		FragmentProgram = compile fp40 DefaultLightPrepassFP();
+	}
+}
+
+#endif //! ALPHA_ENABLED
+
+#ifndef ALPHA_ENABLED
+
+technique LightPreMaterialPass
+<
+	string PhyreRenderPass = "LightPrePassMaterial";
+	string VpIgnoreContextSwitches[] = {"LOD_BLEND"};
+	string FpIgnoreContextSwitches[] = {"NUM_LIGHTS"};
+>
+{
+	pass
+	{
+		DepthTestEnable=true;
+		DepthMask = false;
+		DepthFunc = LEqual;
+		ColorMask = bool4(true,true,true,true);
+		VertexProgram = compile vp40 DefaultForwardRenderVS();
+		FragmentProgram = compile fp40 LightPrepassApplyFP();
+	}
+}
+
+#endif //! ALPHA_ENABLED
+
+#ifndef ALPHA_ENABLED
+
+// Techniques
+technique DeferredRender
+<
+	string PhyreRenderPass = "DeferredRender";
+	string VpIgnoreContextSwitches[] = {"LOD_BLEND"};
+	string FpIgnoreContextSwitches[] = {"NUM_LIGHTS"};
+>
+{
+	pass
+	{
+		DepthTestEnable=true;
+		DepthFunc = LEqual;
+#ifdef ZPREPASS_ENABLED
+		DepthMask = false;
+#else //! ZPREPASS_ENABLED
+		DepthMask = true;	
+#endif //! ZPREPASS_ENABLED
+		ColorMask = bool4(true,true,true,true);
+		VertexProgram = compile vp40 DefaultForwardRenderVS();
+		FragmentProgram = compile fp40 DefaultDeferredRenderFP();
+	}
+}
+
+#endif //! ALPHA_ENABLED

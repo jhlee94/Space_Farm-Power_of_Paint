@@ -1,0 +1,854 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+
+// Context switches
+bool PhyreContextSwitches 
+< 
+string ContextSwitchNames[] = {"ORTHO_CAMERA"}; 
+>;
+
+#define NUM_JITTERSAMPLES 48
+//#define TINT_AREAS
+#define KERNEL_7_SAMPLES
+
+#define VITA_NUM_JITTER_SAMPLES 8
+
+half FocusPlaneDistance;
+half FocusRange;
+half FocusBlurRange; 
+
+half JitterSamplesTotalWeight;
+half4 GaussianBlurWeights;
+half4 GaussianBlurOffsets[7];
+
+half4 JitterSamples[NUM_JITTERSAMPLES/2];
+half4 JitterSampleDistances[NUM_JITTERSAMPLES/4];
+half4 JitterSampleWeights[NUM_JITTERSAMPLES/4];
+half4 FullBlurWeights;
+
+float2 ScreenUvTransform;
+
+sampler2D downsampledDepthMap;
+sampler2D DepthBuffer;
+sampler2D ColorBuffer;
+sampler2D FocusBuffer;
+sampler2D DownsampledColorBuffer;
+sampler2D BlurredColorBuffer;
+
+///////////////////////////////////////////////////////////////
+// structures /////////////////////
+///////////////////////////////////////////////////////////////
+
+struct FullscreenVertexIn
+{
+	float3 vertex		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct FullscreenVertexOut
+{
+	float4 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+
+
+struct TiledVertexIn
+{
+	float3 vertex		: POSITION;	
+};
+
+struct TiledVertexOut
+{
+	float4 position		: POSITION;
+};
+
+struct GaussianVertexOut
+{
+	float4 position		: POSITION;
+	float2 centreUv		: TEXCOORD0;
+	float4 uvs0			: TEXCOORD1;
+	float4 uvs1			: TEXCOORD2;
+	float4 uvs2			: TEXCOORD3;
+};
+
+struct FullscreenFragIn
+{
+	float2	uv			: TEXCOORD0;
+};
+
+struct TiledFragIn
+{
+	float4 ScreenPosition	: WPOS;
+};
+
+struct GaussianFragIn
+{
+	float2 centreUv		: TEXCOORD0;
+	float4 uvs0			: TEXCOORD1;
+	float4 uvs1			: TEXCOORD2;
+	float4 uvs2			: TEXCOORD3;
+};
+
+
+struct FixedKernelVertexOut
+{
+	float4 position		: POSITION;
+	float2 centreUv		: TEXCOORD0;
+	float2 uv0			: TEXCOORD1;
+	float2 uv1			: TEXCOORD2;
+	float2 uv2			: TEXCOORD3;
+	float2 uv3			: TEXCOORD4;
+	float2 uv4			: TEXCOORD5;
+	float2 uv5			: TEXCOORD6;
+	float2 uv6			: TEXCOORD7;
+	float2 uv7			: TEXCOORD8;
+};
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+FullscreenVertexOut FullscreenVP(FullscreenVertexIn input)
+{
+	FullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.uv = input.uv;
+
+	return output;
+}
+
+FullscreenVertexOut FullscreenInvertedVP(FullscreenVertexIn input)
+{
+	FullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.uv = input.uv;
+	output.uv.y = 1 - output.uv.y;
+
+	return output;
+}
+
+
+FixedKernelVertexOut FixedKernelVP(FullscreenVertexIn input)
+{
+	FixedKernelVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.centreUv = input.uv;
+	
+	output.uv0 = input.uv + JitterSamples[0].xy;
+	output.uv1 = input.uv + JitterSamples[1].xy;
+	output.uv2 = input.uv + JitterSamples[2].xy;
+	output.uv3 = input.uv + JitterSamples[3].xy;
+	output.uv4 = input.uv + JitterSamples[4].xy;
+	output.uv5 = input.uv + JitterSamples[5].xy;
+	output.uv6 = input.uv + JitterSamples[6].xy;
+	output.uv7 = input.uv + JitterSamples[7].xy;
+
+	return output;
+}
+
+
+TiledVertexOut TiledVP(TiledVertexIn input)
+{
+	TiledVertexOut output;
+	float2 pos = input.vertex.xy;
+	output.position = float4(pos,0.0f,1.0f);	
+	return output;
+}
+
+GaussianVertexOut GaussianBlurVP(FullscreenVertexIn input)
+{
+	GaussianVertexOut output;
+	
+	output.position = float4(input.vertex,1.0f);
+	output.centreUv = input.uv + GaussianBlurOffsets[3].xy;
+	output.uvs0 = float4(input.uv + GaussianBlurOffsets[0].xy,input.uv + GaussianBlurOffsets[1].xy);
+	output.uvs1 = float4(input.uv + GaussianBlurOffsets[2].xy,input.uv + GaussianBlurOffsets[4].xy);
+	output.uvs2 = float4(input.uv + GaussianBlurOffsets[5].xy,input.uv + GaussianBlurOffsets[6].xy);
+		
+	return output;
+}
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+
+
+
+
+float GetDistanceToFocusPlane(float depth)
+{	
+	
+#ifdef ORTHO_CAMERA
+	float viewSpaceZ = -(depth * scene.cameraFarMinusNear + scene.cameraNearFar.x);
+#else //! ORTHO_CAMERA	
+	float viewSpaceZ = -(scene.cameraNearTimesFar / (depth * scene.cameraFarMinusNear - scene.cameraNearFar.y));
+#endif //! ORTHO_CAMERA
+	float d = (abs(viewSpaceZ - FocusPlaneDistance) - FocusRange) * (1.0f / FocusBlurRange);
+	return saturate(d);
+}
+float ConvertDepth(float depth)
+{
+#ifdef ORTHO_CAMERA
+	float viewSpaceZ = -(depth * scene.cameraFarMinusNear + scene.cameraNearFar.x);
+#else //! ORTHO_CAMERA
+	float viewSpaceZ = -(scene.cameraNearTimesFar / (depth * scene.cameraFarMinusNear - scene.cameraNearFar.y));
+#endif //! ORTHO_CAMERA
+	float d = (viewSpaceZ - FocusPlaneDistance) * (1.0f / (FocusBlurRange + FocusRange));
+	return saturate(d);
+}
+
+// Mimic the functionality of texDepth2D.
+float GetDepth(float4 depthSample)
+{
+#ifdef __psp2__
+	return depthSample.x;
+#else
+	return dot(depthSample.xyz, ((float3(65536, 256, 1)*255.0f) / 16777215.0f));	
+#endif
+}
+
+bool FullyInFocus(half4 depthMinMax)
+{
+	return depthMinMax.x < 0.02f;
+}
+bool FullyOutOfFocus(half4 depthMinMax)
+{
+	return depthMinMax.x > 0.98f;
+}
+
+
+
+float2 TileUvToScreenUv(TiledFragIn input)
+{
+	float2 uv = input.ScreenPosition.xy * scene.screenWidthHeightInv;
+	uv.y = uv.y * ScreenUvTransform.x + ScreenUvTransform.y;
+
+	return uv;
+}
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+float4 GaussianBlurFP(GaussianFragIn input) : FRAG_OUTPUT_COLOR
+{	
+	half4 sampleCentre = h4tex2D(ColorBuffer, input.centreUv);
+#ifdef KERNEL_7_SAMPLES
+	half4 sample0 = h4tex2D(ColorBuffer, input.uvs0.xy);
+	half4 sample1 = h4tex2D(ColorBuffer, input.uvs0.zw);
+	half4 sample2 = h4tex2D(ColorBuffer, input.uvs1.xy);
+	half4 sample3 = h4tex2D(ColorBuffer, input.uvs1.zw);
+	half4 sample4 = h4tex2D(ColorBuffer, input.uvs2.xy);
+	half4 sample5 = h4tex2D(ColorBuffer, input.uvs2.zw);
+
+	half4 total = (sampleCentre* GaussianBlurWeights.w) + ((sample0+sample5)*GaussianBlurWeights.x) + ((sample1+sample4)*GaussianBlurWeights.y) + ((sample2+sample3)*GaussianBlurWeights.z);
+#else 
+	half4 sample0 = h4tex2D(ColorBuffer, input.uvs0.xy);
+	half4 sample1 = h4tex2D(ColorBuffer, input.uvs0.zw);
+	half4 sample2 = h4tex2D(ColorBuffer, input.uvs1.xy);
+	half4 sample3 = h4tex2D(ColorBuffer, input.uvs1.zw);
+	
+	half4 total = (sampleCentre* GaussianBlurWeights.z) + ((sample0+sample3)*GaussianBlurWeights.x) + ((sample1+sample2)*GaussianBlurWeights.y);
+#endif
+	return total;
+}
+
+
+half4 DownsampleColorFP(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{
+    return tex2D(ColorBuffer, input.uv);
+}
+
+float4 CalculateFocusDistanceFP(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{
+	float depth = GetDepth(tex2D(DepthBuffer, input.uv)).x;
+	float distanceToFocusPlane = GetDistanceToFocusPlane(depth);
+	float focusDepth = ConvertDepth(depth);
+
+	return float4(distanceToFocusPlane,distanceToFocusPlane,distanceToFocusPlane,focusDepth);
+}
+
+
+
+half4 DownsampleColorAndFocusDistanceFP(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{
+    half4 colorValue = tex2D(ColorBuffer, input.uv);
+    float depth = tex2D(DepthBuffer, input.uv).x;
+    float viewSpaceZ = -(scene.cameraNearTimesFar / (depth * scene.cameraFarMinusNear - scene.cameraNearFar.y));
+    float d = (viewSpaceZ - FocusPlaneDistance) * (1.0f / (FocusBlurRange + FocusRange));
+    half focusValue = saturate( (d * 0.5 + 0.5) );
+    
+    return half4(colorValue.xyz, focusValue);
+}
+
+half4 CopyToScreenFP(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{
+	half4 col = h4tex2D(ColorBuffer, input.uv);
+	half4 dofCol = h4tex2D(DownsampledColorBuffer, input.uv);
+		
+	half focusDepth = dofCol.w * 2.0 - 1.0;
+	half focusDistance = 1.0 - min(abs(focusDepth) * 15.0, 1.0);
+	
+	return lerp(dofCol, col, focusDistance);
+}
+
+// Writes the areas of the screen which cross between in and out of focus.
+half4 FullDofVITAFP(FixedKernelVertexOut input) : FRAG_OUTPUT_COLOR
+{		
+	half4 col = h4tex2D(DownsampledColorBuffer, input.centreUv);
+	half4 colSample0 = h4tex2D(DownsampledColorBuffer, input.uv0);
+	half4 colSample1 = h4tex2D(DownsampledColorBuffer, input.uv1);
+	half4 colSample2 = h4tex2D(DownsampledColorBuffer, input.uv2);
+	half4 colSample3 = h4tex2D(DownsampledColorBuffer, input.uv3);
+	half4 colSample4 = h4tex2D(DownsampledColorBuffer, input.uv4);
+	half4 colSample5 = h4tex2D(DownsampledColorBuffer, input.uv5);
+	half4 colSample6 = h4tex2D(DownsampledColorBuffer, input.uv6);
+	half4 colSample7 = h4tex2D(DownsampledColorBuffer, input.uv7);
+	
+	half4 focusValues0 = half4(colSample0.w,colSample1.w,colSample2.w,colSample3.w);
+	half4 focusValues1 = half4(colSample4.w,colSample5.w,colSample6.w,colSample7.w);
+	
+	half4 focusDepths0 = focusValues0 < col.w ? focusValues0 : col.w;
+	half4 focusDepths1 = focusValues1 < col.w ? focusValues1 : col.w;
+	
+	focusDepths0 = focusDepths0 * 2.0 - 1.0;
+	focusDepths1 = focusDepths1 * 2.0 - 1.0;
+	half4 weights0 = abs(focusDepths0) >  JitterSampleDistances[0];
+	half4 weights1 = abs(focusDepths1) >  JitterSampleDistances[1];
+			
+	half weightSum = dot(weights0 + weights1, 1.0) + 1.0;
+
+	half4 total = col;
+	total += colSample0 * weights0.x;
+	total += colSample1 * weights0.y;
+	total += colSample2 * weights0.z;
+	total += colSample3 * weights0.w;
+	total += colSample4 * weights1.x;
+	total += colSample5 * weights1.y;
+	total += colSample6 * weights1.z;
+	total += colSample7 * weights1.w;
+	
+	weightSum = 1.0 / weightSum;
+	return total * weightSum;
+	
+}
+
+// Writes the 100% blurred, and 0% blurred, areas. 
+// It takes about 2-3 cycles to hide a non-dependent read on PlayStation(R)Vita, so it's worth the extra ALU to combine the unblurred and full blurred passes.
+half4 FullBlurVITAFP(FixedKernelVertexOut input) : FRAG_OUTPUT_COLOR
+{
+	half4 col = h4tex2D(DownsampledColorBuffer, input.centreUv);
+	half4 colSample0 = h4tex2D(DownsampledColorBuffer, input.uv0);
+	half4 colSample1 = h4tex2D(DownsampledColorBuffer, input.uv1);
+	half4 colSample2 = h4tex2D(DownsampledColorBuffer, input.uv2);
+	half4 colSample3 = h4tex2D(DownsampledColorBuffer, input.uv3);
+	half4 colSample4 = h4tex2D(DownsampledColorBuffer, input.uv4);
+	half4 colSample5 = h4tex2D(DownsampledColorBuffer, input.uv5);
+	half4 colSample6 = h4tex2D(DownsampledColorBuffer, input.uv6);
+	half4 colSample7 = h4tex2D(DownsampledColorBuffer, input.uv7);
+	half4 focusValue = h4tex2D(FocusBuffer, input.centreUv);
+	
+	clip(focusValue.w - 0.5);
+			
+	half focus0Param = abs(col.w - 0.5) > 0.05;
+	half4 blurWeights = lerp(half4(0,0,0,1),FullBlurWeights, focus0Param);
+
+	half4 total = col * blurWeights.w;
+	total += colSample0 * blurWeights.x;
+	total += colSample1 * blurWeights.y;
+	total += colSample2 * blurWeights.x;
+	total += colSample3 * blurWeights.z;
+	total += colSample4 * blurWeights.z;
+	total += colSample5 * blurWeights.x;
+	total += colSample6 * blurWeights.y;
+	total += colSample7 * blurWeights.x;
+	
+	return total;
+}
+
+half4 GenerateDepthRangeFP(FixedKernelVertexOut input) : FRAG_OUTPUT_COLOR
+{
+	half4 col = h4tex2D(DownsampledColorBuffer, input.centreUv);
+	half4 colSample0 = h4tex2D(DownsampledColorBuffer, input.uv0);
+	half4 colSample1 = h4tex2D(DownsampledColorBuffer, input.uv1);
+	half4 colSample2 = h4tex2D(DownsampledColorBuffer, input.uv2);
+	half4 colSample3 = h4tex2D(DownsampledColorBuffer, input.uv3);
+	half4 colSample4 = h4tex2D(DownsampledColorBuffer, input.uv4);
+	half4 colSample5 = h4tex2D(DownsampledColorBuffer, input.uv5);
+	half4 colSample6 = h4tex2D(DownsampledColorBuffer, input.uv6);
+	half4 colSample7 = h4tex2D(DownsampledColorBuffer, input.uv7);
+	
+	half dMin = min( min( min(colSample0.w,colSample1.w), min(colSample2.w,colSample3.w) ), min( min(colSample4.w,colSample5.w), min(colSample6.w,colSample7.w) ) );
+	half dMax = max( max( max(colSample0.w,colSample1.w), max(colSample2.w,colSample3.w) ), max( max(colSample4.w,colSample5.w), max(colSample6.w,colSample7.w) ) );
+	dMin = min(dMin, col.w);
+	dMax = max(dMax, col.w);
+	
+	return half4(dMin,dMax,col.w,0.0);
+}
+
+half4 GenerateFocusDataFP(FixedKernelVertexOut input) : FRAG_OUTPUT_COLOR
+{
+	half4 col = h4tex2D(DownsampledColorBuffer, input.centreUv);
+	return col.w;
+}
+
+
+
+half4 DownsampleDepthRangeFP(FixedKernelVertexOut input) : FRAG_OUTPUT_COLOR
+{
+	half4 col = h4tex2D(FocusBuffer, input.centreUv);
+	half4 colSample0 = h4tex2D(FocusBuffer, input.uv0);
+	half4 colSample1 = h4tex2D(FocusBuffer, input.uv1);
+	half4 colSample2 = h4tex2D(FocusBuffer, input.uv2);
+	half4 colSample3 = h4tex2D(FocusBuffer, input.uv3);
+	half4 colSample4 = h4tex2D(FocusBuffer, input.uv4);
+	half4 colSample5 = h4tex2D(FocusBuffer, input.uv5);
+	half4 colSample6 = h4tex2D(FocusBuffer, input.uv6);
+	half4 colSample7 = h4tex2D(FocusBuffer, input.uv7);
+	
+	half dMin = min( min( min(colSample0.x,colSample1.x), min(colSample2.x,colSample3.x) ), min( min(colSample4.x,colSample5.x), min(colSample6.x,colSample7.x) ) );
+	half dMax = max( max( max(colSample0.y,colSample1.y), max(colSample2.y,colSample3.y) ), max( max(colSample4.y,colSample5.y), max(colSample6.y,colSample7.y) ) );
+	dMin = min(dMin, col.x);
+	dMax = max(dMax, col.y);
+	
+	half isEdgeCaseMask = (0.05 - (dMax-dMin)) >= 0 ;
+	
+	return half4(dMin,dMax,col.z,isEdgeCaseMask);
+}
+
+half4 CalculateFullDofGPUFP(FullscreenFragIn input, int sampleCount)
+{
+	half4 focusVal = h4tex2D(FocusBuffer, input.uv);
+	half4 distanceToFocusPlane = focusVal.x;
+	half4 depth = focusVal.w;
+	half4 col = h4tex2D(ColorBuffer, input.uv);
+		
+	distanceToFocusPlane = saturate(distanceToFocusPlane + 0.2f);
+	
+	half4 uvIn = half4(input.uv,input.uv);
+	half4 totalWeights = (1.0f - distanceToFocusPlane) ;
+	totalWeights *= totalWeights;
+	half4 total = col * totalWeights.x;
+	totalWeights *= 0.25h;
+
+	for(int i = 1; i<sampleCount-1;i++)
+	{	
+		half4 uv0 = uvIn + JitterSamples[i*2 + 0];
+		half4 uv1 = uvIn + JitterSamples[i*2 + 1];
+		// sample some from downsampeld and some from colourmap
+		half4 colSample0 = h4tex2D(ColorBuffer, uv0.xy);
+		half4 colSample1 = h4tex2D(DownsampledColorBuffer, uv0.zw);
+		half4 colSample2 = h4tex2D(ColorBuffer, uv1.xy);
+		half4 colSample3 = h4tex2D(DownsampledColorBuffer, uv1.zw);
+		
+		half4 focusSample0 = h4tex2D(FocusBuffer, uv0.xy);
+		half4 focusSample1 = h4tex2D(FocusBuffer, uv0.zw);
+		half4 focusSample2 = h4tex2D(FocusBuffer, uv1.xy);
+		half4 focusSample3 = h4tex2D(FocusBuffer, uv1.zw);
+
+		half4 sampleDistancesToFocusPlane = half4(focusSample0.x,focusSample1.x,focusSample2.x,focusSample3.x);
+		sampleDistancesToFocusPlane = saturate(sampleDistancesToFocusPlane + 0.3f);
+		half4 depthSamples = half4(focusSample0.w,focusSample1.w,focusSample2.w,focusSample3.w);
+		
+		half4 sampleCirclesOfConfusion = depthSamples > depth ? distanceToFocusPlane : sampleDistancesToFocusPlane;
+		half4 weights = saturate( (sampleCirclesOfConfusion - JitterSampleDistances[i]) * 15.0h );
+		weights *= JitterSampleWeights[i];
+		totalWeights += weights;
+		total += colSample0 * weights.x;
+		total += colSample1 * weights.y;
+		total += colSample2 * weights.z;
+		total += colSample3 * weights.w;
+	}
+	
+	half totalWeightSummed = dot(totalWeights,1.0f);
+
+#ifdef TINT_AREAS
+	return (half4((total / totalWeightSummed).xyz,1) + 0.3f) * half4(1,0.2f,0.2f,1);
+#else
+	return half4((total / totalWeightSummed).xyz,1);
+#endif
+	
+}
+
+half4 FullDofGPUFP(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{
+	return CalculateFullDofGPUFP(input, (NUM_JITTERSAMPLES/4));
+}
+
+#ifndef __psp2__
+
+// PC fallback that uses less registers
+arbfp1 half4 FullDofGPUFP(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{
+	return CalculateFullDofGPUFP(input, (NUM_JITTERSAMPLES/8));
+}
+
+#endif // __psp2__
+
+half4 NoBlurTiledFP(TiledFragIn input) : FRAG_OUTPUT_COLOR
+{
+	float2 inUv = TileUvToScreenUv(input);
+	half3 col = h4tex2D(ColorBuffer, inUv).xyz;	
+#ifdef TINT_AREAS
+	return (half4(col.xyz,1)+0.3f) * half4(0.2f,1,0.2f,1);
+#else
+	return half4(col.xyz,1);
+#endif	
+}
+
+half4 FullBlurTiledFP(TiledFragIn input) : FRAG_OUTPUT_COLOR
+{		
+	// sample 5 samples in a cross-shape
+	float2 SampleOffsets[4] = 
+	{
+		float2( 0.0f, -1.0f),
+		float2(-1.0f,  0.0f),
+		float2( 1.0f,  0.0f),
+		float2( 0.0f,  1.0f)
+	};
+	float2 inUv = TileUvToScreenUv(input);
+	half4 gaussianBufferSampleCentre = h4tex2D(BlurredColorBuffer, inUv);
+	float2 inverseScreenSize = scene.screenWidthHeightInv;
+	half4 gaussianBufferSample0 = h4tex2D(BlurredColorBuffer, inUv + (SampleOffsets[0]*inverseScreenSize));
+	half4 gaussianBufferSample1 = h4tex2D(BlurredColorBuffer, inUv + (SampleOffsets[1]*inverseScreenSize));
+	half4 gaussianBufferSample2 = h4tex2D(BlurredColorBuffer, inUv + (SampleOffsets[2]*inverseScreenSize));
+	half4 gaussianBufferSample3 = h4tex2D(BlurredColorBuffer, inUv + (SampleOffsets[3]*inverseScreenSize));
+	
+	half4 rslt = ((gaussianBufferSample0+gaussianBufferSample1+gaussianBufferSample2+gaussianBufferSample3) + (gaussianBufferSampleCentre*4.0f)) * (1.0f/8.0f);
+	
+#ifdef TINT_AREAS
+	return (rslt*0.01f+0.8f) * half4(0.2f,0.2f,1,1);
+#else
+	return rslt;
+#endif
+}
+
+
+half4 BetweenBlurTiledFP(TiledFragIn input) : FRAG_OUTPUT_COLOR
+{
+	float2 inUv = TileUvToScreenUv(input);
+
+	half4 focusVal = h4tex2D(FocusBuffer, inUv);
+	
+	half distanceToFocusPlane = focusVal.y;
+	half4 depth = focusVal.x;
+	half4 col = h4tex2D(ColorBuffer, inUv);
+			
+	half4 uvIn = half4(inUv,inUv);
+	half4 totalWeights = (1.0f - distanceToFocusPlane);
+	totalWeights *= totalWeights;
+	
+	half4 total = col * totalWeights.x;
+	totalWeights *= 0.25h;
+
+	// Unfortunately, CG appears to run out of registers if we use all the samples. Which is nice.
+	for(int i = 0; i<((NUM_JITTERSAMPLES)/4)-1;i++)
+	{	
+		half4 uv0 = uvIn + JitterSamples[i*2 + 0];
+		half4 uv1 = uvIn + JitterSamples[i*2 + 1];
+
+		// sample some from downsampeld and some from colourmap
+		half4 colSample0 = h4tex2D(ColorBuffer, uv0.xy);
+		half4 colSample1 = h4tex2D(DownsampledColorBuffer, uv0.zw);
+		half4 colSample2 = h4tex2D(ColorBuffer, uv1.xy);
+		half4 colSample3 = h4tex2D(DownsampledColorBuffer, uv1.zw);
+		
+		half4 focusSample0 = h4tex2D(FocusBuffer, uv0.xy);
+		half4 focusSample1 = h4tex2D(FocusBuffer, uv0.zw);
+		half4 focusSample2 = h4tex2D(FocusBuffer, uv1.xy);
+		half4 focusSample3 = h4tex2D(FocusBuffer, uv1.zw);
+
+		half4 sampleDistancesToFocusPlane = half4(focusSample0.y,focusSample1.y,focusSample2.y,focusSample3.y);
+		sampleDistancesToFocusPlane = saturate(sampleDistancesToFocusPlane);
+		half4 depthSamples = half4(focusSample0.x,focusSample1.x,focusSample2.x,focusSample3.x);	
+
+		half4 sampleCirclesOfConfusion = depthSamples > depth ? distanceToFocusPlane : sampleDistancesToFocusPlane;
+		half4 weights = saturate( (sampleCirclesOfConfusion - JitterSampleDistances[i]) * 15.0h );
+
+		weights *= JitterSampleWeights[i];
+		totalWeights += weights;
+
+		total += colSample0 * weights.x;
+		total += colSample1 * weights.y;
+		total += colSample2 * weights.z;
+		total += colSample3 * weights.w;
+	}
+			
+	half totalWeightSummed = dot(totalWeights,1.0f);
+	
+#ifdef TINT_AREAS
+	return (float4((total / totalWeightSummed).xyz,1)+0.3f) * float4(1,0.2f,0.2f,1);
+#else
+	return float4((total / totalWeightSummed).xyz,1);
+#endif
+}
+
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+technique GaussianBlur
+<
+	string ExcludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 GaussianBlurVP();
+		FragmentProgram = compile fp40 GaussianBlurFP();
+		depthmask = false;		
+		depthtestenable = false;		
+		cullFaceEnable = false;	
+	}
+}
+
+technique CalculateFocusDistance
+<
+	string ExcludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullscreenVP();
+		FragmentProgram = compile fp40 CalculateFocusDistanceFP();
+		depthmask = false;		
+		depthtestenable = false;		
+		cullFaceEnable = false;	
+		blendenable = false;
+		stenciltestenable = false;
+		colorMask = bool4(true,true,true,true);
+	}
+}
+
+technique DownsampleColorBuffer
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullscreenVP();
+		FragmentProgram = compile fp40 DownsampleColorFP();
+		depthmask = false;		
+		depthtestenable = false;		
+		cullFaceEnable = false;	
+	}
+}
+
+technique FullDofGPU
+<
+	string ExcludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullscreenVP();
+		FragmentProgram = compile fp40 FullDofGPUFP();
+		depthmask = false;		
+		depthtestenable = false;
+		cullFaceEnable = false;				
+	}
+}
+
+technique DownsampleColorAndFocusDistance
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullscreenVP();
+		FragmentProgram = compile fp40 DownsampleColorAndFocusDistanceFP();
+		depthmask = false;		
+		depthtestenable = false;
+		cullFaceEnable = false;				
+	}
+}
+technique CopyToScreen
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullscreenVP();
+		FragmentProgram = compile fp40 CopyToScreenFP();
+		depthmask = false;		
+		depthtestenable = false;
+		cullFaceEnable = false;				
+	}
+}
+technique CopyToScreenInverted
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullscreenInvertedVP();
+		FragmentProgram = compile fp40 CopyToScreenFP();
+		depthmask = false;		
+		depthtestenable = false;
+		cullFaceEnable = false;				
+	}
+}
+
+
+
+// Tiled passes
+
+technique NoBlurTiledPass
+<
+	string ExcludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 TiledVP();
+		FragmentProgram = compile fp40 NoBlurTiledFP();
+		depthmask = false;		
+		depthtestenable = false;
+		cullFaceEnable = false;	
+		pointSize = 8;			
+		pointSpriteCoordReplace[0] = true;
+		pointSpriteCoordReplace[1] = false;
+		stenciltestenable = false;		
+	}
+}
+
+technique FullBlurTiledPass
+<
+	string ExcludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 TiledVP();
+		FragmentProgram = compile fp40 FullBlurTiledFP();
+		depthmask = false;		
+		depthtestenable = false;
+		cullFaceEnable = false;				
+		pointSize = 8;
+		pointSpriteCoordReplace[0] = true;
+		pointSpriteCoordReplace[1] = false;
+		stenciltestenable = false;		
+	}
+}
+
+technique BetweenBlurTiledPass
+<
+	string ExcludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 TiledVP();
+		FragmentProgram = compile fp40 BetweenBlurTiledFP();
+		depthmask = false;		
+		depthtestenable = false;
+		cullFaceEnable = false;		
+		pointSize = 8;			
+		pointSpriteCoordReplace[0] = true;
+		pointSpriteCoordReplace[1] = false;
+		stenciltestenable = false;		
+	}
+}
+
+
+// PlayStation(R)Vita depth of field passes
+
+technique FullDofVITA
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+
+	pass p0
+	{
+		VertexProgram = compile vp40 FixedKernelVP();
+		FragmentProgram = compile fp40 FullDofVITAFP();
+		depthmask = false;		
+		depthtestenable = false;
+		cullFaceEnable = false;			
+		
+		StencilTestEnable = true;
+		StencilFunc = {equal, 0, 255};
+		StencilOp = {keep,keep,keep};
+		StencilMask = 255;	
+	}
+}
+technique FullBlurVITA
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FixedKernelVP();
+		FragmentProgram = compile fp40 FullBlurVITAFP();
+		depthmask = false;		
+		depthtestenable = false;
+		cullFaceEnable = false;		
+		
+		StencilTestEnable = true;
+		stencilFunc = {always, 1, 255};
+		StencilOp = {replace,replace,replace};
+		StencilMask = 255;		
+	}
+}
+
+
+technique GenerateDepthRange
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FixedKernelVP();
+		FragmentProgram = compile fp40 GenerateDepthRangeFP();
+		depthmask = false;		
+		depthtestenable = false;
+		cullFaceEnable = false;				
+	}
+}
+
+
+technique GenerateFocusData
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FixedKernelVP();
+		FragmentProgram = compile fp40 GenerateFocusDataFP();
+		depthmask = false;		
+		depthtestenable = false;
+		cullFaceEnable = false;				
+	}
+}
+
+technique DownsampleDepthRange
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FixedKernelVP();
+		FragmentProgram = compile fp40 DownsampleDepthRangeFP();
+		depthmask = false;		
+		depthtestenable = false;
+		cullFaceEnable = false;				
+	}
+}

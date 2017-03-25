@@ -1,0 +1,1344 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+
+// Context switches
+bool PhyreContextSwitches 
+< 
+string ContextSwitchNames[] = {"ORTHO_CAMERA"}; 
+>;
+
+#ifndef __psp2__
+#define FLOAT_POSITIONS
+#endif
+#define SHADOWS_BRANCH_SKIP_BACK_FACES
+
+#ifdef FLOAT_POSITIONS
+float4 ScreenPosToView;
+float2 InvProjXY;
+#else
+half4 ScreenPosToView;
+half2 InvProjXY;
+#endif
+
+#ifdef FLOAT_POSITIONS
+float3 DeferredPos;
+float4x4 DeferredWorldTransform;
+float4x4 DeferredShadowMatrix;
+#else
+half3 DeferredPos;
+float4x4 DeferredWorldTransform;
+float4x4 DeferredShadowMatrix;
+#endif
+
+float4x4 DeferredShadowMatrixSplit0;
+float4x4 DeferredShadowMatrixSplit1;
+float4x4 DeferredShadowMatrixSplit2;
+float4x4 DeferredShadowMatrixSplit3;
+float4 DeferredSplitDistances;
+
+half3 DeferredDir;
+half4 DeferredColor;
+half4 DeferredSpotAngles;
+half4 DeferredAttenParams;
+half4 DeferredAttenParams2;
+half3 DeferredAmbientColor;
+
+float4 DeferredShadowMask;
+half DeferredShadowAlpha;
+
+float4 AlphaGlowThreshold;
+float4 FogCoefficients;
+half4 FogColor;
+
+float4 AliasTexelOffset;
+
+sampler2D DepthBuffer;
+sampler2D GBuffer;
+sampler2D NormalDepthBuffer;
+sampler2D ShadowBuffer;
+sampler2D ColorBuffer;
+sampler2D LightBuffer;
+sampler2D ShadowTexture;
+sampler2D ViewXYLookup;
+sampler2D SignedNormalBuffer;
+
+///////////////////////////////////////////////////////////////
+// structures /////////////////////
+///////////////////////////////////////////////////////////////
+
+struct FullscreenVertexIn
+{
+	float3 vertex		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct FullscreenVertexOut
+{
+	float4 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+	float2 aliasUv		: TEXCOORD1;
+	float2 aliasUv2		: TEXCOORD2;
+	half3 screenPos		: TEXCOORD3;
+};
+struct FullscreenFragIn
+{
+	float2	uv			: TEXCOORD0;
+	float2 aliasUv		: TEXCOORD1;
+	float2 aliasUv2		: TEXCOORD2;
+	half3 screenPos		: TEXCOORD3;
+};
+
+struct LightRenderVertexIn
+{
+	float3 vertex	: POSITION;
+};
+
+
+#ifdef __psp2__ 
+
+struct LightRenderVertexOut
+{
+	float4 position		: POSITION;
+	float4 ScreenUv		: TEXCOORD0;
+	float4 AliasScreenUv : TEXCOORD1;
+#ifdef FLOAT_POSITIONS	
+	float4 ViewUV		: TEXCOORD2;	
+#else	
+	half4 ViewUV		: TEXCOORD2;
+#endif
+};
+struct LightRenderFragIn
+{
+	float4 ScreenUv		: TEXCOORD0;
+	float4 AliasScreenUv : TEXCOORD1;
+#ifdef FLOAT_POSITIONS	
+	float3 ViewUV		: TEXCOORD2;
+#else
+	half3 ViewUV		: TEXCOORD2;
+#endif
+	float4 ScreenPosition	: WPOS;
+};
+
+#else
+
+struct LightRenderVertexOut
+{
+	float4 position		: POSITION;
+};
+struct LightRenderFragIn
+{
+	float4 ScreenPosition	: WPOS;
+};
+
+#endif
+
+///////////////////////////////////////////////////////////////
+// Vertex programs ////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+#ifdef __psp2__ 
+
+FullscreenVertexOut FullscreenVP(FullscreenVertexIn input)
+{
+	FullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.uv = input.uv;
+	output.uv.y = 1-output.uv.y;
+	
+	output.aliasUv = output.uv + AliasTexelOffset.xy;
+	output.aliasUv2 = output.uv - AliasTexelOffset.xy;
+	
+	output.screenPos.z = -1.0;
+	output.screenPos.xy = output.uv * 2.0 - 1.0;
+	output.screenPos.y = -output.screenPos.y;
+	output.screenPos.xy *= InvProjXY;
+	
+
+	return output;
+}
+
+
+FullscreenVertexOut FullscreenToScreenVP(FullscreenVertexIn input)
+{
+	FullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.uv = input.uv;
+	
+	output.aliasUv = output.uv + AliasTexelOffset.xy;
+	output.aliasUv2 = output.uv - AliasTexelOffset.xy;
+	
+	output.screenPos.z = -1.0;
+	output.screenPos.xy = output.uv * 2.0 - 1.0;
+	output.screenPos.y = -output.screenPos.y;
+	output.screenPos.xy *= InvProjXY;
+	
+
+	return output;
+}
+
+
+LightRenderVertexOut RenderLightVP(LightRenderVertexIn input)
+{
+	LightRenderVertexOut output;
+	
+	float4 worldPosition = mul(DeferredWorldTransform, float4(input.vertex.xyz,1));
+	float4 projPosition = mul(scene.ViewProjection, float4(worldPosition.xyz,1));
+			
+	float2 clipSpaceDivided = projPosition.xy / projPosition.w;
+	clipSpaceDivided.y = -clipSpaceDivided.y;
+	
+	float2 tc = 0.5*float2(clipSpaceDivided.x,clipSpaceDivided.y)+0.5;
+	float2 aliasTc = tc + AliasTexelOffset.xy;
+	
+	output.position = projPosition;
+	output.ScreenUv = float4(tc*projPosition.w,0,projPosition.w);
+	output.AliasScreenUv = float4(aliasTc*projPosition.w,0,projPosition.w);
+	
+	
+	float2 screenPos = clipSpaceDivided * -InvProjXY;
+	output.ViewUV = float4(screenPos,1.0f,1.0f);
+		
+	return output;
+}
+
+LightRenderVertexOut RenderLightProjectedVP(LightRenderVertexIn input)
+{
+	LightRenderVertexOut output;
+	
+	float4 worldPosition = mul(DeferredWorldTransform, float4(input.vertex.xyz,1));
+	float4 projPosition = mul(scene.ViewProjection, float4(worldPosition.xyz,1));
+			
+	float2 clipSpaceDivided = projPosition.xy / projPosition.w;
+	clipSpaceDivided.y = -clipSpaceDivided.y;
+	
+	float2 tc = 0.5*float2(clipSpaceDivided.x,clipSpaceDivided.y)+0.5;
+	float2 aliasTc = tc + AliasTexelOffset.xy;
+	
+	output.position = float4(projPosition.xyz / max(projPosition.w,0.001f), 1.0f);
+	output.ScreenUv = float4(tc,0,1.0f);
+	output.AliasScreenUv = float4(aliasTc*projPosition.w,0,projPosition.w);
+		
+	float2 screenPos = output.position.xy * -InvProjXY;
+	output.ViewUV = float4(screenPos,1.0f,1.0f);
+		
+	return output;
+}
+
+#else 
+
+
+FullscreenVertexOut FullscreenVP(FullscreenVertexIn input)
+{
+	FullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.uv = input.uv;
+	
+	output.screenPos.z = -1.0;
+	output.screenPos.xy = output.uv * 2.0 - 1.0;
+	output.screenPos.y = -output.screenPos.y;
+	output.screenPos.xy *= InvProjXY;
+	
+	return output;
+}
+
+FullscreenVertexOut FullscreenToScreenVP(FullscreenVertexIn input)
+{
+	FullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.uv = input.uv;
+	
+	output.screenPos.z = -1.0;
+	output.screenPos.xy = output.uv * 2.0 - 1.0;
+	output.screenPos.y = -output.screenPos.y;
+	output.screenPos.xy *= InvProjXY;
+	
+	return output;
+}
+
+
+LightRenderVertexOut RenderLightVP(LightRenderVertexIn input)
+{
+	LightRenderVertexOut output;
+	
+	float4 worldPosition = mul(DeferredWorldTransform, float4(input.vertex.xyz,1));
+	output.position = mul(scene.ViewProjection, float4(worldPosition.xyz,1));
+	
+	return output;
+}
+
+LightRenderVertexOut RenderLightProjectedVP(LightRenderVertexIn input)
+{
+	LightRenderVertexOut output;
+	
+	float4 worldPosition = mul(DeferredWorldTransform, float4(input.vertex.xyz,1));
+	output.position = mul(scene.ViewProjection, float4(worldPosition.xyz,1));
+	
+	return output;
+}
+
+#endif
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+half ClampPlusMinusOneToNonNegative(half value)
+{
+#ifdef __psp2__
+	return max(value, 0.0h);
+#else //! __psp2__
+	return saturate(value);
+#endif //! __psp2__
+}
+
+// Convert a depth value from post projection space to view space. 
+float ConvertDepth(float depth)
+{				
+#ifdef ORTHO_CAMERA
+	float viewSpaceZ = -(depth * scene.cameraFarMinusNear + scene.cameraNearFar.x);
+#else //! ORTHO_CAMERA
+	float viewSpaceZ = -(scene.cameraNearTimesFar / (depth * scene.cameraFarMinusNear - scene.cameraNearFar.y));
+#endif //! ORTHO_CAMERA
+	return viewSpaceZ;
+}
+
+// Read value from a depth map and convert it to float.
+float ReadDepth( sampler2D depthMap, float2 uv )
+{
+    float3 zBuffer_fragment = saturate( tex2D( depthMap, uv.xy ).xyz );
+    float3 depth_factor_precise = float3(65536.0/16777215.0, 256.0/16777215.0, 1.0/16777215.0);
+    zBuffer_fragment = round(zBuffer_fragment * 255.0);
+	float currentDepth = dot( zBuffer_fragment, depth_factor_precise);
+    return currentDepth;
+}
+float TexDepth(sampler2D depthMap, float2 uv)
+{
+	return dot(tex2D(depthMap,uv).xyz, ((float3(65536, 256, 1)*255.0f) / 16777215.0f));	
+}
+
+float3 GetWorldPosition(float2 uv)
+{
+	float2 screenPos = uv * 2.0f - 1.0f;
+	float depthMapValue = ReadDepth(DepthBuffer,uv);
+		
+	float viewSpaceDepth = ConvertDepth(depthMapValue);
+	
+	float4 viewPos = float4(screenPos * InvProjXY.xy * viewSpaceDepth, -viewSpaceDepth, 1);
+	float3 worldPos = mul(scene.ViewInverse, viewPos).xyz;
+	return worldPos;
+}
+half3 GetWorldNormal(float2 uv)
+{
+	half4 normalMapValue = h4tex2D(NormalDepthBuffer, uv);
+	half2 normalMapNormalXY = normalMapValue.xy * 2.0f - 1.0f;
+	half3 viewSpaceNormal = half3(normalMapNormalXY, sqrt(1.0f - dot(normalMapNormalXY.xy, normalMapNormalXY.xy)));	
+	
+	half3 worldSpaceNormal = mul(scene.ViewInverse, half4(viewSpaceNormal,0)).xyz;
+	return worldSpaceNormal;
+}
+
+void GetWorldNormalAndPosition(out half3 worldNormal, out float3 worldPosition, float2 uv)
+{
+	float2 screenPos = uv * 2.0f - 1.0f;
+
+	half4 normalMapValue = h4tex2D(NormalDepthBuffer, uv);
+		
+	float unpackedDepth = (normalMapValue.z + normalMapValue.w * 255.0f) / 255.0f;
+	float viewSpaceDepth = unpackedDepth * scene.cameraNearFar.y;
+		
+	half2 normalMapNormalXY = normalMapValue.xy * 2.0f - 1.0f;
+	half3 viewSpaceNormal = half3(normalMapNormalXY, sqrt(1.0f - dot(normalMapNormalXY.xy, normalMapNormalXY.xy)));	
+	worldNormal = mul(scene.ViewInverse, half4(viewSpaceNormal,0)).xyz;
+
+#ifdef ORTHO_CAMERA
+	float4 viewPos = float4(screenPos * InvProjXY.xy, -viewSpaceDepth, 1);
+#else //! ORTHO_CAMERA
+	float4 viewPos = float4(screenPos * InvProjXY.xy * viewSpaceDepth, -viewSpaceDepth, 1);
+#endif //! ORTHO_CAMERA
+	worldPosition = mul(scene.ViewInverse, viewPos).xyz;	
+}
+
+half EvaluateSpotFalloff(half dp)
+{
+	half atten = 1;
+	if( dp < DeferredSpotAngles.z)
+	{
+		atten = 0;
+		if( dp > DeferredSpotAngles.w)
+		{
+			half a = (DeferredSpotAngles.w - dp) / (DeferredSpotAngles.w - DeferredSpotAngles.z);
+			a = max(a,0);
+			atten = a * a;
+		}
+	}
+	return atten;
+}
+
+half calcSpecularLightAmt(half3 normal, half3 eyeDirection, half3 lightDir, half shininess, half specularPower /*, half fresnelPower*/)
+{
+	// Specular calcs
+	half3 halfVec = normalize(eyeDirection + lightDir);
+	half nDotH = ClampPlusMinusOneToNonNegative(dot(normal,halfVec));
+
+	//half fresnel = saturate( 1 - pow(abs(dot(normal, eyeDirection)), fresnelPower) );
+	half specularLightAmount = ClampPlusMinusOneToNonNegative(pow(nDotH, specularPower)) * shininess; // * fresnel
+
+	specularLightAmount = (dot(normal,lightDir) > 0.0f) ? specularLightAmount : 0.0f;
+	
+	return specularLightAmount;
+}
+
+
+
+
+
+#ifdef __psp2__ 
+
+half3 decodeNormal(half2 enc)
+{
+    half4 nn = half4(enc * 2.0 - 1.0,1.0,-1);
+    half l = dot(nn.xyz,-nn.xyw);
+    nn.z = l;
+    nn.xy *= sqrt(l);
+    return (nn.xyz * 2 + half3(0,0,-1));// * half3(1,1,-1);
+}
+
+#ifdef FLOAT_POSITIONS
+void unpackGbuffer(out half3 viewSpaceNormal, out float3 viewSpacePosition, float4 uv, float4 aliasUv, half4 fragColor, float4 screenPosition, float3 viewUv)
+#else //! FLOAT_POSITIONS
+void unpackGbuffer(out half3 viewSpaceNormal, out half3 viewSpacePosition, float4 uv, float4 aliasUv, half4 fragColor, half4 screenPosition, half3 viewUv)
+#endif //! FLOAT_POSITIONS
+{
+#ifdef FLOAT_POSITIONS
+	float viewSpaceDepth = fragColor.w;
+	float2 screenPos  =  screenPosition.xy * ScreenPosToView.xy + ScreenPosToView.zw;
+	
+#ifdef ORTHO_CAMERA
+	viewSpacePosition = float3(screenPos * InvProjXY.xy, viewSpaceDepth);
+#else //! ORTHO_CAMERA
+	viewSpacePosition = float3(screenPos * viewSpaceDepth, viewSpaceDepth);
+#endif //! ORTHO_CAMERA
+
+#else //! FLOAT_POSITIONS
+	half viewSpaceDepth = fragColor.w;
+#ifdef ORTHO_CAMERA
+	viewSpacePosition = tex2Dproj<half4>(ViewXYLookup, uv.xyw).xyz * half3(1.0,1.0,viewSpaceDepth);
+#else //! ORTHO_CAMERA
+	viewSpacePosition = tex2Dproj<half4>(ViewXYLookup, uv.xyw).xyz * viewSpaceDepth;
+#endif //! ORTHO_CAMERA
+	
+#endif //! FLOAT_POSITIONS
+	viewSpaceNormal = tex2Dproj<half4>(SignedNormalBuffer, aliasUv.xyw).xyz;
+}
+
+#endif // __psp2__ 
+
+
+
+#ifdef __psp2__ 
+
+__nativecolor __regformat half4 RenderPointLightFP(LightRenderFragIn input, __regformat half4 fragColor : FRAGCOLOR)
+{
+	half3 viewSpaceNormal;
+#ifdef FLOAT_POSITIONS	
+	float3 viewSpacePosition;
+#else //! FLOAT_POSITIONS
+	half3 viewSpacePosition;
+#endif //! FLOAT_POSITIONS
+	unpackGbuffer(viewSpaceNormal, viewSpacePosition, input.ScreenUv, input.AliasScreenUv, fragColor, input.ScreenPosition, input.ViewUV);
+	half3 lightDir = DeferredPos - viewSpacePosition;
+		
+	half distSqr = dot(lightDir, lightDir);
+	
+	half3 lightDirNrm = normalize((half3)lightDir);
+	half dp = max(dot(lightDirNrm,viewSpaceNormal),0);
+	
+	half distanceAttenuation = saturate( distSqr *DeferredAttenParams.z + DeferredAttenParams2.z);
+			
+	half3 rslt = DeferredColor.xyz * distanceAttenuation * dp ;
+	
+	return half4(rslt + fragColor.xyz,fragColor.w);
+}
+
+
+
+
+__nativecolor __regformat half4 RenderSpotLightFP(LightRenderFragIn input, __regformat half4 fragColor : FRAGCOLOR)
+{		
+
+	half3 viewSpaceNormal;
+#ifdef FLOAT_POSITIONS	
+	float3 viewSpacePosition;
+#else //! FLOAT_POSITIONS
+	half3 viewSpacePosition;
+#endif //! FLOAT_POSITIONS
+	unpackGbuffer(viewSpaceNormal, viewSpacePosition, input.ScreenUv, input.AliasScreenUv, fragColor, input.ScreenPosition, input.ViewUV);
+	half3 lightDir = DeferredPos - viewSpacePosition;
+	
+	half3 lightDirh3 = (half3)lightDir;
+	half3 lightDirNrm = normalize(lightDirh3);
+	half dp = dot(lightDirNrm,viewSpaceNormal);
+	
+	half4 attenProperties = half4( dot(lightDirNrm,DeferredDir), dp, dot(lightDirh3, lightDirh3), 0.0 );
+	
+	attenProperties = attenProperties * DeferredAttenParams + DeferredAttenParams2;
+	
+	attenProperties = max(attenProperties, 0.0);
+	attenProperties = min(attenProperties, 1.0);
+		
+	half4 rslt = DeferredColor * attenProperties.x * attenProperties.y * attenProperties.z;
+			
+	return rslt + fragColor;
+}
+
+__nativecolor __regformat half4 RenderDirectionalLightFP(__regformat half4 fragColor : FRAGCOLOR, FullscreenFragIn input)
+{
+	half4 gBufferValue = tex2D<half4>(GBuffer,input.uv);
+	float depthBufferValue = tex2D<float>(DepthBuffer,input.uv);
+	float viewSpaceDepth = (scene.cameraNearTimesFar / (depthBufferValue * scene.cameraFarMinusNear - scene.cameraNearFar.y));
+	
+	half4 signedNormal = tex2D<half4>(SignedNormalBuffer, input.aliasUv);
+	half3 viewSpaceNormal = signedNormal.xyz;
+	
+	half3 viewSpacePosition = input.screenPos * viewSpaceDepth;
+	
+	half3 halfVec = normalize(-viewSpacePosition);
+	half specularGloss = tex2D<half4>(ColorBuffer, input.aliasUv2).w;
+	
+	half nDotH = abs(dot(viewSpaceNormal,halfVec));
+
+	half powSpec = nDotH*nDotH;
+	half specAmount = powSpec * specularGloss;
+	
+	half3 lightValue = DeferredAmbientColor;
+	lightValue += DeferredColor.xyz * max(dot(viewSpaceNormal, DeferredDir), 0.0);
+#ifndef ORTHO_CAMERA
+	lightValue += specAmount;
+#endif // !ORTHO_CAMERA		
+	half4 packedResultValue = half4(lightValue.xyz, viewSpaceDepth);
+	return packedResultValue;	
+}
+
+
+
+
+
+__nativecolor __regformat half4 ShadowSpotLightFP(LightRenderFragIn input, __regformat half4 fragColor : FRAGCOLOR)
+{		
+
+	half3 viewSpaceNormal;
+#ifdef FLOAT_POSITIONS	
+	float3 viewSpacePosition;
+#else //! FLOAT_POSITIONS
+	half3 viewSpacePosition;
+#endif //! FLOAT_POSITIONS
+	unpackGbuffer(viewSpaceNormal, viewSpacePosition, input.ScreenUv, input.AliasScreenUv, fragColor, input.ScreenPosition, input.ViewUV);
+	half3 lightDir = DeferredPos - viewSpacePosition;
+	
+#ifdef SHADOWS_BRANCH_SKIP_BACK_FACES
+	if(dot(lightDir, viewSpaceNormal) > 0)
+	{
+#endif //! SHADOWS_BRANCH_SKIP_BACK_FACES
+	
+	half3 lightDirh3 = (half3)lightDir;
+	half distSqr = dot(lightDirh3, lightDirh3);
+	
+	
+	float4 shadowPosition = mul(DeferredShadowMatrix,float4(viewSpacePosition,1.0));
+	float shadowValue = tex2Dproj<float>(ShadowTexture,shadowPosition);
+		
+	half3 lightDirNrm = normalize(lightDirh3);
+	half dp = max(dot(lightDirNrm,viewSpaceNormal),0);
+	
+	half spotDp = dot(lightDirNrm,DeferredDir);
+	
+	half shadowValueHalf = (half)shadowValue;		
+	shadowValueHalf = (shadowValueHalf * DeferredShadowAlpha) + (1.0-DeferredShadowAlpha);
+
+	half3 rslt = 0;
+
+	half4 attenProperties = half4( dot(lightDirNrm,DeferredDir), dp, dot(lightDirh3, lightDirh3), 0.0 );
+	attenProperties = attenProperties * DeferredAttenParams + DeferredAttenParams2;
+	attenProperties = max(attenProperties, 0.0);
+	attenProperties = min(attenProperties, 1.0);
+	
+	rslt = DeferredColor.xyz * attenProperties.x * attenProperties.y * attenProperties.z * shadowValueHalf;
+
+	return half4(rslt + fragColor.xyz,fragColor.w);
+	
+#ifdef SHADOWS_BRANCH_SKIP_BACK_FACES
+	}
+	else
+	{
+		return fragColor;
+	}
+#endif //! SHADOWS_BRANCH_SKIP_BACK_FACES
+}
+
+
+short EvaluateSplitIndex(float viewDepth, float4 splitDistances)
+{
+	float4 v0 = viewDepth > splitDistances ? 1.0 : 0.0;
+	return (short)dot(v0, 1.0);
+}
+
+__nativecolor __regformat half4 ShadowDirectionalLightFP(FullscreenFragIn input, __regformat half4 fragColor : FRAGCOLOR)
+{
+	half4 gBufferValue = tex2D<half4>(GBuffer,input.uv);
+	float depthBufferValue = tex2D<float>(DepthBuffer,input.uv);
+	float viewSpaceDepth = (scene.cameraNearTimesFar / (depthBufferValue * scene.cameraFarMinusNear - scene.cameraNearFar.y));
+	
+	half4 signedNormal = tex2D<half4>(SignedNormalBuffer, input.aliasUv);
+	half3 viewSpaceNormal = signedNormal.xyz;
+	
+	half dotL = dot(DeferredDir, viewSpaceNormal);
+#ifdef SHADOWS_BRANCH_SKIP_BACK_FACES
+	if(dotL > 0)
+	{
+#endif //! SHADOWS_BRANCH_SKIP_BACK_FACES
+
+		half3 viewSpacePosition = input.screenPos * viewSpaceDepth;
+	
+		half3 halfVec = normalize(-viewSpacePosition);
+		half specularGloss = tex2D<half4>(ColorBuffer, input.aliasUv2).w;
+	
+		half nDotH = abs(dot(viewSpaceNormal,halfVec));
+
+		half powSpec = nDotH*nDotH;
+		half specAmount = powSpec * specularGloss;
+
+		float4 viewPos =  float4(-viewSpacePosition,1);  
+		float4 shadowPosition0 = mul(DeferredShadowMatrixSplit0, viewPos);
+		float4 shadowPosition1 = mul(DeferredShadowMatrixSplit1, viewPos);
+		float4 shadowPosition2 = mul(DeferredShadowMatrixSplit2, viewPos);
+		float4 shadowPosition3 = mul(DeferredShadowMatrixSplit3, viewPos);
+
+		float viewDepth = (viewSpacePosition.z);
+		float4 shadowPosition = viewDepth < DeferredSplitDistances.y ? 
+			(viewDepth < DeferredSplitDistances.x ? shadowPosition0 : shadowPosition1)
+			:
+			(viewDepth < DeferredSplitDistances.z ? shadowPosition2 : shadowPosition3);
+
+		half shadowValueHalf  = viewDepth < DeferredSplitDistances.w ? h1tex2D(ShadowTexture,shadowPosition.xyz).x : 1;  
+		shadowValueHalf = (shadowValueHalf * DeferredShadowAlpha) + (1.0-DeferredShadowAlpha);	
+
+#ifdef SHADOWS_BRANCH_SKIP_BACK_FACES
+		half3 rslt =  DeferredColor.xyz  * dotL; 
+#else //! SHADOWS_BRANCH_SKIP_BACK_FACES
+		half3 rslt =  DeferredColor.xyz  * max(dotL, 0.0); 
+#endif //! SHADOWS_BRANCH_SKIP_BACK_FACES
+
+#ifndef ORTHO_CAMERA
+	    rslt += specAmount;
+#endif //! ORTHO_CAMERA
+		rslt *= shadowValueHalf; 
+
+#if 0
+		float4 red = float4(1.0f,0.0f,0.0f,1.0f);
+		float4 green= float4(0.0f,1.0f,0.0f,1.0f);
+		float4 blue= float4(0.0f,0.0f,1.0f,1.0f);
+		float4 white= float4(1.0f,1.0f,1.0f,1.0f);
+
+		float4 shadowCol = viewDepth < DeferredSplitDistances.y ? 
+			(viewDepth < DeferredSplitDistances.x ? red : green)
+			:
+			(viewDepth < DeferredSplitDistances.z ? blue : white);
+		rslt.xyz = shadowCol.xyz;
+#endif
+        return half4(rslt.xyz + DeferredAmbientColor, viewSpaceDepth);
+
+#ifdef SHADOWS_BRANCH_SKIP_BACK_FACES
+	}
+	else
+	{
+		return half4(DeferredAmbientColor, viewSpaceDepth);
+	}
+#endif //! SHADOWS_BRANCH_SKIP_BACK_FACES
+}
+
+
+
+
+#else //! __psp2__ 
+
+half4 RenderPointLightFP(LightRenderFragIn input) : COLOR
+{	
+#ifdef __SCE_CGC__
+	float2 uv = input.ScreenPosition.xy * scene.screenWidthHeightInv;
+	uv.y = 1-uv.y;
+#else
+	float2 uv = input.ScreenPosition.xy * float2(1.0f / scene.ViewportWidthHeight.x, 1.0f / scene.ViewportWidthHeight.y);
+#endif
+
+	float3 worldPosition;
+	half3 worldNormal;
+	GetWorldNormalAndPosition(worldNormal, worldPosition, uv);
+	half3 eyeDirection = normalize(worldPosition - scene.EyePosition);
+	half4 colValue = h4tex2D(ColorBuffer,uv);
+		
+	float3 lightDir = DeferredPos - worldPosition;
+	half3 lightDirNrm = normalize((half3)lightDir);
+	float dist = length(lightDir);
+	half dp = dot(lightDirNrm,worldNormal);
+	
+	half distanceAttenuation = 1-saturate(smoothstep(DeferredAttenParams.x,DeferredAttenParams.y,dist));
+	
+	half specularValue = calcSpecularLightAmt(worldNormal, eyeDirection, lightDirNrm, colValue.w, 16.0f);
+	
+	half3 rslt = DeferredColor.xyz * saturate(dp) * distanceAttenuation;
+
+	return half4(rslt,1.0f);
+}
+
+half4 RenderSpotLightFP(LightRenderFragIn input) : COLOR
+{	
+
+#ifdef __SCE_CGC__
+	float2 uv = input.ScreenPosition.xy * scene.screenWidthHeightInv;
+	uv.y = 1-uv.y;
+#else
+	float2 uv = input.ScreenPosition.xy * float2(1.0f / scene.ViewportWidthHeight.x, 1.0f / scene.ViewportWidthHeight.y);
+#endif
+	float3 worldPosition;
+	half3 worldNormal;
+		
+	GetWorldNormalAndPosition(worldNormal, worldPosition, uv);
+	half3 eyeDirection = normalize(scene.EyePosition - worldPosition);
+	half4 colValue = h4tex2D(ColorBuffer,uv);
+	
+	float3 lightDir = DeferredPos - worldPosition;
+	half3 lightDirNrm = normalize((half3)lightDir);
+	float dist = length(lightDir);
+	half dp = dot(lightDirNrm,worldNormal);
+	
+	half specularValue = calcSpecularLightAmt(worldNormal, eyeDirection, lightDirNrm, colValue.w, 7.0f);
+	dp = saturate(dp);
+	
+	half spotDp = dot(lightDirNrm,DeferredDir);
+	half spotAttenuation = EvaluateSpotFalloff(max(spotDp,0));
+			
+	half distanceAttenuation = 1-saturate(smoothstep(DeferredAttenParams.x,DeferredAttenParams.y,dist));
+
+	half3 rslt = DeferredColor.xyz * distanceAttenuation * spotAttenuation * (specularValue + dp);
+
+	half shadowBufferValue = dot(tex2D(ShadowBuffer,uv), DeferredShadowMask);
+	shadowBufferValue += saturate(1.0f - dot(DeferredShadowMask,1.0f));
+	
+	rslt *= shadowBufferValue;
+
+	return half4(rslt,1.0f);
+}
+
+
+half4 RenderDirectionalLightFP(FullscreenFragIn input) : COLOR0
+{
+	float3 worldPosition;
+	half3 worldNormal;
+	
+	half4 normalMapValue = h4tex2D(NormalDepthBuffer, input.uv.xy);		
+	
+	half2 normalMapNormalXY = normalMapValue.xy * 2.0f - 1.0f;
+	half3 viewSpaceNormal = half3(normalMapNormalXY, sqrt(1.0f - dot(normalMapNormalXY.xy, normalMapNormalXY.xy)));	
+	worldNormal = mul(scene.ViewInverse, half4(viewSpaceNormal,0)).xyz;
+
+	half3 lightValue = DeferredColor.xyz * saturate(dot(DeferredDir, worldNormal));
+
+	half shadowBufferValue = dot(tex2D(ShadowBuffer,input.uv.xy), DeferredShadowMask);
+	shadowBufferValue += saturate(1.0f - dot(DeferredShadowMask,1.0f));
+	lightValue *= shadowBufferValue;
+
+	return half4(lightValue,1.0f);
+}
+
+
+half4 ShadowSpotLightFP(LightRenderFragIn input) : COLOR
+{	
+#ifdef __SCE_CGC__
+	float2 uv = input.ScreenPosition.xy * scene.screenWidthHeightInv;
+	uv.y = 1-uv.y;
+#else
+	float2 uv = input.ScreenPosition.xy * float2(1.0f / scene.ViewportWidthHeight.x, 1.0f / scene.ViewportWidthHeight.y);
+#endif
+
+	half2 screenPos = uv * 2.0f - 1.0f;
+	half4 normalMapValue = h4tex2D(NormalDepthBuffer, uv);
+	
+	half unpackedDepth = (normalMapValue.z + normalMapValue.w * 255.0f);
+
+	// Pixels beyond the far plane have not been rendered and therefore are unshadowed.
+	if (unpackedDepth >= 255.0f)
+		return 1;
+
+#ifdef ORTHO_CAMERA	
+	half4 viewPos = float4(screenPos, unpackedDepth, 1);
+#else //! ORTHO_CAMERA	
+	half4 viewPos = float4(screenPos * unpackedDepth, unpackedDepth, 1);
+#endif //! ORTHO_CAMERA	
+	half4 shadowPosition = mul(DeferredShadowMatrix,viewPos);
+	
+	#define kShadowSize (3.0f/1024.0f)
+	
+	half4 offsets[2] = 
+	{
+		float4(-kShadowSize,-kShadowSize,0,0),
+		float4( kShadowSize, kShadowSize,0,0),
+	};
+	
+	half shadowValue0 = h1tex2Dproj(ShadowTexture,shadowPosition + offsets[0]).x;
+	half shadowValue1 = h1tex2Dproj(ShadowTexture,shadowPosition + offsets[1]).x;
+	half rslt = (shadowValue0+shadowValue1)*0.5f;
+
+	rslt = lerp(1.0f,rslt,DeferredShadowAlpha);
+	
+	
+	return rslt;
+}
+
+
+
+
+half4 ShadowDirectionalLightFP(FullscreenFragIn input) : COLOR
+{
+	float2 uv = input.uv.xy;
+
+	float2 screenPos = uv * 2.0f - 1.0f;
+	half4 normalMapValue = h4tex2D(NormalDepthBuffer, uv);
+		
+	float unpackedDepth = (normalMapValue.z + normalMapValue.w * 255.0f);
+
+	// Pixels beyond the far plane have not been rendered and therefore are unshadowed.
+	if (unpackedDepth >= 255.0f)
+		return 1;
+
+#ifdef ORTHO_CAMERA	
+	float4 viewPos = float4(screenPos, unpackedDepth, 1);
+#else //! ORTHO_CAMERA	
+	float4 viewPos = float4(screenPos * unpackedDepth, unpackedDepth, 1);
+#endif //! ORTHO_CAMERA	
+
+	float4 shadowPosition0 = mul(DeferredShadowMatrixSplit0, viewPos);
+	float4 shadowPosition1 = mul(DeferredShadowMatrixSplit1, viewPos);
+	float4 shadowPosition2 = mul(DeferredShadowMatrixSplit2, viewPos);
+	float4 shadowPosition3 = mul(DeferredShadowMatrixSplit3, viewPos);
+
+	float viewDepth = unpackedDepth * (scene.cameraNearFar.y / 256.0f);
+
+	float4 shadowPosition = viewDepth < DeferredSplitDistances.y ? 
+		(viewDepth < DeferredSplitDistances.x ? shadowPosition0 : shadowPosition1)
+		:
+		(viewDepth < DeferredSplitDistances.z ? shadowPosition2 : shadowPosition3);
+
+
+
+	half rslt = viewDepth < DeferredSplitDistances.w ? h1tex2D(ShadowTexture,shadowPosition.xyz).x : 1;
+	rslt = lerp(1.0f,rslt,DeferredShadowAlpha);
+
+	return rslt;
+	
+}
+
+
+
+
+#endif //! __psp2__ 
+
+half evaluateSpecular(half3 viewPos, half3 normal, half specularPower, half shininess)
+{
+	half3 eyeDir = normalize(viewPos); 
+	
+	// Specular calcs
+	half3 halfVec = eyeDir; //eyeDirection + lightDir;
+	half nDotH = ClampPlusMinusOneToNonNegative(dot(normal,halfVec));
+
+	half specularLightAmount = ClampPlusMinusOneToNonNegative(pow(nDotH, specularPower)) * shininess; 
+
+	return specularLightAmount;
+}
+
+#ifdef __psp2__
+__nativecolor __regformat half4 CompositeToScreenFP(__regformat half4 fragColor : FRAGCOLOR, FullscreenFragIn input)
+#else
+half4 CompositeToScreenFP(FullscreenFragIn input) : COLOR0
+#endif
+{	
+#ifdef __psp2__
+	half4 col = tex2D<half4>(ColorBuffer, input.aliasUv2);		
+
+	half4 materialColor = col;
+	half4 currentColor = fragColor;
+
+	return materialColor * currentColor;
+
+#else //!  __psp2__
+
+	half4 lightValue = h4tex2D(LightBuffer,input.uv.xy);
+	half4 colValue = h4tex2D(ColorBuffer,input.uv.xy);	
+	half4 nrmValue = h4tex2D(NormalDepthBuffer,input.uv.xy);	
+	half glowAmount = saturate( (colValue.w - AlphaGlowThreshold.x) * AlphaGlowThreshold.y);
+
+	float unpackedDepth = (nrmValue.z + nrmValue.w * 255.0f) / 256.0f;
+	float viewSpaceDepth = unpackedDepth * scene.cameraNearFar.y;
+	half fogDepth = saturate((viewSpaceDepth - FogCoefficients.x) * FogCoefficients.z);
+	fogDepth = exp2(fogDepth) - 1.0; 
+	half fogAmount = saturate(fogDepth * FogCoefficients.w);
+
+	half4 result = (lightValue + glowAmount) * colValue;
+	result.xyz = lerp(result.xyz, FogColor.xyz, fogAmount);
+
+	// For pixels outside of the scene.
+	if (unpackedDepth*256.0f >= 255.0f)
+		result = colValue;
+
+	return result;
+#endif //!  __psp2__
+}
+
+half4 NullFP() : COLOR0
+{
+	return 1;
+}
+
+half4 CopyCompositedBufferToScreenFP(FullscreenFragIn input) : COLOR0
+{
+	return h4tex2D(NormalDepthBuffer,input.uv.xy);
+}
+
+#ifdef __psp2__
+half4 CompositeToRenderTargetFP(FullscreenFragIn input)
+#else
+half4 CompositeToRenderTargetFP(FullscreenFragIn input) : COLOR0
+#endif
+{	
+#ifdef __psp2__
+	half4 materialColor = tex2D<half4>(ColorBuffer, input.aliasUv2);	
+	half4 currentColor = tex2D<half4>(NormalDepthBuffer, input.uv);	
+
+	return materialColor * currentColor;
+
+#else //!  __psp2__
+	half4 nrmValue = h4tex2D(NormalDepthBuffer,input.uv.xy);	
+	return nrmValue;
+#endif //!  __psp2__
+}
+
+
+
+
+technique RenderStencilPass
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+	pass p1
+	{
+		VertexProgram = compile arbvp1 RenderLightVP();
+		FragmentProgram = compile arbfp1 NullFP();	
+		colorMask = bool4(false,false,false,false);
+		cullFaceEnable = false;
+		depthTestEnable = true;
+		depthMask = false;
+		depthFunc = lequal;
+		blendEnable = false;
+		StencilTestEnable = true;
+		stencilFunc = {always, 0, 1};
+		StencilTestTwoSideEnable = true;
+		StencilOp = {keep,decrwrap,keep};
+		StencilOpSeparate = {front,keep,incrwrap,keep};
+	}
+}
+
+
+
+
+
+technique RenderPointLight
+<
+	string ExcludePlatforms[] = {"GXM"};
+>
+{
+	pass p1
+	{
+		VertexProgram = compile arbvp1 RenderLightVP();
+		FragmentProgram = compile arbfp1 NullFP();	
+		colorMask = bool4(false,false,false,false);
+		cullFaceEnable = false;
+		depthTestEnable = true;
+		depthMask = false;
+		depthFunc = lequal;
+		blendEnable = false;
+		StencilTestEnable = true;
+		stencilFunc = {always, 0, 1};
+		StencilTestTwoSideEnable = true;
+		StencilOp = {keep,decrwrap,keep};
+		StencilOpSeparate = {front,keep,incrwrap,keep};
+		
+	}
+	
+	pass p2
+	{
+		VertexProgram = compile arbvp1 RenderLightProjectedVP();
+		//VertexProgram = compile arbvp1 RenderLightVP();
+		FragmentProgram = compile arbfp1 RenderPointLightFP();	
+
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = true;
+		cullFace = front;
+		depthTestEnable = false;
+		depthMask = false;
+		depthFunc = lequal;
+		blendEnable = true;
+		blendFunc = {one,one};
+		StencilTestEnable = true;
+		StencilFunc = {notequal, 0, 1};
+		StencilOp = {keep,keep,keep};
+	}
+}
+
+
+
+technique RenderPointLightVITA
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+	pass p1
+	{
+		VertexProgram = compile arbvp1 RenderLightVP();
+		FragmentProgram = compile arbfp1 NullFP();	
+		colorMask = bool4(false,false,false,false);
+		cullFaceEnable = false;
+		depthTestEnable = true;
+		depthMask = false;
+		depthFunc = lequal;
+		blendEnable = false;
+		StencilTestEnable = true;
+		stencilFunc = {always, 0, 1};
+		StencilTestTwoSideEnable = true;
+		StencilOp = {keep,decrwrap,keep};
+		StencilOpSeparate = {front,keep,incrwrap,keep};
+	}
+
+
+	pass p2
+	{
+		VertexProgram = compile arbvp1 RenderLightVP();
+		//VertexProgram = compile arbvp1 RenderLightProjectedVP();
+		FragmentProgram = compile arbfp1 RenderPointLightFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = true;
+		cullFace = front;
+		depthTestEnable = false;
+		depthMask = false;
+		depthFunc = lequal;
+		blendEnable = false;
+		blendFunc = {one,one};
+		StencilTestEnable = true;
+		StencilFunc = {notequal, 0, 255};
+		StencilOp = {keep,keep,replace};
+		StencilMask = 255;
+	}
+}
+
+technique RenderSpotLight
+<
+	string ExcludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 RenderLightVP();
+		FragmentProgram = compile arbfp1 NullFP();	
+		colorMask = bool4(false,false,false,false);
+		cullFaceEnable = false;
+		depthTestEnable = true;
+		depthMask = false;
+		depthFunc = lequal;
+		blendEnable = false;
+		StencilTestEnable = true;
+		stencilFunc = {always, 0, 1};
+		StencilTestTwoSideEnable = true;
+		StencilOp = {keep,decrwrap,keep};
+		StencilOpSeparate = {front,keep,incrwrap,keep};
+	}
+	pass p2
+	{
+		VertexProgram = compile arbvp1 RenderLightVP();
+		FragmentProgram = compile arbfp1 RenderSpotLightFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = true;
+		cullFace = front;
+		depthTestEnable = false;
+		depthMask = false;
+		depthFunc = lequal;
+		blendEnable = true; 
+		blendFunc = {one,one};
+		StencilTestEnable = true;
+		StencilFunc = {notequal, 0, 255};
+		StencilOp = {keep,keep,keep};
+		StencilMask = 255;
+	}
+}
+
+technique RenderSpotLightVITA
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+	
+	pass p0
+	{
+		VertexProgram = compile arbvp1 RenderLightVP();
+		FragmentProgram = compile arbfp1 NullFP();	
+		colorMask = bool4(false,false,false,false);
+		cullFaceEnable = false;
+		depthTestEnable = true;
+		depthMask = false;
+		depthFunc = lequal;
+		blendEnable = false;
+		StencilTestEnable = true;
+		stencilFunc = {always, 0, 1};
+		StencilTestTwoSideEnable = true;
+		StencilOp = {keep,decrwrap,keep};
+		StencilOpSeparate = {front,keep,incrwrap,keep};
+	}
+	
+	pass p2
+	{
+		VertexProgram = compile arbvp1 RenderLightVP();
+		FragmentProgram = compile arbfp1 RenderSpotLightFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = true;
+		cullFace = front;
+		depthTestEnable = false;
+		depthMask = false;
+		depthFunc = lequal;
+		blendEnable = false;
+		blendFunc = {one,one};
+		StencilTestEnable = true;
+		StencilFunc = {notequal, 0, 255};
+		StencilOp = {keep,keep,replace};
+		StencilMask = 255;
+	}
+}
+
+technique RenderDirectionalLight
+<
+	string ExcludePlatforms[] = {"GXM"};
+>
+{
+	pass p2
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 RenderDirectionalLightFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = true;
+		blendFunc = {one,one};
+		StencilTestEnable = false;
+	}
+}
+
+
+technique RenderDirectionalLightVITA
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+	pass p2
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 RenderDirectionalLightFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = true;
+		depthMask = false;
+		blendEnable = false;
+		DepthFunc = Greater;
+				
+		StencilTestEnable = true;
+		StencilFunc = {always, 0, 0xff};
+		StencilOp = {replace,replace,replace};
+		StencilMask = 255;
+	}
+}
+
+
+technique ShadowDirectionalLight
+<
+	string ExcludePlatforms[] = {"GXM"};
+>
+{
+	pass p2
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 ShadowDirectionalLightFP();	
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+		blendFunc = {one,one};
+		StencilTestEnable = false;
+	}
+}
+
+technique ShadowDirectionalLightVITA
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+	pass p2
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 ShadowDirectionalLightFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = true;
+		depthMask = false;
+		blendEnable = false;
+		DepthFunc = Greater;
+				
+		StencilTestEnable = true;
+		StencilFunc = {always, 0, 0xff};
+		StencilOp = {replace,replace,replace};
+		StencilMask = 255;
+	}
+}
+
+
+technique ShadowSpotLight
+<
+	string ExcludePlatforms[] = {"GXM"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 RenderLightVP();
+		FragmentProgram = compile arbfp1 NullFP();	
+		colorMask = bool4(false,false,false,false);
+		cullFaceEnable = false;
+		depthTestEnable = true;
+		depthMask = false;
+		depthFunc = lequal;
+		blendEnable = false;
+		StencilTestEnable = true;
+		stencilFunc = {always, 0, 1};
+		StencilTestTwoSideEnable = true;
+		StencilOp = {keep,decrwrap,keep};
+		StencilOpSeparate = {front,keep,incrwrap,keep};
+	}
+	pass p1
+	{
+		VertexProgram = compile arbvp1 RenderLightVP();
+		FragmentProgram = compile arbfp1 ShadowSpotLightFP();	
+		cullFaceEnable = true;
+		cullFace = front;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+		StencilTestEnable = true;
+		StencilFunc = {notequal, 0, 0xff};
+		StencilOp = {keep,keep,keep};
+		StencilMask = 255;
+	}
+}
+
+
+// Different techniques for PlayStation(R)Vita due to programmable blending / renderstate requirements
+technique ShadowSpotLightVITA
+<
+	string IncludePlatforms[] = {"GXM"};
+>
+{
+	
+	pass p0
+	{
+		VertexProgram = compile arbvp1 RenderLightVP();
+		FragmentProgram = compile arbfp1 NullFP();	
+		colorMask = bool4(false,false,false,false);
+		cullFaceEnable = false;
+		depthTestEnable = true;
+		depthMask = false;
+		depthFunc = lequal;
+		blendEnable = false;
+		StencilTestEnable = true;
+		stencilFunc = {always, 0, 1};
+		StencilTestTwoSideEnable = true;
+		StencilOp = {keep,decrwrap,keep};
+		StencilOpSeparate = {front,keep,incrwrap,keep};
+	}
+	
+	pass p2
+	{
+		VertexProgram = compile arbvp1 RenderLightVP();
+		FragmentProgram = compile arbfp1 ShadowSpotLightFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = true;
+		cullFace = front;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+		StencilTestEnable = true;
+		StencilFunc = {notequal, 0, 0xff};
+		StencilOp = {keep,keep,replace};
+		StencilMask = 255;
+	}
+}
+
+
+technique CompositeToScreen
+{
+	pass p1
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 CompositeToScreenFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+		blendFunc = {one,one};
+		StencilTestEnable = false;
+	}
+}
+
+technique CopyCompositedOutputToScreen
+{
+	pass p1
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 CopyCompositedBufferToScreenFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+		StencilTestEnable = false;
+	}
+}
+
+technique CompositeToRenderTarget
+{
+	pass p1
+	{
+		VertexProgram = compile arbvp1 FullscreenToScreenVP();
+		FragmentProgram = compile arbfp1 CompositeToRenderTargetFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+		StencilTestEnable = false;
+	}
+}
+

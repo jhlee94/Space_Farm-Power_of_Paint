@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<agx>
+    <asset>   
+        <string name ="bankName" value = "EventBank"/> <!---->
+        
+        <!--JDW test edit.-->
+        
+        <!--Every Heatwave AudioBank asset must contain a list tag with name="Sounds" to be processed correctly. 
+            Each item of the list is a HeatWave Sound.
+            Each Sound represents a PAudioEvent in PhyreEngine.-->
+        <list name="Sounds"> 
+        
+            <!--This is a HeatWave Sound. It must have a name and must contain a list of Sources.-->
+            <list name="EventLoop/Clock Tick Tock">
+            <!--This is a Heatwave Source. It represents the file to get the audio data from (path relative to this file), and a list of optional parameters to apply to it.-->
+            <file path="clocktick.wav">
+                    <int name="is3D" value="1"/><!-- An is3D value of 1 means the volume will attenuate depending on how far away the listener is. 0 means it will not.-->
+                    <int name="loopCount" value="-1"/><!--How many times the sample will loop. A loopCount of -1 means infinitely looping.-->
+                    <list name="cone"><!--The cone parameter defines the emitting cone shape. See HeatWave docs for more details.-->
+                        <float name="inside" value="0"/>
+                        <float name="outside" value="360"/>
+                        <float name="outsideGain" value="1"/>
+                        <float name="outsideFreq" value="1"/>
+                    </list>
+                    <list name="rolloff"><!--The rolloff parameter defines the attenuation curve. See HeatWave docs for more details.-->
+                        <float name="minDist" value="1.0"/>
+                        <float name="maxDist" value="10000.0"/>
+                    </list>
+                </file>
+            </list>
+			
+			<!--This is an example of a non-looping 3D HeatWave Sound which is not streamed.-->
+            <list name="EventOnce/Move Character">
+                <file path="movecharacter.wav">
+                    <int name="is3D" value="1"/>
+                    <int name="loopCount" value="0"/>
+                    <list name="rolloff">
+                        <float name="minDist" value="5.0"/>
+                        <float name="maxDist" value="10000.0"/>
+                    </list>
+                </file>
+            </list>
+            
+            <!--This is an example of a non-looping 3D HeatWave Sound which is not streamed.-->
+            <list name="EventOnce/Bounce">
+                <file path="bounce.wav">
+                    <int name="is3D" value="1"/>
+                    <int name="loopCount" value="0"/>
+                    <list name="rolloff">
+                        <float name="minDist" value="5.0"/>
+                        <float name="maxDist" value="10000.0"/>
+                    </list>
+                </file>
+            </list>
+            
+            <!--This is another non-looping 3D HeatWave Sound which is not streamed.-->
+            <list name="EventOnce/Thud">
+                <file path="thud.wav">
+                    <int name="is3D" value="1"/>
+                    <int name="loopCount" value="0"/>
+                    <list name="rolloff">
+                        <float name="minDist" value="4.0"/>
+                        <float name="maxDist" value="10000.0"/>
+                    </list>
+                </file>
+            </list>
+            
+            <!--This is another non-looping 3D HeatWave Sound which is not streamed.-->
+            <list name="EventOnce/Turn Character">
+                <file path="teleportspawn.wav">
+                    <int name="is3D" value="1"/>
+                    <int name="loopCount" value="0"/>
+                    <list name="rolloff">
+                        <float name="minDist" value="4.0"/>
+                        <float name="maxDist" value="10000.0"/>
+                    </list>
+                </file>
+            </list>
+            
+            <!--This is another non-looping 3D HeatWave Sound which is not streamed.-->
+            <list name="EventOnce/Powerup">
+                <file path="powerup.wav">
+                    <int name="is3D" value="1"/>
+                    <int name="loopCount" value="0"/>
+                    <list name="rolloff">
+                        <float name="minDist" value="4.0"/>
+                        <float name="maxDist" value="10000.0"/>
+                    </list>
+                </file>
+            </list>
+            
+            <!--This is another non-looping 3D HeatWave Sound which is not streamed.-->
+            <list name="EventOnce/Splat">
+                <file path="splat.wav">
+                    <int name="is3D" value="1"/>
+                    <int name="loopCount" value="0"/>
+                    <list name="rolloff">
+                        <float name="minDist" value="4.0"/>
+                        <float name="maxDist" value="10000.0"/>
+                    </list>
+                </file>
+            </list>
+            
+            <!--This is another non-looping 3D HeatWave Sound which is not streamed.-->
+            <list name="EventOnce/AI Freeze">
+                <file path="aifreeze.wav">
+                    <int name="is3D" value="1"/>
+                    <int name="loopCount" value="0"/>
+                    <list name="rolloff">
+                        <float name="minDist" value="4.0"/>
+                        <float name="maxDist" value="10000.0"/>
+                    </list>
+                </file>
+            </list>
+			
+			<!--This is another non-looping 3D HeatWave Sound which is not streamed.-->
+            <list name="EventOnce/AI Enemy Detected">
+                <file path="aienemydetected.wav">
+                    <int name="is3D" value="1"/>
+                    <int name="loopCount" value="0"/>
+                    <list name="rolloff">
+                        <float name="minDist" value="4.0"/>
+                        <float name="maxDist" value="10000.0"/>
+                    </list>
+                </file>
+            </list>
+            
+        </list>
+        <!--This script will process the HeatWave Asset.-->
+        <runscript script="%SCE_PHYRE%/Media/Scripts/PhyreAudioHelpers.lua" entry="CreateAudioBanks"/>
+    </asset>
+    <asset>   
+    
+        <string name ="bankName" value = "StreamBank"/> <!---->
+        
+        <!--Every Heatwave AudioBank asset must contain a list tag with name="Sounds" to be processed correctly. 
+            Each item of the list is a HeatWave Sound.
+            Each Sound represents a PAudioEvent in PhyreEngine.-->
+        <list name="Sounds"> 
+            <!--This is an example of a streamed non-3D HeatWave Sound.-->
+            <list name="Music/GameMenu">
+            <!--This is a Heatwave Source. It represents the file to get the audio data from, and a list of parameters to apply to it.-->
+                <file path="gamemenu.wav">
+                    <int name="is3D" value="0"/><!-- A value of 0 means it will not attenuate.-->
+                    <int name="stream" value="1"/><!-- A value of 1 means it will not be loaded into memory but be streamed from disk.-->
+                    <int name="loopCount" value="-1"/><!--A loopCount of -1 means infinitely looping.-->
+                </file>
+            </list>
+            
+            <!--This is an example of a streamed non-3D HeatWave Sound.-->
+            <list name="Music/SpaceBattle">
+            <!--This is a Heatwave Source. It represents the file to get the audio data from, and a list of parameters to apply to it.-->
+                <file path="spacebattle.wav">
+                    <int name="is3D" value="0"/><!-- A value of 0 means it will not attenuate.-->
+                    <int name="stream" value="1"/><!-- A value of 1 means it will not be loaded into memory but be streamed from disk.-->
+                    <int name="loopCount" value="-1"/><!--A loopCount of -1 means infinitely looping.-->
+                </file>
+            </list>
+            
+            <!--This is an example of a streamed non-3D HeatWave Sound.-->
+            <list name="Music/GameOver">
+            <!--This is a Heatwave Source. It represents the file to get the audio data from, and a list of parameters to apply to it.-->
+                <file path="gameover.wav">
+                    <int name="is3D" value="0"/><!-- A value of 0 means it will not attenuate.-->
+                    <int name="stream" value="1"/><!-- A value of 1 means it will not be loaded into memory but be streamed from disk.-->
+                    <int name="loopCount" value="-1"/><!--A loopCount of -1 means infinitely looping.-->
+                </file>
+            </list>
+            
+        </list>
+        
+        <!--This script will process the HeatWave Asset.-->
+        <runscript script="%SCE_PHYRE%/Media/Scripts/PhyreAudioHelpers.lua" entry="CreateAudioBanks"/>
+        
+    </asset>
+</agx>

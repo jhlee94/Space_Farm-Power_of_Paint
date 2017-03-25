@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<COMPONENTFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="3/23/2017 10:49:36 AM" />
+  <ASSETBASE path=".." />
+  <ASSETS />
+  <COMPONENT id="4617bf54-e3ea-4b7e-9ce4-52a7bea65f30" assetref="PickupComponent" basephyretype="PComponent">
+    <PROPERTY name="m_controller0" typename="PPhysicsCharacterControllerComponent" value="&lt;NULL_POINTER&gt;" isdynamicprop="True" />
+  </COMPONENT>
+</COMPONENTFILE>

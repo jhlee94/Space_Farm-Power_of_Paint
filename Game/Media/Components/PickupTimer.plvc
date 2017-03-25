@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<COMPONENTFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="3/21/2017 6:40:57 PM" />
+  <ASSETBASE path=".." />
+  <ASSETS />
+  <COMPONENT id="575daa87-9586-43a0-a2fa-3cbd91464459" assetref="PickupTimer" basephyretype="PTimerComponent">
+    <PROPERTY name="m_property0" typename="PTrigger" value="&lt;NULL_POINTER&gt;" isdynamicprop="True" />
+    <PROPERTY name="m_timeOut" typename="float" value="5" />
+    <PROPERTY name="m_script" typename="PScript" value="&lt;NULL_POINTER&gt;" />
+    <PROPERTY name="m_entryPoint" typename="PString" />
+  </COMPONENT>
+</COMPONENTFILE>

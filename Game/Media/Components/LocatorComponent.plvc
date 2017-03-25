@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<COMPONENTFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="3/21/2017 1:07:48 AM" />
+  <ASSETBASE path=".." />
+  <ASSETS />
+  <COMPONENT id="d6aa1ed3-9c2c-4202-9577-888ae8458a9f" assetref="LocatorComponent" basephyretype="PComponent" />
+</COMPONENTFILE>

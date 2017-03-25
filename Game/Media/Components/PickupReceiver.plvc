@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<COMPONENTFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="3/9/2017 10:43:52 PM" />
+  <ASSETBASE path=".." />
+  <ASSETS />
+  <COMPONENT id="d6e64ee6-2bdf-49aa-881f-d0879196cbec" assetref="PickupReceiver" basephyretype="PTriggerReceiverComponent">
+    <PROPERTY name="m_entryHandler" typename="PScriptCallbackHandler">
+      <PROPERTY name="m_entryPoint" typename="PString" />
+      <PROPERTY name="m_handler" typename="PTypedObject" value="&lt;NULL_POINTER&gt;" />
+    </PROPERTY>
+    <PROPERTY name="m_exitHandler" typename="PScriptCallbackHandler">
+      <PROPERTY name="m_entryPoint" typename="PString" />
+      <PROPERTY name="m_handler" typename="PTypedObject" value="&lt;NULL_POINTER&gt;" />
+    </PROPERTY>
+  </COMPONENT>
+</COMPONENTFILE>

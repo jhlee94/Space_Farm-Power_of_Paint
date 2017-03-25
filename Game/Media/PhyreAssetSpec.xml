@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetSpec>
+<DefaultShader path="./Shaders/ColladaDefaultShader.cgfx"/>
+<FileSpecs>
+<FileSpec platform="*" type="*" spec=";PlatformName;/;InputDir;;InputFilename;.phyre"/>
+</FileSpecs>
+</AssetSpec>

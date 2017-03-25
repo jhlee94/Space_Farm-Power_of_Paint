@@ -1,0 +1,394 @@
+<?xml version="1.0"?>
+<LEVELFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="12/1/2014 9:47:20 AM" />
+  <ASSETBASE path=".." />
+  <ASSETS>
+    <FILE id="85158abf-656f-4e0f-ae8c-1446872c4312" path="./Models/cube.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="46171c05-4fb9-4c0d-948f-1befb51eecc4" assetref="Models/cube.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="b5a98dd6-da10-484d-ba6b-f2ea444b6404" assetref="Models/cube.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="acd2ab00-5491-47cf-8925-3c01091f2039" assetref="Models/cube.dae#pCubeShape1" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="21377769-3d59-4d5e-9d88-c53cf683b7e7" assetref="Models/cube.dae#pCube1" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="690173c8-5b72-4d62-b6f9-a29b054a1ee1" path="./Scripts/DefaultCameraController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="4a1d7ddd-e76b-4592-b177-bfe5d2efbb91" path="./Scripts/PhysicsCharacterController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="bc2b662b-2d84-4c41-a41c-15461f57e50c" path="./Scripts/CustomCameraController_1.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="366fa294-873c-4727-b243-2783d390d91b" path="./Scripts/DefaultTrigger.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="b90f0a08-a241-461a-8366-1a507886f3f1" path="./Scripts/CustomCameraController_2.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="3a4ffcd9-329e-4544-9342-bc0a3a85e39c" path="./Scripts/PhysicsCharacterController_1.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="d02d2473-0d50-4cae-a1c7-86ee4ffbb2f0" path="./Scripts/PhysicsCharacterController_2.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="df22843f-af77-4758-96c3-342c237efe98" path="./Scripts/CustomCameraController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+  </ASSETS>
+  <INSTANCES>
+    <INSTANCE id="f6e494fc-cd6d-499f-bdb4-525aea408ae4" name="Light" assetref="Light" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,4,0,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_color" typename="Vector4">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,1" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="4f874365-10c2-40f9-b4ad-b0bf25083f5d" name="pCube1" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem" />
+    <INSTANCE id="26f71e7c-62dc-4434-a406-8cc53f3c7fc3" name="pCube1_0" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,2,0,0,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="19edfaa6-304c-4b94-b94c-922bc2a6331c" name="pCube1_1" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,6,0,0,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="ff46e408-2a3f-4a8f-92de-3e6a08f73751" name="pCube1_2" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,4,0,0,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="3a07c396-f03f-48c9-a8bc-a45d407f97c1" name="pCube1_3" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,12,0,0,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="e5c83b6b-211b-43a2-9f84-ddd3422a8981" name="pCube1_4" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,8,0,0,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="879c77db-8d7a-4ad5-bee0-60e81eab4bd8" name="pCube1_5" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,10,0,0,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="a9713c34-6dcb-468c-a9d1-0f35b453093a" name="pCube1_6" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,14,0,0,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="21540cdd-bab3-4665-9113-d6dac51a0083" name="pCube1_7" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,14,0,2,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="7518481a-359d-4e74-b4c6-e9193a1b47e2" name="pCube1_8" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,10,0,2,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="e20c07f0-cb51-467f-a207-c7a9d52f058e" name="pCube1_9" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,8,0,2,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="d2a55cb1-03f8-4fdc-af7c-761128b3b8e2" name="pCube1_10" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,12,0,2,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="8e38325f-4a86-48eb-902a-2ba5c7576a15" name="pCube1_11" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,4,0,2,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="3d244422-ac96-4b6f-9654-b706d99d0505" name="pCube1_12" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,6,0,2,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="77360dc7-aa20-4fad-9a72-c79ec8cdda1d" name="pCube1_13" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,2,0,2,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="78e193ed-69f3-438b-b098-a30ed1ea1650" name="pCube1_14" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,2,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="eef39df1-f10c-4f1f-8676-dc416e6a4fc4" name="pCube1_15" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,14,0,4,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="29ed382d-9019-40b3-807e-91ce5f5a9867" name="pCube1_16" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,10,0,4,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="4a3a1286-9714-4f88-a5dc-be41b1566518" name="pCube1_17" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,8,0,4,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="29223fd9-492c-4057-9b75-1dfe1af5f320" name="pCube1_18" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,12,0,4,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="519c93c8-8bfb-4af8-b499-a448cd3757fb" name="pCube1_19" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,4,0,4,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="fc771352-aa43-4743-a434-b185f6974419" name="pCube1_20" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,6,0,4,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="b54a91cd-5d54-4629-87b8-f9c2e391a4fe" name="pCube1_21" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,2,0,4,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="24282bb3-7ffd-4c45-af33-4af0faaba2fd" name="pCube1_22" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,4,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="8f37d69d-7914-47af-a8bc-528bd95e76c1" name="pCube1_23" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,14,0,6,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="347d3b45-f051-4c15-a7b0-bc5c2d5742eb" name="pCube1_24" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,10,0,6,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="862f2a82-c60f-42e1-a4a9-1a0ffc4fcf47" name="pCube1_25" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,8,0,6,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="8a528cec-538a-4212-9c36-8d33c745c8c9" name="pCube1_26" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,12,0,6,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="1e815a3b-b146-4535-a710-0e36e63b9b2e" name="pCube1_27" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,4,0,6,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="bd780a3f-3bba-4c42-9907-8a725cc5bc3d" name="pCube1_28" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,6,0,6,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="91397297-fd22-439d-9bfb-47906056a38b" name="pCube1_29" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,2,0,6,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="3c210877-e38e-42b1-aa2e-8484720b179f" name="pCube1_30" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,6,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="029c9904-b4c4-4dee-a022-291b19878c75" name="pCube1_31" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,14,0,8,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="b5385e8a-8a9c-440d-b615-72e0a1a4bca3" name="pCube1_32" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,10,0,8,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="d415eb68-0196-492a-8c1d-daf7e89087c3" name="pCube1_33" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,8,0,8,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="fa632f91-1f92-4c67-9e7a-3acbc01425a1" name="pCube1_34" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,12,0,8,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="afe96241-ff21-4151-b7f7-c8d9038c1f1a" name="pCube1_35" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,4,0,8,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="6f8741d6-e0d5-4e84-bb1b-583929260c47" name="pCube1_36" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,6,0,8,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="62dd6194-797f-47bf-9516-7f4c0c871251" name="pCube1_37" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,2,0,8,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="627aa84d-6f07-4dc3-9e98-2eb8366da60e" name="pCube1_38" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,8,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="dff2f912-a643-4abf-929c-b5c53f0b3976" name="pCube1_39" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,14,0,10,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="0282c4c6-e787-4a24-88ef-f31968d0c81b" name="pCube1_40" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,10,0,10,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="5e87f890-070c-4d4e-b0f3-16a547575c57" name="pCube1_41" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,8,0,10,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="f1c87554-ff37-4bc3-957b-f22ad2a0fd6d" name="pCube1_42" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,12,0,10,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="98f03a37-921b-4486-92d5-512084b248c3" name="pCube1_43" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,4,0,10,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="e97364c5-3b54-4db5-92ff-9b8832ec468c" name="pCube1_44" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,6,0,10,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="fbedf718-44f5-4e80-a6b9-7a7370873b99" name="pCube1_45" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,2,0,10,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="daf649df-8e26-42ff-a28c-495754229b77" name="pCube1_46" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,10,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="9a1bb4a0-e33e-47c4-94e1-e71aa5c7daf8" name="pCube1_47" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,14,0,12,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="4e5456a0-3b6c-42ba-a2cd-f6eb6a157c08" name="pCube1_48" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,10,0,12,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="3213f2de-21fb-4d45-8c3d-06766045c9ac" name="pCube1_49" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,8,0,12,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="40d3b8e8-82a7-456c-9998-0a4be1b00e30" name="pCube1_50" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,12,0,12,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="f2dd129f-a49d-4a9d-9fe9-23d04519d267" name="pCube1_51" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,4,0,12,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="48ee678d-c4b2-409a-a973-c6a75bba9f40" name="pCube1_52" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,6,0,12,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="17c082ff-c581-46ef-8549-e2e05cbac400" name="pCube1_53" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,2,0,12,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="e465c68d-ac01-4ae5-8406-8c3e434621e5" name="pCube1_54" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,12,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="5c288503-687c-456d-a64d-98e6c5e54028" name="pCube1_55" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,14,0,14,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="94cf4d72-a2f2-4c4d-8f86-912fdc806349" name="pCube1_56" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,10,0,14,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="d064253b-cd35-4809-ba72-094f13479592" name="pCube1_57" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,8,0,14,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="53e1aabc-7579-4469-b6cb-3d500866c828" name="pCube1_58" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,12,0,14,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="fc967542-cc67-44fa-b2eb-2fb540d86d23" name="pCube1_59" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,4,0,14,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="99a012fd-ece6-4f6b-9e74-8b920dbc8edd" name="pCube1_60" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,6,0,14,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="537158dd-23ac-409d-b833-f0b7d79592f6" name="pCube1_61" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,2,0,14,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="d65631f1-7af7-4d9f-ae4b-638b79ed2bdb" name="pCube1_62" assetref="Models/cube.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,14,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="2dd72606-1c09-44e9-890d-e3a47d22f44a" name="Light_0" assetref="Light" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,14,4,0,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_color" typename="Vector4">
+        <PROPERTY name="m_elements" typename="float[]" value="0,1,0,1" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="25c25578-7630-450f-8785-8199fbf44cb7" name="Light_1" assetref="Light" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,4,14,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_color" typename="Vector4">
+        <PROPERTY name="m_elements" typename="float[]" value="0,0,1,1" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="3208afba-2336-4f35-a5dc-f229c9299b07" name="Light_2" assetref="Light" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,7,4,7,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_color" typename="Vector4">
+        <PROPERTY name="m_elements" typename="float[]" value="1,1,1,1" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="bf40ab4b-008c-4ba1-8b9e-c562e3d55ddc" name="Light_3" assetref="Light" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,14,4,14,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_color" typename="Vector4">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,1" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="3f7804d7-a52f-44dc-b2d7-ca27e54303af" name="PerspectiveCamera" assetref="Perspective Camera" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.750539124,0.0154688805,-0.660645068,0,-0.22770679,0.944553971,-0.236574322,0,0.620355308,0.327991635,0.712447047,0,19.4133339,2.9073,16.6811295,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+  </INSTANCES>
+  <LAYERS />
+  <EDITORDATA>
+    <TARGET name="localHost" application="C:/Program Files (x86)/SCE/Engines/PhyreEngine31800/PhyreEngine/Tools/ThirdPersonGameTemplateD3D11DO_x64.exe" args="" workingdir=".." xst="PhyreLevelEditor.Core.TargetManagement.LocalTargetProperties">
+      <PLATFORM name="D3D11" />
+    </TARGET>
+    <TARGET name="PS4" application="C:/Program Files (x86)/SCE/Engines/PhyreEngine31800/PhyreEngine/Tools/ThirdPersonGameTemplateORBISDO.elf" args="" workingdir="" xst="OrbisTargetManager.OrbisTargetProperties">
+      <PLATFORM name="GNM" />
+    </TARGET>
+    <ASSETDEP />
+  </EDITORDATA>
+</LEVELFILE>

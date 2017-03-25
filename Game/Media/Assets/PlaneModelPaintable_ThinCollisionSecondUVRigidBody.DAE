@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>b1032464</author>
+      <authoring_tool>3dsMax 19 - Feeling ColladaMax v3.04C PhyreEngine(TM) 3.18.0.0.</authoring_tool>
+      <comments>ColladaMax Export Options: ExportNormals=1;ExportEPolyAsTriangles=1;ExportXRefs=1;ExportSelected=0;ExportTangents=1;ExportAnimations=0;SampleAnim=1;ExportAnimClip=0;BakeMatrices=0;ExportRelativePaths=1;AnimStart=0;AnimEnd=16000;</comments>
+      <source_data>file:///C:/Users/B1032464/Desktop/Model_Data/Plane_Mine.max</source_data>
+    </contributor>
+    <created>2017-03-10T20:56:42Z</created>
+    <modified>2017-03-10T20:56:46Z</modified>
+    <unit meter="0.025399999693036" name="inch"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_physics_materials>
+    <physics_material id="rigidBody1-material" name="rigidBody1-material">
+      <technique_common>
+        <dynamic_friction>0.2000000029802322</dynamic_friction>
+        <restitution>0.6000000238418579</restitution>
+        <static_friction>0.2000000029802322</static_friction>
+      </technique_common>
+    </physics_material>
+  </library_physics_materials>
+  <library_physics_models>
+    <physics_model id="MayaNativePhysicsModel">
+      <rigid_body name="rigidBody1" sid="rigidBody1">
+        <technique_common>
+          <dynamic>0</dynamic>
+          <mass>1</mass>
+          <mass_frame>
+            <translate>0 0 0</translate>
+            <rotate>1 0 0 0</rotate>
+          </mass_frame>
+          <instance_physics_material url="#rigidBody1-material"/>
+          <shape>
+            <hollow>true</hollow>
+            <mass>1</mass>
+            <instance_geometry url="#collision1xShape1"/>
+          </shape>
+        </technique_common>
+        <technique profile="MAYA">
+          <damping>0</damping>
+        </technique>
+      </rigid_body>
+    </physics_model>
+  </library_physics_models>
+  <library_physics_scenes>
+    <physics_scene id="MayaNativePhysicsScene">
+      <instance_physics_model url="#MayaNativePhysicsModel">
+        <instance_rigid_body target="#collision1x1" body="rigidBody1">
+          <technique_common>
+            <angular_velocity>0 0 0</angular_velocity>
+            <velocity>0 0 0</velocity>
+            <dynamic>0</dynamic>
+            <mass>1</mass>
+            <mass_frame>
+              <translate>0 0 0</translate>
+              <rotate>1 0 0 0</rotate>
+            </mass_frame>
+          </technique_common>
+          <technique profile="MAYA">
+            <damping>0</damping>
+          </technique>
+        </instance_rigid_body>
+      </instance_physics_model>
+      <technique_common>
+        <gravity>0 -980 0</gravity>
+        <time_step>0.0299999993294477</time_step>
+      </technique_common>
+    </physics_scene>
+  </library_physics_scenes>
+  
+  <library_images>
+	<image id="file3" name="file3">
+      <init_from>./textures/PaintNM.dds</init_from>
+      <extra>
+        <technique profile="MAYA">
+          <dgnode_type>kFile</dgnode_type>
+          <image_sequence>0</image_sequence>
+        </technique>
+      </extra>
+    </image>
+	
+    <image id="file2" name="file2">
+      <init_from>./textures/crate_3.dds</init_from>
+      <extra>
+        <technique profile="MAYA">
+          <dgnode_type>kFile</dgnode_type>
+          <image_sequence>0</image_sequence>
+        </technique>
+      </extra>
+    </image>
+    <image id="file1" name="file1">
+      <init_from>./textures/CRATE_3Normal.dds</init_from>
+      <extra>
+        <technique profile="MAYA">
+          <dgnode_type>kFile</dgnode_type>
+          <image_sequence>0</image_sequence>
+        </technique>
+      </extra>
+    </image>
+  </library_images>
+  
+  <library_materials>
+    <material id="ColorMaterial_E5A6D700" name="ColorMaterial_E5A6D700">
+      <instance_effect url="#ColorMaterial_E5A6D700-fx"/>
+    </material>
+	<material id="colladafxShader1" name="colladafxShader1">
+      <instance_effect url="#colladafxShader1-fx">
+        <technique_hint platform="PC-OGL" ref="ForwardRender"/>
+        <setparam ref="colladafxShader1scene_EyePosition">
+          <float3>202.1836090087891 341.9742431640625 -562.3714599609375</float3>
+        </setparam>
+        <setparam ref="colladafxShader1scene_View">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1scene_Projection">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1scene_ViewProjection">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1scene_ViewInverse">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1scene_cameraNearFar">
+          <float2>0 0</float2>
+        </setparam>
+        <setparam ref="colladafxShader1scene_cameraNearTimesFar">
+          <float>0</float>
+        </setparam>
+        <setparam ref="colladafxShader1scene_cameraFarMinusNear">
+          <float>0</float>
+        </setparam>
+        <setparam ref="colladafxShader1scene_ViewportWidthHeight">
+          <float2>0 0</float2>
+        </setparam>
+        <setparam ref="colladafxShader1scene_screenWidthHeightInv">
+          <float2>0 0</float2>
+        </setparam>
+        <setparam ref="colladafxShader1scene_GlobalAmbientColor">
+          <half3>0 0 0</half3>
+        </setparam>
+        <setparam ref="colladafxShader1scene_Time">
+          <float>0</float>
+        </setparam>
+        <setparam ref="colladafxShader1World">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1WorldView">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1WorldInverse">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1WorldViewProjection">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1WorldViewInverse">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1MaterialColour">
+          <half4>1 1 1 1</half4>
+        </setparam>
+        <setparam ref="colladafxShader1MaterialDiffuse">
+          <half>1</half>
+        </setparam>
+        <setparam ref="colladafxShader1MaterialEmissiveness">
+          <half>0</half>
+        </setparam>
+		
+		<setparam ref="crate1Shininess">
+          <half>20</half>
+        </setparam>
+        <setparam ref="crate1SpecularPower">
+          <half>512</half>
+        </setparam>
+		
+        <setparam ref="colladafxShader1SoftDepthScale">
+          <half>0.89990234375</half>
+        </setparam>
+        <setparam ref="colladafxShader1LightmapUVScaleOffset">
+          <float4>1 1 0 0</float4>
+        </setparam>
+		
+		<setparam ref="colladafxShader1PaintNormalSampler">
+          <sampler2D>
+            <source>file3Surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>LINEAR</minfilter>
+            <magfilter>LINEAR</magfilter>
+            <mipfilter>LINEAR</mipfilter>
+            <max_anisotropy>0</max_anisotropy>
+          </sampler2D>
+        </setparam>
+        <setparam ref="file3Surface">
+          <surface type="2D">
+            <init_from mip="0" slice="0">file3</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </setparam>
+		
+		<setparam ref="colladafxShader1TextureSampler">
+          <sampler2D>
+            <source>file2Surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+            <max_anisotropy>0</max_anisotropy>
+          </sampler2D>
+        </setparam>
+        <setparam ref="file2Surface">
+          <surface type="2D">
+            <init_from mip="0" slice="0">file2</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </setparam>
+        <setparam ref="colladafxShader1NormalMapSampler">
+          <sampler2D>
+            <source>file1Surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>LINEAR</minfilter>
+            <magfilter>LINEAR</magfilter>
+            <mipfilter>LINEAR</mipfilter>
+            <max_anisotropy>0</max_anisotropy>
+          </sampler2D>
+        </setparam>
+        <setparam ref="file1Surface">
+          <surface type="2D">
+            <init_from mip="0" slice="0">file1</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </setparam>
+		
+      </instance_effect>
+      <extra>
+        <technique profile="PHYRE">
+          <material_switches>
+            <MULTIPLE_UVS_ENABLED/>
+            <RECEIVE_SHADOWS/>
+            <LIGHTMAP_OCCLUSION/>
+          </material_switches>
+          <material_switch_list>
+            <material_switch name="LAYERED_TEXTURE_MODE_OVER_NONE_ENABLED" material_switch_value="0"/>
+            <material_switch name="MULTIPLE_UVS_ENABLED" material_switch_value="1"/>
+            <material_switch name="VERTEX_COLOR_ENABLED" material_switch_value="0"/>
+            <material_switch name="LIGHTING_ENABLED" material_switch_value="1"/>
+            <material_switch name="TEXTURE_ENABLED" material_switch_value="1"/>
+            <material_switch name="ALPHA_ENABLED" material_switch_value="0"/>
+            <material_switch name="NORMAL_MAPPING_ENABLED" material_switch_value="1"/>
+            <material_switch name="WRAP_DIFFUSE_LIGHTING" material_switch_value="0"/>
+            <material_switch name="SPECULAR_ENABLED" material_switch_value="1"/>
+            <material_switch name="CASTS_SHADOWS" material_switch_value="0"/>
+            <material_switch name="RECEIVE_SHADOWS" material_switch_value="1"/>
+            <material_switch name="DOUBLE_SIDED" material_switch_value="0"/>
+            <material_switch name="MOTION_BLUR_ENABLED" material_switch_value="0"/>
+            <material_switch name="GENERATE_LIGHTS" material_switch_value="0"/>
+            <material_switch name="CEL_ENABLED" material_switch_value="0"/>
+            <material_switch name="RENDER_AS_LOW_RES" material_switch_value="0"/>
+            <material_switch name="LIGHTMAP_OCCLUSION" material_switch_value="1"/>
+          </material_switch_list>
+        </technique>
+      </extra>
+    </material>
+  </library_materials>
+  <library_effects>  
+    <effect id="ColorMaterial_E5A6D700-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0.8980392217636108 0.6509804129600525 0.843137264251709 1</color>
+            </ambient>
+            <diffuse>
+              <color>0.8980392217636108 0.6509804129600525 0.843137264251709 1</color>
+            </diffuse>
+            <specular>
+              <color>1 1 1 1</color>
+            </specular>
+            <shininess>
+              <float>10</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1</float>
+            </index_of_refraction>
+          </phong>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0.2000000029802322</float>
+              </spec_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+    </effect>
+	<effect id="colladafxShader1-fx">
+      <profile_CG platform="PC-OGL">
+        <include sid="include" url="../Shaders/PhyreDefaultLitShaderPainted.cgfx"/>
+        <newparam sid="colladafxShader1scene_EyePosition">
+          <annotate name="UIName">
+            <string>scene_EyePosition</string>
+          </annotate>
+          <annotate name="UIType">
+            <string>Color</string>
+          </annotate>
+          <semantic>EYEPOSITIONWS</semantic>
+          <float3>202.1836090087891 341.9742431640625 -562.3714599609375</float3>
+        </newparam>
+        <newparam sid="colladafxShader1scene_View">
+          <semantic>View</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1scene_Projection">
+          <semantic>Projection</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1scene_ViewProjection">
+          <semantic>ViewProjection</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1scene_ViewInverse">
+          <semantic>ViewInverse</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1scene_cameraNearFar">
+          <annotate name="UIName">
+            <string>scene_cameraNearFar</string>
+          </annotate>
+          <semantic>CAMERANEARFAR</semantic>
+          <float2>0 0</float2>
+        </newparam>
+        <newparam sid="colladafxShader1scene_cameraNearTimesFar">
+          <annotate name="UIName">
+            <string>scene_cameraNearTimesFar</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>1</float>
+          </annotate>
+          <semantic>CAMERANEARTIMESFAR</semantic>
+          <float>0</float>
+        </newparam>
+        <newparam sid="colladafxShader1scene_cameraFarMinusNear">
+          <annotate name="UIName">
+            <string>scene_cameraFarMinusNear</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>1</float>
+          </annotate>
+          <semantic>CAMERAFARMINUSNEAR</semantic>
+          <float>0</float>
+        </newparam>
+        <newparam sid="colladafxShader1scene_ViewportWidthHeight">
+          <annotate name="UIName">
+            <string>scene_ViewportWidthHeight</string>
+          </annotate>
+          <semantic>VIEWPORTWIDTHHEIGHT</semantic>
+          <float2>0 0</float2>
+        </newparam>
+        <newparam sid="colladafxShader1scene_screenWidthHeightInv">
+          <annotate name="UIName">
+            <string>scene_screenWidthHeightInv</string>
+          </annotate>
+          <semantic>SCREENWIDTHHEIGHTINV</semantic>
+          <float2>0 0</float2>
+        </newparam>
+        <newparam sid="colladafxShader1scene_GlobalAmbientColor">
+          <annotate name="UIName">
+            <string>scene_GlobalAmbientColor</string>
+          </annotate>
+          <annotate name="UIType">
+            <string>Color</string>
+          </annotate>
+          <semantic>GLOBALAMBIENTCOLOR</semantic>
+          <half3>0 0 0</half3>
+        </newparam>
+        <newparam sid="colladafxShader1scene_Time">
+          <annotate name="UIName">
+            <string>scene_Time</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>1</float>
+          </annotate>
+          <semantic>TIME</semantic>
+          <float>0</float>
+        </newparam>
+        <newparam sid="colladafxShader1World">
+          <semantic>World</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1WorldView">
+          <semantic>WorldView</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1WorldInverse">
+          <semantic>WorldInverse</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1WorldViewProjection">
+          <semantic>WorldViewProjection</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1WorldViewInverse">
+          <semantic>WorldViewInverse</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1MaterialColour">
+          <annotate name="UIName">
+            <string>MaterialColour</string>
+          </annotate>
+          <annotate name="UIType">
+            <string>Color</string>
+          </annotate>
+          <semantic>MATERIALCOLOUR</semantic>
+          <half4>1 1 1 1</half4>
+        </newparam>
+        <newparam sid="colladafxShader1MaterialDiffuse">
+          <annotate name="UIName">
+            <string>MaterialDiffuse</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>1</float>
+          </annotate>
+          <semantic>MATERIALDIFFUSE</semantic>
+          <half>1</half>
+        </newparam>
+        <newparam sid="colladafxShader1MaterialEmissiveness">
+          <annotate name="UIName">
+            <string>MaterialEmissiveness</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>1</float>
+          </annotate>
+          <semantic>MATERIALEMISSIVENESS</semantic>
+          <half>0</half>
+        </newparam>
+		
+		<newparam sid="crate1Shininess">
+          <annotate name="UIName">
+            <string>Shininess</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>20</float>
+          </annotate>
+          <semantic>SHININESS</semantic>
+          <half>10</half>
+        </newparam>
+        <newparam sid="crate1SpecularPower">
+          <annotate name="UIName">
+            <string>SpecularPower</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>64</float>
+          </annotate>
+          <semantic>SPECULARPOWER</semantic>
+          <half>40</half>
+        </newparam>
+		
+        <newparam sid="colladafxShader1SoftDepthScale">
+          <annotate name="UIName">
+            <string>SoftDepthScale</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0.0000999999974737</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>1</float>
+          </annotate>
+          <half>0.89990234375</half>
+        </newparam>
+        <newparam sid="colladafxShader1LightmapUVScaleOffset">
+          <annotate name="UIName">
+            <string>LightmapUVScaleOffset</string>
+          </annotate>
+          <annotate name="UIType">
+            <string>Color</string>
+          </annotate>
+          <float4>1 1 0 0</float4>
+        </newparam>
+		
+		<newparam sid="colladafxShader1PaintNormalSampler">
+          <annotate name="UIName">
+            <string>PaintmapNormalMap</string>
+          </annotate>
+          <sampler2D>
+            <source>file3Surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>LINEAR</minfilter>
+            <magfilter>LINEAR</magfilter>
+            <mipfilter>LINEAR</mipfilter>
+            <max_anisotropy>0</max_anisotropy>
+          </sampler2D>
+        </newparam>
+        <newparam sid="file3Surface">
+          <annotate name="UIName">
+            <string>file3</string>
+          </annotate>
+          <surface type="2D">
+            <init_from mip="0" slice="0">file3</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+		
+		<newparam sid="colladafxShader1TextureSampler">
+          <annotate name="UIName">
+            <string>TextureSampler</string>
+          </annotate>
+          <sampler2D>
+            <source>file2Surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+            <max_anisotropy>0</max_anisotropy>
+          </sampler2D>
+        </newparam>
+        <newparam sid="file2Surface">
+          <annotate name="UIName">
+            <string>file2</string>
+          </annotate>
+          <surface type="2D">
+            <init_from mip="0" slice="0">file2</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="colladafxShader1NormalMapSampler">
+          <annotate name="UIName">
+            <string>NormalMapSampler</string>
+          </annotate>
+          <sampler2D>
+            <source>file1Surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+            <max_anisotropy>0</max_anisotropy>
+          </sampler2D>
+        </newparam>
+        <newparam sid="file1Surface">
+          <annotate name="UIName">
+            <string>file1</string>
+          </annotate>
+          <surface type="2D">
+            <init_from mip="0" slice="0">file1</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+		
+        <technique sid="ForwardRender">
+          <pass sid="colladafxShader1">
+            <depth_test_enable value="1"/>
+            <depth_func value="LEQUAL"/>
+            <depth_mask value="1"/>
+            <blend_enable value="0"/>
+            <color_mask value="1 1 1 1"/>
+            <cull_face_enable value="1"/>
+            <cull_face value="BACK"/>
+            <shader stage="VERTEX">
+              <compiler_target>vp40</compiler_target>
+              <name source="include">DefaultForwardRenderVS</name>
+              <bind symbol="DitherNoiseTexture">
+                <param ref="colladafxShader1DitherNoiseTexture"/>
+              </bind>
+              <bind symbol="LowResDepthTexture">
+                <param ref="colladafxShader1LowResDepthTexture"/>
+              </bind>
+              <bind symbol="scene_EyePosition">
+                <param ref="colladafxShader1scene_EyePosition"/>
+              </bind>
+              <bind symbol="scene_View">
+                <param ref="colladafxShader1scene_View"/>
+              </bind>
+              <bind symbol="scene_Projection">
+                <param ref="colladafxShader1scene_Projection"/>
+              </bind>
+              <bind symbol="scene_ViewProjection">
+                <param ref="colladafxShader1scene_ViewProjection"/>
+              </bind>
+              <bind symbol="scene_ViewInverse">
+                <param ref="colladafxShader1scene_ViewInverse"/>
+              </bind>
+              <bind symbol="scene_cameraNearFar">
+                <param ref="colladafxShader1scene_cameraNearFar"/>
+              </bind>
+              <bind symbol="scene_cameraNearTimesFar">
+                <param ref="colladafxShader1scene_cameraNearTimesFar"/>
+              </bind>
+              <bind symbol="scene_cameraFarMinusNear">
+                <param ref="colladafxShader1scene_cameraFarMinusNear"/>
+              </bind>
+              <bind symbol="scene_ViewportWidthHeight">
+                <param ref="colladafxShader1scene_ViewportWidthHeight"/>
+              </bind>
+              <bind symbol="scene_screenWidthHeightInv">
+                <param ref="colladafxShader1scene_screenWidthHeightInv"/>
+              </bind>
+              <bind symbol="scene_GlobalAmbientColor">
+                <param ref="colladafxShader1scene_GlobalAmbientColor"/>
+              </bind>
+              <bind symbol="scene_Time">
+                <param ref="colladafxShader1scene_Time"/>
+              </bind>
+              <bind symbol="World">
+                <param ref="colladafxShader1World"/>
+              </bind>
+              <bind symbol="WorldView">
+                <param ref="colladafxShader1WorldView"/>
+              </bind>
+              <bind symbol="WorldInverse">
+                <param ref="colladafxShader1WorldInverse"/>
+              </bind>
+              <bind symbol="WorldViewProjection">
+                <param ref="colladafxShader1WorldViewProjection"/>
+              </bind>
+              <bind symbol="WorldViewInverse">
+                <param ref="colladafxShader1WorldViewInverse"/>
+              </bind>
+              <bind symbol="MaterialColour">
+                <param ref="colladafxShader1MaterialColour"/>
+              </bind>
+              <bind symbol="MaterialDiffuse">
+                <param ref="colladafxShader1MaterialDiffuse"/>
+              </bind>
+              <bind symbol="MaterialEmissiveness">
+                <param ref="colladafxShader1MaterialEmissiveness"/>
+              </bind>
+              <bind symbol="SoftDepthScale">
+                <param ref="colladafxShader1SoftDepthScale"/>
+              </bind>
+              <bind symbol="LightmapSampler">
+                <param ref="colladafxShader1LightmapSampler"/>
+              </bind>
+              <bind symbol="LightmapUVScaleOffset">
+                <param ref="colladafxShader1LightmapUVScaleOffset"/>
+              </bind>
+			  
+			  <bind symbol="Shininess">
+                <param ref="crate1Shininess"/>
+              </bind>
+              <bind symbol="SpecularPower">
+                <param ref="crate1SpecularPower"/>
+              </bind>
+			  
+			  <bind symbol="PaintmapNormalMap">
+                <param ref="colladafxShader1PaintNormalSampler"/>
+              </bind>
+			  
+			  <bind symbol="TextureSampler">
+                <param ref="colladafxShader1TextureSampler"/>
+              </bind>
+              <bind symbol="NormalMapSampler">
+                <param ref="colladafxShader1NormalMapSampler"/>
+              </bind>
+			  
+            </shader>
+          </pass>
+        </technique>
+      </profile_CG>
+      <extra>
+        <technique profile="PHYRE">
+          <context_switches>
+            <context_switch name="NUM_LIGHTS"/>
+            <context_switch name="LOD_BLEND"/>
+            <context_switch name="INSTANCING_ENABLED"/>
+            <context_switch name="SHADER_LOD_LEVEL"/>
+            <context_switch name="LOW_RES_PARTICLES"/>
+            <supported_lights max_light_count="3">
+              <supported_light_type>DirectionalLight</supported_light_type>
+              <supported_light_type>PointLight</supported_light_type>
+              <supported_light_type>SpotLight</supported_light_type>
+            </supported_lights>
+            <supported_shadows>
+              <supported_shadow_type>PCFShadowMap</supported_shadow_type>
+              <supported_shadow_type>CascadedShadowMap</supported_shadow_type>
+              <supported_shadow_type>CombinedCascadedShadowMap</supported_shadow_type>
+            </supported_shadows>
+          </context_switches>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="Plane001-mesh" name="Plane001">
+      <mesh>
+        <source id="Plane001-mesh-positions">
+          <float_array id="Plane001-mesh-positions-array" count="12">-0.5 -0.5 0 0.5 -0.5 0 -0.5 0.5 0 0.5 0.5 0</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-positions-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-normals">
+          <float_array id="Plane001-mesh-normals-array" count="12">0 0 1 0 0 1 0 0 1 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-normals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-map-channel1">
+          <float_array id="Plane001-mesh-map-channel1-array" count="12">0 0 0 1 0 0 0 1 0 1 1 0</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-map-channel1-array" count="4" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-map-channel2">
+          <float_array id="Plane001-mesh-map-channel2-array" count="12">0 0 0 1 0 0 0 1 0 1 1 0</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-map-channel2-array" count="4" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-map-channel1-tangents">
+          <float_array id="Plane001-mesh-map-channel1-tangents-array" count="12">1 0 0 1 0 0 1 0 0 1 0 0</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-map-channel1-tangents-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-map-channel1-binormals">
+          <float_array id="Plane001-mesh-map-channel1-binormals-array" count="12">0 1 0 0 1 0 0 1 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-map-channel1-binormals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-map-channel2-tangents">
+          <float_array id="Plane001-mesh-map-channel2-tangents-array" count="12">1 0 0 1 0 0 1 0 0 1 0 0</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-map-channel2-tangents-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-map-channel2-binormals">
+          <float_array id="Plane001-mesh-map-channel2-binormals-array" count="12">0 1 0 0 1 0 0 1 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-map-channel2-binormals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Plane001-mesh-vertices">
+          <input semantic="POSITION" source="#Plane001-mesh-positions"/>
+        </vertices>
+        <triangles material="colladafxShader1" count="2">
+          <input semantic="VERTEX" source="#Plane001-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Plane001-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Plane001-mesh-map-channel1" offset="2" set="1"/>
+          <input semantic="TEXCOORD" source="#Plane001-mesh-map-channel2" offset="3" set="2"/>
+          <input semantic="TEXTANGENT" source="#Plane001-mesh-map-channel1-tangents" offset="4" set="1"/>
+          <input semantic="TEXBINORMAL" source="#Plane001-mesh-map-channel1-binormals" offset="5" set="1"/>
+          <input semantic="TEXTANGENT" source="#Plane001-mesh-map-channel2-tangents" offset="6" set="2"/>
+          <input semantic="TEXBINORMAL" source="#Plane001-mesh-map-channel2-binormals" offset="7" set="2"/>
+          <p>2 0 2 2 0 0 0 0 0 1 0 0 1 1 1 1 3 2 3 3 2 2 2 2 1 3 1 1 3 3 3 3 3 2 3 3 2 2 2 2 0 1 0 0 1 1 1 1</p>
+        </triangles>
+      </mesh>
+    </geometry>
+	<geometry id="collision1xShape1" name="collision1xShape1">
+      <mesh>
+        <source id="collision1xShape1-positions" name="position">
+          <float_array id="collision1xShape1-positions-array" count="24">-0.5 -0.5 0 0.5 -0.5 0 -0.5 0.5 0 0.5 0.5 0 -0.5 0.5 0 0.5 0.5 0 -0.5 -0.5 0 0.5 -0.5 0</float_array>
+          <technique_common>
+            <accessor source="#collision1xShape1-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="collision1xShape1-normals" name="normal">
+          <float_array id="collision1xShape1-normals-array" count="72">0 0 1 0 0 1 0 0 1 0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 1 0 0 1 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0</float_array>
+          <technique_common>
+            <accessor source="#collision1xShape1-normals-array" count="24" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="collision1xShape1-map1" name="map1">
+          <float_array id="collision1xShape1-map1-array" count="28">0.375 0 0.625 0 0.375 0.25 0.625 0.25 0.375 0.5 0.625 0.5 0.375 0.75 0.625 0.75 0.375 1 0.625 1 0.875 0 0.875 0.25 0.125 0 0.125 0.25</float_array>
+          <technique_common>
+            <accessor source="#collision1xShape1-map1-array" count="14" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="collision1xShape1-vertices">
+          <input semantic="POSITION" source="#collision1xShape1-positions"/>
+        </vertices>
+        <polylist material="initialShadingGroup" count="6">
+          <input semantic="VERTEX" source="#collision1xShape1-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#collision1xShape1-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#collision1xShape1-map1" offset="2" set="0"/>
+          <vcount>4 4 4 4 4 4</vcount>
+          <p>0 0 0 1 1 1 3 2 3 2 3 2 2 4 2 3 5 3 5 6 5 4 7 4 4 8 4 5 9 5 7 10 7 6 11 6 6 12 6 7 13 7 1 14 9 0 15 8 1 16 1 7 17 10 5 18 11 3 19 3 6 20 12 0 21 0 2 22 2 4 23 13</p>
+        </polylist>
+      </mesh>
+      <extra>
+        <technique profile="MAYA">
+          <double_sided>1</double_sided>
+        </technique>
+      </extra>
+    </geometry>
+	
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Plane_Mine.max" name="Plane_Mine_max">
+      <node id="Plane001" name="Plane001" type="NODE">
+        <translate>0 0 0</translate>
+        <rotate sid="RotZ">0 0 1 0</rotate>
+        <rotate sid="RotY">0 1 0 0</rotate>
+        <rotate sid="RotX">1 0 0 0</rotate>
+        <scale>1 1 1</scale>
+        <instance_geometry url="#Plane001-mesh">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="colladafxShader1" target="#colladafxShader1">
+				<bind_vertex_input semantic="TEXCOORD0" input_semantic="TEXCOORD" input_set="1">
+					<extra>
+						<technique profile="PSSG">
+							<param name="IN.Uv"/>
+						</technique>
+					 </extra>
+				</bind_vertex_input>
+				<bind_vertex_input semantic="TEXCOORD2" input_semantic="TEXCOORD" input_set="2">
+					<extra>
+						<technique profile="PSSG">
+						  <param name="IN.Uv1"/>
+						</technique>
+					</extra>
+				</bind_vertex_input>
+			  </instance_material>
+            </technique_common>
+          </bind_material>
+          <extra>
+            <technique profile="PHYRE">
+              <object_render_properties castsShadows="1" receiveShadows="1" visibleInReflections="1" visibleInRefractions="1" motionBlurEnabled="0"/>
+            </technique>
+          </extra>
+        </instance_geometry>
+		<node id="collision1x1" name="collision1x1" type="NODE">
+		  <translate> 0 0 0 </translate>
+          <rotate sid="rotateZ">0 0 1 0</rotate>
+          <rotate sid="rotateY">0 1 0 0</rotate>
+          <rotate sid="rotateX">1 0 0 0</rotate>
+        </node>		
+        <extra>
+          <technique profile="FCOLLADA">
+            <dynamic_attributes>
+              <mr_DisplacementUseGlobalSettings type="bool">1</mr_DisplacementUseGlobalSettings>
+              <mr_ViewDependentDisplacement type="bool">1</mr_ViewDependentDisplacement>
+              <mr_DisplacementMethod type="int">0</mr_DisplacementMethod>
+              <mr_Smoothing type="bool">1</mr_Smoothing>
+              <mr_DisplacementMaxLevel type="int">6</mr_DisplacementMaxLevel>
+              <mr_DisplacementEdgeLength type="float">2</mr_DisplacementEdgeLength>
+              <mr_MaxDisplace type="float">20</mr_MaxDisplace>
+              <mr_ParametricSubdivisionLevel type="int">5</mr_ParametricSubdivisionLevel>
+            </dynamic_attributes>
+          </technique>
+        </extra>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0</start_time>
+          <end_time>3.333333492279053</end_time>
+        </technique>
+      </extra>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30</frame_rate>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+	<instance_physics_scene url="#MayaNativePhysicsScene"/>
+    <instance_visual_scene url="#Plane_Mine.max"/>
+  </scene>
+</COLLADA>

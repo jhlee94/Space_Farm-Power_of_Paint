@@ -1,0 +1,220 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+
+// Using PS3 version for Cg
+#define FXAA_PS3 1
+
+#if !defined(__SCE_CGC__) && !defined(__psp2__)
+#define PHYRE_PC_CG_FXAA
+#endif // !defined(__SCE_CGC__) && !defined(__psp2__)
+
+#ifdef PHYRE_PC_CG_FXAA
+#define h4tex2Dlod tex2Dlod
+#endif // PHYRE_PC_CG_FXAA
+
+#if !defined(__psp2__) && !defined(GLSL)
+// FXAA not executed on PSP2 or GLES
+#include "Fxaa3_11.h"
+
+#undef FxaaLuma
+#undef FxaaTex
+#undef FxaaPixelShader
+#undef FXAA_GREEN_AS_LUMA
+#define FXAA_GREEN_AS_LUMA 1
+#define FxaaPixelShader FxaaPixelShaderGreenAsLuma
+#define FxaaLuma FxaaLumaGreenAsLuma
+#include "Fxaa3_11.h"
+#undef FxaaPixelShader
+
+#endif //! !defined(__psp2__) && !defined(GLSL)
+
+sampler2D ColorBuffer;
+float2 InvColorBufferSize;
+
+struct FullscreenVertexIn
+{
+	float3 vertex		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct FullscreenVertexOut
+{
+	float4 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct FullscreenFragIn
+{
+	float2	uv			: TEXCOORD0;
+};
+
+FullscreenVertexOut FullscreenVP(FullscreenVertexIn input)
+{
+	FullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	float2 uv = input.uv;
+	output.uv = uv;
+
+	return output;
+}
+
+FullscreenVertexOut FullscreenInvertedVP(FullscreenVertexIn input)
+{
+	FullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	float2 uv = input.uv;
+	uv.y = 1.0f-uv.y;
+	output.uv = uv;
+
+	return output;
+}
+
+#ifdef __psp2__
+
+// Render without FXAA
+float4 FxaaPS(FullscreenFragIn Input) : COLOR0 
+{
+	return tex2D(ColorBuffer, Input.uv.xy);
+}
+
+// Render without FXAA
+float4 FxaaPSGreenAsLuma(FullscreenFragIn Input) : COLOR0 
+{
+	return tex2D(ColorBuffer, Input.uv.xy);
+}
+
+#else //! __psp2__
+
+#ifdef PHYRE_PC_CG_FXAA // PC only fallback
+
+// Render without FXAA - ARBFP1 and GLSL fallback
+glslf arbfp1 float4 FxaaPS(FullscreenFragIn Input) : COLOR0 
+{
+	return tex2D(ColorBuffer, Input.uv.xy);
+}
+
+// Render without FXAA - ARBFP1 and GLSL fallback
+glslf arbfp1 float4 FxaaPSGreenAsLuma(FullscreenFragIn Input) : COLOR0 
+{
+	return tex2D(ColorBuffer, Input.uv.xy);
+}
+
+#endif // PHYRE_PC_CG_FXAA
+
+// Render FXAA
+
+#ifdef PHYRE_PC_CG_FXAA // PC best effort markup
+fp40 
+#endif // PHYRE_PC_CG_FXAA
+float4 FxaaPS(FullscreenFragIn Input) : COLOR0 
+{
+	float2 pos = Input.uv.xy;
+    float4 minusPlusInvColorBufferSize = float4(-InvColorBufferSize, InvColorBufferSize);
+    float4 fxaaConsoleRcpFrameOpt = 0.5 * minusPlusInvColorBufferSize; // 0.5f is scale for sharpness
+	float4 fxaaConsolePosPos = float4(pos, pos) + 0.5 * minusPlusInvColorBufferSize;
+	float4 fxaaConsoleRcpFrameOpt2 = 2.0 * minusPlusInvColorBufferSize;
+	float fxaaConsoleEdgeSharpness = 8.0;	// Default
+	float fxaaConsoleEdgeThreshold = 0.125;	// Default
+	float fxaaConsoleEdgeThresholdMin = 0.05;	// Default
+	float4 rslt = FxaaPixelShader(pos,fxaaConsolePosPos, ColorBuffer, ColorBuffer, ColorBuffer, InvColorBufferSize, fxaaConsoleRcpFrameOpt,fxaaConsoleRcpFrameOpt2,0, 0.25f,0.1f,0.0833f, fxaaConsoleEdgeSharpness,fxaaConsoleEdgeThreshold,fxaaConsoleEdgeThresholdMin,0 );
+	return float4(rslt.xyz, 1.0f); 
+}
+
+#ifdef PHYRE_PC_CG_FXAA // PC best effort markup
+fp40 
+#endif // PHYRE_PC_CG_FXAA
+float4 FxaaPSGreenAsLuma(FullscreenFragIn Input) : COLOR0 
+{
+	float2 pos = Input.uv.xy;
+    float4 minusPlusInvColorBufferSize = float4(-InvColorBufferSize, InvColorBufferSize);
+    float4 fxaaConsoleRcpFrameOpt = 0.5 * minusPlusInvColorBufferSize; // 0.5f is scale for sharpness
+	float4 fxaaConsolePosPos = float4(pos, pos) + 0.5 * minusPlusInvColorBufferSize;
+	float4 fxaaConsoleRcpFrameOpt2 = 2.0 * minusPlusInvColorBufferSize;
+	float fxaaConsoleEdgeSharpness = 8.0;	// Default
+	float fxaaConsoleEdgeThreshold = 0.125;	// Default
+	float fxaaConsoleEdgeThresholdMin = 0.05;	// Default
+	float4 rslt = FxaaPixelShaderGreenAsLuma(pos,fxaaConsolePosPos, ColorBuffer, ColorBuffer, ColorBuffer, InvColorBufferSize, fxaaConsoleRcpFrameOpt,fxaaConsoleRcpFrameOpt2,0, 0.25f,0.1f,0.0833f, fxaaConsoleEdgeSharpness,fxaaConsoleEdgeThreshold,fxaaConsoleEdgeThresholdMin,0 );
+	return float4(rslt.xyz, 1.0f); 
+}
+#endif //! __psp2__
+
+// Convert RGBA input to RGBL output
+float4 PS_RenderRGBL(FullscreenFragIn Input) : COLOR0 
+{
+	float2 pos = Input.uv.xy;
+	float4 texel = tex2D(ColorBuffer, pos);
+	texel.w = dot(texel.xyz, float3(0.299f, 0.587f, 0.114f));
+	
+	return texel;
+}
+
+technique RenderFXAA
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullscreenVP();
+		FragmentProgram = compile fp40 FxaaPS();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;		
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}
+technique RenderFXAAInverted
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullscreenInvertedVP();
+		FragmentProgram = compile fp40 FxaaPS();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;		
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}
+
+technique RenderFXAAGreenAsLuma
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullscreenVP();
+		FragmentProgram = compile fp40 FxaaPSGreenAsLuma();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;		
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}
+technique RenderFXAAGreenAsLumaInverted
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullscreenInvertedVP();
+		FragmentProgram = compile fp40 FxaaPSGreenAsLuma();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;		
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}
+
+technique RenderRGBL
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 PS_RenderRGBL();	
+		
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;		
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}

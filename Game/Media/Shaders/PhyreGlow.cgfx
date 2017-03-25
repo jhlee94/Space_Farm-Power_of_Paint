@@ -1,0 +1,346 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+
+float4 GaussianBlurBufferSize;
+half4 GaussianOutputScale;
+float4 UvScaleBias;
+half LuminanceThreshold;
+half LuminanceScale;
+
+sampler2D GlowBuffer;
+sampler2D ColorBuffer;
+
+///////////////////////////////////////////////////////////////
+// structures /////////////////////
+///////////////////////////////////////////////////////////////
+
+struct FullscreenVertexIn
+{
+	float3 vertex		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct FullscreenVertexOut
+{
+	float4 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct FullscreenFragIn
+{
+	float2	uv			: TEXCOORD0;
+};
+
+#ifdef __psp2__
+#define PSP2VERSION
+#endif
+
+#ifdef PSP2VERSION
+
+struct GaussianVertexOut
+{
+	float4 position			: POSITION;
+	float2 uv				: TEXCOORD0;
+	float2 uvs0				: TEXCOORD1;
+	float2 uvs1				: TEXCOORD2;
+	float2 uvs2				: TEXCOORD3;
+	float2 uvs3				: TEXCOORD4;
+};
+
+struct GaussianFragIn
+{
+	float2 uv				: TEXCOORD0;
+	float2 uvs0				: TEXCOORD1;
+	float2 uvs1				: TEXCOORD2;
+	float2 uvs2				: TEXCOORD3;
+	float2 uvs3				: TEXCOORD4;
+};
+#else
+
+struct GaussianVertexOut
+{
+	float4 position			: POSITION;
+	float2 uv				: TEXCOORD0;
+	float4 uvs0				: TEXCOORD1;
+	float4 uvs1				: TEXCOORD2;
+};
+
+struct GaussianFragIn
+{
+	float2 uv				: TEXCOORD0;
+	float4 uvs0				: TEXCOORD1;
+	float4 uvs1				: TEXCOORD2;
+};
+#endif
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+FullscreenVertexOut FullscreenVP(FullscreenVertexIn input)
+{
+	FullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	float2 uv = input.uv * UvScaleBias.xy + UvScaleBias.zw * 0.99999;
+	output.uv = uv;
+
+	return output;
+}
+
+
+// Output fullscreen vertex.
+GaussianVertexOut GaussianUpscaleXVP(FullscreenVertexIn input)
+{
+	GaussianVertexOut output;
+	output.position = float4(input.vertex,1.0f);
+
+	float2 uv = input.uv;
+#ifdef PSP2VERSION
+	uv = uv * UvScaleBias.xy + UvScaleBias.zw;
+#endif
+	output.uv = uv;
+
+	float2 off1 = float2(1.0f/GaussianBlurBufferSize.x,0);
+	float2 off2 = float2(2.0f/GaussianBlurBufferSize.x,0);
+
+#ifdef PSP2VERSION
+	// dont pack the texcoord attributes
+	output.uvs0 = uv - off2;
+	output.uvs1 = uv - off1;
+	output.uvs2 = uv + off1;
+	output.uvs3 = uv + off2;
+#else
+	// pack the texcoord attributes
+	output.uvs0 = float4( uv - off2, uv - off1 );
+	output.uvs1 = float4( uv + off1, uv + off2 );
+#endif
+		
+	return output;
+}
+// Output fullscreen vertex.
+GaussianVertexOut GaussianUpscaleYVP(FullscreenVertexIn input)
+{
+	GaussianVertexOut output;
+	output.position = float4(input.vertex,1.0f);
+
+	float2 uv = input.uv;
+#ifdef PSP2VERSION
+	uv = uv * UvScaleBias.xy + UvScaleBias.zw;
+#endif
+	output.uv = uv;
+	
+
+	float2 off1 = float2(0,1.0f/GaussianBlurBufferSize.y);
+	float2 off2 = float2(0,2.0f/GaussianBlurBufferSize.y);
+
+#ifdef PSP2VERSION
+	// dont pack the texcoord attributes
+	output.uvs0 = uv - off2;
+	output.uvs1 = uv - off1;
+	output.uvs2 = uv + off1;
+	output.uvs3 = uv + off2;
+#else
+	// pack the texcoord attributes
+	output.uvs0 = float4( uv - off2, uv - off1 );
+	output.uvs1 = float4( uv + off1, uv + off2 );
+#endif
+
+	return output;
+}
+
+
+
+#define kWeight0 4.0
+#define kWeight1 2.0
+#define kWeight2 1.0
+#define kWeightSum (half)(1.0/(kWeight0+kWeight1+kWeight1+kWeight2+kWeight2))
+
+#ifdef PSP2VERSION
+
+half4 GaussianBlurUpscaleFP(GaussianVertexOut input) : FRAG_OUTPUT_COLOR
+{
+	half4 sampleCentre = h4tex2D(GlowBuffer,input.uv);
+		
+	half4 sample0 = tex2D<half4>(GlowBuffer,input.uvs0);
+	half4 sample1 = tex2D<half4>(GlowBuffer,input.uvs1);
+	half4 sample2 = tex2D<half4>(GlowBuffer,input.uvs2);
+	half4 sample3 = tex2D<half4>(GlowBuffer,input.uvs3);
+
+	half4 rslt = sampleCentre * (kWeight0 * kWeightSum * GaussianOutputScale);
+	rslt += sample0 * (kWeight2 * kWeightSum * GaussianOutputScale);
+	rslt += sample1 * (kWeight1 * kWeightSum * GaussianOutputScale);
+	rslt += sample2 * (kWeight1 * kWeightSum * GaussianOutputScale);
+	rslt += sample3 * (kWeight2 * kWeightSum * GaussianOutputScale);
+	return rslt;
+}
+
+
+half4 GaussianBlurUpscaleCombineFP(GaussianVertexOut input) : FRAG_OUTPUT_COLOR
+{
+	half4 sampleCentre = h4tex2D(GlowBuffer,input.uv);
+	half4 colorBufferValue = h4tex2D(ColorBuffer,input.uv);
+			
+	half4 sample0 = tex2D<half4>(GlowBuffer,input.uvs0);
+	half4 sample1 = tex2D<half4>(GlowBuffer,input.uvs1);
+	half4 sample2 = tex2D<half4>(GlowBuffer,input.uvs2);
+	half4 sample3 = tex2D<half4>(GlowBuffer,input.uvs3);
+
+	half4 rslt = sampleCentre * (kWeight0 * kWeightSum * GaussianOutputScale);
+	rslt += sample0 * (kWeight2 * kWeightSum * GaussianOutputScale);
+	rslt += sample1 * (kWeight1 * kWeightSum * GaussianOutputScale);
+	rslt += sample2 * (kWeight1 * kWeightSum * GaussianOutputScale);
+	rslt += sample3 * (kWeight2 * kWeightSum * GaussianOutputScale);
+	
+	return colorBufferValue + rslt;
+}
+#else
+
+half4 GaussianBlurUpscaleFP(GaussianVertexOut input) : FRAG_OUTPUT_COLOR
+{
+	half4 sampleCentre = h4tex2D(GlowBuffer,input.uv);
+		
+	half4 sample0 = h4tex2D(GlowBuffer,input.uvs0.xy);
+	half4 sample1 = h4tex2D(GlowBuffer,input.uvs0.zw);
+	half4 sample2 = h4tex2D(GlowBuffer,input.uvs1.xy);
+	half4 sample3 = h4tex2D(GlowBuffer,input.uvs1.zw);
+
+	half4 rslt = sampleCentre * (kWeight0 * kWeightSum);
+	rslt += sample0 * (kWeight2 * kWeightSum);
+	rslt += sample1 * (kWeight1 * kWeightSum);
+	rslt += sample2 * (kWeight1 * kWeightSum);
+	rslt += sample3 * (kWeight2 * kWeightSum);
+	return rslt * GaussianOutputScale;
+}
+
+
+half4 GaussianBlurUpscaleCombineFP(GaussianVertexOut input) : FRAG_OUTPUT_COLOR
+{
+	half4 sampleCentre = h4tex2D(GlowBuffer,input.uv);
+	half4 colorBufferValue = h4tex2D(ColorBuffer,input.uv);
+		
+	half4 sample0 = h4tex2D(GlowBuffer,input.uvs0.xy);
+	half4 sample1 = h4tex2D(GlowBuffer,input.uvs0.zw);
+	half4 sample2 = h4tex2D(GlowBuffer,input.uvs1.xy);
+	half4 sample3 = h4tex2D(GlowBuffer,input.uvs1.zw);
+
+	half4 rslt = sampleCentre * (kWeight0 * kWeightSum);
+	rslt += sample0 * (kWeight2 * kWeightSum);
+	rslt += sample1 * (kWeight1 * kWeightSum);
+	rslt += sample2 * (kWeight1 * kWeightSum);
+	rslt += sample3 * (kWeight2 * kWeightSum);
+	
+	return colorBufferValue + rslt * GaussianOutputScale;
+}
+
+#endif
+
+
+
+half4 CopyToScreenFP(FullscreenVertexOut input) : FRAG_OUTPUT_COLOR0
+{
+	half4 sampleCentre = h4tex2D(GlowBuffer,input.uv);
+	return sampleCentre;
+}
+
+half4 GenerateGlowBufferFP(FullscreenVertexOut input) : FRAG_OUTPUT_COLOR0
+{
+	half4 col = h4tex2D(GlowBuffer,input.uv);
+	
+	half lum = dot(col.xyz,0.333f);
+	half glowAmt = saturate((col.w - 0.8)*100.0) * saturate((lum - LuminanceThreshold) * LuminanceScale);
+
+	return float4(col.xyz * glowAmt * 2.5, 1.0);
+}
+
+
+
+
+technique RenderGaussianBlurX
+{
+	pass mainRender
+	{
+		VertexProgram = compile arbvp1 GaussianUpscaleXVP();
+		FragmentProgram = compile arbfp1 GaussianBlurUpscaleFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFace = back;
+		cullFaceEnable = false;		
+		depthTestEnable = false;
+		depthMask = false;
+	}		
+}
+technique RenderGaussianBlurY
+{
+	pass mainRender
+	{
+		VertexProgram = compile arbvp1 GaussianUpscaleYVP();
+		FragmentProgram = compile arbfp1 GaussianBlurUpscaleFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFace = back;
+		cullFaceEnable = false;		
+		depthTestEnable = false;
+		depthMask = false;
+	}		
+}
+technique RenderGaussianBlurYComposite
+{
+	pass mainRender
+	{
+		VertexProgram = compile arbvp1 GaussianUpscaleYVP();
+		FragmentProgram = compile arbfp1 GaussianBlurUpscaleFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFace = back;
+		cullFaceEnable = false;		
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = true;
+		blendFunc = {one,one};
+	}		
+}
+technique RenderGaussianBlurYCompositeCombine
+{
+	pass mainRender
+	{
+		VertexProgram = compile arbvp1 GaussianUpscaleYVP();
+		FragmentProgram = compile arbfp1 GaussianBlurUpscaleCombineFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFace = back;
+		cullFaceEnable = false;		
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+	}		
+}
+technique CopyGaussianBlurToScreen
+{
+	pass mainRender
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 CopyToScreenFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFace = back;
+		cullFaceEnable = false;		
+		depthTestEnable = false;
+		depthMask = false;
+	}		
+}
+
+technique GenerateGlowBuffer
+{
+	pass mainRender
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 GenerateGlowBufferFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFace = back;
+		cullFaceEnable = false;		
+		depthTestEnable = false;
+		depthMask = false;
+	}		
+}
+

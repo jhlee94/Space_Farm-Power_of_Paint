@@ -1,0 +1,92 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+float4x4 WorldViewProjection	: WorldViewProjection;
+sampler2D TextureSampler;
+
+struct InstancingInput
+{
+	float4	InstanceTransform0	: TEXCOORD4;
+	float4	InstanceTransform1	: TEXCOORD5;
+	float4	InstanceTransform2	: TEXCOORD6;
+	float4  InstanceColor		: TEXCOORD7;
+};
+
+struct DefaultVSInput
+{
+	float2 Vertex				: POSITION;
+	InstancingInput instancingInput;
+};
+
+struct DefaultVSForwardRenderOutput
+{
+	float4 Position				: POSITION;	
+	float2 Uv					: TEXCOORD0;
+	float4 Color				: TEXCOORD1;
+};
+
+struct DefaultPSForwardRenderInput
+{
+	float2 Uv					: TEXCOORD0;
+	float4 Color				: TEXCOORD1;
+};
+
+DefaultVSForwardRenderOutput DefaultForwardRenderVS(DefaultVSInput IN)
+{			
+	////////////////////////////////////////////////////
+	// See PSpriteAttributes for data layout ///////////
+	////////////////////////////////////////////////////
+	// IN.instancingInput.InstanceTransform0 contains //
+	// posX, posY, sinPhi, cosPhi                     //
+	// IN.instancingInput.InstanceTransform1 contains //
+	// uOrigin, vOrigin, textureSizeX, textureSize    //
+	// IN.instancingInput.InstanceTransform2 contains //
+	// spriteSizeX, spriteSizeY, depth, Phi           //
+	// IN.instancingInput.InstanceColor contains	  //
+	// red, green, blue, alpha						  //
+	////////////////////////////////////////////////////
+    
+	// Transform sprite into world space 
+	DefaultVSForwardRenderOutput OUT;
+	float4 trans = IN.instancingInput.InstanceTransform0 * float4(1.0f, 1.0f, -1.0f, 1.0f);
+	
+	// Texture coordinates.
+	OUT.Uv = (IN.Vertex.xy + float2(0.5f, 0.5f)) * IN.instancingInput.InstanceTransform1.zw + IN.instancingInput.InstanceTransform1.xy;
+	
+	IN.Vertex.xy *= IN.instancingInput.InstanceTransform2.xy;                              // Scale
+	float y = dot(float3(1.0f, IN.Vertex.xy), IN.instancingInput.InstanceTransform0.yzw);  // Rotate + Translate
+	float x = dot(float3(1.0f, IN.Vertex.yx), trans.xzw);                                  // Rotate + Translate
+		
+	// Transform from world space to view
+	OUT.Position = mul(WorldViewProjection, float4(x, y, IN.instancingInput.InstanceTransform2.z, 1.0f));
+
+	OUT.Color = IN.instancingInput.InstanceColor;
+	
+	return OUT;
+}
+
+float4 ForwardRenderFP(DefaultPSForwardRenderInput In) : COLOR0
+{
+#ifdef __psp2__
+	return tex2D<float4>(TextureSampler, In.Uv) * In.Color;
+#else //! __psp2__
+	return tex2D(TextureSampler, In.Uv) * In.Color;
+#endif //! __psp2__
+}
+
+technique ForwardRender < string PhyreRenderPass = "Transparent"; >
+{
+	pass pass0
+	{	
+		BlendEnable = true;
+		BlendFunc = {srcAlpha, oneMinusSrcAlpha};
+		colorWriteEnable = bool4(true, true, true, true);
+		CullFaceEnable = true;
+		CullFace = back;
+		VertexProgram = compile vp40 DefaultForwardRenderVS();
+		FragmentProgram = compile fp40 ForwardRenderFP();
+	}
+}

@@ -1,0 +1,9 @@
+<assets>
+  <node shared="true" db="./Game">
+    <asset source="./Levels/Level1.plv"/>
+    <asset source="./Models/floater_bot.dae"/>
+    <asset source="./Shaders/PhyreText.cgfx"/>
+    <asset source="./Textures/tuffy.fgen"/>
+    <asset source="../Media/Audio/PhyreAudioSample.agx"/>
+  </node>
+</assets>

@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>B6041269</author>
+      <authoring_tool>Maya2017 | ColladaMaya v3.04C PhyreEngine(TM) 3.18.0.0</authoring_tool>
+      <comments>Collada Maya Export Options: bakeTransforms=1;exportPolygonMeshes=1;relativePaths=1;bakeLighting=0;isSampling=1;
+curveConstrainSampling=0;removeStaticCurves=0;exportCameraAsLookat=0;
+exportLights=1;exportCameras=1;exportDefaultCameras=0;exportJointsAndSkin=1;
+exportAnimations=1;exportTriangles=0;exportInvisibleNodes=0;
+exportNormals=1;exportTexCoords=1;
+exportVertexColors=1;exportVertexColorsAnimation=0;exportTangents=0;
+exportTexTangents=1;exportConstraints=0;exportPhysics=1;exportXRefs=0;instanceDuplicateCurves=1;
+dereferenceXRefs=1;cameraXFov=0;cameraYFov=1;
+animationTime=0.041667</comments>
+      <source_data>file:///D:/Work/Team Projects/CSC8506/GameProject/Game/Media/Models/Env_Dirt_Plough.dae</source_data>
+    </contributor>
+    <created>2017-03-12T19:39:42Z</created>
+    <modified>2017-03-12T19:39:42Z</modified>
+    <unit meter="0.0099999997764825" name="centimeter"/>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_animations>
+    <animation id="Env_Dirt_Plough.matrix">
+      <source id="Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-input">
+        <float_array id="Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-input-array" count="2">0.0416666679084301 8.333333015441895</float_array>
+        <technique_common>
+          <accessor source="#Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-input-array" count="2" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+        <technique profile="MAYA">
+          <pre_infinity>CONSTANT</pre_infinity>
+          <post_infinity>CONSTANT</post_infinity>
+        </technique>
+      </source>
+      <source id="Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-output">
+        <float_array id="Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-output-array" count="32">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float_array>
+        <technique_common>
+          <accessor source="#Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-output-array" count="2" stride="16">
+            <param name="TRANSFORM" type="float4x4"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-interpolations">
+        <Name_array id="Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-interpolations-array" count="2">LINEAR LINEAR</Name_array>
+        <technique_common>
+          <accessor source="#Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-interpolations-array" count="2" stride="1">
+            <param name="INTERPOLATION" type="Name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-sampler">
+        <input semantic="INPUT" source="#Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-input"/>
+        <input semantic="OUTPUT" source="#Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-output"/>
+        <input semantic="INTERPOLATION" source="#Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-interpolations"/>
+      </sampler>
+      <channel source="#Env_Dirt_Plough.matrix_Env_Dirt_Plough_transform-sampler" target="Env_Dirt_Plough/transform"/>
+    </animation>
+  </library_animations>
+  <library_physics_materials>
+    <physics_material id="rigidBody1-material" name="rigidBody1-material">
+      <technique_common>
+        <dynamic_friction>0.2000000029802322</dynamic_friction>
+        <restitution>0.6000000238418579</restitution>
+        <static_friction>0.2000000029802322</static_friction>
+      </technique_common>
+    </physics_material>
+  </library_physics_materials>
+  <library_physics_models>
+    <physics_model id="MayaNativePhysicsModel">
+      <rigid_body name="rigidBody1" sid="rigidBody1">
+        <technique_common>
+          <dynamic>0</dynamic>
+          <mass>1</mass>
+          <mass_frame>
+            <translate>5.000000953674316 0.1471016854047775 -5</translate>
+            <rotate>1 0 0 0</rotate>
+          </mass_frame>
+          <instance_physics_material url="#rigidBody1-material"/>
+          <shape>
+            <hollow>true</hollow>
+            <mass>1</mass>
+            <instance_geometry url="#Env_Dirt_PloughShape"/>
+          </shape>
+        </technique_common>
+        <technique profile="MAYA">
+          <damping>0</damping>
+        </technique>
+      </rigid_body>
+    </physics_model>
+  </library_physics_models>
+  <library_physics_scenes>
+    <physics_scene id="MayaNativePhysicsScene">
+      <instance_physics_model url="#MayaNativePhysicsModel">
+        <instance_rigid_body target="#Env_Dirt_Plough" body="rigidBody1">
+          <technique_common>
+            <angular_velocity>0 0 0</angular_velocity>
+            <velocity>0 0 0</velocity>
+            <dynamic>0</dynamic>
+            <mass>1</mass>
+            <mass_frame>
+              <translate>5.000000953674316 0.1471016854047775 -5</translate>
+              <rotate>1 0 0 0</rotate>
+            </mass_frame>
+          </technique_common>
+          <technique profile="MAYA">
+            <damping>0</damping>
+          </technique>
+        </instance_rigid_body>
+      </instance_physics_model>
+      <technique_common>
+        <gravity>0 -980 0</gravity>
+        <time_step>0.0299999993294477</time_step>
+      </technique_common>
+    </physics_scene>
+  </library_physics_scenes>
+  <library_images>
+    <image id="tweaks_file1" name="tweaks_file1">
+      <init_from>../Textures/SimpleFarm.png</init_from>
+      <extra>
+        <technique profile="MAYA">
+          <dgnode_type>kFile</dgnode_type>
+          <image_sequence>0</image_sequence>
+        </technique>
+      </extra>
+    </image>
+    <image id="file1" name="file1">
+      <init_from>../Textures/SimpleFarm.png</init_from>
+      <extra>
+        <technique profile="MAYA">
+          <dgnode_type>kFile</dgnode_type>
+          <image_sequence>0</image_sequence>
+        </technique>
+      </extra>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="tweaks_farmShader" name="tweaks_farmShader">
+      <instance_effect url="#tweaks_farmShader-fx"/>
+    </material>
+    <material id="lambert2" name="lambert2">
+      <instance_effect url="#lambert2-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="tweaks_farmShader-fx">
+      <profile_COMMON>
+        <newparam sid="tweaks_file1-surface">
+          <surface type="2D">
+            <init_from>tweaks_file1</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="tweaks_file1-sampler">
+          <sampler2D>
+            <source>tweaks_file1-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+            <max_anisotropy>0</max_anisotropy>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="tweaks_file1-sampler" texcoord="TEX0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <coverageU>1</coverageU>
+                    <coverageV>1</coverageV>
+                    <translateFrameU>0</translateFrameU>
+                    <translateFrameV>0</translateFrameV>
+                    <rotateFrame>0</rotateFrame>
+                    <stagger>0</stagger>
+                    <fast>0</fast>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                    <rotateUV>0</rotateUV>
+                    <noiseU>0</noiseU>
+                    <noiseV>0</noiseV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <transparent opaque="RGB_ZERO">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </lambert>
+          <extra>
+            <technique profile="FCOLLADA"/>
+          </extra>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="lambert2-fx">
+      <profile_COMMON>
+        <newparam sid="file1-surface">
+          <surface type="2D">
+            <init_from>file1</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="file1-sampler">
+          <sampler2D>
+            <source>file1-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+            <max_anisotropy>0</max_anisotropy>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="file1-sampler" texcoord="TEX0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <coverageU>1</coverageU>
+                    <coverageV>1</coverageV>
+                    <translateFrameU>0</translateFrameU>
+                    <translateFrameV>0</translateFrameV>
+                    <rotateFrame>0</rotateFrame>
+                    <stagger>0</stagger>
+                    <fast>0</fast>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                    <rotateUV>0</rotateUV>
+                    <noiseU>0</noiseU>
+                    <noiseV>0</noiseV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <transparent opaque="RGB_ZERO">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </lambert>
+          <extra>
+            <technique profile="FCOLLADA"/>
+          </extra>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="Env_Dirt_PloughShape" name="Env_Dirt_PloughShape">
+      <mesh>
+        <source id="Env_Dirt_PloughShape-positions" name="position">
+          <float_array id="Env_Dirt_PloughShape-positions-array" count="78">10.00000190734863 0 -10 10.00000190734863 0 -6 0 0 -6 0 0 -10 10.00000190734863 0.1424540728330612 -8.020554542541504 0 0.1424540728330612 -8.020554542541504 10.00000190734863 0.2942033708095551 -9.030832290649414 0 0.2942033708095551 -9.030832290649414 10.00000190734863 0.2942033708095551 -7.01027774810791 0 0.2942033708095551 -7.01027774810791 10.00000190734863 0 -4.041109085083008 10.00000190734863 0 0 0 0 0 0 0 -4.041109085083008 10.00000190734863 0.1424540728330612 -2.020554542541504 0 0.1424540728330612 -2.020554542541504 10.00000190734863 0.2942033708095551 -3.030831813812256 0 0.2942033708095551 -3.030831813812256 10.00000190734863 0.2942033708095551 -1.01027774810791 0 0.2942033708095551 -1.01027774810791 10.00000190734863 0 -6.120661735534668 10.00000190734863 0 -3.929972648620606 0 0 -3.929972648620606 0 0 -6.120661735534668 10.00000190734863 0.2942033708095551 -5.030831813812256 0 0.2942033708095551 -5.030831813812256</float_array>
+          <technique_common>
+            <accessor source="#Env_Dirt_PloughShape-positions-array" count="26" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Env_Dirt_PloughShape-normals" name="normal">
+          <float_array id="Env_Dirt_PloughShape-normals-array" count="246">0 0.9975239038467407 0.0703279078006744 0 0.9975239038467407 0.0703279078006744 0 0.9601176381111145 0.2795962691307068 0 0.9601176381111145 0.2795962691307068 0 0.9974203109741211 -0.0717810094356536 0 0.9974203109741211 -0.0717810094356536 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9568827152252197 -0.2904740869998932 0 0.9568827152252197 -0.2904740869998932 0 0.9974203109741211 -0.0717810094356536 0 0.9974203109741211 -0.0717810094356536 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9975239038467407 0.0703279078006744 0 0.9975239038467407 0.0703279078006744 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0 0.9975239038467407 0.0703279078006744 0 0.9975239038467407 0.0703279078006744 0 0.9601176381111145 0.2795962691307068 0 0.9601176381111145 0.2795962691307068 0 0.9975237846374512 -0.0703278854489326 0 0.9975237846374512 -0.0703278854489326 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.960117518901825 -0.2795963287353516 0 0.960117518901825 -0.2795963287353516 0 0.9975237846374512 -0.0703278854489326 0 0.9975237846374512 -0.0703278854489326 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9975239038467407 0.0703279078006744 0 0.9975239038467407 0.0703279078006744 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9660946726799011 0.2581877112388611 0 0.9660946726799011 0.2581877112388611 0 0.9654403328895569 -0.260623961687088 0 0.9654403328895569 -0.260623961687088 0 0.9999999403953552 0 0 0.9999999403953552 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 -0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0</float_array>
+          <technique_common>
+            <accessor source="#Env_Dirt_PloughShape-normals-array" count="82" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Env_Dirt_PloughShape-map1" name="map1">
+          <float_array id="Env_Dirt_PloughShape-map1-array" count="132">0.134796142578125 0.3937119543552399 0.1347962915897369 0.3937119543552399 0.1347962915897369 0.3937119543552399 0.134796142578125 0.3937119543552399 0.134796142578125 0.3937119543552399 0.1347962915897369 0.3937119543552399 0.1347962915897369 0.3937119543552399 0.134796142578125 0.3937119543552399 0.2001924514770508 0.3923773169517517 0.2001925110816956 0.3923773169517517 0.2001925110816956 0.3923773169517517 0.2001924514770508 0.3923773169517517 0.2001924514770508 0.3923773169517517 0.2001925110816956 0.3923773169517517 0.2001925110816956 0.3923773169517517 0.2001924514770508 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.134796142578125 0.3937119543552399 0.1347962915897369 0.3937119543552399 0.1347962915897369 0.3937119543552399 0.134796142578125 0.3937119543552399 0.134796142578125 0.3937119543552399 0.1347962915897369 0.3937119543552399 0.1347962915897369 0.3937119543552399 0.134796142578125 0.3937119543552399 0.2001924514770508 0.3923773169517517 0.2001925110816956 0.3923773169517517 0.2001925110816956 0.3923773169517517 0.2001924514770508 0.3923773169517517 0.2001924514770508 0.3923773169517517 0.2001925110816956 0.3923773169517517 0.2001925110816956 0.3923773169517517 0.2001924514770508 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.134796142578125 0.3937119543552399 0.1347962915897369 0.3937119543552399 0.1347962915897369 0.3937119543552399 0.134796142578125 0.3937119543552399 0.2001924514770508 0.3923773169517517 0.2001925110816956 0.3923773169517517 0.2001925110816956 0.3923773169517517 0.2001924514770508 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517 0.1134424209594727 0.3923773169517517</float_array>
+          <technique_common>
+            <accessor source="#Env_Dirt_PloughShape-map1-array" count="66" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Env_Dirt_PloughShape-map1-tangents">
+          <float_array id="Env_Dirt_PloughShape-map1-tangents-array" count="246">-1 0 0 0.6699599623680115 -0.0522112511098384 0.7405588626861572 1 0 0 -0.6690864562988281 0.2077916264533997 -0.7135446071624756 -1 0 0 0.6711235642433167 0.053214494138956 0.7394331097602844 1 0 0 -0.6706280708312988 0 -0.7417937517166138 -1 0 0 0.6705339550971985 0.2154965549707413 0.7098910212516785 1 0 0 -0.6714535355567932 -0.0531931072473526 -0.7391350269317627 -1 0 0 0.6706280708312988 0 0.741793692111969 1 0 0 -0.6711117029190064 0.0521380342543125 -0.7395206689834595 0 -0.0703278928995132 0.9975239038467407 0 0.279596209526062 -0.9601176381111145 0 -0.14853934943676 -0.9889064431190491 0 -0.290474146604538 -0.9568828940391541 0 0.0717810094356536 0.9974203705787659 0 0.1485392153263092 -0.9889064431190491 0 -0.0717810094356536 -0.9974203705787659 0 0 0.9999999403953552 0 0.0703278928995132 -0.9975239038467407 0 -0.0717810094356536 -0.9974203705787659 0 0.290474146604538 0.9568828940391541 0 -0.1485392153263092 0.9889064431190491 0 -0.0703278928995132 0.9975239038467407 0 0 -0.9999999403953552 0 0.0717810094356536 0.9974203705787659 0 -0.279596209526062 0.9601176381111145 0 0.0703278928995132 -0.9975239038467407 0 0.14853934943676 0.9889064431190491 -1 0 0 0.6699599623680115 -0.0522112511098384 0.7405588626861572 1 0 0 -0.6690864562988281 0.2077916264533997 -0.7135446071624756 -1 0 0 0.6711117029190064 0.0521379932761192 0.7395207285881043 1 0 0 -0.6706280708312988 0 -0.7417937517166138 -1 0 0 0.6690865159034729 0.2077916860580444 0.7135446071624756 1 0 0 -0.6699600219726563 -0.0522112846374511 -0.7405588626861572 -1 0 0 0.6706280708312988 0 0.741793692111969 1 0 0 -0.6711117029190064 0.0521380342543125 -0.7395206689834595 0 -0.0703278928995132 0.9975239038467407 0 0.279596209526062 -0.9601176381111145 0 -0.14853934943676 -0.9889064431190491 0 -0.2795963287353516 -0.9601175785064697 0 0.0703278928995132 0.9975239038467407 0 0.148539274930954 -0.9889064431190491 0 -0.0703278928995132 -0.9975239038467407 0 0 1 0 0.0703278928995132 -0.9975239038467407 0 -0.0703278928995132 -0.9975239038467407 0 0.2795963287353516 0.9601175785064697 0 -0.148539274930954 0.9889064431190491 0 -0.0703278928995132 0.9975239038467407 0 0 -1 0 0.0703278928995132 0.9975239038467407 0 -0.279596209526062 0.9601176381111145 0 0.0703278928995132 -0.9975239038467407 0 0.14853934943676 0.9889064431190491 -1 0 0 0.6672987341880798 0 0.7447901368141174 1 0 0 -0.665876567363739 0.192624032497406 -0.7207664847373962 -1 0 0 0.6662687659263611 0.1943503469228745 0.719940185546875 1 0 0 -0.6677044630050659 0 -0.7444264888763428 0 -0.260623961687088 -0.9654403328895569 0 0 0.9999999403953552 0 0.2581877112388611 -0.9660946726799011 0 0 -0.9999999403953552 0 0.260623961687088 0.9654403328895569 0 -0.2581877112388611 0.9660946726799011</float_array>
+          <technique_common>
+            <accessor source="#Env_Dirt_PloughShape-map1-tangents-array" count="82" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Env_Dirt_PloughShape-map1-binormals">
+          <float_array id="Env_Dirt_PloughShape-map1-binormals-array" count="246">0 -0.070327915251255 0.9975240230560303 0.7423971295356751 0.0471168905496597 -0.6683011651039124 0 0.2795962989330292 -0.9601177573204041 -0.7431846261024475 -0.1870740950107575 0.6424017548561096 0 0.0717810168862342 0.9974204301834106 0.7413455247879028 -0.048173937946558 -0.669392466545105 0 0 -1 -0.7417937517166138 0 0.6706280708312988 0 0.2904741168022156 0.9568828344345093 0.7418787479400635 -0.1947727799415588 -0.6416225433349609 0 -0.0717810168862342 -0.9974204301834106 -0.7410466074943543 0.0481976196169853 0.6697214245796204 0 0 1 0.741793692111969 0 -0.6706280708312988 0 0.070327915251255 -0.9975240230560303 -0.7413563132286072 -0.0471978820860385 0.6694499850273132 0 0.9975239634513855 0.0703278928995132 0 -0.9601176977157593 -0.279596209526062 0 -0.9889065027236939 0.14853934943676 0 -0.9568829536437988 0.290474146604538 0 0.9974204301834106 -0.0717810094356536 0 -0.9889065027236939 -0.1485392153263092 0 -0.9974204301834106 0.0717810094356536 0 1 0 0 -0.9975239634513855 -0.0703278928995132 0 0.9974204301834106 -0.0717810094356536 0 -0.9568829536437988 0.290474146604538 0 -0.9889065027236939 -0.1485392153263092 0 -0.9975239634513855 -0.0703278928995132 0 1 0 0 -0.9974204301834106 0.0717810094356536 0 -0.9601176977157593 -0.279596209526062 0 0.9975239634513855 0.0703278928995132 0 -0.9889065027236939 0.14853934943676 0 -0.070327915251255 0.9975240230560303 0.7423971295356751 0.0471168905496597 -0.6683011651039124 0 0.2795962989330292 -0.9601177573204041 -0.7431846261024475 -0.1870740950107575 0.6424017548561096 0 0.0703279003500938 0.9975240230560303 0.7413563132286072 -0.0471978746354579 -0.6694499254226685 0 0 -1 -0.7417937517166138 0 0.6706280708312988 0 0.279596358537674 0.9601176381111145 0.743184506893158 -0.1870741546154022 -0.6424017548561096 0 -0.0703279003500938 -0.9975240230560303 -0.7423971295356751 0.0471168830990791 0.6683012247085571 0 0 1 0.741793692111969 0 -0.6706280708312988 0 0.070327915251255 -0.9975240230560303 -0.7413563132286072 -0.0471978820860385 0.6694499850273132 0 0.9975239634513855 0.0703278928995132 0 -0.9601176977157593 -0.279596209526062 0 -0.9889065027236939 0.14853934943676 0 -0.9601176381111145 0.2795963287353516 0 0.9975239634513855 -0.0703278928995132 0 -0.9889065027236939 -0.148539274930954 0 -0.9975239634513855 0.0703278928995132 0 1 0 0 -0.9975239634513855 -0.0703278928995132 0 0.9975239634513855 -0.0703278928995132 0 -0.9601176381111145 0.2795963287353516 0 -0.9889065027236939 -0.148539274930954 0 -0.9975239634513855 -0.0703278928995132 0 1 0 0 -0.9975239634513855 0.0703278928995132 0 -0.9601176977157593 -0.279596209526062 0 0.9975239634513855 0.0703278928995132 0 -0.9889065027236939 0.14853934943676 0 0 1 0.7447901368141174 0 -0.6672987341880798 0 0.2581877410411835 -0.9660947918891907 -0.7460618615150452 -0.1719211637973785 0.6432998776435852 0 0.2606239914894104 0.9654404520988464 0.7457117438316345 -0.1736456155776978 -0.6432427763938904 0 0 -1 -0.7444264888763428 0 0.6677044630050659 0 -0.9654403924942017 0.260623961687088 0 1 0 0 -0.9660948514938355 -0.2581877410411835 0 1 0 0 -0.9654403924942017 0.260623961687088 0 -0.9660948514938355 -0.2581877410411835</float_array>
+          <technique_common>
+            <accessor source="#Env_Dirt_PloughShape-map1-binormals-array" count="82" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Env_Dirt_PloughShape-vertices">
+          <input semantic="POSITION" source="#Env_Dirt_PloughShape-positions"/>
+        </vertices>
+        <polylist material="lambert2SG" count="24">
+          <input semantic="VERTEX" source="#Env_Dirt_PloughShape-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Env_Dirt_PloughShape-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Env_Dirt_PloughShape-map1" offset="2" set="0"/>
+          <input semantic="TEXTANGENT" source="#Env_Dirt_PloughShape-map1-tangents" offset="3" set="0"/>
+          <input semantic="TEXBINORMAL" source="#Env_Dirt_PloughShape-map1-binormals" offset="4" set="0"/>
+          <vcount>4 4 4 4 3 3 3 3 3 3 4 4 4 4 3 3 3 3 3 3 4 4 3 3</vcount>
+          <p>8 0 0 0 0 9 1 1 1 1 2 2 2 2 2 1 3 3 3 3 6 4 4 4 4 7 5 5 5 5 5 6 6 6 6 4 7 7 7 7 0 8 8 8 8 3 9 9 9 9 7 10 10 10 10 6 11 11 11 11 4 12 12 12 12 5 13 13 13 13 9 14 14 14 14 8 15 15 15 15 5 16 16 16 16 2 17 17 17 17 9 18 18 18 18 7 19 19 19 19 3 20 20 20 20 5 21 16 21 21 5 22 16 22 22 3 23 20 23 23 2 24 17 24 24 4 25 21 25 25 0 26 22 26 26 6 27 23 27 27 4 28 21 28 28 1 29 24 29 29 0 30 22 30 30 8 31 25 31 31 1 32 24 32 32 4 33 21 33 33 18 34 26 34 34 19 35 27 35 35 12 36 28 36 36 11 37 29 37 37 16 38 30 38 38 17 39 31 39 39 15 40 32 40 40 14 41 33 41 41 10 42 34 42 42 13 43 35 43 43 17 44 36 44 44 16 45 37 45 45 14 46 38 46 46 15 47 39 47 47 19 48 40 48 48 18 49 41 49 49 15 50 42 50 50 12 51 43 51 51 19 52 44 52 52 17 53 45 53 53 13 54 46 54 54 15 55 42 55 55 15 56 42 56 56 13 57 46 57 57 12 58 43 58 58 14 59 47 59 59 10 60 48 60 60 16 61 49 61 61 14 62 47 62 62 11 63 50 63 63 10 64 48 64 64 18 65 51 65 65 11 66 50 66 66 14 67 47 67 67 24 68 52 68 68 25 69 53 69 69 22 70 54 70 70 21 71 55 71 71 20 72 56 72 72 23 73 57 73 73 25 74 58 74 74 24 75 59 75 75 25 76 60 76 76 23 77 61 77 77 22 78 62 78 78 21 79 63 79 79 20 80 64 80 80 24 81 65 81 81</p>
+        </polylist>
+      </mesh>
+      <extra>
+        <technique profile="MAYA">
+          <double_sided>1</double_sided>
+        </technique>
+      </extra>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="VisualSceneNode" name="untitled">
+      <node id="Env_Dirt_Plough" name="Env_Dirt_Plough" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <extra>
+          <technique profile="PSSG">
+            <translate_keyed/>
+            <rotate_keyed/>
+          </technique>
+        </extra>
+        <instance_geometry url="#Env_Dirt_PloughShape">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="lambert2SG" target="#lambert2">
+                <bind_vertex_input semantic="TEX0" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+          <extra>
+            <technique profile="PHYRE">
+              <object_render_properties castsShadows="1" receiveShadows="1" visibleInReflections="1" visibleInRefractions="1" motionBlurEnabled="1"/>
+            </technique>
+          </extra>
+        </instance_geometry>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0.0416666679084301</start_time>
+          <end_time>8.333333015441895</end_time>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_physics_scene url="#MayaNativePhysicsScene"/>
+    <instance_visual_scene url="#VisualSceneNode"/>
+  </scene>
+</COLLADA>

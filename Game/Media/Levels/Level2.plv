@@ -1,0 +1,1588 @@
+<?xml version="1.0"?>
+<LEVELFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="2/20/2017 1:36:10 PM" />
+  <ASSETBASE path=".." />
+  <ASSETS>
+    <FILE id="68c682a9-3914-48f4-8864-54fc934da09d" path="./PhyreSystemAssets/Shaders/PhyreSkyBox.fx" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="22e331bc-ac04-4e33-afd7-05a00857dad6" assetref="PhyreSystemAssets/Shaders/PhyreSkyBox.cgfx#material" phyretype="PMaterial" instancephyretype="PMaterial" />
+    </FILE>
+    <FILE id="f527278c-d483-47ba-8861-2e0b3893b04f" path="./Textures/Space.dds" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="82047f1c-3d4c-4d57-8352-a9083fc74d25" assetref="Textures/Space.dds" phyretype="PTextureCubeMap" instancephyretype="PTextureCubeMap" />
+    </FILE>
+    <FILE id="be29cae9-b6e7-4488-80c9-819019a0c0b5" path="./Models/Building_Cottage_02.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="75445fa8-5449-452a-b1ab-1dfa864c7930" assetref="Models/Building_Cottage_02.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="5cce986e-f07c-45c2-98ca-618927d7b6da" assetref="Models/Building_Cottage_02.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="00b79ce8-7b03-4db1-a136-ac7d4dea5ad1" assetref="Models/Building_Cottage_02.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="852d6ec2-be40-4474-becb-bc31dffc26b6" assetref="Models/Building_Cottage_02.dae#Building_Cottage_02Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="fa4705bd-db5b-4d50-876f-be3cff84cb31" assetref="Models/Building_Cottage_02.dae#Building_Cottage_02" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="aec4b36c-8fe9-48c9-ae88-ea46c610431b" assetref="Models/Building_Cottage_02.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="3abcf292-7324-4787-9a39-4aa6b140a39b" assetref="Models/Building_Cottage_02.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="f70826d3-8be1-4233-9f2b-a1d18cfcebb0" path="./Models/Building_Windmill.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="0bde8d43-cf2e-47e9-9c99-356db38ec61c" assetref="Models/Building_Windmill.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="b592fdc5-9afc-418e-8bae-ba790bfb3e38" assetref="Models/Building_Windmill.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="201e9c33-ee91-40f1-9a27-1056f5303f55" assetref="Models/Building_Windmill.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="663971a9-da85-4e25-8a2d-c4b6c5bf2cae" assetref="Models/Building_Windmill.dae#Windmill_BladesShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="712bc879-deea-42fb-8b2c-56b576ad9e6f" assetref="Models/Building_Windmill.dae#Windmil_TopShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="253dff1e-8505-4a04-810a-0658e46c8216" assetref="Models/Building_Windmill.dae#Building_WindmillShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="472fb26b-fdbf-45af-84fb-e61a351b887a" assetref="Models/Building_Windmill.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="923ce14d-8a71-4061-8500-ddc737adee89" assetref="Models/Building_Windmill.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+      <ASSET id="7d27b99c-11ea-4782-94f9-63e9704c3a50" assetref="Models/Building_Windmill.dae#Building_Windmill" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="033c5ed7-b995-44cc-bc39-3f685c455c7c" path="./Models/Building_Farm_House_03.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="0d4a49f9-61e3-4d2e-9d1b-7a269fd82290" assetref="Models/Building_Farm_House_03.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="08de9eb7-785c-4e99-a697-d5dc8877523d" assetref="Models/Building_Farm_House_03.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="a635680f-fe94-47ab-b67e-8a9e347cad54" assetref="Models/Building_Farm_House_03.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="b65896ff-a0df-43c1-9006-0469029ba7f7" assetref="Models/Building_Farm_House_03.dae#Building_Farm_House_03Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="02b4a4f2-936a-450c-a806-dc0198384d5a" assetref="Models/Building_Farm_House_03.dae#Building_Farm_House_03" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="6feb4800-5b54-4a3d-aed4-df3b254ec77c" assetref="Models/Building_Farm_House_03.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="be70547a-71bc-4c98-b3d8-3ccbccc807c1" assetref="Models/Building_Farm_House_03.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="8af476bc-1ac5-4ce9-8940-af2072f1440b" path="./Models/Building_Farm_House_01.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="e05cafa7-85c3-42a9-b654-887379bf4a17" assetref="Models/Building_Farm_House_01.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="fd463533-aca3-4226-889b-e688fae06913" assetref="Models/Building_Farm_House_01.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="238a9986-b173-45f4-b8a3-2be5e53b5570" assetref="Models/Building_Farm_House_01.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="888b8acd-ddeb-4a6a-8605-3eabe3c68b0a" assetref="Models/Building_Farm_House_01.dae#Building_Farm_House_01Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="44e2444c-f4b1-4ce1-bc56-81eb11614da7" assetref="Models/Building_Farm_House_01.dae#Building_Farm_House_01" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="1a38ee7c-917f-4e7a-9701-53ef2ef41cea" assetref="Models/Building_Farm_House_01.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="23a62a40-544f-4b66-a352-b1c497c43f0d" assetref="Models/Building_Farm_House_01.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="1c48e33d-e2b7-44db-9dc3-6c077c5677f1" path="./Models/Building_Barn_Big_01.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="15197140-ba12-4f00-912e-17ab2ec424b1" assetref="Models/Building_Barn_Big_01.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="f899987d-6dc1-4935-b981-1c3c4bcf1f65" assetref="Models/Building_Barn_Big_01.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="f2fe7b19-289b-4955-b2ee-73da4173d44b" assetref="Models/Building_Barn_Big_01.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="88122b00-9355-457f-8e25-385b231096ca" assetref="Models/Building_Barn_Big_01.dae#Building_Barn_Big_01Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="bfe21c66-9e48-426c-85f9-59fa476488c0" assetref="Models/Building_Barn_Big_01.dae#Building_Barn_Big_01" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="8f9066c7-a63a-42b3-a3a4-0e289cc37445" path="./Models/pickup_1.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="c3c29821-e9b0-4cf6-9dec-a247a56754e5" assetref="Models/pickup_1.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="0161e96b-a116-4db5-8aef-4dde338c14eb" assetref="Models/pickup_1.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="208ed9ad-4f52-4b1e-949b-d2a1f3a44cee" assetref="Models/pickup_1.dae#pSphereShape1" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="0e97e7f2-462c-4590-8981-2947f30931e9" assetref="Models/pickup_1.dae#pSphere1" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="fcba586e-c326-46eb-8583-dfb7d8f75b7f" assetref="Models/pickup_1.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="2c0b094a-128c-4729-92ff-e87672c53312" assetref="Models/pickup_1.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="e6ef93c6-65ce-413f-821d-d88db1b1d55c" path="./Models/pickup_2.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="046014ba-39bd-4026-af64-b2b0cbe631a7" assetref="Models/pickup_2.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="d8a96106-1420-4f01-bb37-654df0cbcb29" assetref="Models/pickup_2.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="df06fbbb-f299-4748-9300-cd935f7f926f" assetref="Models/pickup_2.dae#pSphereShape1" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="7f4834d3-9689-4011-ac33-9ac26869d9d2" assetref="Models/pickup_2.dae#pSphere1" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="a8aed0eb-a215-471d-a12b-185885c49827" assetref="Models/pickup_2.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="e61161a9-d7de-4819-af9d-b1407096e349" assetref="Models/pickup_2.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="07f3e3be-f810-4beb-b1de-6dec890d5640" path="./Models/character_bot.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="adffa060-31d7-4648-af2d-34f03b4f063a" assetref="Models/character_bot.dae#bot" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="e3fd1e82-0a1a-4ca1-8d00-19b7a45c4d43" assetref="Models/character_bot.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="fc4df9d1-abe3-4363-97c7-ccc4b9f46b3b" assetref="Models/character_bot.dae#pointLight1" phyretype="PLight" instancephyretype="PLight" />
+      <ASSET id="9ab86bfe-c12d-4841-9acd-acd1354acc40" assetref="Models/character_bot.dae#botShape1" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="5fde9a6f-0a98-4f27-aebe-cdefe9f1f6b9" assetref="Models/character_bot.dae#bot1" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="bfeb8c64-194a-4a0d-b379-28dfadcd51d2" path="./Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="6f294ad6-9c93-4c86-b6bb-3c99bc429994" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#ColorMaterial_E5A6D700" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="7a93c687-d2e2-461b-a9dc-329a805ffb8c" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="2b16d941-68c8-4fec-a5d0-249bf492ccba" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane_Mine.max" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="c9816d70-c861-4b3b-8c37-2bad9cd76406" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001-mesh" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="d5d6120b-6248-4772-8adf-98899803998a" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="a328f2db-522f-4341-bbbf-e5501e906545" path="./Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="5ffc3319-9e6d-4ec7-8434-241cbd67841a" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#ColorMaterial_B1941B00" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="46bcc9c6-295d-4aa4-a82d-b72b2643e539" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="e621ff9e-4c2e-4581-accf-2458869b21bb" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Cube_1m.max" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="e1094648-7f05-4ca5-be07-9b00ab2f9ec8" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001-mesh" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="4636116b-1e26-497a-a42c-22ebafdd61eb" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="d6e64ee6-2bdf-49aa-881f-d0879196cbec" path="./Components/PickupReceiver.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="575daa87-9586-43a0-a2fa-3cbd91464459" path="./Components/PickupTimer.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="4617bf54-e3ea-4b7e-9ce4-52a7bea65f30" path="./Components/PickupComponent.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="b1fa4da2-3950-4dee-9a6c-3128bc0e4946" path="./Components/TriggerComponent.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="afa90fd7-7dcf-4395-ad73-31b19ef55421" path="./Components/CustomCameraController.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="690173c8-5b72-4d62-b6f9-a29b054a1ee1" path="./Scripts/DefaultCameraController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="4a1d7ddd-e76b-4592-b177-bfe5d2efbb91" path="./Scripts/PhysicsCharacterController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="bc2b662b-2d84-4c41-a41c-15461f57e50c" path="./Scripts/CustomCameraController_1.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="366fa294-873c-4727-b243-2783d390d91b" path="./Scripts/TriggerSpeed.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="b90f0a08-a241-461a-8366-1a507886f3f1" path="./Scripts/CustomCameraController_2.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="3a4ffcd9-329e-4544-9342-bc0a3a85e39c" path="./Scripts/PhysicsCharacterController_1.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="d02d2473-0d50-4cae-a1c7-86ee4ffbb2f0" path="./Scripts/PhysicsCharacterController_2.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="df22843f-af77-4758-96c3-342c237efe98" path="./Scripts/CustomCameraController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="88d393f3-0a04-45c1-9291-5043aa873669" path="./Scripts/PickupSpawner.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="05bb7e51-8e6b-4b2f-ad94-265f6a31d283" path="./Scripts/Helpers.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="63502a19-2f4e-4471-bf47-bf256a801ce9" path="./Scripts/Trace.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="db295547-5c13-421f-97a8-0231ff97358d" path="./Scripts/DefaultTimer.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="7a754259-26ee-441e-9d64-3eb6b97f4580" path="./Scripts/CurrentCharacterHolder.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="ff6597b8-1a50-4d02-9ed5-71818e5f6eca" path="./Scripts/TriggerJump.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+  </ASSETS>
+  <INSTANCES>
+    <INSTANCE id="8cfcb324-5163-4753-a103-29f87d89624d" name="Floor" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="4,0,0,0,0,9.99999975E-06,0,0,0,0,4.5,0,0,0,5.20001078,1" editinfo="true" />
+      </PROPERTY>
+      <CHILD>07507cfa-24c8-4002-a98f-ed6eb4048267</CHILD>
+      <CHILD>09feeae5-05e8-48c6-bb1b-27114a4cc0bb</CHILD>
+    </INSTANCE>
+    <INSTANCE id="392f8426-ba1a-4b1c-90b3-643c8915acb1" name="DirectionalLight" assetref="Light" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.499999911,0,0.866025448,0,0.75000006,0.499999911,-0.433012635,0,-0.433012635,0.866025448,0.249999911,0,0,0,0,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_color" typename="Vector4">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0.968627453,0.905882359,1" />
+      </PROPERTY>
+      <PROPERTY name="m_lightType" typename="PLightType" value="DirectionalLight" />
+      <PROPERTY name="m_scatteringIntensity" typename="float" value="20" />
+    </INSTANCE>
+    <INSTANCE id="07507cfa-24c8-4002-a98f-ed6eb4048267" name="NavigationMesh" assetref="Navigation Mesh" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_tileSize" typename="PUInt32" value="15" />
+    </INSTANCE>
+    <INSTANCE id="7be0905c-7650-4219-9724-67255412d8bd" name="Locator_Spawn" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-206.907806,2,164.642807,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Spawn" />
+    </INSTANCE>
+    <INSTANCE id="b12cde2f-69d1-4dc3-898a-0081859bf291" name="Locator_Spawn_0" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-126.732803,2,228.798096,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Spawn" />
+    </INSTANCE>
+    <INSTANCE id="64e79882-8637-4843-9443-760a0d60f9d0" name="Skybox" assetref="Skybox" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_material" typename="PMaterial" value="22e331bc-ac04-4e33-afd7-05a00857dad6" linkref="PhyreSystemAssets/Shaders/PhyreSkyBox.cgfx#material" />
+      <PROPERTY name="m_texture" typename="PTextureCubeMap" value="82047f1c-3d4c-4d57-8352-a9083fc74d25" linkref="Textures/Space.dds" />
+    </INSTANCE>
+    <INSTANCE id="e0748622-19d5-49bf-80d1-e21e4d5c4ae0" name="Locators" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,164.082397,0,-202.641327,1" editinfo="true" />
+      </PROPERTY>
+      <CHILD>b12cde2f-69d1-4dc3-898a-0081859bf291</CHILD>
+      <CHILD>7be0905c-7650-4219-9724-67255412d8bd</CHILD>
+      <CHILD>1b7b4fd0-1118-475a-b566-4675f0443fb3</CHILD>
+      <CHILD>cb533fb5-0c51-4aa4-b41b-58f3f3618aa6</CHILD>
+      <CHILD>acccfe7b-9f35-491a-876e-7451b9ae8d19</CHILD>
+      <CHILD>ea948307-7af8-49f3-a8a9-cd3ebdf31fae</CHILD>
+      <CHILD>ee8b70ee-1b6d-4db3-bd34-87acd6334ab2</CHILD>
+      <CHILD>0705f37e-352b-4abb-8381-9f5cb9640a28</CHILD>
+      <CHILD>ed927ed7-6138-4663-8cad-e84fc64c058f</CHILD>
+      <CHILD>15364757-859a-4f4c-b49e-08ddc352228c</CHILD>
+    </INSTANCE>
+    <INSTANCE id="f76defdf-9f73-4d0e-962e-f39e9567cb56" name="Lights" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,14,0,1" editinfo="true" />
+      </PROPERTY>
+      <CHILD>392f8426-ba1a-4b1c-90b3-643c8915acb1</CHILD>
+      <CHILD>29b27a10-7f20-4eaf-8b86-308ea0e39214</CHILD>
+      <CHILD>49dc8e1d-8a88-4847-9782-1720b60dbed1</CHILD>
+    </INSTANCE>
+    <INSTANCE id="29b27a10-7f20-4eaf-8b86-308ea0e39214" name="Red" assetref="Light" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,30,0,30,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_color" typename="Vector4">
+        <PROPERTY name="m_elements" typename="float[]" value="1,1,1,1" />
+      </PROPERTY>
+      <PROPERTY name="m_intensity" typename="float" value="0.5" />
+    </INSTANCE>
+    <INSTANCE id="49dc8e1d-8a88-4847-9782-1720b60dbed1" name="Green" assetref="Light" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-30,0,-30,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_color" typename="Vector4">
+        <PROPERTY name="m_elements" typename="float[]" value="1,1,1,1" />
+      </PROPERTY>
+      <PROPERTY name="m_intensity" typename="float" value="0.5" />
+    </INSTANCE>
+    <INSTANCE id="351cb1ec-c693-43fc-b535-070d7b457640" name="Building_Cottage_02" assetref="Models/Building_Cottage_02.dae#Building_Cottage_02" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="6.36160422E-08,5.56149339E-15,1.45536542,0,-2.54464169E-07,1.45536542,5.56149339E-15,0,-1.45536542,-2.54464169E-07,6.36160422E-08,0,22.0327492,6.32504816E-06,71.1602249,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="42c0b582-46e8-4a21-ae12-b4f2024841c7" name="Building_Windmill" assetref="Models/Building_Windmill.dae#Building_Windmill" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-0.707106769,-6.18172393E-08,-0.707106769,0,-2.56055372E-08,1,-6.18172393E-08,0,0.707106769,-2.56055426E-08,-0.707106769,0,60.633255,-9.08417519E-08,-61.1963196,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="09feeae5-05e8-48c6-bb1b-27114a4cc0bb" name="Env_Dirt_dae" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.275000006,0,0,0,0,100000,0,0,0,0,0.266666681,0,-55.84795,0,-20.0288086,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="17bb11cd-c311-4eeb-831f-cc600dcba1c9" name="Building_Farm_House_03" assetref="Models/Building_Farm_House_03.dae#Building_Farm_House_03" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-4.66376768E-08,0,-1.06694579,0,0,1.06694579,0,0,1.06694579,0,-4.66376768E-08,0,-71.1464615,0,24.9862213,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="f1963462-da1f-44f1-8c66-c8c2c0d01fc8" name="Building_Windmill_0" assetref="Models/Building_Windmill.dae#Building_Windmill" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.707106769,0,0.707106769,0,0,1,0,0,-0.707106769,0,0.707106769,0,-60.0522614,0,59.489254,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="69571225-04f0-41f9-a351-38a8cbe757c2" name="Building_Farm_House_2" assetref="Models/Building_Farm_House_01.dae#Building_Farm_House_01" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1.12549996,0,9.83943309E-08,0,0,1.12549996,0,0,-9.83943309E-08,0,-1.12549996,0,-23.6616001,-2.49329996,69.5873032,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="4194bac2-1879-424b-80d7-b467b09a3a29" name="Building_Cottage_2" assetref="Models/Building_Cottage_02.dae#Building_Cottage_02" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1.17139995,0,1.02407036E-07,0,0,1.17139995,0,0,-1.02407036E-07,0,-1.17139995,0,-65.6119537,0,-3.94840002,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="2308972e-9f6c-477a-a333-f2420fd33c96" name="Building_Barn_Big_01" assetref="Models/Building_Barn_Big_01.dae#Building_Barn_Big_01" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.13389111,0,0,0,0,1.13389111,0,0,0,0,1.13389111,0,75.2153473,0,9.79119873,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="40f38c49-3028-44b4-9511-7e54e4c4c0f8" name="Pickups" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <CHILD>61816d5a-d578-4afb-a2ec-3e1f20f563ad</CHILD>
+      <CHILD>f0d5a56a-687b-47f4-b37e-22ed6371798f</CHILD>
+    </INSTANCE>
+    <INSTANCE id="61816d5a-d578-4afb-a2ec-3e1f20f563ad" name="PickupSpeed" assetref="Models/pickup_1.dae#pSphere1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_rigidBody" typename="PPhysicsRigidBody" editinfo="true">
+        <PROPERTY name="m_enabled" typename="bool" value="False" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.699999988,0,0,0,0,0.699999988,0,0,0,0,0.699999988,0,-13.9961834,0.641236782,-4.80900002,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="b6d68acd-766b-4524-b35e-2ba468a51727" name="PickupReceiver" assetref="PickupReceiver">
+        <PROPERTY name="m_entryHandler" typename="PScriptCallbackHandler">
+          <PROPERTY name="m_entryPoint" typename="PString" value="OnEnter" />
+          <PROPERTY name="m_handler" typename="PTypedObject" value="366fa294-873c-4727-b243-2783d390d91b" linkref="Scripts/TriggerSpeed.lua" />
+        </PROPERTY>
+        <PROPERTY name="m_exitHandler" typename="PScriptCallbackHandler">
+          <PROPERTY name="m_entryPoint" typename="PString" value="OnExit" />
+          <PROPERTY name="m_handler" typename="PTypedObject" value="366fa294-873c-4727-b243-2783d390d91b" linkref="Scripts/TriggerSpeed.lua" />
+        </PROPERTY>
+      </COMPONENTINSTANCE>
+      <COMPONENTINSTANCE id="0a791fe6-df53-4507-ad47-4b35026e25a8" name="PickupTimer" assetref="PickupTimer">
+        <PROPERTY name="m_property0" typename="PTrigger" value="eaaf1e09-5aa9-4644-84b2-2692c7cfd049" linkref="" isdynamicprop="True" />
+        <PROPERTY name="m_timeOut" typename="float" value="10" />
+        <PROPERTY name="m_script" typename="PScript" value="db295547-5c13-421f-97a8-0231ff97358d" linkref="Scripts/DefaultTimer.lua" />
+        <PROPERTY name="m_entryPoint" typename="PString" value="OnAlarm" />
+      </COMPONENTINSTANCE>
+      <COMPONENTINSTANCE id="811ba504-c6bc-45ac-97c9-9156a198d745" name="PickupComponent" assetref="PickupComponent" />
+      <CHILD>eaaf1e09-5aa9-4644-84b2-2692c7cfd049</CHILD>
+    </INSTANCE>
+    <INSTANCE id="eaaf1e09-5aa9-4644-84b2-2692c7cfd049" name="Trigger" assetref="Trigger" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="2.71359992,0,0,0,0,1.13440001,0,0,0,0,2.71359992,0,0,0,-0.0401000008,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_triggerReceivers" typename="PSharray&lt;PTriggerReceiverComponent *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+        <PROPERTY name="ELEMENT" typename="PTriggerReceiverComponent" value="b6d68acd-766b-4524-b35e-2ba468a51727" linkref="" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="e73eca75-2574-406f-9ba7-565019dda98f" name="TriggerComponent" assetref="TriggerComponent" />
+    </INSTANCE>
+    <INSTANCE id="f0d5a56a-687b-47f4-b37e-22ed6371798f" name="PickupJump" assetref="Models/pickup_2.dae#pSphere1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_rigidBody" typename="PPhysicsRigidBody" editinfo="true">
+        <PROPERTY name="m_enabled" typename="bool" value="False" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.699999988,0,0,0,0,0.699999988,0,0,0,0,0.699999988,0,-8.22172546,1.1103549,-4.51006603,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="61dac253-d7f2-48af-9874-be94e25d5952" name="PickupReceiver" assetref="PickupReceiver">
+        <PROPERTY name="m_entryHandler" typename="PScriptCallbackHandler">
+          <PROPERTY name="m_entryPoint" typename="PString" value="OnEnter" />
+          <PROPERTY name="m_handler" typename="PTypedObject" value="ff6597b8-1a50-4d02-9ed5-71818e5f6eca" linkref="Scripts/TriggerJump.lua" />
+        </PROPERTY>
+        <PROPERTY name="m_exitHandler" typename="PScriptCallbackHandler">
+          <PROPERTY name="m_entryPoint" typename="PString" value="OnExit" />
+          <PROPERTY name="m_handler" typename="PTypedObject" value="366fa294-873c-4727-b243-2783d390d91b" linkref="Scripts/TriggerSpeed.lua" />
+        </PROPERTY>
+      </COMPONENTINSTANCE>
+      <COMPONENTINSTANCE id="a047cedc-675a-416d-bf51-e8717a05e473" name="PickupTimer" assetref="PickupTimer">
+        <PROPERTY name="m_property0" typename="PTrigger" value="be680191-a5d3-4311-a090-a82f87e58a0c" linkref="" isdynamicprop="True" />
+        <PROPERTY name="m_timeOut" typename="float" value="10" />
+        <PROPERTY name="m_script" typename="PScript" value="db295547-5c13-421f-97a8-0231ff97358d" linkref="Scripts/DefaultTimer.lua" />
+        <PROPERTY name="m_entryPoint" typename="PString" value="OnAlarm" />
+      </COMPONENTINSTANCE>
+      <COMPONENTINSTANCE id="fb28d92c-653d-4dd4-9fa3-04f5e03c740a" name="PickupComponent" assetref="PickupComponent" />
+      <CHILD>be680191-a5d3-4311-a090-a82f87e58a0c</CHILD>
+    </INSTANCE>
+    <INSTANCE id="be680191-a5d3-4311-a090-a82f87e58a0c" name="Trigger" assetref="Trigger" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="2.71359992,0,0,0,0,1.13440001,0,0,0,0,2.71359992,0,0,0,-0.0401000008,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_triggerReceivers" typename="PSharray&lt;PTriggerReceiverComponent *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+        <PROPERTY name="ELEMENT" typename="PTriggerReceiverComponent" value="61dac253-d7f2-48af-9874-be94e25d5952" linkref="" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="7a0adebb-20f0-4535-892a-d736e54ecad3" name="TriggerComponent" assetref="TriggerComponent" />
+    </INSTANCE>
+    <INSTANCE id="16555fed-321d-4ae8-ba83-c75a68b42039" name="Character_1" assetref="Models/character_bot.dae#bot1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1,0,8.74227766E-08,0,0,1,0,0,-8.74227766E-08,0,-1,0,-7.29082489,2.25389719,0.638141751,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="d327ad4f-2303-4b01-bb30-675239822a71" name="PhysicsCharacterControllerComponent" assetref="Physics Character Controller Component">
+        <PROPERTY name="m_controller" typename="PPhysicsCharacterController">
+          <PROPERTY name="m_velocity" typename="float" value="30" />
+          <PROPERTY name="m_startPosition" typename="Point3">
+            <PROPERTY name="m_elements" typename="float[]" value="-7.29082489,3.03159857,0.514209032,-2.87351825E-16" />
+          </PROPERTY>
+          <PROPERTY name="m_height" typename="float" value="0.6037046" />
+          <PROPERTY name="m_radius" typename="float" value="0.4796435" />
+          <PROPERTY name="m_graphicsOffset" typename="PMatrix4">
+            <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,-0.777701378,0.123932719,1" />
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="m_script" typename="PScript" value="3a4ffcd9-329e-4544-9342-bc0a3a85e39c" linkref="Scripts/PhysicsCharacterController_1.lua" />
+        <PROPERTY name="m_entryPoint" typename="PString" value="OnUpdate" />
+      </COMPONENTINSTANCE>
+      <COMPONENTINSTANCE id="aa1a89c7-a4f1-4c31-87df-85ce4644bb74" name="QuarryComponent" assetref="Quarry Component">
+        <PROPERTY name="m_min" typename="Vector3">
+          <PROPERTY name="m_elements" typename="float[]" value="-0.553075731,-0.00379438768,-0.282278478,0" />
+        </PROPERTY>
+        <PROPERTY name="m_size" typename="Vector3">
+          <PROPERTY name="m_elements" typename="float[]" value="1.10615146,1.5629915,0.812422335,0" />
+        </PROPERTY>
+      </COMPONENTINSTANCE>
+      <CHILD>fad194c3-07e0-4127-9277-55629d161a00</CHILD>
+      <CHILD>de68255e-8e19-48b4-984b-cca9ecbf924d</CHILD>
+    </INSTANCE>
+    <INSTANCE id="fad194c3-07e0-4127-9277-55629d161a00" name="Follow_1" assetref="Perspective Camera" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1,0,8.74227766E-08,0,1.5180829E-08,0.98480773,0.173648447,0,-8.6094623E-08,0.173648447,-0.98480773,0,-1.1916728,11.0061073,-13.3317623,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_aspect" typename="float" value="1.264177" />
+      <PROPERTY name="m_skyBox" typename="PSkyBox" value="64e79882-8637-4843-9443-760a0d60f9d0" linkref="" />
+      <COMPONENTINSTANCE id="7d14a561-5646-43bc-a81b-5bab53105bc1" name="CustomCameraController" assetref="CustomCameraController">
+        <PROPERTY name="m_characterController" typename="PScriptedComponent" value="d327ad4f-2303-4b01-bb30-675239822a71" linkref="" isdynamicprop="True" />
+        <PROPERTY name="m_camera" typename="PCameraProjection" value="fad194c3-07e0-4127-9277-55629d161a00" linkref="" />
+        <PROPERTY name="m_followTarget" typename="PWorldMatrix" value="16555fed-321d-4ae8-ba83-c75a68b42039" linkref="" />
+        <PROPERTY name="m_script" typename="PScript" value="bc2b662b-2d84-4c41-a41c-15461f57e50c" linkref="Scripts/CustomCameraController_1.lua" />
+      </COMPONENTINSTANCE>
+    </INSTANCE>
+    <INSTANCE id="de68255e-8e19-48b4-984b-cca9ecbf924d" name="Locator_Player_1" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1,-8.74227766E-08,0,0,-8.74227766E-08,1,-8.74227766E-08,0,7.64274186E-15,-8.74227766E-08,-1,0,0,0.5,0,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Player" />
+    </INSTANCE>
+    <INSTANCE id="af62091a-4da6-4a68-937b-043cf8c58cd9" name="Character_2" assetref="Models/character_bot.dae#bot1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,8.74227766E-08,8.74227766E-08,0,-8.74227837E-08,1,8.74227766E-08,0,-8.74227695E-08,-8.74227837E-08,1,0,-12.9530277,2.01525235,-1.05295874E-06,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="7a64800d-a817-4e4b-9e76-7912dc225a61" name="PhysicsCharacterControllerComponent" assetref="Physics Character Controller Component">
+        <PROPERTY name="m_controller" typename="PPhysicsCharacterController">
+          <PROPERTY name="m_velocity" typename="float" value="30" />
+          <PROPERTY name="m_startPosition" typename="Point3">
+            <PROPERTY name="m_elements" typename="float[]" value="-12.9530277,2.79295373,0.123931788,-2.87351825E-16" />
+          </PROPERTY>
+          <PROPERTY name="m_height" typename="float" value="0.6037046" />
+          <PROPERTY name="m_radius" typename="float" value="0.4796435" />
+          <PROPERTY name="m_graphicsOffset" typename="PMatrix4">
+            <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,-0.777701318,-0.123932838,1" />
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="m_script" typename="PScript" value="d02d2473-0d50-4cae-a1c7-86ee4ffbb2f0" linkref="Scripts/PhysicsCharacterController_2.lua" />
+        <PROPERTY name="m_entryPoint" typename="PString" value="OnUpdate" />
+      </COMPONENTINSTANCE>
+      <COMPONENTINSTANCE id="004fc9e2-6b3f-4046-8e13-b57a85727db5" name="QuarryComponent" assetref="Quarry Component">
+        <PROPERTY name="m_min" typename="Vector3">
+          <PROPERTY name="m_elements" typename="float[]" value="-0.553075731,-0.00379438768,-0.282278478,0" />
+        </PROPERTY>
+        <PROPERTY name="m_size" typename="Vector3">
+          <PROPERTY name="m_elements" typename="float[]" value="1.10615146,1.5629915,0.812422335,0" />
+        </PROPERTY>
+      </COMPONENTINSTANCE>
+      <CHILD>518141fa-c561-4e48-a060-ae498d6cdfd9</CHILD>
+      <CHILD>71cb3ff1-c16c-4a5d-a70f-834aa0c833cb</CHILD>
+    </INSTANCE>
+    <INSTANCE id="518141fa-c561-4e48-a060-ae498d6cdfd9" name="Follow_2" assetref="Perspective Camera" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1,0,8.74227766E-08,0,1.51808308E-08,0.98480773,0.173648447,0,-8.6094623E-08,0.173648447,-0.98480773,0,-1.19168091,11.0061131,-13.3317413,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_aspect" typename="float" value="1.264177" />
+      <PROPERTY name="m_skyBox" typename="PSkyBox" value="64e79882-8637-4843-9443-760a0d60f9d0" linkref="" />
+      <COMPONENTINSTANCE id="415c6008-5041-4f22-bca0-f1be40054057" name="CustomCameraController" assetref="CustomCameraController">
+        <PROPERTY name="m_characterController" typename="PScriptedComponent" value="7a64800d-a817-4e4b-9e76-7912dc225a61" linkref="" isdynamicprop="True" />
+        <PROPERTY name="m_camera" typename="PCameraProjection" value="518141fa-c561-4e48-a060-ae498d6cdfd9" linkref="" />
+        <PROPERTY name="m_followTarget" typename="PWorldMatrix" value="af62091a-4da6-4a68-937b-043cf8c58cd9" linkref="" />
+        <PROPERTY name="m_script" typename="PScript" value="b90f0a08-a241-461a-8366-1a507886f3f1" linkref="Scripts/CustomCameraController_2.lua" />
+      </COMPONENTINSTANCE>
+    </INSTANCE>
+    <INSTANCE id="71cb3ff1-c16c-4a5d-a70f-834aa0c833cb" name="Locator_Player_2" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0.5,0,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Player" />
+    </INSTANCE>
+    <INSTANCE id="15364757-859a-4f4c-b49e-08ddc352228c" name="Locator_EnemyAI" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-133.855392,2,158.843094,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="EnemyAI" />
+    </INSTANCE>
+    <INSTANCE id="ea948307-7af8-49f3-a8a9-cd3ebdf31fae" name="Locator_Target" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-142.553894,2,198.536194,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Target" />
+    </INSTANCE>
+    <INSTANCE id="acccfe7b-9f35-491a-876e-7451b9ae8d19" name="Locator_Target_0" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-204.735001,2,180.2491,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Target" />
+    </INSTANCE>
+    <INSTANCE id="cb533fb5-0c51-4aa4-b41b-58f3f3618aa6" name="Locator_Target_1" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-178.851593,2,228.632706,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Target" />
+    </INSTANCE>
+    <INSTANCE id="ed927ed7-6138-4663-8cad-e84fc64c058f" name="Locator_EnemyAI_0" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-207.737396,2,222.5522,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="EnemyAI" />
+    </INSTANCE>
+    <INSTANCE id="0705f37e-352b-4abb-8381-9f5cb9640a28" name="Locator_PlayerStart" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-169.514801,2,211.9758,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="PlayerStart" />
+    </INSTANCE>
+    <INSTANCE id="ee8b70ee-1b6d-4db3-bd34-87acd6334ab2" name="Locator_PlayerStart_0" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-206.945404,2,160.234497,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="PlayerStart" />
+    </INSTANCE>
+    <INSTANCE id="1b7b4fd0-1118-475a-b566-4675f0443fb3" name="Locator_Target_2" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-147.792297,2,184.192596,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Target" />
+    </INSTANCE>
+    <INSTANCE id="b455f0ce-c9c4-42f1-ac63-4d81b608ec4b" name="Building_Farm_House_01" assetref="Models/Building_Farm_House_01.dae#Building_Farm_House_01" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.12552285,0,0,0,0,1.12552285,0,0,0,0,1.12552285,0,-22.3315353,0,-68.1158371,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="434c8ac7-f2d1-4563-94ea-5020aca058a7" name="Building_Farm_House_3" assetref="Models/Building_Farm_House_03.dae#Building_Farm_House_03" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.30125499,0,0,0,0,1.30125499,0,0,0,0,1.30125499,0,21.2501984,0,-81.2070007,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="90635454-913f-479c-832f-bc3adcfd8881" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="32,0,0,0,0,3.8159618E-07,-32,0,0,1,1.19248806E-08,0,0,0,0,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="c7a10ac8-462a-4877-92fa-fd98b6073b95" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="2048" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="2048" />
+      </COMPONENTINSTANCE>
+      <CHILD>9a0b0bbb-36af-433e-bcdc-80c5083d3389</CHILD>
+    </INSTANCE>
+    <INSTANCE id="9a0b0bbb-36af-433e-bcdc-80c5083d3389" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="35085913-90e2-44d7-a649-201a1581e573" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_2" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="32,0,0,0,0,3.8159618E-07,-32,0,0,1,1.19248806E-08,0,31.6095181,0,0,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="4c31133d-eb5e-479f-97fe-a81e0d8adce3" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="2048" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="2048" />
+      </COMPONENTINSTANCE>
+      <CHILD>d0cb915c-c8fd-411a-9be6-239935c638cc</CHILD>
+    </INSTANCE>
+    <INSTANCE id="d0cb915c-c8fd-411a-9be6-239935c638cc" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0.00937157869,0,0,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="afe2b515-00b0-4e4e-94a3-da9643bbc691" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_0" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="32,0,0,0,0,3.8159618E-07,-32,0,0,1,1.19248806E-08,0,-31.9700966,0,0,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="c36c7fb7-d86d-4cd4-b34c-ce70aea70ea8" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="2048" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="2048" />
+      </COMPONENTINSTANCE>
+      <CHILD>54a6d489-7fb8-4e71-848d-241b55ff5ffe</CHILD>
+    </INSTANCE>
+    <INSTANCE id="54a6d489-7fb8-4e71-848d-241b55ff5ffe" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="88e9a098-40ae-4c4b-9c40-0b4867565b00" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_1" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="32,0,0,0,0,3.8159618E-07,-32,0,0,1,1.19248806E-08,0,0,3.79650487E-07,-31.8368378,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="f1e342f4-aff2-44ff-9618-4f323f26cec4" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="2048" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="2048" />
+      </COMPONENTINSTANCE>
+      <CHILD>eeafb09a-f012-4f4b-b110-96c827d7dd7c</CHILD>
+    </INSTANCE>
+    <INSTANCE id="eeafb09a-f012-4f4b-b110-96c827d7dd7c" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0.00368750095,-3.43058915E-14,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="4c538c8b-c9d8-482c-bcfa-ba9c059e275a" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_3" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="32,0,0,0,0,3.8159618E-07,-32,0,0,1,1.19248806E-08,0,-31.9700966,3.79650487E-07,-31.8368378,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="ebb70359-9a7a-4fa7-b475-125ca83e4e2e" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="2048" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="2048" />
+      </COMPONENTINSTANCE>
+      <CHILD>107e061c-d50e-47ad-b3b7-920bbcc124e3</CHILD>
+    </INSTANCE>
+    <INSTANCE id="107e061c-d50e-47ad-b3b7-920bbcc124e3" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0.00368750095,-3.43058915E-14,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="71087ba0-037d-422e-acce-b12e6d3e1f1c" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_4" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="32,0,0,0,0,3.8159618E-07,-32,0,0,1,1.19248806E-08,0,31.6095181,3.79650487E-07,-31.8368378,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="e043fff2-81de-4c2b-8425-89a0677b8087" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="2048" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="2048" />
+      </COMPONENTINSTANCE>
+      <CHILD>40485084-f34b-49cd-8557-cabffcce3264</CHILD>
+    </INSTANCE>
+    <INSTANCE id="40485084-f34b-49cd-8557-cabffcce3264" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0.00937157869,0.00368750095,-2.84217094E-14,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="7675ee50-9ff9-4372-bd4c-8ad0ca19fada" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_5" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="32,0,0,0,0,3.8159618E-07,-32,0,0,1,1.19248806E-08,0,0,-3.80452661E-07,31.9041023,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="6ee96171-729c-4f2f-815e-57af3928f59d" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="2048" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="2048" />
+      </COMPONENTINSTANCE>
+      <CHILD>61afdbd1-c7d6-4551-af43-bf93d03e4565</CHILD>
+    </INSTANCE>
+    <INSTANCE id="61afdbd1-c7d6-4551-af43-bf93d03e4565" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,1.02519989E-05,2.70894418E-14,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="0da53ee1-ec32-4daf-8292-370daaec52dc" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_6" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="32,0,0,0,0,3.8159618E-07,-32,0,0,1,1.19248806E-08,0,-31.9700966,-3.80452661E-07,31.9041023,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="79336da7-3e39-4595-a58d-9835587fb732" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="2048" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="2048" />
+      </COMPONENTINSTANCE>
+      <CHILD>ac508b15-c866-47bb-ba55-01aa713255d8</CHILD>
+    </INSTANCE>
+    <INSTANCE id="ac508b15-c866-47bb-ba55-01aa713255d8" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,1.02519989E-05,2.70894418E-14,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="ee2ba517-5a7d-482d-a1f1-a6fc7dadf771" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_7" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="32,0,0,0,0,3.8159618E-07,-32,0,0,1,1.19248806E-08,0,31.6095181,-3.80452661E-07,31.9041023,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="6b3f16f6-ac63-492f-b83c-5ba2461c855e" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="2048" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="2048" />
+      </COMPONENTINSTANCE>
+      <CHILD>f9e7f5fc-77f7-44c1-bc96-70f739d91c42</CHILD>
+    </INSTANCE>
+    <INSTANCE id="f9e7f5fc-77f7-44c1-bc96-70f739d91c42" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0.00937157869,1.02519989E-05,1.42108547E-13,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="03daf380-ff64-4a06-8543-016e79bc960d" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_8" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-8.34004903E-15,1.9079809E-07,16,0,-4.45090166E-07,8,-9.53990451E-08,0,-1,-5.56362707E-08,1.42202776E-16,0,47.7594986,3.95630026,39.7471848,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="ac1eb70f-e816-4133-adf6-80d0bae83995" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>75b719a7-59bf-4a84-8d95-b3aa10e28743</CHILD>
+    </INSTANCE>
+    <INSTANCE id="75b719a7-59bf-4a84-8d95-b3aa10e28743" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,-1.3566011E-23,0,-9.92616735E-24,-2.119687E-25,1,0,0.0093716383,1.02519989E-05,0,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="549036e4-d223-4bbc-acdf-51e3f9831288" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_9" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-8.34004903E-15,1.9079809E-07,16,0,-4.45090166E-07,8,-9.53990451E-08,0,-1,-5.56362707E-08,1.42202776E-16,0,47.7594986,3.95630002,23.738699,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="13628e12-6963-4f09-9ec3-b5d13cb85150" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>fff64e0f-b911-4f83-977e-4f39418f4d35</CHILD>
+    </INSTANCE>
+    <INSTANCE id="fff64e0f-b911-4f83-977e-4f39418f4d35" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,-1.3566011E-23,0,-9.92616735E-24,-2.119687E-25,1,0,0.0093716383,1.02519989E-05,0,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="0de65686-2ff8-4247-9500-7001a6943139" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_10" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-8.34004903E-15,1.9079809E-07,16,0,-4.45090166E-07,8,-9.53990451E-08,0,-1,-5.56362707E-08,1.42202776E-16,0,47.7594986,3.95629978,7.82420921,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="1b0fd9a6-c450-4d04-97eb-f0e119fea323" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>40342921-a677-44fd-8098-31034cecc768</CHILD>
+    </INSTANCE>
+    <INSTANCE id="40342921-a677-44fd-8098-31034cecc768" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,-1.3566011E-23,0,-9.92616735E-24,-2.119687E-25,1,0,0.0093716383,1.02519989E-05,0,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="6ecb2848-f69f-4511-956e-4152afc77781" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_11" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-8.34004903E-15,1.9079809E-07,16,0,-4.45090166E-07,8,-9.53990451E-08,0,-1,-5.56362707E-08,1.42202776E-16,0,47.7594986,3.95629954,-8.18427658,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="c2211b9b-dd5c-44b0-ab23-4f313aa73276" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>86d02d65-0ac9-4563-be3d-09e702c5bf47</CHILD>
+    </INSTANCE>
+    <INSTANCE id="86d02d65-0ac9-4563-be3d-09e702c5bf47" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,-1.3566011E-23,0,-9.92616735E-24,-2.119687E-25,1,0,0.0093716383,1.02519989E-05,0,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="fbee42a2-2249-4a71-b96c-785ad15a581c" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_12" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-8.34004903E-15,1.9079809E-07,16,0,-4.45090166E-07,8,-9.53990451E-08,0,-1,-5.56362707E-08,1.42202776E-16,0,47.7594986,3.9562993,-24.14011,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="234871c7-e988-4124-9f4e-0a348dbca167" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>60623636-e295-4000-a497-306af97f865d</CHILD>
+    </INSTANCE>
+    <INSTANCE id="60623636-e295-4000-a497-306af97f865d" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,-1.3566011E-23,0,-1.15805286E-23,-2.11968651E-25,1,0,0.0093716383,1.02519989E-05,0,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="1b7776c2-1598-4f5a-9dbe-998a39d6d28d" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_13" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-8.34004903E-15,1.9079809E-07,16,0,-4.45090166E-07,8,-9.53990451E-08,0,-1,-5.56362707E-08,1.42202776E-16,0,47.7594986,3.95629907,-40.1485977,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="c3111baa-8f0f-4e3b-a5b9-ed61cd71c65c" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>c14a8e0a-83f1-4e34-9a3c-270da002aad5</CHILD>
+    </INSTANCE>
+    <INSTANCE id="c14a8e0a-83f1-4e34-9a3c-270da002aad5" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,-1.3566011E-23,0,-9.92616735E-24,-2.119687E-25,1,0,0.0093716383,1.02519989E-05,0,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="4937bad0-80b4-4675-90b3-bb338ab8b543" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_14" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-6.99382213E-07,0,-16,0,0,8,0,0,1,0,-4.37113883E-08,0,-47.8744011,3.95630002,23.7387009,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="e18de643-9b9c-4d6c-b211-8459214a4752" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>661ca65a-3357-45a9-9843-e81dfb52c465</CHILD>
+    </INSTANCE>
+    <INSTANCE id="661ca65a-3357-45a9-9843-e81dfb52c465" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000024,0,2.14576721E-06,0,-9.86076132E-32,1,9.94541556E-23,0,-8.38190317E-09,1.5539701E-24,1.00000024,0,0.00937116146,1.00135803E-05,-7.62939453E-06,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="5f7a64b5-33cf-4f0b-92de-e743c2e39d07" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_15" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-6.99382213E-07,0,-16,0,0,8,0,0,1,0,-4.37113883E-08,0,-47.8744011,3.95630002,39.723671,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="89de5cc2-ca77-4203-831e-f8a954ada47e" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>301646e6-983f-478e-9895-9f716be02cc6</CHILD>
+    </INSTANCE>
+    <INSTANCE id="301646e6-983f-478e-9895-9f716be02cc6" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000024,0,2.14576721E-06,0,-9.86076132E-32,1,9.94541556E-23,0,-8.38190317E-09,1.5539701E-24,1.00000024,0,0.00937128067,1.00135803E-05,-7.62939453E-06,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="1ba2f06a-c817-491b-b7aa-6fb418d9db55" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_16" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-6.99382213E-07,0,-16,0,0,8,0,0,1,0,-4.37113883E-08,0,-47.8744011,3.95630002,7.77555275,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="dda99768-3c4f-4204-806a-c894b6595432" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>941d7f7b-8da3-42cc-b7a7-3711fed9dba3</CHILD>
+    </INSTANCE>
+    <INSTANCE id="941d7f7b-8da3-42cc-b7a7-3711fed9dba3" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000024,0,2.14576721E-06,0,-9.86076132E-32,1,9.94541556E-23,0,-8.38190317E-09,1.5539701E-24,1.00000024,0,0.00937128067,1.00135803E-05,-7.62939453E-06,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="c602d3c5-1803-4805-8989-c6c35798b0e3" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_17" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-6.99382213E-07,0,-16,0,0,8,0,0,1,0,-4.37113883E-08,0,-47.8744011,3.95630002,-8.20941734,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="d556f743-bca6-4575-ae80-d49a5446a080" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>a603ffe5-01c0-485c-8227-2cf3ab2812ca</CHILD>
+    </INSTANCE>
+    <INSTANCE id="a603ffe5-01c0-485c-8227-2cf3ab2812ca" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000024,0,2.14576721E-06,0,-9.86076132E-32,1,9.94541556E-23,0,-8.38190317E-09,1.5539701E-24,1.00000024,0,0.00937116146,1.00135803E-05,-7.62939453E-06,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="a281059e-644b-4bef-b1a9-2271419b70bc" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_18" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-6.99382213E-07,0,-16,0,0,8,0,0,1,0,-4.37113883E-08,0,-47.8744011,3.95630002,-24.0490208,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="3916024c-bf89-4c98-a3e0-b966fc2ef8b5" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>037d281e-dd3b-4951-98e0-4e109ae4e517</CHILD>
+    </INSTANCE>
+    <INSTANCE id="037d281e-dd3b-4951-98e0-4e109ae4e517" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000024,0,2.14576721E-06,0,-9.86076132E-32,1,9.94541556E-23,0,-8.38190317E-09,1.5539701E-24,1.00000024,0,0.00937128067,1.00135803E-05,-7.62939453E-06,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="7b83de22-4660-4707-b35c-a5fdfaed7163" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_19" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-6.99382213E-07,0,-16,0,0,8,0,0,1,0,-4.37113883E-08,0,-47.8744011,3.95630002,-40.033989,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="30d77538-1016-48dd-9a6c-ef0110ac8551" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>cfa55ddf-d80c-4f5e-93e9-657c33b8015e</CHILD>
+    </INSTANCE>
+    <INSTANCE id="cfa55ddf-d80c-4f5e-93e9-657c33b8015e" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000024,0,2.14576721E-06,0,-9.86076132E-32,1,9.94541556E-23,0,-8.38190317E-09,1.5539701E-24,1.00000024,0,0.00937116146,1.00135803E-05,-7.62939453E-06,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="d393d779-969f-4c7f-8b1e-9b338ba52801" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_20" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-16,0,1.39876443E-06,0,0,8,0,0,-8.74227766E-08,0,-1,0,39.8586197,3.95630002,47.6661453,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="48f0bd9a-8fb8-4035-86b7-a48ef12b9f79" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>a77a871a-9d6b-4075-bd24-47c421c85893</CHILD>
+    </INSTANCE>
+    <INSTANCE id="a77a871a-9d6b-4075-bd24-47c421c85893" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000119,-4.1361559E-15,-4.76837158E-07,0,4.79840014E-15,1.00000072,1.78814048E-07,0,0,9.31322575E-10,1.00000155,0,0.00937151909,1.17123127E-05,-1.14440918E-05,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="aec6f9c9-750b-4399-a804-a27e8c90231c" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_21" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-16,0,1.39876443E-06,0,0,8,0,0,-8.74227766E-08,0,-1,0,23.8587856,3.95630002,47.6661453,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="a5113620-783f-4e57-b023-41ff0738f44e" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>77a9ba7b-0e1f-46b6-9467-995755bbe68d</CHILD>
+    </INSTANCE>
+    <INSTANCE id="77a9ba7b-0e1f-46b6-9467-995755bbe68d" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000119,-4.1361559E-15,-4.76837158E-07,0,4.79840014E-15,1.00000072,1.78814048E-07,0,0,9.31322575E-10,1.00000155,0,0.00937151909,1.17123127E-05,-1.14440918E-05,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="beb08054-aee2-480c-a59e-f60a79f8cbf8" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_22" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-16,0,1.39876443E-06,0,0,8,0,0,-8.74227766E-08,0,-1,0,7.87442207,3.95630002,47.6661453,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="5a0974e0-a690-4237-8c78-8c31205d2498" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>748aa592-6f8f-4cff-8759-23c6bff5a836</CHILD>
+    </INSTANCE>
+    <INSTANCE id="748aa592-6f8f-4cff-8759-23c6bff5a836" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000119,-4.1361559E-15,-4.76837158E-07,0,4.79840014E-15,1.00000072,1.78814048E-07,0,0,9.31322575E-10,1.00000155,0,0.00937151909,1.17123127E-05,-1.14440918E-05,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="13687c6d-b8ad-4c37-8afa-a1c92d5a5375" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_23" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-16,0,1.39876443E-06,0,0,8,0,0,-8.74227766E-08,0,-1,0,-8.12541199,3.95630002,47.6661453,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="3ba38778-3ef2-4a91-bc8f-21f69cb948ee" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>b59dcf7d-0b3c-47cf-b79c-b49c6d1ab151</CHILD>
+    </INSTANCE>
+    <INSTANCE id="b59dcf7d-0b3c-47cf-b79c-b49c6d1ab151" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000119,-4.1361559E-15,-4.76837158E-07,0,4.79840014E-15,1.00000072,1.78814048E-07,0,0,9.31322575E-10,1.00000155,0,0.00937151909,1.17123127E-05,-1.14440918E-05,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="bed92cc8-53a1-47d7-bd23-fd0c1a716ccf" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_24" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-16,0,1.39876443E-06,0,0,8,0,0,-8.74227766E-08,0,-1,0,-24.0629025,3.95630002,47.6661453,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="aad6caf2-4719-4e74-b56a-8907caadb053" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>9be87375-983f-4cde-9aab-b081ec060540</CHILD>
+    </INSTANCE>
+    <INSTANCE id="9be87375-983f-4cde-9aab-b081ec060540" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000119,-4.1361559E-15,-4.76837158E-07,0,4.79840014E-15,1.00000072,1.78814048E-07,0,0,9.31322575E-10,1.00000155,0,0.00937151909,1.17123127E-05,-1.14440918E-05,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="f75a0ea1-b09e-401a-bc98-90c0f883ef0d" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_25" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-16,0,1.39876443E-06,0,0,8,0,0,-8.74227766E-08,0,-1,0,-40.0627365,3.95630002,47.6661453,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="b15cd7bd-0729-41a8-b941-4f2ca9dae8b3" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>a7a03678-3b2a-4faf-8c7a-e6258ecba225</CHILD>
+    </INSTANCE>
+    <INSTANCE id="a7a03678-3b2a-4faf-8c7a-e6258ecba225" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000119,-4.1361559E-15,-4.76837158E-07,0,4.79840014E-15,1.00000072,1.78814048E-07,0,0,9.31322575E-10,1.00000155,0,0.00937151909,1.17123127E-05,-1.14440918E-05,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="e04c40e5-fec7-4788-b0e4-82e467426861" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_26" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="16,0,0,0,0,8,0,0,0,0,1,0,-39.8480415,3.95630002,-47.8752594,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="cb8590d9-4066-4dd9-b710-8c0d33fbc9a6" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>adcf5cc9-11a3-4e31-b406-6ea4c71c0d28</CHILD>
+    </INSTANCE>
+    <INSTANCE id="adcf5cc9-11a3-4e31-b406-6ea4c71c0d28" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000036,-7.99360578E-15,0,0,6.66133815E-16,1.00000048,-1.27897692E-13,0,-4.65661287E-10,-1.11022302E-16,1.00000012,0,0.00937151909,1.02519989E-05,-3.81469727E-06,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="cfef4fef-81fd-43bb-96ce-64da6caef309" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_27" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="16,0,0,0,0,8,0,0,0,0,1,0,-23.8591404,3.95630002,-47.8752594,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="cc97811f-0fc9-44e7-a923-13384914f691" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>7cc8b0cf-f22c-4f16-bf4a-346daa09fa01</CHILD>
+    </INSTANCE>
+    <INSTANCE id="7cc8b0cf-f22c-4f16-bf4a-346daa09fa01" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000036,-7.99360578E-15,0,0,6.66133815E-16,1.00000048,-1.27897692E-13,0,-4.65661287E-10,-1.11022302E-16,1.00000012,0,0.00937151909,1.02519989E-05,-3.81469727E-06,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="4c26a56e-c39e-4afa-a902-fb720c11b7fd" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_28" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="16,0,0,0,0,8,0,0,0,0,1,0,-7.89154053,3.95630002,-47.8752594,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="7eeb3970-90a7-4994-a8f2-2b1145c01c65" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>0e83d506-9f4b-4690-8682-e51421057ab3</CHILD>
+    </INSTANCE>
+    <INSTANCE id="0e83d506-9f4b-4690-8682-e51421057ab3" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000036,-7.99360578E-15,0,0,6.66133815E-16,1.00000048,-1.27897692E-13,0,-4.65661287E-10,-1.11022302E-16,1.00000012,0,0.00937151909,1.02519989E-05,-3.81469727E-06,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="c293c7b0-fe1c-4e2c-8e71-2a1da78db419" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_29" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="16,0,0,0,0,8,0,0,0,0,1,0,8.09736061,3.95630002,-47.8752594,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="3894301e-0f6a-432f-a0d4-8d8f39e7f9b4" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>1c7832f9-eb64-404a-aec9-7b2d5a57973a</CHILD>
+    </INSTANCE>
+    <INSTANCE id="1c7832f9-eb64-404a-aec9-7b2d5a57973a" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000036,-7.99360578E-15,0,0,6.66133815E-16,1.00000048,-1.27897692E-13,0,-4.65661287E-10,-1.11022302E-16,1.00000012,0,0.00937151909,1.02519989E-05,-3.81469727E-06,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="e6626ff3-0164-4625-bd76-5f884238b783" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_30" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="16,0,0,0,0,8,0,0,0,0,1,0,24.1148453,3.95630002,-47.8752594,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="bb363777-b360-4c26-991e-d42b39c8b433" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>2a6b4e4c-395a-4d70-b4dd-b0f4b5ce738a</CHILD>
+    </INSTANCE>
+    <INSTANCE id="2a6b4e4c-395a-4d70-b4dd-b0f4b5ce738a" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000036,-7.99360578E-15,0,0,6.66133815E-16,1.00000048,-1.27897692E-13,0,-4.65661287E-10,-1.11022302E-16,1.00000012,0,0.00937151909,1.02519989E-05,-3.81469727E-06,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="592fb004-5e8b-4425-a1ad-b5e1623d28d9" name="PlaneModelPaintable_ThinCollisionSecondUVRigidBody_DAE_31" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="16,0,0,0,0,8,0,0,0,0,1,0,40.1037445,3.95630002,-47.8752594,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="2eb0d2ee-a76b-4682-bef7-e3e2bc4018f9" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>01a8675f-cc0e-424d-bbe3-b6f1cdfe793a</CHILD>
+    </INSTANCE>
+    <INSTANCE id="01a8675f-cc0e-424d-bbe3-b6f1cdfe793a" name="Plane001" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000036,-7.99360578E-15,0,0,6.66133815E-16,1.00000048,-1.27897692E-13,0,-4.65661287E-10,-1.11022302E-16,1.00000012,0,0.00937151909,1.02519989E-05,-3.81469727E-06,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="7a93c687-d2e2-461b-a9dc-329a805ffb8c" linkref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="0125dc35-1f14-42d6-82dd-97eaf9e10766" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-1.71659088,0.564060271,4.88640404,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="bf4455ee-c16d-4872-837b-e123be9dada4" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+        <PROPERTY name="scoreValue" typename="PInt32" value="820" />
+      </COMPONENTINSTANCE>
+      <CHILD>06b0389e-ea93-4599-8158-be87b1a724e4</CHILD>
+    </INSTANCE>
+    <INSTANCE id="06b0389e-ea93-4599-8158-be87b1a724e4" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.910454273,0,-0.413609743,0,0,1,0,0,0.413609743,0,0.910454273,0,-10.0390406,0,27.084116,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="c423bc17-1b75-44cb-a0d8-bb6f4b50bd37" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_0" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,5.49690008,1.88408017,-1.36699641,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="072211e1-f625-472e-a824-3742e1bbd692" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>56eb7b79-e36f-4863-94b9-ca42ef422d0c</CHILD>
+    </INSTANCE>
+    <INSTANCE id="56eb7b79-e36f-4863-94b9-ca42ef422d0c" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.8313784,0,0.555706739,0,0,1,0,0,-0.555706739,0,0.8313784,0,0,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="f3ae3131-f8bf-4b9a-845b-0e1c3083b5c5" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_1" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,5.49690008,1.88408017,13.6371975,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="21fc6fb7-c76b-4a71-aa20-f8a685fe6908" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>556d731b-4279-46cf-8a6f-c28603196dc8</CHILD>
+    </INSTANCE>
+    <INSTANCE id="556d731b-4279-46cf-8a6f-c28603196dc8" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.948868394,0,-0.315671951,0,0,1,0,0,0.315671951,0,0.948868394,0,0,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="f2b6e558-33e6-4391-9726-b333e7b03074" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_2" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,28.6978703,1.88408017,13.6371975,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="694936d7-ef4d-4ba2-beb2-13b850bf07ec" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>8bfad8f2-b2c4-430a-bf54-a5ea37af6ed3</CHILD>
+    </INSTANCE>
+    <INSTANCE id="8bfad8f2-b2c4-430a-bf54-a5ea37af6ed3" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="67dcfb52-26fe-407d-bcb0-aa98b91421ee" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_3" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,28.6978703,4.86038923,13.6371975,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="2ba1d6b3-e62c-45bb-8166-360e8c21307a" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>467b0af8-25f2-4535-a656-541fca2e9ed2</CHILD>
+    </INSTANCE>
+    <INSTANCE id="467b0af8-25f2-4535-a656-541fca2e9ed2" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="79e22c81-c53a-4b9d-95f9-0c0e7b7792c1" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_4" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,22.9144554,1.88408017,13.6371975,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="d1b11c0b-15f1-44ab-a943-901b887bea15" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>bbecc17c-7ba8-4716-8153-1daf3c0db784</CHILD>
+    </INSTANCE>
+    <INSTANCE id="bbecc17c-7ba8-4716-8153-1daf3c0db784" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-0.0621433258,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="0d2f537d-e6ec-4159-ae9e-5180bc6b965a" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_5" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,21.7026367,4.86038923,13.6371975,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="62719614-1ff4-4374-a1a0-5c5653ec4c81" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>2c8b6062-5e8d-4f35-a90b-c4f9cf361eef</CHILD>
+    </INSTANCE>
+    <INSTANCE id="2c8b6062-5e8d-4f35-a90b-c4f9cf361eef" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0.3390522,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="b5ad1359-4a1f-40c9-9d36-576422465f84" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_6" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,25.7517929,4.86038923,13.6371975,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="6116e14f-6ea3-4699-9344-3d77d8454093" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>57744ab1-dd93-457c-b382-5e2af6d7fcdd</CHILD>
+    </INSTANCE>
+    <INSTANCE id="57744ab1-dd93-457c-b382-5e2af6d7fcdd" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0.968940139,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="7e733b5e-8e9a-4ba8-ab83-ba6e49e80eeb" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_7" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,-2.67326975,1.88408017,-27.4522552,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="193edf1c-821c-4df0-8381-223075a422ec" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>f5391c78-c9e5-4f23-bcce-771f6cab9a28</CHILD>
+    </INSTANCE>
+    <INSTANCE id="f5391c78-c9e5-4f23-bcce-771f6cab9a28" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.774993539,0,0.631969333,0,0,1,0,0,-0.631969333,0,0.774993539,0,0,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="1a013395-bcb0-4f23-a365-cfe88b4e28aa" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_8" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,-27.3224659,1.88408017,-15.3454208,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="c0a158c4-9021-4a94-8d5c-6e2a3fe0bce3" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>28610a20-f958-445c-b29f-1f7c888a6d75</CHILD>
+    </INSTANCE>
+    <INSTANCE id="28610a20-f958-445c-b29f-1f7c888a6d75" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="89207bd1-72c0-48c7-96e5-d2e4509e7449" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_9" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,-27.3224659,1.88408017,-4.62443542,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="44d95e57-4b2b-481d-87c4-59137fa244d1" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>dcd3df99-1e6c-4643-b00e-b41ff9cdb545</CHILD>
+    </INSTANCE>
+    <INSTANCE id="dcd3df99-1e6c-4643-b00e-b41ff9cdb545" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="7e127e7b-df00-4654-bcd8-1366a5ca189e" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_10" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,-27.3224659,4.8365593,-4.62443542,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="0db5dc1f-2045-4e12-abd5-7759f704343f" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>8b682362-b42f-438a-a659-8ef81d271d7a</CHILD>
+    </INSTANCE>
+    <INSTANCE id="8b682362-b42f-438a-a659-8ef81d271d7a" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.77129209,0,0.636481345,0,0,1,0,0,-0.636481345,0,0.77129209,0,0,0,-0.500000119,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="dc451c44-bbaf-4d51-879a-9871922fb51f" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_11" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,-27.3224659,4.8365593,-15.3001394,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="d3c9f2f9-6986-4516-ba5d-3bdc7b98b7a2" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>3058cebf-8d54-4874-9742-838ab2ce9c17</CHILD>
+    </INSTANCE>
+    <INSTANCE id="3058cebf-8d54-4874-9742-838ab2ce9c17" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="e89b72b6-3943-48cb-984e-32e809f11bc5" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_12" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,-27.3224659,7.83281422,-15.3001394,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="428d3566-9c2d-49b6-bd55-f805356e8f28" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>a4e9753c-71cd-4ce6-8dde-9ba77c4f3d20</CHILD>
+    </INSTANCE>
+    <INSTANCE id="a4e9753c-71cd-4ce6-8dde-9ba77c4f3d20" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.891365647,0,-0.453284979,0,0,1,0,0,0.453284979,0,0.891365647,0,0,0,-0.500000477,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="52d05ba0-e946-4978-853b-74ba9e907d60" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_13" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="2.12922001,0,2.11339116,0,0,3,0,0,-2.11339116,0,2.12922001,0,-27.3224659,1.88408017,29.1239738,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="82e19f1b-b24b-4211-9139-5112d5166c63" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>f65486fc-dfdf-4fc0-b70b-3aab166a5cd0</CHILD>
+    </INSTANCE>
+    <INSTANCE id="f65486fc-dfdf-4fc0-b70b-3aab166a5cd0" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="104c9f35-6106-4ff1-8369-7fa0c4d0fb14" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_14" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,28.6978703,7.67212582,13.6371975,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="ba18745d-b4e8-424e-be93-1f5b79b46d30" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>230c7395-ceb3-475c-90af-8fa002844ad4</CHILD>
+    </INSTANCE>
+    <INSTANCE id="230c7395-ceb3-475c-90af-8fa002844ad4" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="7500dfd8-204a-4fd9-9fc3-690014b10c8c" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_15" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,3,0,0,0,0,3,0,21.7026367,7.77402878,13.6371975,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="ccaf5bcd-e021-4684-a594-4ca68fadb64c" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>1bfb0d24-bbfb-4d00-8e3c-d8dd14c4b1bd</CHILD>
+    </INSTANCE>
+    <INSTANCE id="1bfb0d24-bbfb-4d00-8e3c-d8dd14c4b1bd" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0.3390522,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="1a83e8d1-dfd0-4d0d-b3ad-30e4c12af1e1" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_16" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.77414846,0,2.41917276,0,0,3,0,0,-2.41917276,0,1.77414846,0,29.7191677,1.88408017,-29.7282906,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="c7b15b9a-b608-4a2f-b015-8882e4663654" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>580b1f51-cbd6-4b17-988b-8db064f52d55</CHILD>
+    </INSTANCE>
+    <INSTANCE id="580b1f51-cbd6-4b17-988b-8db064f52d55" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="d736382f-6d67-46af-a73b-e54fb1a9121a" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_17" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-0.999104083,0,2.82874393,0,0,3,0,0,-2.82874393,0,-0.999104083,0,26.2054977,1.88408017,36.9250717,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="f8a07529-c903-4638-af41-9cf6ace60f83" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>cd7918ac-b2ca-4db3-8478-be7667786135</CHILD>
+    </INSTANCE>
+    <INSTANCE id="cd7918ac-b2ca-4db3-8478-be7667786135" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,0,-0.5,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="1460b521-ab37-47ec-abfc-8971f16a5412" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_18" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-2.89744234,0,0.777708888,0,0,3,0,0,-0.777708888,0,-2.89744234,0,25.7995777,5.01747894,35.4127731,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="b0225c2c-e249-423f-8fd7-e6301131c712" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="512" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>04ac2351-22c1-4999-8a87-60970db4382c</CHILD>
+    </INSTANCE>
+    <INSTANCE id="04ac2351-22c1-4999-8a87-60970db4382c" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.00000012,0,-8.94069601E-08,0,0,0.999999881,0,0,8.94069601E-08,0,1.00000012,0,-0.431159586,0,-0.49999845,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="6b3ba47a-cfe1-45fa-93a5-61fd573f6df4" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_19" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-0.160550773,-1.40353222E-08,1.99354541,0,-0.000973759918,1.99999976,-7.84079602E-05,0,-3.98709035,-0.00195382303,-0.321101516,0,-16.4491997,1.88409996,39.9164009,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="981471b5-537b-487e-87f1-a85a5c5f39a0" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>75bdc9db-dbb3-4dff-ac9c-178758015dc0</CHILD>
+    </INSTANCE>
+    <INSTANCE id="75bdc9db-dbb3-4dff-ac9c-178758015dc0" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,-1.33226763E-15,-3.7252903E-09,0,4.4408921E-16,0.99999994,1.60149671E-14,0,0,-2.14273044E-14,1,0,3.81469727E-06,0,-0.500000715,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="05ef0675-5ae3-4944-bf45-de4527ebe505" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_20" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-0.160550773,-1.40353222E-08,1.99354541,0,-0.000973759918,1.99999976,-7.84079602E-05,0,-3.98709035,-0.00195382303,-0.321101516,0,-16.1824493,1.88409996,36.6041794,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="575f1342-5b72-46c7-a14c-aa7d18fa62cd" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>f155f84d-24dc-4c4c-b5ee-ee32a8aba048</CHILD>
+    </INSTANCE>
+    <INSTANCE id="f155f84d-24dc-4c4c-b5ee-ee32a8aba048" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,-1.33226763E-15,-3.7252903E-09,0,4.4408921E-16,0.99999994,1.60149671E-14,0,0,-2.14273044E-14,1,0,3.81469727E-06,0,-0.500000715,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="45b38195-5cf4-43a8-9563-d2c844e550ca" name="CubeModelPaintable_TexArrSecondUVRigidBody_DAE_21" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-0.160550773,-1.40353222E-08,1.99354541,0,-0.000973759918,1.99999976,-7.84079602E-05,0,-3.98709035,-0.00195382303,-0.321101516,0,-16.1834068,3.85163593,36.6040993,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="20c0acd0-0ba7-418a-b258-a34434e83ef3" name="PaintableMeshComponent" assetref="Paintable Mesh Component">
+        <PROPERTY name="paintmapTextureResolutionWidth" typename="PInt32" value="1024" />
+        <PROPERTY name="paintmapTextureResolutionHeight" typename="PInt32" value="512" />
+      </COMPONENTINSTANCE>
+      <CHILD>4b1e2061-56ca-4e79-a938-39be91a952d1</CHILD>
+    </INSTANCE>
+    <INSTANCE id="4b1e2061-56ca-4e79-a938-39be91a952d1" name="Box001" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,-1.33226763E-15,-3.7252903E-09,0,4.4408921E-16,0.99999994,1.60149671E-14,0,0,-2.14273044E-14,1,0,3.81469727E-06,0,-0.500000715,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_materialSet" typename="PMaterialSet">
+        <PROPERTY name="m_materials" typename="PSharray&lt;PMaterial *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+          <PROPERTY name="ELEMENT" typename="PMaterial" value="46bcc9c6-295d-4aa4-a82d-b72b2643e539" linkref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" />
+        </PROPERTY>
+      </PROPERTY>
+    </INSTANCE>
+  </INSTANCES>
+  <LAYERS />
+  <EDITORDATA>
+    <TARGET name="localHost" application="C:/Program Files (x86)/SCE/Engines/PhyreEngine31800/PhyreEngine/Tools/ThirdPersonGameTemplateD3D11DO_x64.exe" args="" workingdir=".." xst="PhyreLevelEditor.Core.TargetManagement.LocalTargetProperties">
+      <PLATFORM name="D3D11" />
+    </TARGET>
+    <TARGET name="PS4" application="C:/Program Files (x86)/SCE/Engines/PhyreEngine31800/PhyreEngine/Tools/ThirdPersonGameTemplateORBISDO.elf" args="" workingdir="" xst="OrbisTargetManager.OrbisTargetProperties">
+      <PLATFORM name="GNM" />
+    </TARGET>
+    <ASSETDEP />
+  </EDITORDATA>
+</LEVELFILE>

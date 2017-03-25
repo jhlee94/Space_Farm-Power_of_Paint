@@ -1,0 +1,128 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreShaderCommon.h"
+
+// A simple template shader without using Phyre's ubershader approach.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Global shader parameters.
+
+// Un-tweakables
+float4x4 World					: World;
+float4x4 WorldView				: WorldView;
+float4x4 WorldInverse			: WorldInverse;
+float4x4 WorldViewProjection	: WorldViewProjection;
+float4x4 WorldViewInverse		: WorldViewInverse;
+
+// Material Parameters
+float4 MaterialColor : MATERIALCOLOR = float4(1.0f,1.0f,1.0f,1.0f);
+float4 MaterialTransparency : MATERIALTRANSPARENCY = float4(1,1,1,1);
+float4 MaterialAmbient : MATERIALAMBIENT = float4(0,0,0,0);
+float4 MaterialEmission : MATERIALEMISSION = float4(0,0,0,0);
+float4 MaterialDiffuse : MATERIALDIFFUSE = float4(1,1,1,1);
+
+// Textures
+sampler2D TextureSampler = sampler_state
+{
+	MagFilter = Linear;
+	MinFilter = LinearMipmapLinear;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Structures
+struct VSInput
+{
+	float4 Position		: POSITION;
+	float4 Normal		: NORMAL0;
+	float4 Tangent		: TANGENT0;
+	float4 Binormal		: BINORMAL0;
+	float4 Uv			: TEXCOORD0;
+};
+
+struct VSOutput
+{
+	float4 Position		: POSITION;
+	float2 Uv			: TEXCOORD0;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Vertex shaders
+
+// Default forward render vertex shader
+VSOutput ForwardRenderVS(VSInput IN)
+{
+	VSOutput Out = (VSOutput)0;
+	float3 position = IN.Position.xyz;
+	Out.Position = mul(WorldViewProjection, float4(position.xyz,1));
+	Out.Uv = IN.Uv.xy;
+	return Out;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Fragment shaders.
+
+// Forward render fragment shader
+half4 ForwardRenderFP(VSOutput In) : FRAG_OUTPUT_COLOR0
+{
+	float4 shadingResult = MaterialColor;
+
+	float3 lightResult = 1;
+	lightResult *= MaterialDiffuse.xyz;
+	lightResult += MaterialAmbient.xyz;
+
+	half4 texValue = h4tex2D( TextureSampler, In.Uv );
+
+	float4 result = saturate(shadingResult + texValue);
+
+	result.xyz *= lightResult;
+	result.xyz += MaterialEmission.xyz;
+
+	result.a = MaterialTransparency.x;
+	
+	return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Techniques.
+technique ForwardRender
+<
+	string PhyreRenderPass = "Opaque";
+>
+{
+	pass pass0
+	{
+		DepthTestEnable = true;
+		DepthMask = true;
+		DepthFunc = LEqual;
+		BlendEnable = false;
+		ColorMask = bool4(true, true, true, true);
+		CullFaceEnable = false;
+		VertexProgram = compile vp40 ForwardRenderVS();
+		FragmentProgram = compile fp40 ForwardRenderFP();
+	}
+}
+
+technique ForwardRenderAlpha
+{
+	pass pass0
+	{		
+		DepthTestEnable = true;
+		DepthMask = true;
+		DepthFunc = LEqual;
+		BlendEnable = true;
+		BlendFunc = {srcAlpha,oneMinusSrcAlpha};
+		ColorMask = bool4(true,true,true,true);
+		CullFaceEnable = true;
+#ifndef MAX		
+		CullFace = back;
+#endif //! MAX
+		VertexProgram = compile vp40 ForwardRenderVS();
+		FragmentProgram = compile fp40 ForwardRenderFP();
+	}
+}

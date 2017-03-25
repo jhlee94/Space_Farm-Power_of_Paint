@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<COMPONENTFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="3/22/2017 3:51:16 PM" />
+  <ASSETBASE path=".." />
+  <ASSETS>
+    <FILE id="e9fb71bc-a256-4d57-bce5-678bbfd650dd" path="./Scripts/ResetCustomerTImerScript.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+  </ASSETS>
+  <COMPONENT id="ecdb6868-f140-4bba-bc64-8cf8f14f1010" assetref="ResetCharacterTimer" basephyretype="PTimerComponent">
+    <PROPERTY name="currentTrigger" typename="PTrigger" value="a9bd445d-1436-4c6d-8875-50bf1c2ba9bb" linkref="" isdynamicprop="True" />
+    <PROPERTY name="m_timeOut" typename="float" value="10" />
+    <PROPERTY name="m_script" typename="PScript" value="e9fb71bc-a256-4d57-bce5-678bbfd650dd" linkref="Scripts/ResetCustomerTImerScript.lua" />
+    <PROPERTY name="m_entryPoint" typename="PString" value="OnAlarm" />
+  </COMPONENT>
+</COMPONENTFILE>

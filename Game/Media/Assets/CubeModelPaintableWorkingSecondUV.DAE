@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>b1032464</author>
+      <authoring_tool>3dsMax 19 - Feeling ColladaMax v3.04C PhyreEngine(TM) 3.18.0.0.</authoring_tool>
+      <comments>ColladaMax Export Options: ExportNormals=1;ExportEPolyAsTriangles=1;ExportXRefs=1;ExportSelected=0;ExportTangents=1;ExportAnimations=0;SampleAnim=1;ExportAnimClip=0;BakeMatrices=0;ExportRelativePaths=1;AnimStart=0;AnimEnd=16000;</comments>
+      <source_data>file:///C:/Users/B1032464/Desktop/Model_Data/Cube_1m.max</source_data>
+    </contributor>
+    <created>2017-03-10T21:29:32Z</created>
+    <modified>2017-03-10T21:29:33Z</modified>
+    <unit meter="0.025399999693036" name="inch"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_materials>
+    <material id="ColorMaterial_B1941B00" name="ColorMaterial_B1941B00">
+      <instance_effect url="#ColorMaterial_B1941B00-fx"/>
+    </material>
+	<material id="colladafxShader1" name="colladafxShader1">
+      <instance_effect url="#colladafxShader1-fx">
+        <technique_hint platform="PC-OGL" ref="ForwardRender"/>
+        <setparam ref="colladafxShader1scene_EyePosition">
+          <float3>202.1836090087891 341.9742431640625 -562.3714599609375</float3>
+        </setparam>
+        <setparam ref="colladafxShader1scene_View">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1scene_Projection">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1scene_ViewProjection">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1scene_ViewInverse">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1scene_cameraNearFar">
+          <float2>0 0</float2>
+        </setparam>
+        <setparam ref="colladafxShader1scene_cameraNearTimesFar">
+          <float>0</float>
+        </setparam>
+        <setparam ref="colladafxShader1scene_cameraFarMinusNear">
+          <float>0</float>
+        </setparam>
+        <setparam ref="colladafxShader1scene_ViewportWidthHeight">
+          <float2>0 0</float2>
+        </setparam>
+        <setparam ref="colladafxShader1scene_screenWidthHeightInv">
+          <float2>0 0</float2>
+        </setparam>
+        <setparam ref="colladafxShader1scene_GlobalAmbientColor">
+          <half3>0 0 0</half3>
+        </setparam>
+        <setparam ref="colladafxShader1scene_Time">
+          <float>0</float>
+        </setparam>
+        <setparam ref="colladafxShader1World">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1WorldView">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1WorldInverse">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1WorldViewProjection">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1WorldViewInverse">
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </setparam>
+        <setparam ref="colladafxShader1MaterialColour">
+          <half4>1 1 1 1</half4>
+        </setparam>
+        <setparam ref="colladafxShader1MaterialDiffuse">
+          <half>1</half>
+        </setparam>
+        <setparam ref="colladafxShader1MaterialEmissiveness">
+          <half>0</half>
+        </setparam>
+        <setparam ref="colladafxShader1SoftDepthScale">
+          <half>0.89990234375</half>
+        </setparam>
+        <setparam ref="colladafxShader1LightmapUVScaleOffset">
+          <float4>1 1 0 0</float4>
+        </setparam>
+      </instance_effect>
+      <extra>
+        <technique profile="PHYRE">
+          <material_switches>
+            <MULTIPLE_UVS_ENABLED/>
+            <RECEIVE_SHADOWS/>
+            <LIGHTMAP_OCCLUSION/>
+          </material_switches>
+          <material_switch_list>
+            <material_switch name="LAYERED_TEXTURE_MODE_OVER_NONE_ENABLED" material_switch_value="0"/>
+            <material_switch name="MULTIPLE_UVS_ENABLED" material_switch_value="1"/>
+            <material_switch name="VERTEX_COLOR_ENABLED" material_switch_value="0"/>
+            <material_switch name="LIGHTING_ENABLED" material_switch_value="0"/>
+            <material_switch name="TEXTURE_ENABLED" material_switch_value="1"/>
+            <material_switch name="ALPHA_ENABLED" material_switch_value="0"/>
+            <material_switch name="NORMAL_MAPPING_ENABLED" material_switch_value="0"/>
+            <material_switch name="WRAP_DIFFUSE_LIGHTING" material_switch_value="0"/>
+            <material_switch name="SPECULAR_ENABLED" material_switch_value="0"/>
+            <material_switch name="CASTS_SHADOWS" material_switch_value="0"/>
+            <material_switch name="RECEIVE_SHADOWS" material_switch_value="1"/>
+            <material_switch name="DOUBLE_SIDED" material_switch_value="0"/>
+            <material_switch name="MOTION_BLUR_ENABLED" material_switch_value="0"/>
+            <material_switch name="GENERATE_LIGHTS" material_switch_value="0"/>
+            <material_switch name="CEL_ENABLED" material_switch_value="0"/>
+            <material_switch name="RENDER_AS_LOW_RES" material_switch_value="0"/>
+            <material_switch name="LIGHTMAP_OCCLUSION" material_switch_value="1"/>
+          </material_switch_list>
+        </technique>
+      </extra>
+    </material>	
+  </library_materials>
+  <library_effects>
+    <effect id="ColorMaterial_B1941B00-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0.6941176652908325 0.5803921818733215 0.105882354080677 1</color>
+            </ambient>
+            <diffuse>
+              <color>0.6941176652908325 0.5803921818733215 0.105882354080677 1</color>
+            </diffuse>
+            <specular>
+              <color>1 1 1 1</color>
+            </specular>
+            <shininess>
+              <float>10</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1</float>
+            </index_of_refraction>
+          </phong>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0.2000000029802322</float>
+              </spec_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+    </effect>
+	<effect id="colladafxShader1-fx">
+      <profile_CG platform="PC-OGL">
+        <include sid="include" url="../Shaders/PhyreDefaultLitShaderPainted.cgfx"/>
+        <newparam sid="colladafxShader1scene_EyePosition">
+          <annotate name="UIName">
+            <string>scene_EyePosition</string>
+          </annotate>
+          <annotate name="UIType">
+            <string>Color</string>
+          </annotate>
+          <semantic>EYEPOSITIONWS</semantic>
+          <float3>202.1836090087891 341.9742431640625 -562.3714599609375</float3>
+        </newparam>
+        <newparam sid="colladafxShader1scene_View">
+          <semantic>View</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1scene_Projection">
+          <semantic>Projection</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1scene_ViewProjection">
+          <semantic>ViewProjection</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1scene_ViewInverse">
+          <semantic>ViewInverse</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1scene_cameraNearFar">
+          <annotate name="UIName">
+            <string>scene_cameraNearFar</string>
+          </annotate>
+          <semantic>CAMERANEARFAR</semantic>
+          <float2>0 0</float2>
+        </newparam>
+        <newparam sid="colladafxShader1scene_cameraNearTimesFar">
+          <annotate name="UIName">
+            <string>scene_cameraNearTimesFar</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>1</float>
+          </annotate>
+          <semantic>CAMERANEARTIMESFAR</semantic>
+          <float>0</float>
+        </newparam>
+        <newparam sid="colladafxShader1scene_cameraFarMinusNear">
+          <annotate name="UIName">
+            <string>scene_cameraFarMinusNear</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>1</float>
+          </annotate>
+          <semantic>CAMERAFARMINUSNEAR</semantic>
+          <float>0</float>
+        </newparam>
+        <newparam sid="colladafxShader1scene_ViewportWidthHeight">
+          <annotate name="UIName">
+            <string>scene_ViewportWidthHeight</string>
+          </annotate>
+          <semantic>VIEWPORTWIDTHHEIGHT</semantic>
+          <float2>0 0</float2>
+        </newparam>
+        <newparam sid="colladafxShader1scene_screenWidthHeightInv">
+          <annotate name="UIName">
+            <string>scene_screenWidthHeightInv</string>
+          </annotate>
+          <semantic>SCREENWIDTHHEIGHTINV</semantic>
+          <float2>0 0</float2>
+        </newparam>
+        <newparam sid="colladafxShader1scene_GlobalAmbientColor">
+          <annotate name="UIName">
+            <string>scene_GlobalAmbientColor</string>
+          </annotate>
+          <annotate name="UIType">
+            <string>Color</string>
+          </annotate>
+          <semantic>GLOBALAMBIENTCOLOR</semantic>
+          <half3>0 0 0</half3>
+        </newparam>
+        <newparam sid="colladafxShader1scene_Time">
+          <annotate name="UIName">
+            <string>scene_Time</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>1</float>
+          </annotate>
+          <semantic>TIME</semantic>
+          <float>0</float>
+        </newparam>
+        <newparam sid="colladafxShader1World">
+          <semantic>World</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1WorldView">
+          <semantic>WorldView</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1WorldInverse">
+          <semantic>WorldInverse</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1WorldViewProjection">
+          <semantic>WorldViewProjection</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1WorldViewInverse">
+          <semantic>WorldViewInverse</semantic>
+          <float4x4>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float4x4>
+        </newparam>
+        <newparam sid="colladafxShader1MaterialColour">
+          <annotate name="UIName">
+            <string>MaterialColour</string>
+          </annotate>
+          <annotate name="UIType">
+            <string>Color</string>
+          </annotate>
+          <semantic>MATERIALCOLOUR</semantic>
+          <half4>1 1 1 1</half4>
+        </newparam>
+        <newparam sid="colladafxShader1MaterialDiffuse">
+          <annotate name="UIName">
+            <string>MaterialDiffuse</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>1</float>
+          </annotate>
+          <semantic>MATERIALDIFFUSE</semantic>
+          <half>1</half>
+        </newparam>
+        <newparam sid="colladafxShader1MaterialEmissiveness">
+          <annotate name="UIName">
+            <string>MaterialEmissiveness</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>1</float>
+          </annotate>
+          <semantic>MATERIALEMISSIVENESS</semantic>
+          <half>0</half>
+        </newparam>
+        <newparam sid="colladafxShader1SoftDepthScale">
+          <annotate name="UIName">
+            <string>SoftDepthScale</string>
+          </annotate>
+          <annotate name="UIMin">
+            <float>0.0000999999974737</float>
+          </annotate>
+          <annotate name="UIMax">
+            <float>1</float>
+          </annotate>
+          <half>0.89990234375</half>
+        </newparam>
+        <newparam sid="colladafxShader1LightmapUVScaleOffset">
+          <annotate name="UIName">
+            <string>LightmapUVScaleOffset</string>
+          </annotate>
+          <annotate name="UIType">
+            <string>Color</string>
+          </annotate>
+          <float4>1 1 0 0</float4>
+        </newparam>
+        <technique sid="ForwardRender">
+          <pass sid="colladafxShader1">
+            <depth_test_enable value="1"/>
+            <depth_func value="LEQUAL"/>
+            <depth_mask value="1"/>
+            <blend_enable value="0"/>
+            <color_mask value="1 1 1 1"/>
+            <cull_face_enable value="1"/>
+            <cull_face value="BACK"/>
+            <shader stage="VERTEX">
+              <compiler_target>vp40</compiler_target>
+              <name source="include">DefaultForwardRenderVS</name>
+              <bind symbol="DitherNoiseTexture">
+                <param ref="colladafxShader1DitherNoiseTexture"/>
+              </bind>
+              <bind symbol="LowResDepthTexture">
+                <param ref="colladafxShader1LowResDepthTexture"/>
+              </bind>
+              <bind symbol="scene_EyePosition">
+                <param ref="colladafxShader1scene_EyePosition"/>
+              </bind>
+              <bind symbol="scene_View">
+                <param ref="colladafxShader1scene_View"/>
+              </bind>
+              <bind symbol="scene_Projection">
+                <param ref="colladafxShader1scene_Projection"/>
+              </bind>
+              <bind symbol="scene_ViewProjection">
+                <param ref="colladafxShader1scene_ViewProjection"/>
+              </bind>
+              <bind symbol="scene_ViewInverse">
+                <param ref="colladafxShader1scene_ViewInverse"/>
+              </bind>
+              <bind symbol="scene_cameraNearFar">
+                <param ref="colladafxShader1scene_cameraNearFar"/>
+              </bind>
+              <bind symbol="scene_cameraNearTimesFar">
+                <param ref="colladafxShader1scene_cameraNearTimesFar"/>
+              </bind>
+              <bind symbol="scene_cameraFarMinusNear">
+                <param ref="colladafxShader1scene_cameraFarMinusNear"/>
+              </bind>
+              <bind symbol="scene_ViewportWidthHeight">
+                <param ref="colladafxShader1scene_ViewportWidthHeight"/>
+              </bind>
+              <bind symbol="scene_screenWidthHeightInv">
+                <param ref="colladafxShader1scene_screenWidthHeightInv"/>
+              </bind>
+              <bind symbol="scene_GlobalAmbientColor">
+                <param ref="colladafxShader1scene_GlobalAmbientColor"/>
+              </bind>
+              <bind symbol="scene_Time">
+                <param ref="colladafxShader1scene_Time"/>
+              </bind>
+              <bind symbol="World">
+                <param ref="colladafxShader1World"/>
+              </bind>
+              <bind symbol="WorldView">
+                <param ref="colladafxShader1WorldView"/>
+              </bind>
+              <bind symbol="WorldInverse">
+                <param ref="colladafxShader1WorldInverse"/>
+              </bind>
+              <bind symbol="WorldViewProjection">
+                <param ref="colladafxShader1WorldViewProjection"/>
+              </bind>
+              <bind symbol="WorldViewInverse">
+                <param ref="colladafxShader1WorldViewInverse"/>
+              </bind>
+              <bind symbol="MaterialColour">
+                <param ref="colladafxShader1MaterialColour"/>
+              </bind>
+              <bind symbol="MaterialDiffuse">
+                <param ref="colladafxShader1MaterialDiffuse"/>
+              </bind>
+              <bind symbol="MaterialEmissiveness">
+                <param ref="colladafxShader1MaterialEmissiveness"/>
+              </bind>
+              <bind symbol="SoftDepthScale">
+                <param ref="colladafxShader1SoftDepthScale"/>
+              </bind>
+              <bind symbol="LightmapSampler">
+                <param ref="colladafxShader1LightmapSampler"/>
+              </bind>
+              <bind symbol="LightmapUVScaleOffset">
+                <param ref="colladafxShader1LightmapUVScaleOffset"/>
+              </bind>
+            </shader>
+          </pass>
+        </technique>
+      </profile_CG>
+      <extra>
+        <technique profile="PHYRE">
+          <context_switches>
+            <context_switch name="NUM_LIGHTS"/>
+            <context_switch name="LOD_BLEND"/>
+            <context_switch name="INSTANCING_ENABLED"/>
+            <context_switch name="SHADER_LOD_LEVEL"/>
+            <context_switch name="LOW_RES_PARTICLES"/>
+            <supported_lights max_light_count="3">
+              <supported_light_type>DirectionalLight</supported_light_type>
+              <supported_light_type>PointLight</supported_light_type>
+              <supported_light_type>SpotLight</supported_light_type>
+            </supported_lights>
+            <supported_shadows>
+              <supported_shadow_type>PCFShadowMap</supported_shadow_type>
+              <supported_shadow_type>CascadedShadowMap</supported_shadow_type>
+              <supported_shadow_type>CombinedCascadedShadowMap</supported_shadow_type>
+            </supported_shadows>
+          </context_switches>
+        </technique>
+      </extra>
+    </effect>	
+  </library_effects>
+  <library_geometries>
+    <geometry id="Box001-mesh" name="Box001">
+      <mesh>
+        <source id="Box001-mesh-positions">
+          <float_array id="Box001-mesh-positions-array" count="24">-0.5 -0.5 0 0.5 -0.5 0 -0.5 0.5 0 0.5 0.5 0 -0.5 -0.5 1 0.5 -0.5 1 -0.5 0.5 1 0.5 0.5 1</float_array>
+          <technique_common>
+            <accessor source="#Box001-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Box001-mesh-normals">
+          <float_array id="Box001-mesh-normals-array" count="72">0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0</float_array>
+          <technique_common>
+            <accessor source="#Box001-mesh-normals-array" count="24" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Box001-mesh-map-channel1">
+          <float_array id="Box001-mesh-map-channel1-array" count="36">0 0 0 1 0 0 0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 1 1 0</float_array>
+          <technique_common>
+            <accessor source="#Box001-mesh-map-channel1-array" count="12" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Box001-mesh-map-channel2">
+          <float_array id="Box001-mesh-map-channel2-array" count="72">0.6701205968856812 0.0199999995529651 0 0.9799999594688416 0.0199999995529651 0 0.6701205968856812 0.3298794031143189 0 0.9799999594688416 0.3298794031143189 0 0.0199999995529651 0.0199999995529651 0 0.3298794031143189 0.0199999995529651 0 0.0199999995529651 0.3298794031143189 0 0.3298794031143189 0.3298794031143189 0 0.0199999995529651 0.3450603187084198 0 0.3298794031143189 0.3450603187084198 0 0.0199999995529651 0.6549397110939026 0 0.3298794031143189 0.6549397110939026 0 0.6549397110939026 0.3298794031143189 0 0.3450603187084198 0.3298794031143189 0 0.6549397110939026 0.0200000088661909 0 0.3450603187084198 0.0199999995529651 0 0.0199999995529651 0.6701205968856812 0 0.3298794031143189 0.6701205968856812 0 0.0199999995529651 0.9799999594688416 0 0.3298794031143189 0.9799999594688416 0 0.3450603187084198 0.3450603187084198 0 0.6549397110939026 0.3450603187084198 0 0.3450603187084198 0.6549397110939026 0 0.6549397110939026 0.6549397110939026 0</float_array>
+          <technique_common>
+            <accessor source="#Box001-mesh-map-channel2-array" count="24" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Box001-mesh-map-channel1-tangents">
+          <float_array id="Box001-mesh-map-channel1-tangents-array" count="72">-1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0</float_array>
+          <technique_common>
+            <accessor source="#Box001-mesh-map-channel1-tangents-array" count="24" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Box001-mesh-map-channel1-binormals">
+          <float_array id="Box001-mesh-map-channel1-binormals-array" count="72">0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#Box001-mesh-map-channel1-binormals-array" count="24" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Box001-mesh-map-channel2-tangents">
+          <float_array id="Box001-mesh-map-channel2-tangents-array" count="72">-1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 0 1 0 0 1 0 0 1 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#Box001-mesh-map-channel2-tangents-array" count="24" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Box001-mesh-map-channel2-binormals">
+          <float_array id="Box001-mesh-map-channel2-binormals-array" count="72">0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1</float_array>
+          <technique_common>
+            <accessor source="#Box001-mesh-map-channel2-binormals-array" count="24" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Box001-mesh-vertices">
+          <input semantic="POSITION" source="#Box001-mesh-positions"/>
+        </vertices>
+        <triangles material="colladafxShader1" count="12">
+          <input semantic="VERTEX" source="#Box001-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Box001-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Box001-mesh-map-channel1" offset="2" set="1"/>
+          <input semantic="TEXCOORD" source="#Box001-mesh-map-channel2" offset="3" set="2"/>
+          <input semantic="TEXTANGENT" source="#Box001-mesh-map-channel1-tangents" offset="4" set="1"/>
+          <input semantic="TEXBINORMAL" source="#Box001-mesh-map-channel1-binormals" offset="5" set="1"/>
+          <input semantic="TEXTANGENT" source="#Box001-mesh-map-channel2-tangents" offset="6" set="2"/>
+          <input semantic="TEXBINORMAL" source="#Box001-mesh-map-channel2-binormals" offset="7" set="2"/>
+          <p>0 0 9 9 0 0 0 0 2 1 11 11 1 1 1 1 3 2 10 10 2 2 2 2 3 2 10 10 2 2 2 2 1 3 8 8 3 3 3 3 0 0 9 9 0 0 0 0 4 4 8 20 4 4 4 4 5 5 9 21 5 5 5 5 7 6 11 23 6 6 6 6 7 6 11 23 6 6 6 6 6 7 10 22 7 7 7 7 4 4 8 20 4 4 4 4 0 8 4 16 8 8 8 8 1 9 5 17 9 9 9 9 5 10 7 19 10 10 10 10 5 10 7 19 10 10 10 10 4 11 6 18 11 11 11 11 0 8 4 16 8 8 8 8 1 12 0 0 12 12 12 12 3 13 1 1 13 13 13 13 7 14 3 3 14 14 14 14 7 14 3 3 14 14 14 14 5 15 2 2 15 15 15 15 1 12 0 0 12 12 12 12 3 16 4 4 16 16 16 16 2 17 5 5 17 17 17 17 6 18 7 7 18 18 18 18 6 18 7 7 18 18 18 18 7 19 6 6 19 19 19 19 3 16 4 4 16 16 16 16 2 20 0 12 20 20 20 20 0 21 1 13 21 21 21 21 4 22 3 15 22 22 22 22 4 22 3 15 22 22 22 22 6 23 2 14 23 23 23 23 2 20 0 12 20 20 20 20</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Cube_1m.max" name="Cube_1m_max">
+      <node id="Box001" name="Box001" type="NODE">
+        <translate>0 0 -0.5</translate>
+        <instance_geometry url="#Box001-mesh">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="colladafxShader1" target="#colladafxShader1">
+				  <bind_vertex_input semantic="TEXCOORD0" input_semantic="TEXCOORD" input_set="1">
+					  <extra>
+						<technique profile="PSSG">
+						  <param name="IN.Uv"/>
+						</technique>
+					  </extra>
+					</bind_vertex_input>
+					<bind_vertex_input semantic="TEXCOORD2" input_semantic="TEXCOORD" input_set="2">
+					  <extra>
+						<technique profile="PSSG">
+						  <param name="IN.Uv1"/>
+						</technique>
+					  </extra>
+					</bind_vertex_input>
+				</instance_material>
+            </technique_common>
+          </bind_material>
+          <extra>
+            <technique profile="PHYRE">
+              <object_render_properties castsShadows="1" receiveShadows="1" visibleInReflections="1" visibleInRefractions="1" motionBlurEnabled="0"/>
+            </technique>
+          </extra>
+        </instance_geometry>
+        <extra>
+          <technique profile="FCOLLADA">
+            <dynamic_attributes>
+              <mr_DisplacementUseGlobalSettings type="bool">1</mr_DisplacementUseGlobalSettings>
+              <mr_ViewDependentDisplacement type="bool">1</mr_ViewDependentDisplacement>
+              <mr_DisplacementMethod type="int">0</mr_DisplacementMethod>
+              <mr_Smoothing type="bool">1</mr_Smoothing>
+              <mr_DisplacementMaxLevel type="int">6</mr_DisplacementMaxLevel>
+              <mr_DisplacementEdgeLength type="float">2</mr_DisplacementEdgeLength>
+              <mr_MaxDisplace type="float">20</mr_MaxDisplace>
+              <mr_ParametricSubdivisionLevel type="int">5</mr_ParametricSubdivisionLevel>
+            </dynamic_attributes>
+          </technique>
+        </extra>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0</start_time>
+          <end_time>3.333333492279053</end_time>
+        </technique>
+      </extra>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30</frame_rate>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Cube_1m.max"/>
+  </scene>
+</COLLADA>

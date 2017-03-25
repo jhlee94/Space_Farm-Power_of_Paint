@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<LEVELFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="3/23/2017 5:05:16 PM" />
+  <ASSETBASE path=".." />
+  <ASSETS>
+    <FILE id="690173c8-5b72-4d62-b6f9-a29b054a1ee1" path="./Scripts/DefaultCameraController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="4a1d7ddd-e76b-4592-b177-bfe5d2efbb91" path="./Scripts/PhysicsCharacterController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="bc2b662b-2d84-4c41-a41c-15461f57e50c" path="./Scripts/CustomCameraController_1.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="366fa294-873c-4727-b243-2783d390d91b" path="./Scripts/TriggerSpeed.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="b90f0a08-a241-461a-8366-1a507886f3f1" path="./Scripts/CustomCameraController_2.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="3a4ffcd9-329e-4544-9342-bc0a3a85e39c" path="./Scripts/PhysicsCharacterController_1.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="d02d2473-0d50-4cae-a1c7-86ee4ffbb2f0" path="./Scripts/PhysicsCharacterController_2.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="df22843f-af77-4758-96c3-342c237efe98" path="./Scripts/CustomCameraController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="88d393f3-0a04-45c1-9291-5043aa873669" path="./Scripts/PickupSpawner.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="05bb7e51-8e6b-4b2f-ad94-265f6a31d283" path="./Scripts/Helpers.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="63502a19-2f4e-4471-bf47-bf256a801ce9" path="./Scripts/Trace.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="db295547-5c13-421f-97a8-0231ff97358d" path="./Scripts/DefaultTimer.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="7a754259-26ee-441e-9d64-3eb6b97f4580" path="./Scripts/CurrentCharacterHolder.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="65ed0ba9-a1a9-4d4c-bfd2-a8b96b8896f2" path="./TriggerJump.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+  </ASSETS>
+  <INSTANCES />
+  <LAYERS />
+  <EDITORDATA>
+    <TARGET name="localHost" application="C:/Program Files (x86)/SCE/Engines/PhyreEngine31800/PhyreEngine/Tools/ThirdPersonGameTemplateD3D11DO_x64.exe" args="" workingdir=".." xst="PhyreLevelEditor.Core.TargetManagement.LocalTargetProperties">
+      <PLATFORM name="D3D11" />
+    </TARGET>
+    <TARGET name="PS4" application="C:/Program Files (x86)/SCE/Engines/PhyreEngine31800/PhyreEngine/Tools/ThirdPersonGameTemplateORBISDO.elf" args="" workingdir="" xst="OrbisTargetManager.OrbisTargetProperties">
+      <PLATFORM name="GNM" />
+    </TARGET>
+    <ASSETDEP />
+  </EDITORDATA>
+</LEVELFILE>

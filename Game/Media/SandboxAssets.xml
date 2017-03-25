@@ -1,0 +1,16 @@
+<assets>
+  <node shared="true" db="./Sandbox">
+    <asset source="./Levels/Level2.plv"/>
+    <asset source="./Models/floater_bot.dae"/>
+    <asset source="./Shaders/PhyreText.cgfx"/>
+    <asset source="./Textures/tuffy.fgen"/>
+    <asset source="./Textures/neuropol.fgen"/>
+    <asset source="./Textures/heyDings.fgen"/>
+    <asset source="./Textures/UIFont.fgen"/>
+    <asset source="./Textures/bubbles.fgen"/>
+    <asset source="./Audio/PhyreAudioSample.agx"/>
+    <asset source="./Models/menu_start_dot.dae"/>
+    <asset source="./Models/menu_animations.agx"/>
+    <asset source="./Models/MenuScreen.cgfx"/>
+  </node>
+</assets>

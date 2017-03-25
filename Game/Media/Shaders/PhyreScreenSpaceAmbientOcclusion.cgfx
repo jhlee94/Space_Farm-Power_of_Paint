@@ -1,0 +1,320 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+
+float4x4	Projection				: Projection;	
+
+sampler2D DepthBuffer;
+sampler2D ColorBuffer;
+sampler2D SSAOBuffer;
+sampler2D BlurBuffer;
+sampler2D NormalBuffer;
+half2 InvProjXY;
+
+
+///////////////////////////////////////////////////////////////
+// structures /////////////////////
+///////////////////////////////////////////////////////////////
+
+struct FullscreenVertexIn
+{
+	float3 vertex		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct FullscreenVertexOut
+{
+	float4 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+	half3 screenPos		: TEXCOORD3;
+};
+struct FullscreenFragIn
+{
+	float2	uv			: TEXCOORD0;
+	half3 screenPos		: TEXCOORD3;
+};
+
+FullscreenVertexOut FullscreenVP(FullscreenVertexIn input)
+{
+	FullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.uv = input.uv;
+
+	output.screenPos.z = 1.0;
+	output.screenPos.xy = output.uv * 2.0 - 1.0;
+	output.screenPos.xy *= InvProjXY;
+	
+	return output;
+}
+
+
+// Convert a depth value from post projection space to view space(values are z>0). 
+float ConvertDepth(float depth)
+{	
+	float viewSpaceZ = (scene.cameraNearTimesFar / (depth * scene.cameraFarMinusNear - scene.cameraNearFar.y));
+	return viewSpaceZ;
+}
+
+// Combine SAO information with color informatio.
+float4 ApplySSAOFP(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{
+	half4 colorValue = h4tex2D(ColorBuffer, input.uv);
+
+#ifndef __SCE_CGC__
+	half4 ssaoValue = h4tex2D(SSAOBuffer, input.uv);
+	return colorValue *ssaoValue.r;
+#else //! __SCE_CGC__
+
+	float2 dxy = scene.screenWidthHeightInv * 2.0f;
+
+	half4 ssaoValue0 = h4tex2D(SSAOBuffer, input.uv + float2(-dxy.x, 0.0f));
+	half4 ssaoValue1 = h4tex2D(SSAOBuffer, input.uv + float2( dxy.x, 0.0f));
+	half4 ssaoValue2 = h4tex2D(SSAOBuffer, input.uv + float2( 0.0f,-dxy.y));
+	half4 ssaoValue3 = h4tex2D(SSAOBuffer, input.uv + float2( 0.0f, dxy.y));
+	half4 ssaoValue = h4tex2D(SSAOBuffer, input.uv);
+
+	ssaoValue = (ssaoValue*0.4f) + (ssaoValue0+ssaoValue1+ssaoValue2+ssaoValue3)*0.25f*0.6f;
+
+	return colorValue * ssaoValue.w;
+#endif //! __SCE_CGC__
+}
+
+// Render only the ssao texture.
+float4 OnlySSAOFP(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{	
+	half4 ssaoValue = h4tex2D(SSAOBuffer, input.uv);
+#ifndef __SCE_CGC__
+	return float4(ssaoValue.r, ssaoValue.r, ssaoValue.r, 1);
+#else //! __SCE_CGC__
+	return float4(ssaoValue.w, ssaoValue.w, ssaoValue.w, 1);
+#endif //! __SCE_CGC__
+}
+
+// Copy buffer shader.
+half4 CopyBufferFP(FullscreenFragIn input) : FRAG_OUTPUT_COLOR0
+{
+	return h4tex2D(ColorBuffer,input.uv);
+}
+
+// Copy buffer shader with Y filp.
+half4 CopyBufferFlipFP(FullscreenFragIn input) : FRAG_OUTPUT_COLOR0
+{
+	input.uv.y = 1 - input.uv.y;
+	return h4tex2D(ColorBuffer,input.uv);
+}
+
+// Reconstructs the view position. Note that depth > 0.
+float3 getPosition(float depth, float3 pos)
+{
+  float2 viewPos = -(pos.xy * depth);
+  return float3(viewPos,depth);
+}
+
+// Reconstructs the normal from the depth buffer.
+float3 getNormal(float3 origin)
+{
+  return normalize(cross(ddx(origin), ddy(origin)));
+}
+
+// A hash function to get pseudo randomized values.
+float3 hash31(float p)
+{
+	float3 p2 = frac(p * float3(5.3983, 5.4427, 6.9371));
+    p2 += dot(p2.yzx, p2.xyz + float3(21.5351, 14.3137, 15.3219));
+	return frac(float3(p2.x * p2.z * 95.4337, p2.x * p2.y * 97.597, p2.y * p2.z * 93.8365));
+}
+
+// Used for packing float Z into the 2x8bit GB channels
+float CSZToKey(float z) {
+	return clamp(-z * (1.0 / scene.cameraNearFar.y), 0.0, 1.0);  
+}
+
+// Used for packing float Z into the 2x8bit GB channels
+void packKey(float key, out float2 p) {
+	// Round to the nearest 1/256.0
+	float temp = floor(key * 256.0);
+
+	// Integer part
+	p.x = temp * (1.0 / 256.0);
+
+	// Fractional part
+	p.y = key * 256.0 - temp;
+}
+
+// The sample radius in view space.
+float uRadius = 10.11f;
+// A depth bias to improve SSAO results.
+float depthBias = 0.0f;
+
+// Calculate ambient occlution values using techique described at 
+// http://john-chapman-graphics.blogspot.co.uk/2013/01/ssao-tutorial.html
+float4 getSAOValues(float3 origin, float3 normal, float2 uv, float depth)
+{
+	float4 outColour;
+	outColour.w = 1.0;
+
+#ifndef __psp2__
+    const int kernelSize = 16;
+#else
+	 const int kernelSize = 4;
+#endif
+	float index = depth;  // used as random seed.
+
+	packKey(CSZToKey(origin.z), outColour.gb);
+
+	// Create tangent, bintangent, normal matrix
+	float2 rand = hash31(uv.x).xy * 2.0f - 1.0f;
+	float3 rvec =  normalize(float3(rand+0.0001f, 0.0f));   
+	float3 tangent = normalize(rvec - normal * dot(rvec, normal));
+	float3 bitangent = cross(normal, tangent);
+	float3x3 tbn = float3x3(tangent, bitangent, normal);
+
+    float occlusion = 0.0;
+    for (int i = 0; i < kernelSize; ++i) 
+    { 
+	   // create a sample kernel
+	   float3 kernel = hash31(index);
+	   kernel.xy = 2*kernel.xy - 1;
+	   kernel = normalize(kernel);
+	  
+	   float3 test = hash31(index+500.0f);  
+	   kernel *=  test.x;
+
+	   float scale = float(i) / float(kernelSize);
+	   scale = lerp(0.1f, 1.0f, scale * scale); 
+	   kernel *= scale;
+	   index +=1.0f;
+		
+	   // get sample position:
+	   float3 sample = mul(kernel,tbn);
+	   sample = sample * uRadius + origin;
+
+	   // project sample position:
+	   float4 offset = float4(sample, 1.0);
+	   offset = mul(Projection, offset);
+	   offset.xy /= offset.w;
+	   offset.xy = offset.xy * 0.5 + 0.5;
+	   float sampleDepth = ConvertDepth(tex2D(DepthBuffer,offset.xy).r);
+
+	   // range check & accumulate:
+	   float rangeCheck = abs(depth - sampleDepth) < uRadius ? 1.0 : 0.0;
+	   occlusion += (sampleDepth <= depth+depthBias ? 0.0 : 1.0) * rangeCheck;
+    }
+
+    float ao = (1.0 - (occlusion / kernelSize));
+	
+	outColour.r = ao;
+	return outColour;
+}
+
+float4 GenerateAO(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{
+	float depth = ConvertDepth(tex2D(DepthBuffer,input.uv).r);
+
+	float3 origin =  getPosition(depth, input.screenPos);
+	float3 normal = getNormal(origin);
+
+	return getSAOValues(origin, normal, input.uv, depth);
+}
+
+float4 GenerateAOWithNormalBuffer(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{
+	float depth = ConvertDepth(tex2D(DepthBuffer,input.uv).r);
+	
+	float3 origin =  getPosition(depth, input.screenPos);
+
+	float4 normalMapValue = tex2D(NormalBuffer, input.uv);
+	float2 normalMapNormalXY = normalMapValue.xy * 2.0f - 1.0f;
+	float3 viewSpaceNormal = half3(normalMapNormalXY, sqrt(1.0f - dot(normalMapNormalXY.xy, normalMapNormalXY.xy)));	
+
+	return getSAOValues(origin, viewSpaceNormal.xyz, input.uv, depth);
+}
+
+technique GenerateSSA0
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullscreenVP();
+		FragmentProgram = compile fp40 GenerateAO();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}
+
+technique GenerateNormalBufferSSA0
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullscreenVP();
+		FragmentProgram = compile fp40 GenerateAOWithNormalBuffer();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}
+
+technique ApplySSAO
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 ApplySSAOFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}
+
+technique OnlySSAO
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 OnlySSAOFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}
+
+technique CopyBuffer
+{
+	pass p1
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 CopyBufferFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+	}
+}
+
+technique CopyColorBuffer
+{
+	pass p1
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 CopyBufferFlipFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+	}
+}
+
+// Use same blur as in PS4/D3D case.
+#include "ScalableAmbientObscurance/PhyreScalableAmbientObscuranceBlur.cgfx"

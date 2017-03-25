@@ -1,0 +1,398 @@
+<?xml version="1.0"?>
+<GAMECONFIGFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="2/20/2017 1:36:10 PM" />
+  <ASSETBASE path="." />
+  <ASSETS />
+  <GAMECONFIG id="bf13691d-a23b-4451-976a-bdbf53b5d9fe" assetref="Levels.pconf">
+    <PROPERTY name="m_inputMap" typename="PInputMap">
+      <PROPERTY name="m_inputActions" typename="PArray&lt;PInputAction *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="TOGGLE_IMGUI" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_Y" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceJoypadButton">
+              <PROPERTY name="m_positiveButtonSemantic" typename="PInputJoypadButtonSemantic" value="Button_Start" />
+              <PROPERTY name="m_negativeButtonSemantic" typename="PInputJoypadButtonSemantic" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="JoypadButton" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="PHYSICS_DEBUG" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_D" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="SWITCH_CAMERA" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_C" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceJoypadButton">
+              <PROPERTY name="m_positiveButtonSemantic" typename="PInputJoypadButtonSemantic" value="Button_Square" />
+              <PROPERTY name="m_negativeButtonSemantic" typename="PInputJoypadButtonSemantic" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="JoypadButton" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="FORWARD2" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_Up" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Key_Down" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceJoypadAxis">
+              <PROPERTY name="m_joypadAxisSemantic" typename="PInputAxisSemantic" value="YAxis_0" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="JoypadAxis" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="RIGHT2" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_Right" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Key_Left" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceJoypadAxis">
+              <PROPERTY name="m_joypadAxisSemantic" typename="PInputAxisSemantic" value="XAxis_0" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="JoypadAxis" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="UP2" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_W" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Key_S" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceJoypadButton">
+              <PROPERTY name="m_positiveButtonSemantic" typename="PInputJoypadButtonSemantic" value="Button_R1" />
+              <PROPERTY name="m_negativeButtonSemantic" typename="PInputJoypadButtonSemantic" value="Button_L1" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="JoypadButton" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="ROTATE X2" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_I" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Key_K" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_Up" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Key_Down" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceJoypadAxis">
+              <PROPERTY name="m_joypadAxisSemantic" typename="PInputAxisSemantic" value="YAxis_1" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="JoypadAxis" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceJoypadAxis">
+              <PROPERTY name="m_joypadAxisSemantic" typename="PInputAxisSemantic" value="YAxis_0" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="JoypadAxis" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="ROTATE Y2" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_P" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Key_O" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_Right" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Key_Left" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceJoypadAxis">
+              <PROPERTY name="m_joypadAxisSemantic" typename="PInputAxisSemantic" value="XAxis_1" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="JoypadAxis" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceJoypadAxis">
+              <PROPERTY name="m_joypadAxisSemantic" typename="PInputAxisSemantic" value="XAxis_0" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="JoypadAxis" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="JUMP2" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_J" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceJoypadButton">
+              <PROPERTY name="m_positiveButtonSemantic" typename="PInputJoypadButtonSemantic" value="Button_Cross" />
+              <PROPERTY name="m_negativeButtonSemantic" typename="PInputJoypadButtonSemantic" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="JoypadButton" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="RESET2" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_Space" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceJoypadButton">
+              <PROPERTY name="m_positiveButtonSemantic" typename="PInputJoypadButtonSemantic" value="Button_Circle" />
+              <PROPERTY name="m_negativeButtonSemantic" typename="PInputJoypadButtonSemantic" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="JoypadButton" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="PICKUP" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_N" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceJoypadButton">
+              <PROPERTY name="m_positiveButtonSemantic" typename="PInputJoypadButtonSemantic" value="Button_Square" />
+              <PROPERTY name="m_negativeButtonSemantic" typename="PInputJoypadButtonSemantic" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="JoypadButton" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="DROP" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_M" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceJoypadButton">
+              <PROPERTY name="m_positiveButtonSemantic" typename="PInputJoypadButtonSemantic" value="Button_Triangle" />
+              <PROPERTY name="m_negativeButtonSemantic" typename="PInputJoypadButtonSemantic" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="JoypadButton" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="DEBUG_KEY_1" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_1" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="DEBUG_KEY_2" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_2" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="DEBUG_KEY_3" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_3" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="DEBUG_KEY_4" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_4" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="TOUCH" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceMouseButton">
+              <PROPERTY name="m_mouseButtonSemantic" typename="PInputMouseButtonSemantic" value="Button_LeftMB" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="MouseButton" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="TOUCHX" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceMouseDeltaX">
+              <PROPERTY name="m_modifierButtonSemantic" typename="PInputMouseButtonSemantic" value="Empty" />
+              <PROPERTY name="m_modifierKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="MouseDeltaX" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceTouchDragX">
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="TouchDragX" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="45" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="TOUCHY" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceMouseDeltaY">
+              <PROPERTY name="m_modifierButtonSemantic" typename="PInputMouseButtonSemantic" value="Empty" />
+              <PROPERTY name="m_modifierKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="MouseDeltaY" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+            <PROPERTY name="ELEMENT" typename="PInputSourceTouchDragY">
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="TouchDragY" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="True" />
+              <PROPERTY name="m_scale" typename="float" value="45" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="ELEMENT" typename="PInputAction">
+          <PROPERTY name="m_name" typename="PString" value="SWITCH_CAMERA2" />
+          <PROPERTY name="m_inputSources" typename="PArray&lt;PInputSource *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+            <PROPERTY name="ELEMENT" typename="PInputSourceKey">
+              <PROPERTY name="m_positiveKeySemantic" typename="PInputKeySemantic" value="Key_L" />
+              <PROPERTY name="m_negativeKeySemantic" typename="PInputKeySemantic" value="Empty" />
+              <PROPERTY name="m_typeSemantic" typename="PInputTypeSemantic" value="Key" />
+              <PROPERTY name="m_id" typename="PUInt32" value="0" />
+              <PROPERTY name="m_invert" typename="bool" value="False" />
+              <PROPERTY name="m_scale" typename="float" value="1" />
+            </PROPERTY>
+          </PROPERTY>
+        </PROPERTY>
+      </PROPERTY>
+    </PROPERTY>
+    <PROPERTY name="m_inputMaps" typename="PArray&lt;PInputMap *&gt;" value="&lt;PHYRE_ARRAY&gt;" />
+  </GAMECONFIG>
+</GAMECONFIGFILE>

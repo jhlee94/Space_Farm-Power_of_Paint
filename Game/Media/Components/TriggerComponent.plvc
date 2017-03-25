@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<COMPONENTFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="3/21/2017 4:49:30 AM" />
+  <ASSETBASE path=".." />
+  <ASSETS />
+  <COMPONENT id="b1fa4da2-3950-4dee-9a6c-3128bc0e4946" assetref="TriggerComponent" basephyretype="PComponent" />
+</COMPONENTFILE>

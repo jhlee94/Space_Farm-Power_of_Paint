@@ -1,0 +1,234 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Define local context switches.
+
+#define MAX_NUM_LIGHTS 0
+// Context switches
+bool PhyreContextSwitches 
+< 
+	string ContextSwitchNames[] = {"LOD_BLEND", "INSTANCING_ENABLED", "SHADER_LOD_LEVEL"}; 
+	int MaxNumLights = MAX_NUM_LIGHTS; 
+	string SupportedLightTypes[] = {"DirectionalLight","PointLight","SpotLight"};
+	string SupportedShadowTypes[] = {"PCFShadowMap", "CascadedShadowMap", "CombinedCascadedShadowMap"};
+	int NumSupportedShaderLODLevels = 1;
+>;
+#define DEFINED_CONTEXT_SWITCHES
+
+#include "PhyreDefaultShaderSharedCode.h"
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Global shader parameters.
+
+float4 constantColor = {1,1,1,1};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Structures
+struct ShadowTexturedVSInput
+{
+#ifdef SKINNING_ENABLED
+	float3 SkinnableVertex : POSITION;
+#else //! SKINNING_ENABLED
+	float4 Position	: POSITION;
+#endif //! SKINNING_ENABLED
+#ifdef SKINNING_ENABLED
+	float4 SkinIndices : COLOR0;
+	float4 SkinWeights : TEXCOORD2;
+#endif //! SKINNING_ENABLED
+};
+
+struct ShadowTexturedVSOutput
+{
+	float4 Position	: POSITION;	
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Vertex shaders
+
+// Default shadow vertex shader.
+ShadowTexturedVSOutput ShadowTexturedVS(ShadowTexturedVSInput IN)
+{
+	ShadowTexturedVSOutput Out = (ShadowTexturedVSOutput)0;	
+#ifdef SKINNING_ENABLED
+	float3 position = IN.SkinnableVertex.xyz;
+	UNNORMALIZE_SKININDICES(IN.SkinIndices);
+	EvaluateSkinPosition4Bones(position.xyz, IN.SkinWeights, IN.SkinIndices, BoneTransforms);
+	Out.Position = mul(scene.ViewProjection, float4(position.xyz,1));	
+#else //! SKINNING_ENABLED
+	float3 position = IN.Position.xyz;
+	Out.Position = mul(WorldViewProjection, float4(position.xyz,1));
+#endif //! SKINNING_ENABLED
+
+	return Out;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Fragment shaders.
+
+// Forward render fragment shader
+float4 ForwardRenderFP(DefaultPSForwardRenderInput In) : FRAG_OUTPUT_COLOR0
+{
+	return constantColor;
+}
+
+// Light pre pass second pass shader. Samples the light prepass buffer.
+#ifdef __psp2__
+__nativecolor __regformat half4 LightPrepassApplyFP(DefaultPSLightPrepassRenderInput In, __regformat half4 fragColor : FRAGCOLOR)
+#else //! __psp2__
+float4 LightPrepassApplyFP(DefaultPSLightPrepassRenderInput In) : FRAG_OUTPUT_COLOR0
+#endif //! __psp2__
+{
+	return constantColor;
+}
+
+
+// Textured shadow shader.
+#ifdef __psp2__
+__nativecolor __regformat unsigned char4 ShadowTexturedFP(ShadowTexturedVSOutput IN)
+//half4 ShadowTexturedFP(ShadowTexturedVSOutput IN) : FRAG_OUTPUT_COLOR0
+#else //! __psp2__
+float4 ShadowTexturedFP(ShadowTexturedVSOutput IN) : FRAG_OUTPUT_COLOR0
+#endif //! __psp2__
+{
+	return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Techniques.
+
+technique ForwardRender
+<
+	string PhyreRenderPass = "Opaque";
+	string FpIgnoreContextSwitches[] = {"LOD_BLEND", "INSTANCING_ENABLED", "SHADER_LOD_LEVEL"};
+>
+{
+	pass pass0
+	{
+		DepthTestEnable=true;
+		DepthFunc = LEqual;
+		DepthMask = true;	
+		BlendEnable = false;
+		ColorMask = bool4(true,true,true,true);
+		CullFaceEnable = true;
+		CullFace = back;
+		VertexProgram = compile vp40 DefaultForwardRenderVS();
+		FragmentProgram = compile fp40 ForwardRenderFP();
+	}
+}
+
+technique ForwardRenderAlpha
+<
+	string PhyreRenderPass = "Transparent";
+	string FpIgnoreContextSwitches[] = {"LOD_BLEND", "INSTANCING_ENABLED", "SHADER_LOD_LEVEL"};
+>
+{
+	pass pass0
+	{
+		DepthTestEnable=true;
+		DepthFunc = LEqual;
+		DepthMask = true;	
+		BlendEnable = true;
+		BlendFunc = {srcAlpha,oneMinusSrcAlpha};
+		ColorMask = bool4(true,true,true,true);
+		CullFaceEnable = true;
+		CullFace = back;
+		VertexProgram = compile vp40 DefaultForwardRenderVS();
+		FragmentProgram = compile fp40 ForwardRenderFP();
+	}
+}
+
+technique ShadowTransparent
+<
+	string PhyreRenderPass = "ShadowTransparent";
+	string VpIgnoreContextSwitches[] = {"LOD_BLEND"};
+	string FpIgnoreContextSwitches[] = {"LOD_BLEND", "INSTANCING_ENABLED", "SHADER_LOD_LEVEL"};
+>
+{
+	pass p0
+	{
+		DepthTestEnable=true;
+		DepthMask = true;
+		DepthFunc = LEqual;
+		BlendEnable = false;
+		AlphaTestEnable = false;
+		ColorMask = bool4(false,false,false,false);
+		CullFaceEnable = true;
+		CullFace = back;
+		VertexProgram = compile vp40 ShadowTexturedVS();
+		FragmentProgram = compile fp40 ShadowTexturedFP();
+	}
+}
+
+technique Shadow
+<
+	string PhyreRenderPass = "Shadow";
+	string VpIgnoreContextSwitches[] = {"LOD_BLEND"};
+	string FpIgnoreContextSwitches[] = {"LOD_BLEND", "INSTANCING_ENABLED", "SHADER_LOD_LEVEL"};
+>
+{
+	pass p0
+	{
+		DepthTestEnable=true;
+		DepthMask = true;
+		DepthFunc = LEqual;
+		BlendEnable = false;
+		AlphaTestEnable = false;
+		ColorMask = bool4(false,false,false,false);
+		CullFaceEnable = true;
+		CullFace = back;
+		VertexProgram = compile vp40 DefaultShadowVS();
+		FragmentProgram = compile fp40 DefaultShadowFP();
+	}
+}
+
+technique ZPrePass
+<
+	string PhyreRenderPass = "ZPrePass";
+	string VpIgnoreContextSwitches[] = {"LOD_BLEND"};
+	string FpIgnoreContextSwitches[] = {"INSTANCING_ENABLED", "SHADER_LOD_LEVEL"};
+>
+{
+	pass p0
+	{
+		DepthTestEnable=true;
+		DepthMask = true;
+		DepthFunc = LEqual;
+		ColorMask = bool4(false,false,false,false);
+		CullFaceEnable = true;
+		CullFace = back;
+		VertexProgram = compile vp40 DefaultZPrePassVS();
+		FragmentProgram = compile fp40 DefaultUnshadedFP();
+	}
+}
+
+// Techniques
+technique DeferredRender
+<
+	string PhyreRenderPass = "DeferredRender";
+	string VpIgnoreContextSwitches[] = {"LOD_BLEND"};
+	string FpIgnoreContextSwitches[] = {"INSTANCING_ENABLED"};
+>
+{
+	pass
+	{
+		DepthTestEnable=true;
+		DepthFunc = LEqual;
+		DepthMask = true;	
+		ColorMask = bool4(true,true,true,true);
+		CullFaceEnable = true;
+		CullFace = back;
+		StencilFunc = {always, 0, 0xff};
+		StencilOp = {replace,keep,replace};
+
+		VertexProgram = compile vp40 DefaultDeferredRenderVS();
+		FragmentProgram = compile fp40 DefaultDeferredRenderFP();
+	}
+}

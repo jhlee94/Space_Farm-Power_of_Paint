@@ -1,0 +1,449 @@
+<?xml version="1.0"?>
+<LEVELFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="2/20/2017 1:36:10 PM" />
+  <ASSETBASE path=".." />
+  <ASSETS>
+    <FILE id="07f3e3be-f810-4beb-b1de-6dec890d5640" path="./Models/character_bot.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="adffa060-31d7-4648-af2d-34f03b4f063a" assetref="Models/character_bot.dae#bot" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="e3fd1e82-0a1a-4ca1-8d00-19b7a45c4d43" assetref="Models/character_bot.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="fc4df9d1-abe3-4363-97c7-ccc4b9f46b3b" assetref="Models/character_bot.dae#pointLight1" phyretype="PLight" instancephyretype="PLight" />
+      <ASSET id="9ab86bfe-c12d-4841-9acd-acd1354acc40" assetref="Models/character_bot.dae#botShape1" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="5fde9a6f-0a98-4f27-aebe-cdefe9f1f6b9" assetref="Models/character_bot.dae#bot1" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="fb010f0d-1659-4d0b-bf2e-d6f8f9db7f7a" path="./Models/wall_panel.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="e025e7c9-b921-44dc-80c6-b42e58c2591b" assetref="Models/wall_panel.dae#wall_panel1" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="564d463d-3a14-4986-8429-907dc6a95d48" assetref="Models/wall_panel.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="11c97b0a-39c6-4912-a3af-849c35c89d24" assetref="Models/wall_panel.dae#wall_panelShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="325efc5c-b11d-4a11-baef-cadab9685a11" assetref="Models/wall_panel.dae#wall_panel" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="68c682a9-3914-48f4-8864-54fc934da09d" path="./PhyreSystemAssets/Shaders/PhyreSkyBox.fx" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="22e331bc-ac04-4e33-afd7-05a00857dad6" assetref="PhyreSystemAssets/Shaders/PhyreSkyBox.cgfx#material" phyretype="PMaterial" instancephyretype="PMaterial" />
+    </FILE>
+    <FILE id="97100c0a-a8f4-45c2-a655-f84129d0e8e9" path="./Textures/EditPreviewPBRCubeMap.hdr" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="02857030-97e3-46c4-b963-b24f0fbd8551" assetref="Textures/EditPreviewPBRCubeMap.hdr" phyretype="PTextureCubeMap" instancephyretype="PTextureCubeMap" />
+    </FILE>
+    <FILE id="be29cae9-b6e7-4488-80c9-819019a0c0b5" path="./Models/Building_Cottage_02.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="75445fa8-5449-452a-b1ab-1dfa864c7930" assetref="Models/Building_Cottage_02.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="5cce986e-f07c-45c2-98ca-618927d7b6da" assetref="Models/Building_Cottage_02.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="00b79ce8-7b03-4db1-a136-ac7d4dea5ad1" assetref="Models/Building_Cottage_02.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="852d6ec2-be40-4474-becb-bc31dffc26b6" assetref="Models/Building_Cottage_02.dae#Building_Cottage_02Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="fa4705bd-db5b-4d50-876f-be3cff84cb31" assetref="Models/Building_Cottage_02.dae#Building_Cottage_02" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="aec4b36c-8fe9-48c9-ae88-ea46c610431b" assetref="Models/Building_Cottage_02.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="3abcf292-7324-4787-9a39-4aa6b140a39b" assetref="Models/Building_Cottage_02.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="8af476bc-1ac5-4ce9-8940-af2072f1440b" path="./Models/Building_Farm_House_01.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="e05cafa7-85c3-42a9-b654-887379bf4a17" assetref="Models/Building_Farm_House_01.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="fd463533-aca3-4226-889b-e688fae06913" assetref="Models/Building_Farm_House_01.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="238a9986-b173-45f4-b8a3-2be5e53b5570" assetref="Models/Building_Farm_House_01.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="888b8acd-ddeb-4a6a-8605-3eabe3c68b0a" assetref="Models/Building_Farm_House_01.dae#Building_Farm_House_01Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="44e2444c-f4b1-4ce1-bc56-81eb11614da7" assetref="Models/Building_Farm_House_01.dae#Building_Farm_House_01" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="1a38ee7c-917f-4e7a-9701-53ef2ef41cea" assetref="Models/Building_Farm_House_01.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="23a62a40-544f-4b66-a352-b1c497c43f0d" assetref="Models/Building_Farm_House_01.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="f70826d3-8be1-4233-9f2b-a1d18cfcebb0" path="./Models/Building_Windmill.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="0bde8d43-cf2e-47e9-9c99-356db38ec61c" assetref="Models/Building_Windmill.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="b592fdc5-9afc-418e-8bae-ba790bfb3e38" assetref="Models/Building_Windmill.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="201e9c33-ee91-40f1-9a27-1056f5303f55" assetref="Models/Building_Windmill.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="663971a9-da85-4e25-8a2d-c4b6c5bf2cae" assetref="Models/Building_Windmill.dae#Windmill_BladesShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="712bc879-deea-42fb-8b2c-56b576ad9e6f" assetref="Models/Building_Windmill.dae#Windmil_TopShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="253dff1e-8505-4a04-810a-0658e46c8216" assetref="Models/Building_Windmill.dae#Building_WindmillShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="472fb26b-fdbf-45af-84fb-e61a351b887a" assetref="Models/Building_Windmill.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="923ce14d-8a71-4061-8500-ddc737adee89" assetref="Models/Building_Windmill.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+      <ASSET id="7d27b99c-11ea-4782-94f9-63e9704c3a50" assetref="Models/Building_Windmill.dae#Building_Windmill" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="083e0ee9-0364-4f5a-9c31-3d605605a114" path="./Models/lol1.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="54129d20-1a86-4f5a-a988-67714afe23b8" assetref="Models/lol1.dae#lambert1" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="690d2389-cce8-4cdf-b7a7-7abc276412ef" assetref="Models/lol1.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="bcf31808-6de4-4975-9426-805cd4ef73fe" assetref="Models/lol1.dae#pCubeShape1" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="90987adc-178a-4e9d-bc76-2fbd208ddca3" assetref="Models/lol1.dae#pCube1" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="b52303d3-92c1-45e1-8e19-00b0b75389ae" assetref="Models/lol1.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="3b689099-3350-48be-9874-7cda27709325" assetref="Models/lol1.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="033c5ed7-b995-44cc-bc39-3f685c455c7c" path="./Models/Building_Farm_House_03.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="0d4a49f9-61e3-4d2e-9d1b-7a269fd82290" assetref="Models/Building_Farm_House_03.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="08de9eb7-785c-4e99-a697-d5dc8877523d" assetref="Models/Building_Farm_House_03.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="a635680f-fe94-47ab-b67e-8a9e347cad54" assetref="Models/Building_Farm_House_03.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="b65896ff-a0df-43c1-9006-0469029ba7f7" assetref="Models/Building_Farm_House_03.dae#Building_Farm_House_03Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="02b4a4f2-936a-450c-a806-dc0198384d5a" assetref="Models/Building_Farm_House_03.dae#Building_Farm_House_03" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="6feb4800-5b54-4a3d-aed4-df3b254ec77c" assetref="Models/Building_Farm_House_03.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="be70547a-71bc-4c98-b3d8-3ccbccc807c1" assetref="Models/Building_Farm_House_03.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="1c48e33d-e2b7-44db-9dc3-6c077c5677f1" path="./Models/Building_Barn_Big_01.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="15197140-ba12-4f00-912e-17ab2ec424b1" assetref="Models/Building_Barn_Big_01.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="f899987d-6dc1-4935-b981-1c3c4bcf1f65" assetref="Models/Building_Barn_Big_01.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="f2fe7b19-289b-4955-b2ee-73da4173d44b" assetref="Models/Building_Barn_Big_01.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="88122b00-9355-457f-8e25-385b231096ca" assetref="Models/Building_Barn_Big_01.dae#Building_Barn_Big_01Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="bfe21c66-9e48-426c-85f9-59fa476488c0" assetref="Models/Building_Barn_Big_01.dae#Building_Barn_Big_01" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="afa90fd7-7dcf-4395-ad73-31b19ef55421" path="./Components/CustomCameraController.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="690173c8-5b72-4d62-b6f9-a29b054a1ee1" path="./Scripts/DefaultCameraController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="4a1d7ddd-e76b-4592-b177-bfe5d2efbb91" path="./Scripts/DefaultPhysicsCharacterController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="a030bec0-408a-4df9-ad27-d70a9e401061" path="./Scripts/CustomCameraController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+  </ASSETS>
+  <INSTANCES>
+    <INSTANCE id="98ae7152-fcdf-4dc7-892a-aa707197fbff" name="Walls" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-8.74227766E-08,0,-2,0,0,1.5,0,0,2,0,-8.74227766E-08,0,-40,0,0,1" editinfo="true" />
+      </PROPERTY>
+      <CHILD>b4e69072-ad89-421c-a036-7e5630a867d8</CHILD>
+      <CHILD>1d817e4b-ab3a-4b7f-b6a2-d9c8ec906b41</CHILD>
+      <CHILD>6c1a6248-b2bc-48cd-9241-e3be5c774a4a</CHILD>
+      <CHILD>6ba3ab0e-23eb-4df7-ac70-895b3b5d9fe9</CHILD>
+      <CHILD>8ee7e470-513c-4d14-93a4-767aad5e0e08</CHILD>
+      <CHILD>1b395fe1-8585-46af-a3aa-ba5d703425a3</CHILD>
+      <CHILD>c93c6fca-a140-4b4a-b924-64a88991b9c0</CHILD>
+      <CHILD>a715ac51-97f0-4fdc-a68e-32345ce12e30</CHILD>
+    </INSTANCE>
+    <INSTANCE id="a4dfd943-054b-43ab-bcc0-dfe25d98fa63" name="Floor" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="4,0,0,0,0,9.99999975E-06,0,0,0,0,4.5,0,0,0,5.20001078,1" editinfo="true" />
+      </PROPERTY>
+      <CHILD>73ce2499-e28e-4a9a-934b-6fe2f1bee094</CHILD>
+      <CHILD>09feeae5-05e8-48c6-bb1b-27114a4cc0bb</CHILD>
+      <CHILD>a4248978-e544-46aa-a917-21cf9e145b96</CHILD>
+    </INSTANCE>
+    <INSTANCE id="594e7ece-d25e-4f5b-b99c-2d1456414998" name="DirectionalLight" assetref="Light" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.499999911,0,0.866025448,0,0.75000006,0.499999911,-0.433012635,0,-0.433012635,0.866025448,0.249999911,0,0,0,0,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_color" typename="Vector4">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0.968627453,0.905882359,1" />
+      </PROPERTY>
+      <PROPERTY name="m_lightType" typename="PLightType" value="DirectionalLight" />
+      <PROPERTY name="m_scatteringIntensity" typename="float" value="20" />
+    </INSTANCE>
+    <INSTANCE id="73ce2499-e28e-4a9a-934b-6fe2f1bee094" name="NavigationMesh" assetref="Navigation Mesh" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_tileSize" typename="PUInt32" value="15" />
+    </INSTANCE>
+    <INSTANCE id="41b5fe72-879e-494b-88ad-7495e7f66de1" name="Locator_Spawn" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-206.907791,0,164.642807,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Spawn" />
+    </INSTANCE>
+    <INSTANCE id="84642fa2-bd21-4e82-934d-544253ab5708" name="Locator_Target" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-206.603714,0,211.08934,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Target" />
+    </INSTANCE>
+    <INSTANCE id="cb82db42-cbb1-493e-a63a-7a064200ee9d" name="Locator_Target_0" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-158.654877,0,182.115707,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Target" />
+    </INSTANCE>
+    <INSTANCE id="ed66e73e-e8e0-4340-8994-56dda136d588" name="Locator_Target_1" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-161.613495,0,233.507721,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Target" />
+    </INSTANCE>
+    <INSTANCE id="fee964a0-8323-4823-904f-a92d753d6c4c" name="Locator_Spawn_0" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-126.732788,0,228.798065,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Spawn" />
+    </INSTANCE>
+    <INSTANCE id="6d19c112-20bf-4bea-8423-280208e1c38c" name="Locator_Target_2" assetref="Locator" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-133.272705,0,194.197205,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_name" typename="PString" value="Target" />
+    </INSTANCE>
+    <INSTANCE id="287c010a-a6b9-4d38-9a6d-6a7e1d4b8844" name="Character" assetref="Models/character_bot.dae#bot1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1,0,8.74227766E-08,0,0,1,0,0,-8.74227766E-08,0,-1,0,-18.539938,0.0272000004,-1.3026669,1" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="ec59d178-4752-4640-9b03-45a6a7e33db8" name="PhysicsCharacterControllerComponent" assetref="Physics Character Controller Component">
+        <PROPERTY name="m_controller" typename="PPhysicsCharacterController">
+          <PROPERTY name="m_velocity" typename="float" value="30" />
+          <PROPERTY name="m_startPosition" typename="Point3">
+            <PROPERTY name="m_elements" typename="float[]" value="-18.539938,0.804901361,-1.17873406,-2.87351825E-16" />
+          </PROPERTY>
+          <PROPERTY name="m_height" typename="float" value="0.6037046" />
+          <PROPERTY name="m_radius" typename="float" value="0.4796435" />
+          <PROPERTY name="m_graphicsOffset" typename="PMatrix4">
+            <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,-0.777701378,-0.123932838,1" />
+          </PROPERTY>
+        </PROPERTY>
+        <PROPERTY name="m_script" typename="PScript" value="4a1d7ddd-e76b-4592-b177-bfe5d2efbb91" linkref="Scripts/DefaultPhysicsCharacterController.lua" />
+        <PROPERTY name="m_entryPoint" typename="PString" value="OnUpdate" />
+      </COMPONENTINSTANCE>
+      <CHILD>12dca0ee-2bfa-4a6c-a389-f66e2cee31b3</CHILD>
+    </INSTANCE>
+    <INSTANCE id="12dca0ee-2bfa-4a6c-a389-f66e2cee31b3" name="Follow" assetref="Perspective Camera" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1,0,8.74227766E-08,0,1.5180829E-08,0.98480773,0.173648447,0,-8.6094623E-08,0.173648447,-0.98480773,0,-1.19168472,11.0061073,-13.3317423,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_aspect" typename="float" value="1.264177" />
+      <PROPERTY name="m_skyBox" typename="PSkyBox" value="7a545b3d-3512-499b-b426-6d80e27feecc" linkref="" />
+      <COMPONENTINSTANCE id="0c5776f6-7e1a-4841-815a-a68410b0976a" name="CameraControllerComponent" assetref="CustomCameraController">
+        <PROPERTY name="m_characterController" typename="PScriptedComponent" value="ec59d178-4752-4640-9b03-45a6a7e33db8" linkref="" isdynamicprop="True" />
+        <PROPERTY name="m_camera" typename="PCameraProjection" value="12dca0ee-2bfa-4a6c-a389-f66e2cee31b3" linkref="" />
+        <PROPERTY name="m_followTarget" typename="PWorldMatrix" value="287c010a-a6b9-4d38-9a6d-6a7e1d4b8844" linkref="" />
+      </COMPONENTINSTANCE>
+    </INSTANCE>
+    <INSTANCE id="b4e69072-ad89-421c-a036-7e5630a867d8" name="wall_panel_6" assetref="Models/wall_panel.dae#wall_panel" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_rigidBody" typename="PPhysicsRigidBody" editinfo="true">
+        <PROPERTY name="m_collisionGroup" typename="PUInt8" value="0" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1.49061012E-08,-1.30313266E-15,1.25,0,-1.74845553E-07,1,-1.04250613E-15,0,-10,-1.74845559E-06,-1.1924881E-07,0,-25,0,-5,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="1d817e4b-ab3a-4b7f-b6a2-d9c8ec906b41" name="wall_panel_5" assetref="Models/wall_panel.dae#wall_panel" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_rigidBody" typename="PPhysicsRigidBody" editinfo="true">
+        <PROPERTY name="m_collisionGroup" typename="PUInt8" value="0" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1.49061012E-08,-1.30313266E-15,1.25,0,-1.74845553E-07,1,-1.04250613E-15,0,-10,-1.74845559E-06,-1.1924881E-07,0,-25,0,20,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="6c1a6248-b2bc-48cd-9241-e3be5c774a4a" name="wall_panel_3" assetref="Models/wall_panel.dae#wall_panel" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_rigidBody" typename="PPhysicsRigidBody" editinfo="true">
+        <PROPERTY name="m_collisionGroup" typename="PUInt8" value="0" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1.25,-1.09278474E-07,0,0,-8.74227766E-08,1,-8.74227766E-08,0,7.64274169E-14,-8.74227794E-07,-10,0,0,0,-5,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="6ba3ab0e-23eb-4df7-ac70-895b3b5d9fe9" name="wall_panel_2" assetref="Models/wall_panel.dae#wall_panel" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_rigidBody" typename="PPhysicsRigidBody" editinfo="true">
+        <PROPERTY name="m_collisionGroup" typename="PUInt8" value="0" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-5.46392371E-08,0,-1.25,0,0,1,0,0,10,0,-4.37113897E-07,0,25,0,45,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="8ee7e470-513c-4d14-93a4-767aad5e0e08" name="wall_panel_1" assetref="Models/wall_panel.dae#wall_panel" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_rigidBody" typename="PPhysicsRigidBody" editinfo="true">
+        <PROPERTY name="m_collisionGroup" typename="PUInt8" value="0" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-5.46392371E-08,0,-1.25,0,0,1,0,0,10,0,-4.37113897E-07,0,25,0,20,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="1b395fe1-8585-46af-a3aa-ba5d703425a3" name="wall_panel_0" assetref="Models/wall_panel.dae#wall_panel" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_rigidBody" typename="PPhysicsRigidBody" editinfo="true">
+        <PROPERTY name="m_collisionGroup" typename="PUInt8" value="0" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.25,0,0,0,0,1,0,0,0,0,10,0,0,0,45,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="e6a150a3-984e-4acf-8a5a-426c8d9ca41e" name="Overview" assetref="Perspective Camera" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,0.819151938,-0.57357657,0,0,0.57357657,0.819151938,0,0,18.9603004,33.6399002,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_skyBox" typename="PSkyBox" value="7a545b3d-3512-499b-b426-6d80e27feecc" linkref="" />
+      <COMPONENTINSTANCE id="4b0d4b72-1328-49d2-835e-d97311a2b201" name="CameraControllerComponent" assetref="Camera Controller Component">
+        <PROPERTY name="m_camera" typename="PCameraProjection" value="e6a150a3-984e-4acf-8a5a-426c8d9ca41e" linkref="" />
+        <PROPERTY name="m_script" typename="PScript" value="690173c8-5b72-4d62-b6f9-a29b054a1ee1" linkref="Scripts/DefaultCameraController.lua" />
+        <PROPERTY name="m_entryPoint" typename="PString" value="OnUpdate" />
+      </COMPONENTINSTANCE>
+    </INSTANCE>
+    <INSTANCE id="7a545b3d-3512-499b-b426-6d80e27feecc" name="Skybox" assetref="Skybox" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_material" typename="PMaterial" value="22e331bc-ac04-4e33-afd7-05a00857dad6" linkref="PhyreSystemAssets/Shaders/PhyreSkyBox.cgfx#material" />
+      <PROPERTY name="m_texture" typename="PTextureCubeMap" value="02857030-97e3-46c4-b963-b24f0fbd8551" linkref="Textures/EditPreviewPBRCubeMap.hdr" />
+    </INSTANCE>
+    <INSTANCE id="8311dacb-9279-449b-958f-85370847f6a1" name="Locators" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,164.082397,0,-202.641327,1" editinfo="true" />
+      </PROPERTY>
+      <CHILD>6d19c112-20bf-4bea-8423-280208e1c38c</CHILD>
+      <CHILD>ed66e73e-e8e0-4340-8994-56dda136d588</CHILD>
+      <CHILD>cb82db42-cbb1-493e-a63a-7a064200ee9d</CHILD>
+      <CHILD>84642fa2-bd21-4e82-934d-544253ab5708</CHILD>
+      <CHILD>fee964a0-8323-4823-904f-a92d753d6c4c</CHILD>
+      <CHILD>41b5fe72-879e-494b-88ad-7495e7f66de1</CHILD>
+    </INSTANCE>
+    <INSTANCE id="5946e2db-47a4-4197-8c86-e4f0604e438f" name="Lights" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,0,14,0,1" editinfo="true" />
+      </PROPERTY>
+      <CHILD>594e7ece-d25e-4f5b-b99c-2d1456414998</CHILD>
+      <CHILD>68c7ac9a-c5ab-40ed-beb0-75304b403ec6</CHILD>
+      <CHILD>e8f25373-aef8-4419-8a31-92f3bf7a35fd</CHILD>
+    </INSTANCE>
+    <INSTANCE id="68c7ac9a-c5ab-40ed-beb0-75304b403ec6" name="Red" assetref="Light" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,30,0,30,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_color" typename="Vector4">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,1" />
+      </PROPERTY>
+      <PROPERTY name="m_intensity" typename="float" value="0.5" />
+    </INSTANCE>
+    <INSTANCE id="e8f25373-aef8-4419-8a31-92f3bf7a35fd" name="Green" assetref="Light" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1,0,0,0,0,1,0,0,0,0,1,0,-30,0,-30,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_color" typename="Vector4">
+        <PROPERTY name="m_elements" typename="float[]" value="0,1,0,1" />
+      </PROPERTY>
+      <PROPERTY name="m_intensity" typename="float" value="0.5" />
+    </INSTANCE>
+    <INSTANCE id="74bc1e03-ea13-4d76-9101-80abe1060c31" name="Building_Cottage_02" assetref="Models/Building_Cottage_02.dae#Building_Cottage_02" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="6.36160422E-08,5.56149339E-15,1.45536542,0,-2.54464169E-07,1.45536542,5.56149339E-15,0,-1.45536542,-2.54464169E-07,6.36160422E-08,0,22.0327492,6.32504816E-06,71.1602249,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="c53539dc-26bb-46d9-9c3f-90d1ed393be3" name="Building_Farm_House_01" assetref="Models/Building_Farm_House_01.dae#Building_Farm_House_01" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.12552285,0,0,0,0,1.12552285,0,0,0,0,1.12552285,0,-22.3315353,0,-68.1158371,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="cbbf6faa-1754-4a70-8036-da739bc719a6" name="Building_Windmill" assetref="Models/Building_Windmill.dae#Building_Windmill" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-0.707106769,-6.18172393E-08,-0.707106769,0,-2.56055372E-08,1,-6.18172393E-08,0,0.707106769,-2.56055426E-08,-0.707106769,0,60.633255,-9.08417519E-08,-61.1963196,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="c93c6fca-a140-4b4a-b924-64a88991b9c0" name="wall_panel_13" assetref="Models/wall_panel.dae#wall_panel" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_rigidBody" typename="PPhysicsRigidBody" editinfo="true">
+        <PROPERTY name="m_collisionGroup" typename="PUInt8" value="0" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1.25,-1.09278474E-07,0,0,-8.74227766E-08,1,-8.74227766E-08,0,7.64274169E-14,-8.74227794E-07,-10,0,25,0,-5,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="09feeae5-05e8-48c6-bb1b-27114a4cc0bb" name="Env_Dirt_dae" assetref="Node" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.275000006,0,0,0,0,100000,0,0,0,0,0.266666681,0,-55.84795,0,-20.0288086,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="a715ac51-97f0-4fdc-a68e-32345ce12e30" name="wall_panel_4" assetref="Models/wall_panel.dae#wall_panel" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_rigidBody" typename="PPhysicsRigidBody" editinfo="true">
+        <PROPERTY name="m_collisionGroup" typename="PUInt8" value="0" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.25,0,0,0,0,1,0,0,0,0,10,0,-25,0,45,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="a4248978-e544-46aa-a917-21cf9e145b96" name="floor" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="25,0,0,0,0,10000,0,0,0,0,22.2222233,0,0,0,-1.15555799,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="b907a628-73fd-44fc-a286-44ea67bdbd49" name="pCube1_0" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="69.9999924,0,0,0,0,0.99999994,0,0,2.38418579E-07,0,5.1097002,0,-1.90734863E-06,0.5,-37,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="5954dda8-b4a3-47e2-8190-06a2ac844533" name="pCube1_1" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="69.9999924,0,0,0,0,0.99999994,0,0,2.38418579E-07,0,5.1097002,0,1.90734863E-06,0.5,37,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="69712397-f98e-41da-934e-804ef054eac5" name="pCube1_2" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="70.0035706,0,-70.0035706,0,0,1,0,0,3.61310363,0,3.61310363,0,0,0.5,0,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="baf17785-0609-4ae6-9152-f4c2b75934c1" name="pCube1_4" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="23,0,0,0,0,1,0,0,0,0,3,0,-35,0.5,-2.5,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="080fd8e2-bdb5-4996-9d45-fbcd02f64c79" name="pCube1_5" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="3,0,0,0,0,1,0,0,0,0,24,0,-35,0.5,11,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="c6fa7159-232b-425f-9863-d8e48a4d6e95" name="pCube1" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="20,0,0,0,0,1,0,0,0,0,3,0,-10.6000004,0.5,-29,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="c5a9b7c5-79d7-4f60-9626-0da6c2a860ab" name="pCube1_3" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="20,0,0,0,0,1,0,0,0,0,3,0,-10.6000004,0.5,-8,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="8be8eed3-c3ba-43ea-a676-737a6a7ff77b" name="pCube1_6" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-7.86805003E-07,0,-18,0,0,1,0,0,3,0,-1.31134158E-07,0,-19.1000004,0.5,-18.5,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="893320be-939d-4fb3-b2fa-6e46364dc39a" name="pCube1_7" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="15.5,0,0,0,0,1,0,0,0,0,3,0,-10.6000004,0.5,-18.5,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="82fd848f-6fe7-473e-8c56-5bbf7a8a939c" name="pCube1_8" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="12,0,0,0,0,1,0,0,0,0,3,0,6,0.5,21,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="052a8c4c-8859-4850-b8b5-802a3878a7ea" name="pCube1_9" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="8.89252377,0,-24.4320087,0,0,1,0,0,2.81907797,0,1.02606046,0,0.5,0.5,19,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="7941c71a-2759-4196-a4c3-7dc5430ec1a1" name="pCube1_10" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="8.89252281,0,24.4320087,0,0,1,0,0,-2.81907797,0,1.02606034,0,12,0.5,19,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="9f1f362c-18db-45ef-8b02-ad1db8776d8d" name="pCube1_11" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="6.21165752,0,-23.1822205,0,0,1,0,0,2.89777756,0,0.776457191,0,21,0.5,-3,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="c4042f70-9ef0-4d74-848c-d5d637eed0c5" name="pCube1_12" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="7.5244422,0,20.6732368,0,0,1,0,0,-2.81907797,0,1.02606034,0,27.5,0.5,-3,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="47c64b38-e8da-426a-894f-aea067bb66de" name="pCube1_13" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="7.52444363,0,-20.6732368,0,0,1,0,0,2.81907797,0,1.02606046,0,33.5,0.5,-3,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="98392276-6665-417a-b27d-92672922b097" name="pCube1_13" assetref="Models/lol1.dae#pCube1" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="6.21165657,0,23.1822205,0,0,1,0,0,-2.89777756,0,0.776457071,0,40,0.5,-3,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="b5dfda56-d691-4882-91c0-4f9e715aefd2" name="Building_Farm_House_03" assetref="Models/Building_Farm_House_03.dae#Building_Farm_House_03" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-4.66376768E-08,0,-1.06694579,0,0,1.06694579,0,0,1.06694579,0,-4.66376768E-08,0,-71.1464615,0,24.9862213,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="277a3229-fbbf-4e3c-bc1b-2c9a3a5de079" name="Building_Farm_House_3" assetref="Models/Building_Farm_House_03.dae#Building_Farm_House_03" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.30125499,0,0,0,0,1.30125499,0,0,0,0,1.30125499,0,21.2501984,0,-81.2070007,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="f1963462-da1f-44f1-8c66-c8c2c0d01fc8" name="Building_Windmill_0" assetref="Models/Building_Windmill.dae#Building_Windmill" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="0.707106769,0,0.707106769,0,0,1,0,0,-0.707106769,0,0.707106769,0,-60.0522614,0,59.489254,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="69571225-04f0-41f9-a351-38a8cbe757c2" name="Building_Farm_House_2" assetref="Models/Building_Farm_House_01.dae#Building_Farm_House_01" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1.12549996,0,9.83943309E-08,0,0,1.12549996,0,0,-9.83943309E-08,0,-1.12549996,0,-23.6616001,-2.49329996,69.5873032,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="4194bac2-1879-424b-80d7-b467b09a3a29" name="Building_Cottage_2" assetref="Models/Building_Cottage_02.dae#Building_Cottage_02" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="-1.17139995,0,1.02407036E-07,0,0,1.17139995,0,0,-1.02407036E-07,0,-1.17139995,0,-65.6119537,0,-3.94840002,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+    <INSTANCE id="2308972e-9f6c-477a-a333-f2420fd33c96" name="Building_Barn_Big_01" assetref="Models/Building_Barn_Big_01.dae#Building_Barn_Big_01" xst="PhyreLevelEditor.Core.Items.RenderableInstanceItem">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="1.13389111,0,0,0,0,1.13389111,0,0,0,0,1.13389111,0,75.2153473,0,9.79119873,1" editinfo="true" />
+      </PROPERTY>
+    </INSTANCE>
+  </INSTANCES>
+  <LAYERS />
+  <EDITORDATA>
+    <TARGET name="localHost" application="C:/Program Files (x86)/SCE/Engines/PhyreEngine31800/PhyreEngine/Tools/ThirdPersonGameTemplateD3D11DO_x64.exe" args="" workingdir=".." xst="PhyreLevelEditor.Core.TargetManagement.LocalTargetProperties">
+      <PLATFORM name="D3D11" />
+    </TARGET>
+    <TARGET name="PS4" application="C:/Program Files (x86)/SCE/Engines/PhyreEngine31800/PhyreEngine/Tools/ThirdPersonGameTemplateORBISDO.elf" args="" workingdir="" xst="OrbisTargetManager.OrbisTargetProperties">
+      <PLATFORM name="GNM" />
+    </TARGET>
+    <ASSETDEP />
+  </EDITORDATA>
+</LEVELFILE>

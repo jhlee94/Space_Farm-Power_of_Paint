@@ -1,0 +1,104 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+//! Defining context switches
+bool PhyreContextSwitches
+<
+	string ContextSwitchNames[] = { "ORTHO_CAMERA" };
+>;
+#define DEFINED_CONTEXT_SWITCHES
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Shader parameters.
+
+sampler2D	ColorBuffer;			// The input color buffer.
+
+// Description:
+// The FullscreenVertexIn structure carries the input information for the vertex stage.
+struct FullscreenVertexIn
+{
+	float4 Position	: POSITION;		// The vertex position.
+	float2 Uv		: TEXCOORD0;	// The texture coordinates.
+};
+
+// Description:
+// The FullscreenVertexOut structure carries the output information from the vertex stage.
+struct FullscreenVertexOut
+{
+	float4 Position	: POSITION;		// The projected position.
+	float2 Uv		: TEXCOORD0;	// The texture coordinates.
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Helper functions.
+
+// Description:
+// Converts the given normalized device coordinates into texture coordinates.
+// Arguments:
+// ndc - The normalized device coordinates.
+// Returns:
+// The computed texture coordinates.
+float2 NDCsToUVs(float2 ndc)
+{
+	return 0.5f * ndc;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Shader code.
+
+// Description:
+// Performs the vertex stage for the full-screen shading pass.
+// Arguments:
+// In - The vertex parameters.
+// Returns:
+// The shaded vertex.
+FullscreenVertexOut VS_Fullscreen(FullscreenVertexIn In)
+{
+	FullscreenVertexOut Out;
+
+	Out.Position = float4(In.Position.xy, 1.0f, 1.0f);
+	Out.Uv = In.Uv;
+
+	return Out;
+}
+
+// Description:
+// Unjitters the jittered input buffer.
+// Arguments:
+// In - The interpolated output from the vertex stage.
+// Returns:
+// The unjittered color value.
+float4 PS_TemporalUnjitter(FullscreenVertexOut In) : COLOR0
+{
+#ifdef ORTHO_CAMERA
+	const float2 uv = In.Uv;	// no jittering for orthographic cameras
+#else //! ORTHO_CAMERA
+	const float2 uv = In.Uv - NDCsToUVs(scene.ProjectionJitter);
+#endif //! ORTHO_CAMERA
+	return tex2D(ColorBuffer, uv);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Techniques.
+
+technique TemporalUnjitter
+<
+	string VpIgnoreContextSwitches[] = { "ORTHO_CAMERA" };
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 VS_Fullscreen();
+		FragmentProgram = compile fp40 PS_TemporalUnjitter();
+
+		BlendEnable = false;
+		CullFaceEnable = false;
+		DepthTestEnable = false;
+	}
+}

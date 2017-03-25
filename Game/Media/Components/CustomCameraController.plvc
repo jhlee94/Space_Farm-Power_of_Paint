@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<COMPONENTFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="3/2/2017 3:29:43 PM" />
+  <ASSETBASE path=".." />
+  <ASSETS>
+    <FILE id="a030bec0-408a-4df9-ad27-d70a9e401061" path="./Scripts/CustomCameraController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+  </ASSETS>
+  <COMPONENT id="afa90fd7-7dcf-4395-ad73-31b19ef55421" assetref="CustomCameraController" basephyretype="PCameraControllerComponent">
+    <PROPERTY name="m_characterController" typename="PScriptedComponent" value="&lt;NULL_POINTER&gt;" isdynamicprop="True" />
+    <PROPERTY name="m_camera" typename="PCameraProjection" value="&lt;NULL_POINTER&gt;" />
+    <PROPERTY name="m_isMainCamera" typename="bool" value="False" />
+    <PROPERTY name="m_followTarget" typename="PWorldMatrix" value="&lt;NULL_POINTER&gt;" />
+    <PROPERTY name="m_followPhysics" typename="PPhysicsCharacterCamera">
+      <PROPERTY name="m_collisionRadius" typename="float" value="0.5" />
+      <PROPERTY name="m_targetDistance" typename="float" value="4" />
+      <PROPERTY name="m_targetHeight" typename="float" value="2.8" />
+      <PROPERTY name="m_contactEpsilon" typename="float" value="0.1" />
+      <PROPERTY name="m_minimumCameraDistance" typename="float" value="2" />
+      <PROPERTY name="m_smoothingRate" typename="float" value="6" />
+      <PROPERTY name="m_springTension" typename="float" value="3" />
+      <PROPERTY name="m_nearCameraYAdjust" typename="float" value="0.5" />
+    </PROPERTY>
+    <PROPERTY name="m_onLoadEntryPoint" typename="PString" value="OnLoad" />
+    <PROPERTY name="m_onUnloadEntryPoint" typename="PString" />
+    <PROPERTY name="m_executionInterval" typename="PUInt32" value="1" />
+    <PROPERTY name="m_suspendOnInitialization" typename="bool" value="False" />
+    <PROPERTY name="m_script" typename="PScript" value="a030bec0-408a-4df9-ad27-d70a9e401061" linkref="Scripts/CustomCameraController.lua" />
+    <PROPERTY name="m_entryPoint" typename="PString" value="OnUpdate" />
+  </COMPONENT>
+</COMPONENTFILE>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<agx>
+	<asset>
+		<list name="InputFiles">
+			<file path="menu_options_open.dae"/>
+			<file path="menu_options_close.dae"/>
+			<file path="menu_leaderboard_open.dae"/>
+			<file path="menu_leaderboard_close.dae"/>
+		</list>
+		<file name="CharacterCluster" path="menu_start_dot.dae"/>
+		<list name="ChannelsToRemove">
+			<string value="setVisibilityFromAnimation"/>
+		</list>
+		<string name="AssetName" value="menuAnimationSet"/>
+
+		<runscript script="%SCE_PHYRE%/Media/Scripts/PhyreAnimationHelpers.lua" entry="CreateAnimationSet"/>
+	</asset>
+</agx>

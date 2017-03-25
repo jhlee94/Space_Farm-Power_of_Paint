@@ -1,0 +1,17 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+// Shaders for PBR. These include setup shaders executed once, and per frame shaders for rendering.
+// There is nothing here.
+
+// Defining DEFINED_CONTEXT_SWITCHES prevents PhyreDefaultShaderSharedCode.h from defining a default set of context switches.
+#define DEFINED_CONTEXT_SWITCHES 1
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+#include "PhyreShaderDefs.h"
+#include "PhyreDefaultShaderSharedCode.h"
+#include "PBR/PhyrePbrShared.h"

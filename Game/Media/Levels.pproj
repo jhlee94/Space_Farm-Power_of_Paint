@@ -1,0 +1,398 @@
+<?xml version="1.0"?>
+<PROJECTFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="2/20/2017 1:36:10 PM" />
+  <ASSETBASE path="." />
+  <ASSETS>
+    <FILE id="aa1d7349-e6fa-4053-bda2-faebcaa6ba14" path="./Models/floor_panel.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="6358b90b-7367-4f45-ae21-dbd5d27bc6f4" assetref="Models/floor_panel.dae#floor_panel1" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="d32b062d-a45a-4106-9114-aff68c4a4ec8" assetref="Models/floor_panel.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="ef872bf0-5f7d-45f1-b9bb-470155df42f1" assetref="Models/floor_panel.dae#floor_panelShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="749fd00b-826a-4da8-9500-44a848c2082c" assetref="Models/floor_panel.dae#floor_panel" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="a4431ef8-414f-4725-9648-3a6d30d65248" path="./Models/cube_1x1.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="be06cd98-78d5-433d-b802-b2fc1666437f" assetref="Models/cube_1x1.dae#crate1" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="0eb93c73-5d46-41c0-aba3-35750b2c2871" assetref="Models/cube_1x1.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="396d2a78-4e31-42ff-8492-07db778fd761" assetref="Models/cube_1x1.dae#cube1x1Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="c2d80b02-4fe0-412f-a2f8-0185f385f625" assetref="Models/cube_1x1.dae#cube1x1" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="40444a61-965d-4818-a774-4710c8f16334" path="./Models/cube_2x2.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="36b8bc08-3d63-4290-8ddf-69cb1c6cfa0f" assetref="Models/cube_2x2.dae#crate2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="91168041-8be3-42e7-aef1-85eeed4d691f" assetref="Models/cube_2x2.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="d4086d20-1cc9-488e-a033-397fec19fc2f" assetref="Models/cube_2x2.dae#cube2x2Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="b98c4b9e-e363-4c7f-8141-ec977b8cdcd4" assetref="Models/cube_2x2.dae#cube2x2" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="697bb1ef-c281-4ccf-aadc-a79752851c50" path="./Models/cube_3x3.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="d2039697-a534-4aeb-b9b5-90941d48a2e8" assetref="Models/cube_3x3.dae#crate3" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="af905bd5-0b20-46a6-84e1-6575ead58b94" assetref="Models/cube_3x3.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="1aa2cd48-03a6-4e2c-a425-52057c2b12cd" assetref="Models/cube_3x3.dae#cube3x3Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="8f120422-235c-488f-ae2b-72c510541e7e" assetref="Models/cube_3x3.dae#cube3x3" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="fb010f0d-1659-4d0b-bf2e-d6f8f9db7f7a" path="./Models/wall_panel.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="e025e7c9-b921-44dc-80c6-b42e58c2591b" assetref="Models/wall_panel.dae#wall_panel1" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="564d463d-3a14-4986-8429-907dc6a95d48" assetref="Models/wall_panel.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="11c97b0a-39c6-4912-a3af-849c35c89d24" assetref="Models/wall_panel.dae#wall_panelShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="325efc5c-b11d-4a11-baef-cadab9685a11" assetref="Models/wall_panel.dae#wall_panel" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="85158abf-656f-4e0f-ae8c-1446872c4312" path="./Models/cube.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="46171c05-4fb9-4c0d-948f-1befb51eecc4" assetref="Models/cube.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="b5a98dd6-da10-484d-ba6b-f2ea444b6404" assetref="Models/cube.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="acd2ab00-5491-47cf-8925-3c01091f2039" assetref="Models/cube.dae#pCubeShape1" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="21377769-3d59-4d5e-9d88-c53cf683b7e7" assetref="Models/cube.dae#pCube1" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="07f3e3be-f810-4beb-b1de-6dec890d5640" path="./Models/character_bot.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="adffa060-31d7-4648-af2d-34f03b4f063a" assetref="Models/character_bot.dae#bot" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="e3fd1e82-0a1a-4ca1-8d00-19b7a45c4d43" assetref="Models/character_bot.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="fc4df9d1-abe3-4363-97c7-ccc4b9f46b3b" assetref="Models/character_bot.dae#pointLight1" phyretype="PLight" instancephyretype="PLight" />
+      <ASSET id="9ab86bfe-c12d-4841-9acd-acd1354acc40" assetref="Models/character_bot.dae#botShape1" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="5fde9a6f-0a98-4f27-aebe-cdefe9f1f6b9" assetref="Models/character_bot.dae#bot1" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="e7aad987-10cc-4586-bc44-2ca2f315882d" path="./Shaders/PhyreSkyBox.fx" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="dba57313-e8e9-44ba-8cbe-8499f9d497a1" assetref="Shaders/PhyreSkyBox.cgfx#material" phyretype="PMaterial" instancephyretype="PMaterial" />
+    </FILE>
+    <FILE id="768f471b-d3dd-4f68-bd8d-f4e312b3d858" path="./Textures/EditPreviewPBRCubeMap.hdr" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="bc0827f5-8889-4249-8c40-d195287fe55d" assetref="Textures/EditPreviewPBRCubeMap.hdr" phyretype="PTextureCubeMap" instancephyretype="PTextureCubeMap" />
+    </FILE>
+    <FILE id="1c48e33d-e2b7-44db-9dc3-6c077c5677f1" path="./Models/Building_Barn_Big_01.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="15197140-ba12-4f00-912e-17ab2ec424b1" assetref="Models/Building_Barn_Big_01.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="f899987d-6dc1-4935-b981-1c3c4bcf1f65" assetref="Models/Building_Barn_Big_01.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="f2fe7b19-289b-4955-b2ee-73da4173d44b" assetref="Models/Building_Barn_Big_01.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="88122b00-9355-457f-8e25-385b231096ca" assetref="Models/Building_Barn_Big_01.dae#Building_Barn_Big_01Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="bfe21c66-9e48-426c-85f9-59fa476488c0" assetref="Models/Building_Barn_Big_01.dae#Building_Barn_Big_01" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="8f2ea469-e027-4a28-a073-060434bbf2f0" path="./Models/Building_Barn_Medium_01.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="3ae35d01-1854-43f7-b538-99046b1394a2" assetref="Models/Building_Barn_Medium_01.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="f52c07bd-ef28-4e88-8786-1a6c8841855e" assetref="Models/Building_Barn_Medium_01.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="665a8520-dfc7-4ca1-a585-6a1a8f2827c0" assetref="Models/Building_Barn_Medium_01.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="3845e98b-7678-4e79-83a3-992d465733e6" assetref="Models/Building_Barn_Medium_01.dae#Building_Barn_Medium_01Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="c7df0341-8e4d-4b5c-a287-fb5bd6106652" assetref="Models/Building_Barn_Medium_01.dae#Building_Barn_Medium_01" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="798020fe-b463-4780-84fe-3a377409befa" assetref="Models/Building_Barn_Medium_01.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="c9275eb3-bf88-4cdf-a5f5-15988d4ca343" assetref="Models/Building_Barn_Medium_01.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="6426ef06-8853-443a-b7ed-62671e767fda" path="./Models/Building_Barn_Small_03.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="4c851596-9bdf-4535-a3df-1755b6c193e2" assetref="Models/Building_Barn_Small_03.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="4f1c13c6-30c4-4e7b-842b-b86c56f910eb" assetref="Models/Building_Barn_Small_03.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="ce611528-4942-4205-8560-71c8cc3c2b21" assetref="Models/Building_Barn_Small_03.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="5c674b84-dfdb-4fde-a84c-ffc86d3de140" assetref="Models/Building_Barn_Small_03.dae#Building_Barn_Small_03Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="81a4395e-c852-48d0-9428-5fd91cfd289e" assetref="Models/Building_Barn_Small_03.dae#Building_Barn_Small_03" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="69e23a65-fcfb-43d9-81e0-fc55b24ef017" assetref="Models/Building_Barn_Small_03.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="c5a09108-0ba1-43d9-a623-ce8d540e4b42" assetref="Models/Building_Barn_Small_03.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="12d093dd-be31-4616-8a01-0061cfb0afb4" path="./Models/Building_Cottage_01.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="3f9faba8-a4de-48bc-81b4-d47b9a00f3d1" assetref="Models/Building_Cottage_01.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="c946dbad-a7b5-4667-9d16-20bb727e2052" assetref="Models/Building_Cottage_01.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="f4a88425-2523-4e29-962a-7653c76279bc" assetref="Models/Building_Cottage_01.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="9932b30f-b68e-4064-a5e1-36ad9ba86763" assetref="Models/Building_Cottage_01.dae#Building_Cottage_01Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="6469d2bb-94ac-46fa-82ed-1eab2743fb35" assetref="Models/Building_Cottage_01.dae#Building_Cottage_01" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="df984aa4-aed4-4246-af20-93b3f68e01ba" assetref="Models/Building_Cottage_01.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="562ce9a2-a1da-4e8b-a8d4-820f744c0a48" assetref="Models/Building_Cottage_01.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="be29cae9-b6e7-4488-80c9-819019a0c0b5" path="./Models/Building_Cottage_02.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="75445fa8-5449-452a-b1ab-1dfa864c7930" assetref="Models/Building_Cottage_02.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="5cce986e-f07c-45c2-98ca-618927d7b6da" assetref="Models/Building_Cottage_02.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="00b79ce8-7b03-4db1-a136-ac7d4dea5ad1" assetref="Models/Building_Cottage_02.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="852d6ec2-be40-4474-becb-bc31dffc26b6" assetref="Models/Building_Cottage_02.dae#Building_Cottage_02Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="fa4705bd-db5b-4d50-876f-be3cff84cb31" assetref="Models/Building_Cottage_02.dae#Building_Cottage_02" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="aec4b36c-8fe9-48c9-ae88-ea46c610431b" assetref="Models/Building_Cottage_02.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="3abcf292-7324-4787-9a39-4aa6b140a39b" assetref="Models/Building_Cottage_02.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="d1ed7164-3c62-4ddf-974b-8df0461f338d" path="./Models/Building_Cottage_03.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="8b1fc46d-871a-4b4c-aab1-28b07c2b42b0" assetref="Models/Building_Cottage_03.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="7e509d0a-1b58-416e-9e86-e84ad5a31905" assetref="Models/Building_Cottage_03.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="7a690471-ee22-4ca9-be38-51ec88f3393d" assetref="Models/Building_Cottage_03.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="119e7310-f2ef-46f7-aab6-a07bbff30037" assetref="Models/Building_Cottage_03.dae#Building_Cottage_03Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="59271e47-70c6-474f-b7b2-1bc064cecd6b" assetref="Models/Building_Cottage_03.dae#Building_Cottage_03" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="2da2015c-5262-4c42-8d45-3accf0fefbf1" assetref="Models/Building_Cottage_03.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="d98bb051-7460-4dc9-9ca1-1a2746f08b9e" assetref="Models/Building_Cottage_03.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="8af476bc-1ac5-4ce9-8940-af2072f1440b" path="./Models/Building_Farm_House_01.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="e05cafa7-85c3-42a9-b654-887379bf4a17" assetref="Models/Building_Farm_House_01.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="fd463533-aca3-4226-889b-e688fae06913" assetref="Models/Building_Farm_House_01.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="238a9986-b173-45f4-b8a3-2be5e53b5570" assetref="Models/Building_Farm_House_01.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="888b8acd-ddeb-4a6a-8605-3eabe3c68b0a" assetref="Models/Building_Farm_House_01.dae#Building_Farm_House_01Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="44e2444c-f4b1-4ce1-bc56-81eb11614da7" assetref="Models/Building_Farm_House_01.dae#Building_Farm_House_01" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="1a38ee7c-917f-4e7a-9701-53ef2ef41cea" assetref="Models/Building_Farm_House_01.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="23a62a40-544f-4b66-a352-b1c497c43f0d" assetref="Models/Building_Farm_House_01.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="033c5ed7-b995-44cc-bc39-3f685c455c7c" path="./Models/Building_Farm_House_03.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="0d4a49f9-61e3-4d2e-9d1b-7a269fd82290" assetref="Models/Building_Farm_House_03.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="08de9eb7-785c-4e99-a697-d5dc8877523d" assetref="Models/Building_Farm_House_03.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="a635680f-fe94-47ab-b67e-8a9e347cad54" assetref="Models/Building_Farm_House_03.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="b65896ff-a0df-43c1-9006-0469029ba7f7" assetref="Models/Building_Farm_House_03.dae#Building_Farm_House_03Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="02b4a4f2-936a-450c-a806-dc0198384d5a" assetref="Models/Building_Farm_House_03.dae#Building_Farm_House_03" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="6feb4800-5b54-4a3d-aed4-df3b254ec77c" assetref="Models/Building_Farm_House_03.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="be70547a-71bc-4c98-b3d8-3ccbccc807c1" assetref="Models/Building_Farm_House_03.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="f70826d3-8be1-4233-9f2b-a1d18cfcebb0" path="./Models/Building_Windmill.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="0bde8d43-cf2e-47e9-9c99-356db38ec61c" assetref="Models/Building_Windmill.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="b592fdc5-9afc-418e-8bae-ba790bfb3e38" assetref="Models/Building_Windmill.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="201e9c33-ee91-40f1-9a27-1056f5303f55" assetref="Models/Building_Windmill.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="663971a9-da85-4e25-8a2d-c4b6c5bf2cae" assetref="Models/Building_Windmill.dae#Windmill_BladesShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="712bc879-deea-42fb-8b2c-56b576ad9e6f" assetref="Models/Building_Windmill.dae#Windmil_TopShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="253dff1e-8505-4a04-810a-0658e46c8216" assetref="Models/Building_Windmill.dae#Building_WindmillShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="472fb26b-fdbf-45af-84fb-e61a351b887a" assetref="Models/Building_Windmill.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="923ce14d-8a71-4061-8500-ddc737adee89" assetref="Models/Building_Windmill.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+      <ASSET id="7d27b99c-11ea-4782-94f9-63e9704c3a50" assetref="Models/Building_Windmill.dae#Building_Windmill" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="4516404d-eb6a-4361-9578-336ff37201a9" path="./Models/Env_Crop_Cabbage.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="f8b46532-655e-4ab8-aab5-ca82c40a1ca7" assetref="Models/Env_Crop_Cabbage.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="bbf41159-866e-45d6-bc0f-52fe4a94bda5" assetref="Models/Env_Crop_Cabbage.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="3728affa-56a2-4e8f-9b2a-d2528391da03" assetref="Models/Env_Crop_Cabbage.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="c17b067b-8d8c-44e3-8207-8c631464a810" assetref="Models/Env_Crop_Cabbage.dae#Env_Crop_CabbageShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="d490230d-4e45-42d7-a5a5-03d076648248" assetref="Models/Env_Crop_Cabbage.dae#Env_Crop_Cabbage" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="80ba6bd2-474e-4fa2-a141-8c35f5b779a5" assetref="Models/Env_Crop_Cabbage.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="e02d3a74-d1ac-4383-8a28-8095e8be616d" assetref="Models/Env_Crop_Cabbage.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="41fd1535-a6c6-4873-96e9-5ba385466bd6" path="./Models/Env_Crop_Carrot.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="57f51b5d-f614-4e13-adb9-0105686e3195" assetref="Models/Env_Crop_Carrot.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="d704570c-8b73-42f3-a848-7b26b401a9b8" assetref="Models/Env_Crop_Carrot.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="3cc47af8-ad1b-40b0-a297-795f8695f49e" assetref="Models/Env_Crop_Carrot.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="e2f1b5bb-3025-40ac-a481-411df46bc4da" assetref="Models/Env_Crop_Carrot.dae#Env_Crop_CarrotShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="169365d9-4ecd-4bc3-8ba8-cc53f62941d8" assetref="Models/Env_Crop_Carrot.dae#Env_Crop_Carrot" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="221d73e6-8eef-4441-8adb-f8f5171ca2a2" assetref="Models/Env_Crop_Carrot.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="dee566f9-43f1-49eb-90bd-04ea1abe0512" assetref="Models/Env_Crop_Carrot.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="8bc7bb1e-d246-4cfe-92fd-1fa107be35f4" path="./Models/Env_Crop_Corn_Young.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="5fbed523-2437-4251-ad48-46fdef482a67" assetref="Models/Env_Crop_Corn_Young.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="a467a811-b6c5-47e3-8ad3-2cce6c4701c6" assetref="Models/Env_Crop_Corn_Young.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="b6688baa-5125-4b02-88d4-75b7f0365add" assetref="Models/Env_Crop_Corn_Young.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="b2b255bd-1ab0-4313-b18d-110746f14975" assetref="Models/Env_Crop_Corn_Young.dae#Env_Crop_Corn_YoungShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="93012b29-7d40-400a-9c36-1da50539728a" assetref="Models/Env_Crop_Corn_Young.dae#Env_Crop_Corn_Young" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="2ccb7651-f48c-4a07-af24-3744898fc6d5" path="./Models/Env_Crop_Maze.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="140a6560-7c78-424b-92cd-b0d1a644a9ef" assetref="Models/Env_Crop_Maze.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="333f9da6-82e7-4243-9e16-9fff7ff06d7d" assetref="Models/Env_Crop_Maze.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="4c66ca3b-bfe4-436c-95aa-a22f3d05581c" assetref="Models/Env_Crop_Maze.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="89e132bf-8cca-4a91-a433-b073541d5376" assetref="Models/Env_Crop_Maze.dae#Env_Crop_MazeShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="3e2a3f2e-699c-44c7-b9c1-2777c6bfe166" assetref="Models/Env_Crop_Maze.dae#Env_Crop_Maze" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="276d0993-04d1-4bd1-9d4e-88ba0278cb54" path="./Models/Env_Crop_Seedling.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="e50b1d85-c58e-4678-9f45-3097ed319af9" assetref="Models/Env_Crop_Seedling.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="d0599020-0e99-4957-b614-abe2854292cc" assetref="Models/Env_Crop_Seedling.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="fbb46035-f42f-4825-b19a-448df5bb982f" assetref="Models/Env_Crop_Seedling.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="0911f166-7f3c-4e83-8aa6-3beb7491dcea" assetref="Models/Env_Crop_Seedling.dae#Env_Crop_SeedlingShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="8e3c97b1-ee4c-4817-bdd3-41e07de9a196" assetref="Models/Env_Crop_Seedling.dae#Env_Crop_Seedling" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="28d09450-134d-49c1-99ff-8c0f1fb8659d" assetref="Models/Env_Crop_Seedling.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="9bab74ba-1001-4b9e-bf3f-4c1641e9a18b" assetref="Models/Env_Crop_Seedling.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="e6bc9143-b276-4684-961c-08af67e807ae" path="./Models/Env_Grass.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="c8530578-9e13-426e-ac68-bc560db13629" assetref="Models/Env_Grass.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="f330749e-bca7-4d4c-832d-2c7f8e1d6b81" assetref="Models/Env_Grass.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="f77f9862-ed42-4eff-a0ba-4020f3fd7271" assetref="Models/Env_Grass.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="e01b9779-e909-4301-8691-4eb7b45be75f" assetref="Models/Env_Grass.dae#Env_GrassShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="edfde892-9e28-432d-81d6-934681fc837c" assetref="Models/Env_Grass.dae#Env_Grass" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="3eeb614f-79a7-4b42-b5a7-636a1d6103ce" assetref="Models/Env_Grass.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="c39376a6-2a3b-4546-9189-36ce1386126c" assetref="Models/Env_Grass.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="238907bc-3571-4319-9a1f-5fab1ff6511e" path="./Models/Building_Shed_01.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="7ceb5639-9e7e-4c34-bd9b-9dc047b356f8" assetref="Models/Building_Shed_01.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="a42225cc-6a3a-4eec-addb-1f1e4b20f2c2" assetref="Models/Building_Shed_01.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="35c91507-1e20-4b15-975e-dfb3a49b0e50" assetref="Models/Building_Shed_01.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="aa28555d-52d3-4881-832a-e8d5727a8261" assetref="Models/Building_Shed_01.dae#Building_Shed_01Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="a2120056-92c4-4b05-8608-b496a513ff7f" assetref="Models/Building_Shed_01.dae#Building_Shed_01" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="540e5fb7-ad54-4790-9b7a-4385221f6b27" assetref="Models/Building_Shed_01.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="4413bed8-fe74-44c6-a715-e7573696ea9a" assetref="Models/Building_Shed_01.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="c53ce1a6-6e0b-4141-849c-b4b5c26228b4" path="./Models/Env_Crop_Corn_Mature.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="d4bbd075-33fc-48c8-85a3-5cf0cdad49da" assetref="Models/Env_Crop_Corn_Mature.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="64a65ce3-8587-46ea-86a3-32331e8bbb48" assetref="Models/Env_Crop_Corn_Mature.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="cfd68088-55fe-493a-8459-bfc336f43890" assetref="Models/Env_Crop_Corn_Mature.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="d26d00ff-aee5-4073-8438-e63a834e0cf2" assetref="Models/Env_Crop_Corn_Mature.dae#Env_Crop_Corn_MatureShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="c2f4681c-37b6-4bfa-96ac-05a193e69bfa" assetref="Models/Env_Crop_Corn_Mature.dae#Env_Crop_Corn_Mature" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="90a22ba0-fdd9-4a99-a3f6-5634ca2c2e36" path="./Models/Building_Barn_Medium_03.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="53c35cda-25e4-40cd-8cf1-5765c676fae9" assetref="Models/Building_Barn_Medium_03.dae#farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="b8dab6a1-e607-4a47-acef-a85413d96c87" assetref="Models/Building_Barn_Medium_03.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="51cde3a6-ecb9-4d77-af5b-ace513bdaf96" assetref="Models/Building_Barn_Medium_03.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="ffedd5b9-ca0b-4a24-a2f1-2e73eb543c27" assetref="Models/Building_Barn_Medium_03.dae#Building_Barn_Medium_03Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="b9ff2ae9-d6b8-4915-9af1-65ffc69b8d3d" assetref="Models/Building_Barn_Medium_03.dae#Building_Barn_Medium_03" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="b6f69637-2b16-4448-a0f9-1b1ceeb8bcdb" assetref="Models/Building_Barn_Medium_03.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="4cf421b5-94de-4d8b-920f-d9e914bc844a" assetref="Models/Building_Barn_Medium_03.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="0396a50b-0934-4e65-bc7b-b1b91cfdea74" path="./Models/Prop_Tree_Apple.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="a89da648-ab76-4fcf-8e38-9deef1e2d36a" assetref="Models/Prop_Tree_Apple.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="84d70c7f-ad11-4d60-88f2-b898fdc3692d" assetref="Models/Prop_Tree_Apple.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="7b86512d-9cc4-422c-9755-9f2c7629b94b" assetref="Models/Prop_Tree_Apple.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="3bc367cc-618e-42fd-adb8-928564af2d3a" assetref="Models/Prop_Tree_Apple.dae#Prop_Tree_AppleShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="5e1b9c6d-6818-4489-8ec4-75f618bb3864" assetref="Models/Prop_Tree_Apple.dae#Prop_Tree_Apple" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="d49ffd17-9106-42b4-b2d5-84b459663917" assetref="Models/Prop_Tree_Apple.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="74971348-8e43-4428-91cc-23d234edaa95" assetref="Models/Prop_Tree_Apple.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="43e8d82b-5cca-4af8-a6bd-1021e3656a56" path="./Models/Prop_Tree_Lemon.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="1b480486-ae99-4ae6-9d59-243527715a7b" assetref="Models/Prop_Tree_Lemon.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="f78d107a-fef3-430b-993a-9a103a32563e" assetref="Models/Prop_Tree_Lemon.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="1aecdead-7e30-4873-b6e6-282787578e63" assetref="Models/Prop_Tree_Lemon.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="838b12b3-8567-443e-8e32-b2941392fefe" assetref="Models/Prop_Tree_Lemon.dae#Prop_Tree_LemonShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="d808a28d-b5c5-4307-8547-8693f4601827" assetref="Models/Prop_Tree_Lemon.dae#Prop_Tree_Lemon" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="13ca6836-4340-4472-96b0-9c9098152dfe" assetref="Models/Prop_Tree_Lemon.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="37840c57-de36-4903-9a78-976a5d8bc38a" assetref="Models/Prop_Tree_Lemon.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="7f022ce2-ff13-42fa-a047-aeeee34f93aa" path="./Models/Prop_Tree_Orange.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="79ae5555-82dd-4e4e-b5a5-ef1bdb8d229d" assetref="Models/Prop_Tree_Orange.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="587abfce-1b5f-416c-b370-b95133c32b77" assetref="Models/Prop_Tree_Orange.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="125a4424-5527-4a4c-80d2-24b5e154ae21" assetref="Models/Prop_Tree_Orange.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="0bbd6703-938b-4bba-81ce-46923dda3713" assetref="Models/Prop_Tree_Orange.dae#Prop_Tree_OrangeShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="591e0c36-b61b-48ef-abf3-7db012835f4e" assetref="Models/Prop_Tree_Orange.dae#Prop_Tree_Orange" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="1a017fd0-b9d1-4223-b7cf-4d795f92c9cf" assetref="Models/Prop_Tree_Orange.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="7db74391-0b0b-457b-9125-58b6ee053334" assetref="Models/Prop_Tree_Orange.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="afe039be-360e-4eb1-aec6-db510faecc6f" path="./Models/Vehicle_Tracktor_New_02.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="7e3d2f8a-3de3-4a92-ab38-8d11f1ded514" assetref="Models/Vehicle_Tracktor_New_02.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="695d9f29-2237-46e6-8057-f7c6c1615a93" assetref="Models/Vehicle_Tracktor_New_02.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="aa354a1e-951a-45df-bf5a-3be3f257b7d4" assetref="Models/Vehicle_Tracktor_New_02.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="4d39aba2-2b1d-440e-8113-de140cf5e2c7" assetref="Models/Vehicle_Tracktor_New_02.dae#Wheel_flShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="9c32d05b-7bd8-4cfb-9455-564b3e9a4615" assetref="Models/Vehicle_Tracktor_New_02.dae#Wheel_rlShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="0bf80f87-a9ac-4cd2-8c26-7a696f1fc27b" assetref="Models/Vehicle_Tracktor_New_02.dae#Wheel_frShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="c2504b66-0a03-4d7e-8336-e5561c223a49" assetref="Models/Vehicle_Tracktor_New_02.dae#Wheel_rrShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="083c670c-de8e-43d4-a502-957f9d712bdd" assetref="Models/Vehicle_Tracktor_New_02.dae#Vehicle_Tracktor_New_02Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="775e4d4c-8e29-431c-b437-db0572c8c1d3" assetref="Models/Vehicle_Tracktor_New_02.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="c7f47338-164c-4466-9977-e000cd47f321" assetref="Models/Vehicle_Tracktor_New_02.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+      <ASSET id="f64fe4f6-ed4d-4b9f-87ee-18fd5b49ac31" assetref="Models/Vehicle_Tracktor_New_02.dae#Vehicle_Tracktor_New_02" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="eed5a8ff-3536-4bfd-8788-45e39f908701" path="./Models/Vehicle_Harvester_01.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="0b6b5de7-3467-472f-afa1-6ca091bccebe" assetref="Models/Vehicle_Harvester_01.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="b1ab7f61-f49f-4969-bb98-4d472b338835" assetref="Models/Vehicle_Harvester_01.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="dec58938-91ec-434b-8a97-73d516b36025" assetref="Models/Vehicle_Harvester_01.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="6326fe30-5811-4761-b0d2-63a4f0ce5a6d" assetref="Models/Vehicle_Harvester_01.dae#Crop_CutterShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="351adc50-a806-4a3b-89cf-404bb5fed827" assetref="Models/Vehicle_Harvester_01.dae#Crop_TubeShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="7c34ac4b-6096-4ad9-8aac-0a3031dfd13b" assetref="Models/Vehicle_Harvester_01.dae#Wheel_flShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="ca00a6aa-9780-4e48-9ece-697d093ea128" assetref="Models/Vehicle_Harvester_01.dae#Wheel_rlShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="a618c516-e498-4ff7-a4a2-2ba8881c9238" assetref="Models/Vehicle_Harvester_01.dae#Wheel_rrShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="58415854-9626-45fe-8e9f-f25bb355d9e9" assetref="Models/Vehicle_Harvester_01.dae#Wheel_frShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="3009c407-057e-4a8c-b26a-671885878b25" assetref="Models/Vehicle_Harvester_01.dae#Vehicle_Harvester_01Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="3fb15cb1-d0f0-4fd7-9c6c-058952b7be99" assetref="Models/Vehicle_Harvester_01.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="e6e89b91-d153-4efe-aa07-93e964f196af" assetref="Models/Vehicle_Harvester_01.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+      <ASSET id="c6ab8a27-3188-483d-b2a3-39f6225f932c" assetref="Models/Vehicle_Harvester_01.dae#Vehicle_Harvester_01" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="6d5f423b-f90e-46d8-9a7c-81e1f84c04f4" path="./Models/Vehicle_Farm_Ute_02.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="fd6ff6f3-ef3d-45e2-a594-5539e185affc" assetref="Models/Vehicle_Farm_Ute_02.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="8e49277f-8f99-4984-8f6c-59e0252a0481" assetref="Models/Vehicle_Farm_Ute_02.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="c0c30bbe-f90d-41d0-97df-e0c9532c5c38" assetref="Models/Vehicle_Farm_Ute_02.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="d16afdb2-4b8e-498f-93c2-613f5c5b9bdd" assetref="Models/Vehicle_Farm_Ute_02.dae#Wheel_flShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="8fa86d14-5efc-41a9-a9a3-055e6fe0d4fc" assetref="Models/Vehicle_Farm_Ute_02.dae#Wheel_rlShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="17d92ed2-8ca9-49ca-b669-05507facc8fe" assetref="Models/Vehicle_Farm_Ute_02.dae#Wheel_rrShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="f75295ab-c902-493d-9317-32ec5877ef7d" assetref="Models/Vehicle_Farm_Ute_02.dae#Wheel_frShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="3588ea1d-c1b3-478e-b493-988deaa443c8" assetref="Models/Vehicle_Farm_Ute_02.dae#Vehicle_Farm_Ute_02Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="5ff2b347-6546-44ab-ac02-ed578ad38269" assetref="Models/Vehicle_Farm_Ute_02.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="acf46c44-2d68-41e7-a18c-ec7aea6909e3" assetref="Models/Vehicle_Farm_Ute_02.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+      <ASSET id="a54417fe-947c-4f47-b7d7-e7a2a7a6eb30" assetref="Models/Vehicle_Farm_Ute_02.dae#Vehicle_Farm_Ute_02" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="466b0ee3-7750-4c4d-b24d-a867d2c9332e" path="./Models/Vehicle_Farm_Flatbed_03.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="53a64091-0716-4fc8-9811-56040df023c6" assetref="Models/Vehicle_Farm_Flatbed_03.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="a02b0371-ac1e-4e27-8c84-948864c219b7" assetref="Models/Vehicle_Farm_Flatbed_03.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="68d530f4-d318-4d5d-89ec-cc313cf87b28" assetref="Models/Vehicle_Farm_Flatbed_03.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="5f9c9a2f-76e7-4a04-8e81-19eadee2c15c" assetref="Models/Vehicle_Farm_Flatbed_03.dae#Wheel_rlShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="816172c2-b127-4ee9-83b8-488303dee2f2" assetref="Models/Vehicle_Farm_Flatbed_03.dae#Wheel_flShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="07ebc7e4-65e7-4fd0-99ee-85ddce94d7b4" assetref="Models/Vehicle_Farm_Flatbed_03.dae#Wheel_frShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="be5320db-1e98-4b2f-b2eb-a977a8d305f6" assetref="Models/Vehicle_Farm_Flatbed_03.dae#Wheel_rrShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="f4bcdf8a-005c-4d71-b304-4ff3acac87ec" assetref="Models/Vehicle_Farm_Flatbed_03.dae#Vehicle_Farm_Flatbed_03Shape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="c9b25146-890b-4204-b9db-ad47535591a2" assetref="Models/Vehicle_Farm_Flatbed_03.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="cc5356fd-702c-4eaf-9b56-f48f6792fa4d" assetref="Models/Vehicle_Farm_Flatbed_03.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+      <ASSET id="4dd91af7-8177-47eb-a8fc-ec03211e95c3" assetref="Models/Vehicle_Farm_Flatbed_03.dae#Vehicle_Farm_Flatbed_03" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="c35e12a1-5412-4d6d-b3f3-a2d648833d29" path="./Models/Env_Dirt.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="247fc60d-f54f-43cd-b348-95554d40ebda" assetref="Models/Env_Dirt.dae#tweaks_farmShader" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="22530af3-e790-4c4a-95eb-71748f111506" assetref="Models/Env_Dirt.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="47cb284c-c4a1-49a6-9238-e1de2d5a72aa" assetref="Models/Env_Dirt.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="dae564bb-8cee-4830-8206-2d862b33a357" assetref="Models/Env_Dirt.dae#Env_DirtShape" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="2376ede2-f6fa-452d-b2ae-3cf649a3c1bc" assetref="Models/Env_Dirt.dae#Env_Dirt" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="5dddfef5-f310-441c-8ac1-5824be37a884" assetref="Models/Env_Dirt.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="3ed1094e-0559-46ae-b1f1-5b0203319f54" assetref="Models/Env_Dirt.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="f527278c-d483-47ba-8861-2e0b3893b04f" path="./Textures/Space.dds" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="82047f1c-3d4c-4d57-8352-a9083fc74d25" assetref="Textures/Space.dds" phyretype="PTextureCubeMap" instancephyretype="PTextureCubeMap" />
+    </FILE>
+    <FILE id="8f9066c7-a63a-42b3-a3a4-0e289cc37445" path="./Models/pickup_1.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="c3c29821-e9b0-4cf6-9dec-a247a56754e5" assetref="Models/pickup_1.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="0161e96b-a116-4db5-8aef-4dde338c14eb" assetref="Models/pickup_1.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="208ed9ad-4f52-4b1e-949b-d2a1f3a44cee" assetref="Models/pickup_1.dae#pSphereShape1" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="0e97e7f2-462c-4590-8981-2947f30931e9" assetref="Models/pickup_1.dae#pSphere1" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="fcba586e-c326-46eb-8583-dfb7d8f75b7f" assetref="Models/pickup_1.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="2c0b094a-128c-4729-92ff-e87672c53312" assetref="Models/pickup_1.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="e6ef93c6-65ce-413f-821d-d88db1b1d55c" path="./Models/pickup_2.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="046014ba-39bd-4026-af64-b2b0cbe631a7" assetref="Models/pickup_2.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="d8a96106-1420-4f01-bb37-654df0cbcb29" assetref="Models/pickup_2.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="df06fbbb-f299-4748-9300-cd935f7f926f" assetref="Models/pickup_2.dae#pSphereShape1" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="7f4834d3-9689-4011-ac33-9ac26869d9d2" assetref="Models/pickup_2.dae#pSphere1" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="a8aed0eb-a215-471d-a12b-185885c49827" assetref="Models/pickup_2.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="e61161a9-d7de-4819-af9d-b1407096e349" assetref="Models/pickup_2.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="68c682a9-3914-48f4-8864-54fc934da09d" path="./PhyreSystemAssets/Shaders/PhyreSkyBox.fx" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="22e331bc-ac04-4e33-afd7-05a00857dad6" assetref="PhyreSystemAssets/Shaders/PhyreSkyBox.cgfx#material" phyretype="PMaterial" instancephyretype="PMaterial" />
+    </FILE>
+    <FILE id="083e0ee9-0364-4f5a-9c31-3d605605a114" path="./Models/lol1.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="54129d20-1a86-4f5a-a988-67714afe23b8" assetref="Models/lol1.dae#lambert1" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="690d2389-cce8-4cdf-b7a7-7abc276412ef" assetref="Models/lol1.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="bcf31808-6de4-4975-9426-805cd4ef73fe" assetref="Models/lol1.dae#pCubeShape1" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="90987adc-178a-4e9d-bc76-2fbd208ddca3" assetref="Models/lol1.dae#pCube1" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="b52303d3-92c1-45e1-8e19-00b0b75389ae" assetref="Models/lol1.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="3b689099-3350-48be-9874-7cda27709325" assetref="Models/lol1.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="361a6546-00fd-4f58-a391-13de6bf68f63" path="./Assets/CubeModelPaintable_SecondUVRigidBody.DAE" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="b31bac27-f3db-4473-a52a-58c029d9f781" assetref="Assets/CubeModelPaintable_SecondUVRigidBody.DAE#ColorMaterial_B1941B00" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="63113224-e95b-48ca-89be-1c6fe4b4e338" assetref="Assets/CubeModelPaintable_SecondUVRigidBody.DAE#colladafxShader1" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="0ffc0981-f9e7-4582-9226-6f5d35ce813b" assetref="Assets/CubeModelPaintable_SecondUVRigidBody.DAE#Cube_1m.max" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="c091889d-ec52-4bbe-850c-51b81dbfea0c" assetref="Assets/CubeModelPaintable_SecondUVRigidBody.DAE#Box001-mesh" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="1b3263df-af00-4705-aca3-cf888a3c8810" assetref="Assets/CubeModelPaintable_SecondUVRigidBody.DAE#Box001" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="a328f2db-522f-4341-bbbf-e5501e906545" path="./Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="5ffc3319-9e6d-4ec7-8434-241cbd67841a" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#ColorMaterial_B1941B00" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="46bcc9c6-295d-4aa4-a82d-b72b2643e539" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#colladafxShader1" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="e621ff9e-4c2e-4581-accf-2458869b21bb" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Cube_1m.max" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="e1094648-7f05-4ca5-be07-9b00ab2f9ec8" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001-mesh" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="4636116b-1e26-497a-a42c-22ebafdd61eb" assetref="Assets/CubeModelPaintable_TexArrSecondUVRigidBody.DAE#Box001" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="d2fe24a4-acbe-420d-a0a2-635a9a75bdb8" path="./Assets/PlaneModelPaintable_SecondUVRigidBody.DAE" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="bdfa8d41-af7d-48c8-b6a6-1ab84d540a26" assetref="Assets/PlaneModelPaintable_SecondUVRigidBody.DAE#ColorMaterial_E5A6D700" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="e8f374c7-81b1-413b-9e64-42377dda2ae5" assetref="Assets/PlaneModelPaintable_SecondUVRigidBody.DAE#colladafxShader1" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="a72b0d4f-eff3-46bd-93ed-0e1330a3de80" assetref="Assets/PlaneModelPaintable_SecondUVRigidBody.DAE#Plane_Mine.max" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="a7c98792-4c36-4733-8d98-921bbe987ded" assetref="Assets/PlaneModelPaintable_SecondUVRigidBody.DAE#Plane001-mesh" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="944867cf-6153-43e3-9c5a-9e34d871f619" assetref="Assets/PlaneModelPaintable_SecondUVRigidBody.DAE#Plane001" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="bfeb8c64-194a-4a0d-b379-28dfadcd51d2" path="./Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="6f294ad6-9c93-4c86-b6bb-3c99bc429994" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#ColorMaterial_E5A6D700" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="7a93c687-d2e2-461b-a9dc-329a805ffb8c" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#colladafxShader1" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="2b16d941-68c8-4fec-a5d0-249bf492ccba" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane_Mine.max" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="c9816d70-c861-4b3b-8c37-2bad9cd76406" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001-mesh" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="d5d6120b-6248-4772-8adf-98899803998a" assetref="Assets/PlaneModelPaintable_ThinCollisionSecondUVRigidBody.DAE#Plane001" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+    </FILE>
+    <FILE id="afa90fd7-7dcf-4395-ad73-31b19ef55421" path="./Components/CustomCameraController.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="d6e64ee6-2bdf-49aa-881f-d0879196cbec" path="./Components/PickupReceiver.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="575daa87-9586-43a0-a2fa-3cbd91464459" path="./Components/PickupTimer.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="b1fa4da2-3950-4dee-9a6c-3128bc0e4946" path="./Components/TriggerComponent.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="d6aa1ed3-9c2c-4202-9577-888ae8458a9f" path="./Components/LocatorComponent.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="4617bf54-e3ea-4b7e-9ce4-52a7bea65f30" path="./Components/PickupComponent.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="bf13691d-a23b-4451-976a-bdbf53b5d9fe" path="./Levels.pconf" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="690173c8-5b72-4d62-b6f9-a29b054a1ee1" path="./Scripts/DefaultCameraController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="4a1d7ddd-e76b-4592-b177-bfe5d2efbb91" path="./Scripts/PhysicsCharacterController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="bc2b662b-2d84-4c41-a41c-15461f57e50c" path="./Scripts/CustomCameraController_1.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="366fa294-873c-4727-b243-2783d390d91b" path="./Scripts/TriggerSpeed.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="b90f0a08-a241-461a-8366-1a507886f3f1" path="./Scripts/CustomCameraController_2.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="3a4ffcd9-329e-4544-9342-bc0a3a85e39c" path="./Scripts/PhysicsCharacterController_1.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="d02d2473-0d50-4cae-a1c7-86ee4ffbb2f0" path="./Scripts/PhysicsCharacterController_2.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="df22843f-af77-4758-96c3-342c237efe98" path="./Scripts/CustomCameraController.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="88d393f3-0a04-45c1-9291-5043aa873669" path="./Scripts/PickupSpawner.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="05bb7e51-8e6b-4b2f-ad94-265f6a31d283" path="./Scripts/Helpers.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="63502a19-2f4e-4471-bf47-bf256a801ce9" path="./Scripts/Trace.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="db295547-5c13-421f-97a8-0231ff97358d" path="./Scripts/DefaultTimer.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="7a754259-26ee-441e-9d64-3eb6b97f4580" path="./Scripts/CurrentCharacterHolder.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="ff6597b8-1a50-4d02-9ed5-71818e5f6eca" path="./Scripts/TriggerJump.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+  </ASSETS>
+  <LEVELS>
+    <LEVEL id="d728ed50-393c-4fde-a743-628f7828136b" name="endah" path="./Levels/endah.plv" />
+    <LEVEL id="ed4ac83f-77b6-46e4-b49f-c3d2dfad7d4c" name="cubes" path="./Levels/cubes.plv" />
+    <LEVEL id="dab2ab55-154f-4e62-87de-bcd496dd5077" name="jh" path="./Levels/jh.plv" />
+    <LEVEL id="0313d99d-02a5-4dc8-8a9d-a6b10880fa69" name="Level1" path="./Levels/Level1.plv" />
+    <LEVEL id="682432d4-8293-4d2d-b3cf-5762c3c6da4b" name="Level2" path="./Levels/Level2.plv" />
+  </LEVELS>
+  <LAYERS />
+  <EDITORDATA>
+    <TARGET name="localHost" application="C:/Program Files (x86)/SCE/Engines/PhyreEngine31800/PhyreEngine/Tools/ThirdPersonGameTemplateD3D11DO_x64.exe" args="" workingdir=".." xst="PhyreLevelEditor.Core.TargetManagement.LocalTargetProperties">
+      <PLATFORM name="D3D11" />
+    </TARGET>
+    <TARGET name="PS4" application="C:/Program Files (x86)/SCE/Engines/PhyreEngine31800/PhyreEngine/Tools/ThirdPersonGameTemplateORBISDO.elf" args="" workingdir="" xst="OrbisTargetManager.OrbisTargetProperties">
+      <PLATFORM name="GNM" />
+    </TARGET>
+    <ASSETDEP />
+  </EDITORDATA>
+</PROJECTFILE>

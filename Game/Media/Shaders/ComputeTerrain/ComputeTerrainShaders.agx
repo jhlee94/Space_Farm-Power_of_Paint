@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<agx>
+	<asset>
+		<list name="InputFiles">
+			<file path="PhyreComputeTerrainCompositeTextureCache.fx" out_ref="yes"/>
+			<file path="PhyreComputeTerrainFlushIntermediateTexture.fx" out_ref="yes"/>
+		</list>
+	</asset>
+</agx>

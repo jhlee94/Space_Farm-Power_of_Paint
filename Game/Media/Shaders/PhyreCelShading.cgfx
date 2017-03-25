@@ -1,0 +1,209 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+
+#ifdef __psp2__
+#define PSP2VERSION
+#endif
+
+float LineThickness;
+float Threshold;
+float Gamma;
+float4 CelColor;
+float4 EdgeColor;
+
+#ifndef PSP2VERSION
+float2 InvProjXY;
+#else
+half2 InvProjXY;
+#endif
+
+sampler2D ColorBuffer;
+
+///////////////////////////////////////////////////////////////
+// structures /////////////////////
+///////////////////////////////////////////////////////////////
+
+struct VertexIn
+{
+	float3 vertex		:	POSITION;
+	float2 uv			:	TEXCOORD0;
+};
+
+struct VertexOut
+{
+	float4 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct FragIn
+{
+	float2 uv			: TEXCOORD0;
+};
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+half Grey( half4 c )
+{
+	return dot( c.rgb, (0.333).xxx );
+}
+
+#define KWeight0	0
+#define KWeight1	1
+#define KWeight2	2
+
+half4 Sobel( float2 texCoord )
+{
+	float2 xOffset = float2( LineThickness * scene.screenWidthHeightInv.x, 0 );
+	float2 yOffset = float2( 0, LineThickness * scene.screenWidthHeightInv.y );
+	float g[9];
+
+#ifdef PSP2VERSION
+	float2 pixel = texCoord - yOffset;
+	g[0] = Grey( tex2D<half4>( ColorBuffer, pixel - xOffset ) );
+	g[1] = Grey( tex2D<half4>( ColorBuffer, pixel ) );
+	g[2] = Grey( tex2D<half4>( ColorBuffer, pixel + xOffset ) );
+
+	pixel = texCoord;
+	g[3] = Grey( tex2D<half4>( ColorBuffer, pixel - xOffset ) );
+	g[5] = Grey( tex2D<half4>( ColorBuffer, pixel + xOffset ) );
+
+	pixel = texCoord + yOffset;
+	g[6] = Grey( tex2D<half4>( ColorBuffer, pixel - xOffset ) );
+	g[7] = Grey( tex2D<half4>( ColorBuffer, pixel ) );
+	g[8] = Grey( tex2D<half4>( ColorBuffer, pixel + xOffset ) );
+#else
+	float2 pixel = texCoord - yOffset;
+	g[0] = Grey( h4tex2D( ColorBuffer, pixel - xOffset ) );
+	g[1] = Grey( h4tex2D( ColorBuffer, pixel ) );
+	g[2] = Grey( h4tex2D( ColorBuffer, pixel + xOffset ) );
+
+	pixel = texCoord;
+	g[3] = Grey( h4tex2D( ColorBuffer, pixel - xOffset ) );
+	g[5] = Grey( h4tex2D( ColorBuffer, pixel + xOffset ) );
+
+	pixel = texCoord + yOffset;
+	g[6] = Grey( h4tex2D( ColorBuffer, pixel - xOffset ) );
+	g[7] = Grey( h4tex2D( ColorBuffer, pixel ) );
+	g[8] = Grey( h4tex2D( ColorBuffer, pixel + xOffset ) );
+#endif
+
+	half2 G = half2( 0, 0 );
+
+	// Run horizontal filter
+	G.x = (half)((g[0]	*	KWeight1) +
+				 (g[2]	*	-KWeight1) +
+				 (g[3]	*	KWeight2) +
+				 (g[5]	*	-KWeight2) +
+				 (g[6]	*	KWeight1) +
+				 (g[8]	*	-KWeight1));
+
+	// Run vertical filter
+	G.y = (half)((g[0]	*	KWeight1) +
+				 (g[1]	*	KWeight2) +
+				 (g[2]	*	KWeight1) +
+				 (g[6]	*	-KWeight1) +
+				 (g[7]	*	-KWeight2) +
+				 (g[8]	*	-KWeight1));
+
+	float norm = dot( G, G );
+
+	if( norm > ( Threshold * Threshold ) )
+	{
+		return EdgeColor;
+	}
+
+	return half4(1,1,1,1);
+}
+
+#define kNumLevels 4
+#define kNumLevelsInv (float)(1.0f/kNumLevels)
+
+half4 CalcLightVal( float3 color )
+{
+	float intensity = pow( Grey( color.rgbr ), Gamma );
+	intensity *= kNumLevels;
+	intensity = floor(intensity) * kNumLevelsInv;
+	intensity = pow( intensity, 1.0f / Gamma );
+
+	half3 lightValue = CelColor.xyz * intensity;
+	return half4(lightValue, 1.0f);
+}
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+VertexOut CelVS(VertexIn input)
+{
+	VertexOut output;
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.uv = input.uv;
+
+	return output;
+}
+
+VertexOut CelInvertedVS(VertexIn input)
+{
+	VertexOut output;
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.uv = input.uv;
+	output.uv.y = 1 - output.uv.y;
+
+	return output;
+}
+
+#ifdef __psp2__
+__nativecolor __regformat half4 CelPS(__regformat half4 fragColor : FRAGCOLOR, FragIn input)
+#else
+half4 CelPS( VertexOut input ) : FRAG_OUTPUT_COLOR0
+#endif
+{
+	half4 color = h4tex2D( ColorBuffer, input.uv );
+	half4 lightColor = CalcLightVal( color.xyz );
+	color += lightColor;
+
+	// Multiply by Sobel to check for edges
+	color *= Sobel(input.uv);
+	return color;
+}
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+technique Cel
+{
+	pass mainRender
+	{
+		VertexProgram = compile arbvp1 CelVS();
+		FragmentProgram = compile arbfp1 CelPS();
+
+		colorMask = bool4( true, true, true, true );
+		cullFace = back;
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}
+technique CelInverted
+{
+	pass mainRender
+	{
+		VertexProgram = compile arbvp1 CelInvertedVS();
+		FragmentProgram = compile arbfp1 CelPS();
+
+		colorMask = bool4( true, true, true, true );
+		cullFace = back;
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}

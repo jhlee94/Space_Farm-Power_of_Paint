@@ -1,0 +1,81 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+// Shader for gamma correction of frame buffers.
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreShaderDefs.h"
+
+sampler2D ColorBuffer;									// The input frame buffer for gamma correction.
+float RecipGammaValue;										// The reciprocal gamma value to apply.
+
+// Description:
+// The input vertex structure for gamma correction vertex shader.
+struct GammaCorrectVsIn
+{
+	float3	Position			: POSITION;				// The input vertex position.
+	float2	Uv					: TEXCOORD0;			// The matching texture coordinate.
+};
+
+// Description:
+// The output vertex structure for gamma correction vertex shader.
+struct GammaCorrectVsOut
+{
+	float4	Position			: POSITION;				// The vertex position to rasterize.
+	float2	Uv					: TEXCOORD0;			// The matching texture coordinate.
+};
+
+// Description:
+// The vertex shader for the frame buffer gamma correction operation. This is a simple pass through shader.
+// Arguments:
+// IN : The input vertex to pass through.
+// Returns:
+// The vertex passed through.
+GammaCorrectVsOut RenderGammaCorrectionVS(GammaCorrectVsIn IN)
+{
+	GammaCorrectVsOut OUT;
+	OUT.Position = float4(IN.Position.xy, 1, 1);
+	OUT.Uv = IN.Uv;
+
+	return OUT;
+}
+
+// Description:
+// The pixel shader for the frame buffer gamma correction operation.
+// Arguments:
+// IN - The input point to be shaded with the results of the gamma correction.
+// Returns:
+// The gamma corrected fragment to be inserted into the result frame buffer.
+float4 RenderGammaCorrectionPS(GammaCorrectVsOut IN) : FRAG_OUTPUT_COLOR0
+{
+	float2 uv = IN.Uv;
+#ifdef __psp2__
+	uv.y = 1.0f - uv.y;
+#endif //! __psp2__
+
+	float4 inRgba = tex2Dlod(ColorBuffer, float4(uv, 0, 0));
+	float3 outRgb = pow(abs(inRgba.xyz), RecipGammaValue);
+
+	return float4(outRgb, inRgba.w);
+}
+
+technique RenderGammaCorrection
+{
+	pass
+	{
+		DepthTestEnable = false;
+		DepthMask = false;
+		BlendEnable = false;
+		ColorMask = bool4(true,true,true,true);
+		cullFace = back;
+		CullFaceEnable = false;
+		StencilFunc = {always, 0, 0xff};
+		StencilOp = {replace,keep,replace};
+
+		VertexProgram = compile vp40 RenderGammaCorrectionVS();
+		FragmentProgram = compile fp40 RenderGammaCorrectionPS();
+	}
+}

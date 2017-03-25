@@ -1,0 +1,244 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+
+sampler2D BitmapFontTexture;
+float4 textColor		= { 1.0f, 1.0f, 1.0f, 1.0f };
+float4x4 World;
+float CameraAspectRatio;
+
+// Alpha threshold
+float alphaThreshold	= 0.5f;
+
+// Outlines
+float4 outlineColor		= { 0.0f, 0.0f, 0.0f, 1.0f };
+float4 outlineValues	= { 0.47f, 0.50f, 0.62f, 0.63f };
+
+// Drop Shadows
+float4 shadowColor		= { 0.0f, 0.0f, 0.0f, 1.0f };
+float2 shadowUVOffset	= { -0.0025f, -0.0025f };
+
+// Glows
+float4 glowColor		= { 1.0f, 0.0f, 0.0f, 1.0f };
+float2 glowValues		= { 0.17f, 0.5f };
+
+// Soft Edges
+float2 softEdges		= { 0.5f, 0.51f };
+
+struct VPInput
+{
+	float2 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct VPOutput
+{
+	float4 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct FPInput
+{
+	float2 uv			: TEXCOORD0;
+};
+
+VPOutput TextVP(VPInput IN)
+{
+	VPOutput OUT;
+	
+	OUT.position = mul(World, float4(IN.position.xy, 0.0f, 1.0f));
+	OUT.position.x *= CameraAspectRatio;
+	OUT.uv = IN.uv;
+	
+	return OUT;
+}
+
+float4 TextFP(FPInput IN) : FRAG_OUTPUT_COLOR0
+{
+	return float4(textColor.xyz, textColor.w * tex2D(BitmapFontTexture, IN.uv).r);
+}
+
+float4 TextAlphaTestFP(FPInput IN) : FRAG_OUTPUT_COLOR0
+{
+	float4 color = float4(textColor.xyz, tex2D(BitmapFontTexture, IN.uv).r);
+	if(color.a <= alphaThreshold)
+		discard;	// Use discard to simulate alpha test.
+	return float4(color.xyz, color.w * textColor.w);
+}
+
+float SoftEdges(float alphaMask, float distMin, float distMax)
+{
+	return smoothstep(distMin, distMax, alphaMask);
+}
+
+float HardEdges(float alphaMask, float threshold)
+{
+	return alphaMask >= threshold;
+}
+
+float4 ShadowGlow(float2 uv, float4 color, float4 shadowGlowColor, float maskUsed)
+{
+	float4 glowTexel = float4(textColor.xyz, tex2D(BitmapFontTexture, uv).r);
+	float4 glowc = shadowGlowColor * smoothstep(glowValues.x, glowValues.y, glowTexel.a);
+	return lerp(glowc, color, maskUsed);
+}
+
+float4 Outline(float4 color, float alphaMask)
+{
+	float4 result = color;
+
+	if((alphaMask >= outlineValues.x) && (alphaMask <= outlineValues.w))
+	{
+		float oFactor;
+		if(alphaMask <= outlineValues.y)
+			oFactor = smoothstep(outlineValues.x, outlineValues.y, alphaMask);
+		else
+			oFactor = smoothstep(outlineValues.w, outlineValues.z, alphaMask);
+		result = lerp(color, outlineColor, oFactor);
+	}
+
+	return result;
+}
+
+float4 TextHardEdgesFP(FPInput IN) : FRAG_OUTPUT_COLOR0
+{
+	float4 color = float4(textColor.xyz, tex2D(BitmapFontTexture, IN.uv).r);
+	color.a = textColor.w * HardEdges(color.a, alphaThreshold);
+	return color;
+}
+
+float4 TextSoftEdgesFP(FPInput IN) : FRAG_OUTPUT_COLOR0
+{
+	float4 color = float4(textColor.xyz, tex2D(BitmapFontTexture, IN.uv).r);
+	color.a = textColor.w * SoftEdges(color.a, softEdges.x, softEdges.y);
+	return color;
+}
+
+float4 TextSoftEdgesAndOutlineFP(FPInput IN) : FRAG_OUTPUT_COLOR0
+{
+	float4 color = float4(textColor.xyz, tex2D(BitmapFontTexture, IN.uv).r);
+	float distAlphaMask = color.a;
+	color = Outline(color, distAlphaMask);
+	color.a = textColor.w * SoftEdges(distAlphaMask, softEdges.x, softEdges.y);
+	return color;
+}
+
+float4 TextSoftEdgesAndShadowFP(FPInput IN) : FRAG_OUTPUT_COLOR0
+{
+	float4 color = float4(textColor.xyz, tex2D(BitmapFontTexture, IN.uv).r);
+	float distAlphaMask = color.a;
+	float maskUsed = SoftEdges(distAlphaMask, softEdges.x, softEdges.y);
+	color.a = maskUsed;
+	color = ShadowGlow(IN.uv + shadowUVOffset, color, shadowColor, maskUsed);
+	return float4(color.xyz, color.w * textColor.w);
+}
+
+float4 TextSoftEdgesAndGlowFP(FPInput IN) : FRAG_OUTPUT_COLOR0
+{
+	float4 color = float4(textColor.xyz, tex2D(BitmapFontTexture, IN.uv).r);
+	float distAlphaMask = color.a;
+	color = Outline(color, distAlphaMask);
+	float maskUsed = SoftEdges(distAlphaMask, softEdges.x, softEdges.y);
+	color.a = maskUsed;
+	color = ShadowGlow(IN.uv, color, glowColor, maskUsed);
+	return float4(color.xyz, color.w * textColor.w);
+}
+
+technique RenderText_AlphaBlend
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 TextVP();
+		FragmentProgram = compile arbfp1 TextFP();
+		ColorMask = bool4(true, true, true, true);
+		DepthMask = false;
+		DepthTestEnable = false;
+		BlendEnable = true;
+		BlendFunc = {SrcAlpha, OneMinusSrcAlpha};
+	}
+}
+
+technique RenderText_AlphaTest
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 TextVP();
+		FragmentProgram = compile arbfp1 TextAlphaTestFP();
+		ColorMask = bool4(true, true, true, true);
+		DepthMask = false;
+	}
+}
+
+technique RenderText_SoftEdges
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 TextVP();
+		FragmentProgram = compile arbfp1 TextSoftEdgesFP();
+		ColorMask = bool4(true, true, true, true);
+		BlendEnable = true;
+		BlendFunc = int2(SrcAlpha, OneMinusSrcAlpha);
+		DepthMask = false;
+		DepthTestEnable = false;
+	}
+}
+
+technique RenderText_HardEdges
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 TextVP();
+		FragmentProgram = compile arbfp1 TextHardEdgesFP();
+		ColorMask = bool4(true, true, true, true);
+		BlendEnable = true;
+		BlendFunc = int2(SrcAlpha, OneMinusSrcAlpha);
+		DepthMask = false;
+		DepthTestEnable = false;
+	}
+}
+
+technique RenderText_SoftEdgesAndOutline
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 TextVP();
+		FragmentProgram = compile arbfp1 TextSoftEdgesAndOutlineFP();
+		ColorMask = bool4(true, true, true, true);
+		BlendEnable = true;
+		BlendFunc = int2(SrcAlpha, OneMinusSrcAlpha);
+		DepthMask = false;
+		DepthTestEnable = false;
+	}
+}
+
+technique RenderText_SoftEdgesAndShadow
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 TextVP();
+		FragmentProgram = compile arbfp1 TextSoftEdgesAndShadowFP();
+		ColorMask = bool4(true, true, true, true);
+		BlendEnable = true;
+		BlendFunc = int2(SrcAlpha, OneMinusSrcAlpha);
+		DepthMask = false;
+		DepthTestEnable = false;
+	}
+}
+
+technique RenderText_SoftEdgesAndGlow
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 TextVP();
+		FragmentProgram = compile arbfp1 TextSoftEdgesAndGlowFP();
+		ColorMask = bool4(true, true, true, true);
+		BlendEnable = true;
+		BlendFunc = int2(SrcAlpha, OneMinusSrcAlpha);
+		DepthMask = false;
+		DepthTestEnable = false;
+	}
+}

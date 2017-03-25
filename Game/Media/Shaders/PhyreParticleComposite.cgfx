@@ -1,0 +1,248 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+
+struct FullscreenVertexIn
+{
+	float3 vertex		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct FullscreenVertexOut
+{
+	float4 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct FullscreenFragIn
+{
+	float2	uv			: TEXCOORD0;
+};
+
+FullscreenVertexOut FullScreenVS(FullscreenVertexIn input)
+{
+	FullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.uv = input.uv;
+
+	return output;
+}
+
+sampler2D ParticleColorBuffer;
+sampler2D ParticleDepthBuffer;
+
+// Convert a depth value from post projection space to view space. 
+float ConvertDepth(float depth)
+{				
+#ifdef ORTHO_CAMERA
+	float viewSpaceZ = -(depth * scene.cameraFarMinusNear + scene.cameraNearFar.x);
+#else //! ORTHO_CAMERA
+	float viewSpaceZ = -(scene.cameraNearTimesFar / (depth * scene.cameraFarMinusNear - scene.cameraNearFar.y));
+#endif //! ORTHO_CAMERA
+	return viewSpaceZ;
+}
+float ReadDepth( sampler2D depthMap, float2 uv )
+{
+#ifdef __SCE_CGC__
+    float3 zBuffer_fragment = saturate( tex2D( depthMap, uv.xy ).xyz );
+    float3 depth_factor_precise = float3(65536.0/16777215.0, 256.0/16777215.0, 1.0/16777215.0);
+    zBuffer_fragment = round(zBuffer_fragment * 255.0);
+	float currentDepth = dot( zBuffer_fragment, depth_factor_precise);
+    return currentDepth;
+#elif defined __psp2__
+	return tex2D<float>(depthMap, uv.xy).x;
+#else // Not PS3 or Vita
+	return tex2D(depthMap, uv.xy).x;
+#endif
+}
+
+float4 PS_CompositeSimple(FullscreenFragIn Input, out float depth : DEPTH) : COLOR0 
+{
+	float2 pos = Input.uv.xy;
+	depth = ReadDepth(ParticleDepthBuffer, pos);
+	return tex2D(ParticleColorBuffer, pos);
+}
+
+sampler2D SceneColorBuffer;
+sampler2D SceneDepthBuffer;
+float2 InvSceneBufferSize;
+
+float GetSceneDepth(in float2 pos)
+{
+#ifdef __psp2__
+	pos.y = 1 - pos.y;	// Assumed to be using offscreen depth target which will be inverted.
+#endif // __psp2__
+	return ReadDepth(SceneDepthBuffer, pos);
+}
+
+#ifndef __psp2__
+float4 ApplyToScreenBilateralFP(float2 pos)
+{
+#define numBilateralSamples 9
+	float x = InvSceneBufferSize.x;
+	float y = InvSceneBufferSize.y;
+	float2 offsets[numBilateralSamples] = 
+	{
+		float2(-x, -y),
+		float2(0, -y),
+		float2(x, -y),
+		float2(-x, 0),
+		float2(0, 0),
+		float2(x, 0),
+		float2(-x, y),
+		float2(0, y),
+		float2(x, y)
+	};
+	
+	// Gaussian weights:
+	//	1--2--1
+	//	|  |  |
+	//	2--4--1
+	//	|  |  |
+	//	1--2--1
+	half gaussianWeights[numBilateralSamples] = { 1, 2, 1, 2, 4, 2, 1, 2, 1 };
+
+	float hiResDepth = abs(ConvertDepth(GetSceneDepth(pos)));
+	
+	float weights = 0.0f;
+	float4 rslt0 = 0.0f;
+	for(int i = 0; i < numBilateralSamples; ++i)
+	{
+		float lowResDepth = abs(ConvertDepth(ReadDepth(ParticleDepthBuffer, pos + offsets[i]).x));
+		float4 particleColour = tex2D(ParticleColorBuffer, pos + offsets[i]);
+		float depthDiff = lowResDepth - hiResDepth;
+		half sampleWeights = 1.0f / (0.00001f + abs(depthDiff));
+		sampleWeights *= depthDiff < 0.0f;
+		sampleWeights *= gaussianWeights[i];
+		weights += sampleWeights;
+		rslt0 += particleColour * sampleWeights.x;
+	}
+	if(weights == 0.0f)
+		return float4(0,0,0,1);
+
+	float div = (1.0f / weights);
+	rslt0 *= div;
+	return rslt0;
+}
+#else // __psp2__
+float4 ApplyToScreenBilateralFP(float2 pos)
+{
+	float hiResDepth = abs(ConvertDepth(GetSceneDepth(pos).x));
+
+	float weights = 0.0f;
+	float4 rslt0 = 0.0f;
+	{
+		float lowResDepth = abs(ConvertDepth(ReadDepth(ParticleDepthBuffer, pos)));
+		float4 particleColour = tex2D(ParticleColorBuffer, pos);
+		float depthDiff = lowResDepth - hiResDepth;
+		half sampleWeights = 1.0f / (0.00001f + abs(depthDiff));
+		sampleWeights *= depthDiff < 0.0f;
+		weights += sampleWeights;
+		rslt0 += particleColour * sampleWeights.x;
+	}
+	if(weights == 0.0f)
+		return float4(0,0,0,1);
+
+	float div = (1.0f / weights);
+	rslt0 *= div;
+	return rslt0;
+}
+#endif // __psp2__
+
+float4 PS_CompositeOver(FullscreenFragIn Input) : COLOR0 
+{
+	float2 pos = Input.uv.xy;
+	return ApplyToScreenBilateralFP(pos);
+}
+
+float4 PS_Composite(FullscreenFragIn Input) : COLOR0 
+{
+	float2 pos = Input.uv.xy;
+	float4 col = ApplyToScreenBilateralFP(pos);
+#ifdef __psp2__
+	pos.y = 1 - pos.y;	// Assumed to be using offscreen color target which will be inverted.
+#endif // __psp2__
+	float4 sceneColor = tex2D(SceneColorBuffer, pos);
+	return float4(col.xyz + col.w * sceneColor.xyz, col.w);
+}
+
+#ifdef __psp2__
+float PS_DownsampleDepth(FullscreenFragIn Input) : DEPTH 
+#else // __psp2__
+float PS_DownsampleDepth(FullscreenFragIn Input) : COLOR0 
+#endif 
+{
+	float2 pos = Input.uv.xy;
+	float x = InvSceneBufferSize.x;
+	float y = InvSceneBufferSize.y;
+	
+	float a = GetSceneDepth(pos + float2(0, 0));
+	float b = GetSceneDepth(pos + float2(x, 0));
+	float c = GetSceneDepth(pos + float2(0, y));
+	float d = GetSceneDepth(pos + float2(x, y));
+	return min(min(a, b), min(c, d));
+}
+
+technique CompositeParticlesSimple
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullScreenVS();
+		FragmentProgram = compile fp40 PS_CompositeSimple();
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = true;
+		depthMask = false;
+		blendEnable = true;
+		blendFunc = {one, srcAlpha};
+	}
+}
+
+technique CompositeParticlesOver
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullScreenVS();
+		FragmentProgram = compile fp40 PS_CompositeOver();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;		
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = true;
+		blendFunc = {one, srcAlpha};
+	}
+}
+
+technique CompositeParticles
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullScreenVS();
+		FragmentProgram = compile fp40 PS_Composite();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+	}
+}
+
+technique DownsampleDepth
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullScreenVS();
+		FragmentProgram = compile fp40 PS_DownsampleDepth();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = true;
+		blendEnable = false;
+	}
+}

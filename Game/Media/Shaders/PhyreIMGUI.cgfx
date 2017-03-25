@@ -1,0 +1,61 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+
+sampler2D BitmapFontTexture;
+
+struct VPInput
+{
+	float2 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+	float4 color		: TEXCOORD1;
+};
+
+struct VPOutput
+{
+	float4 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+	float4 color		: TEXCOORD1;
+};
+
+struct FPInput
+{
+	float2 uv			: TEXCOORD0;
+	float4 color		: TEXCOORD1;
+};
+
+VPOutput IMGUIVP(VPInput IN)
+{
+	VPOutput OUT;
+	
+	OUT.position = mul(scene.Projection, float4(IN.position.xy, 0.0f, 1.0f));
+	OUT.color = IN.color;
+	OUT.uv = IN.uv;
+	//OUT.uv.y = 1 - OUT.uv.y;
+	
+	return OUT;
+}
+
+float4 IMGUIFP(FPInput IN) : FRAG_OUTPUT_COLOR0
+{
+	return float4(IN.color * tex2D(BitmapFontTexture, IN.uv).r);
+}
+
+technique RenderIMGUI
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 IMGUIVP();
+		FragmentProgram = compile arbfp1 IMGUIFP();
+		ColorMask = bool4(true, true, true, true);
+		DepthMask = false;
+		DepthTestEnable = false;
+		BlendEnable = true;
+		BlendFunc = {SrcAlpha, OneMinusSrcAlpha};
+	}
+}

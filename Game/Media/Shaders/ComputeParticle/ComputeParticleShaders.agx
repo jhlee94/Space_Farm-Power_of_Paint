@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<agx>
+	<asset>
+		<list name="InputFiles">
+			<file path="Emission/*.fx" out_ref="yes"/>
+			<file path="Update/*.fx" out_ref="yes"/>
+			<file path="Geomgen/*.fx" out_ref="yes"/>
+			<file path="JobManagement/*.fx" out_ref="yes"/>
+		</list>
+	</asset>
+</agx>

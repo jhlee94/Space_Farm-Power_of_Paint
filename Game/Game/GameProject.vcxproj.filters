@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Android">
+      <UniqueIdentifier>{996eaf58-fcea-48bb-9399-68be999333c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{2a5c259b-bc93-40be-b944-4b4547a10326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Application">
+      <UniqueIdentifier>{3f9e679d-4f30-48e8-9574-7a9e5fc206bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Application\Game">
+      <UniqueIdentifier>{b7588f29-b116-4d66-9fca-7d31429cd7c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Application\Sandbox">
+      <UniqueIdentifier>{1b1943e6-90d3-44b9-8454-229ec459ca7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Config">
+      <UniqueIdentifier>{02369afd-f216-47d5-b903-075ff78d2a80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\AI">
+      <UniqueIdentifier>{aaf34857-5f5f-452a-a6fd-478d553b44cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\UI">
+      <UniqueIdentifier>{b2831884-7d16-4fc3-996d-5a79161c9d34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Media">
+      <UniqueIdentifier>{6de8f92c-457d-4173-b6d2-ad9fe56c6670}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Media\Scripts">
+      <UniqueIdentifier>{48e77379-3670-4eb6-a9dc-784f25ef6387}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\BowlerSandbox">
+      <UniqueIdentifier>{4af2302f-3572-4bf7-b463-489fedb0d8cc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="project.properties">
+      <Filter>Android</Filter>
+    </None>
+    <None Include="build.xml">
+      <Filter>Android</Filter>
+    </None>
+    <None Include="AndroidManifest.xml">
+      <Filter>Android</Filter>
+    </None>
+    <None Include="..\Media\Scripts\CustomCameraController.lua">
+      <Filter>Media\Scripts</Filter>
+    </None>
+    <None Include="..\Media\Scripts\CustomCameraController_1.lua">
+      <Filter>Media\Scripts</Filter>
+    </None>
+    <None Include="..\Media\Scripts\CustomCameraController_2.lua">
+      <Filter>Media\Scripts</Filter>
+    </None>
+    <None Include="..\Media\Scripts\DefaultCameraController.lua">
+      <Filter>Media\Scripts</Filter>
+    </None>
+    <None Include="..\Media\Scripts\DefaultPhysicsCharacterController.lua">
+      <Filter>Media\Scripts</Filter>
+    </None>
+    <None Include="..\Media\Scripts\DefaultTrigger.lua">
+      <Filter>Media\Scripts</Filter>
+    </None>
+    <None Include="..\Media\Scripts\Helpers.lua">
+      <Filter>Media\Scripts</Filter>
+    </None>
+    <None Include="..\Media\Scripts\PhysicsCharacterController.lua">
+      <Filter>Media\Scripts</Filter>
+    </None>
+    <None Include="..\Media\Scripts\PhysicsCharacterController_1.lua">
+      <Filter>Media\Scripts</Filter>
+    </None>
+    <None Include="..\Media\Scripts\PhysicsCharacterController_2.lua">
+      <Filter>Media\Scripts</Filter>
+    </None>
+    <None Include="..\Media\Scripts\Trace.lua">
+      <Filter>Media\Scripts</Filter>
+    </None>
+    <None Include="ConvertAssets.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\GameConfig\GameConfig.h">
+      <Filter>Source\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Application\GameApplication\GameApplication.h">
+      <Filter>Source\Application\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Application\SandboxApplication\SandboxApplication.h">
+      <Filter>Source\Application\Sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\EndMenu.h">
+      <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\PauseMenu.h">
+      <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\StartMenu.h">
+      <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\TextHelper.h">
+      <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AI\Bot.h">
+      <Filter>Source\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AI\Floater.h">
+      <Filter>Source\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AI\Target.h">
+      <Filter>Source\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ViewportConfig.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Application\GameApplication\GameApplication.cpp">
+      <Filter>Source\Application\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Application\SandboxApplication\SandboxApplication.cpp">
+      <Filter>Source\Application\Sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\EndMenu.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\PauseMenu.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\StartMenu.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\TextHelper.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AI\Bot.cpp">
+      <Filter>Source\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AI\Floater.cpp">
+      <Filter>Source\AI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <PhyreAssetGatherTask Include="..\Media\GameAssets.xml">
+      <Filter>Media</Filter>
+    </PhyreAssetGatherTask>
+    <PhyreAssetGatherTask Include="..\Media\SandboxAssets.xml">
+      <Filter>Media</Filter>
+    </PhyreAssetGatherTask>
+  </ItemGroup>
+</Project>

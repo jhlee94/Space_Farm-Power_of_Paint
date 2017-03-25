@@ -1,0 +1,386 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#define NUM_BLUR_TAPS_FORWARD 6
+#define NUM_BLUR_TAPS_BACKWARD 3
+#define NUM_BLUR_TAPS (NUM_BLUR_TAPS_BACKWARD+NUM_BLUR_TAPS_FORWARD)
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+
+// Context switches
+bool PhyreContextSwitches 
+< 
+string ContextSwitchNames[] = {"ORTHO_CAMERA"}; 
+>;
+
+float4 GaussianBlurWeights;
+float4 GaussianBlurOffsets[7];
+
+float VelocityScale;
+float4x4 ViewToPreviousViewProjection;
+float4x4 ObjectViewToPreviousViewProjection;
+
+sampler2D DepthBuffer;
+sampler2D ColorBuffer;
+sampler2D VelocityBuffer;
+
+///////////////////////////////////////////////////////////////
+// structures /////////////////////
+///////////////////////////////////////////////////////////////
+
+struct FullscreenVertexIn
+{
+	float3 vertex	: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct FullscreenVertexOut
+{
+	float4 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+struct GaussianVertexOut
+{
+	float4 position		: POSITION;
+	float2 centreUv		: TEXCOORD0;
+	float4 uvs0			: TEXCOORD1;
+	float4 uvs1			: TEXCOORD2;
+	float4 uvs2			: TEXCOORD3;
+};
+
+struct FullscreenFragIn
+{
+	float2	uv			: TEXCOORD0;
+};
+struct GaussianFragIn
+{
+	float2 centreUv		: TEXCOORD0;
+	float4 uvs0			: TEXCOORD1;
+	float4 uvs1			: TEXCOORD2;
+	float4 uvs2			: TEXCOORD3;
+};
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+FullscreenVertexOut FullscreenVP(FullscreenVertexIn input)
+{
+	FullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.uv = input.uv;
+
+	return output;
+}
+
+FullscreenVertexOut FullscreenInvertedVP(FullscreenVertexIn input)
+{
+	FullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.uv = input.uv;
+	output.uv.y = 1 - output.uv.y;
+
+	return output;
+}
+
+GaussianVertexOut GaussianBlurVP(FullscreenVertexIn input)
+{
+	GaussianVertexOut output;
+	
+	output.position = float4(input.vertex,1.0f);
+	output.centreUv = input.uv + GaussianBlurOffsets[3].xy;
+	output.uvs0 = float4(input.uv + GaussianBlurOffsets[0].xy,input.uv + GaussianBlurOffsets[1].xy);
+	output.uvs1 = float4(input.uv + GaussianBlurOffsets[2].xy,input.uv + GaussianBlurOffsets[4].xy);
+	output.uvs2 = float4(input.uv + GaussianBlurOffsets[5].xy,input.uv + GaussianBlurOffsets[6].xy);
+		
+	return output;
+}
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+float4 GaussianBlurFP(GaussianFragIn input) : FRAG_OUTPUT_COLOR
+{	
+	half4 sampleCentre = h4tex2D(ColorBuffer, input.centreUv);
+#ifdef KERNEL_7_SAMPLES
+	half4 sample0 = h4tex2D(ColorBuffer, input.uvs0.xy);
+	half4 sample1 = h4tex2D(ColorBuffer, input.uvs0.zw);
+	half4 sample2 = h4tex2D(ColorBuffer, input.uvs1.xy);
+	half4 sample3 = h4tex2D(ColorBuffer, input.uvs1.zw);
+	half4 sample4 = h4tex2D(ColorBuffer, input.uvs2.xy);
+	half4 sample5 = h4tex2D(ColorBuffer, input.uvs2.zw);
+
+	half4 total = (sampleCentre* GaussianBlurWeights.w) + ((sample0+sample5)*GaussianBlurWeights.x) + ((sample1+sample4)*GaussianBlurWeights.y) + ((sample2+sample3)*GaussianBlurWeights.z);
+#else 
+	half4 sample0 = h4tex2D(ColorBuffer, input.uvs0.xy);
+	half4 sample1 = h4tex2D(ColorBuffer, input.uvs0.zw);
+	half4 sample2 = h4tex2D(ColorBuffer, input.uvs1.xy);
+	half4 sample3 = h4tex2D(ColorBuffer, input.uvs1.zw);
+	
+	half4 total = (sampleCentre* GaussianBlurWeights.z) + ((sample0+sample3)*GaussianBlurWeights.x) + ((sample1+sample2)*GaussianBlurWeights.y);
+#endif
+	return total;
+}
+
+
+
+// Convert a depth value from post projection space to view space. 
+float ConvertDepth(float depth)
+{	
+#ifdef ORTHO_CAMERA
+	float viewSpaceZ = -(depth * scene.cameraFarMinusNear + scene.cameraNearFar.x);
+#else //! ORTHO_CAMERA
+	float viewSpaceZ = -(scene.cameraNearTimesFar / (depth * scene.cameraFarMinusNear - scene.cameraNearFar.y));
+#endif //! ORTHO_CAMERA
+	return viewSpaceZ;
+}
+
+// Read value from a depth map and convert it to float.
+float ReadDepth( sampler2D depthMap, float2 uv )
+{
+#ifdef __psp2__
+	// PlayStation(R)Vita reads depth buffer directly.
+	float currentDepth = tex2D<float1>(depthMap, uv.xy);
+#else //! __psp2__
+	float3 zBuffer_fragment = saturate( tex2D( depthMap, uv.xy ).xyz );
+	float3 depth_factor_precise = float3(65536.0/16777215.0, 256.0/16777215.0, 1.0/16777215.0);
+	zBuffer_fragment = round(zBuffer_fragment * 255.0);
+	float currentDepth = dot( zBuffer_fragment, depth_factor_precise);
+#endif //! __psp2__
+	return currentDepth;
+}
+float TexDepth(sampler2D depthMap, float2 uv)
+{
+	return dot(tex2D(depthMap,uv).xyz, ((float3(65536, 256, 1)*255.0f) / 16777215.0f));	
+}
+
+float ReadDepthStencil(out half stencil, sampler2D depthMap, float2 uv )
+{
+	float4 zbufVal = tex2D( depthMap, uv.xy );
+
+    float3 zBuffer_fragment = saturate( zbufVal.xyz );
+    float3 depth_factor_precise = float3(65536.0/16777215.0, 256.0/16777215.0, 1.0/16777215.0);
+    zBuffer_fragment = round(zBuffer_fragment * 255.0);
+	float currentDepth = dot( zBuffer_fragment, depth_factor_precise);
+	stencil = zbufVal.w;
+    return currentDepth;
+}
+
+// Perform a directional blur in +- the velocity direction.
+float4 DirectionalBlurForwardBack(float2 inputUv, float2 velocity)
+{
+	half4 outCol = 0;
+	float2 uv = inputUv;
+	const float maxVel = 0.01h;
+	velocity = clamp(velocity, -maxVel,maxVel);
+	for(int i = 0; i < NUM_BLUR_TAPS_FORWARD; ++i) 
+	{
+		half4 c = tex2D(ColorBuffer, uv);
+		outCol += c;
+		uv += velocity;		
+	}
+	uv = inputUv;
+	for(int i = 0; i < NUM_BLUR_TAPS_BACKWARD; ++i) 
+	{
+		half4 c = tex2D(ColorBuffer, uv);
+		outCol += c;
+		uv -= velocity;		
+	}
+	return outCol * (1.0h/NUM_BLUR_TAPS);
+}
+float4 DirectionalBlurForwardBackWeighted(float2 inputUv, float2 velocity)
+{
+	const float maxVel = 0.01f;
+	velocity = clamp(velocity, -maxVel,maxVel);
+
+	half4 outCol = 0;
+	half totalWeight = 0;
+	float2 uv = inputUv;
+
+	{
+		half4 c = tex2D(ColorBuffer, uv);
+		half weight = 1 + c.w;
+		outCol = c * weight;
+		totalWeight = weight;
+		uv += velocity;		
+	}
+
+	half w = 1;
+	for(int i = 1; i < NUM_BLUR_TAPS_FORWARD; ++i) 
+	{
+		half4 c = tex2D(ColorBuffer, uv);
+		half weight = w + c.w;
+		outCol += c * weight;
+		totalWeight += weight;
+		uv += velocity;		
+		w *= 0.95h;
+	}
+	uv = inputUv;
+	w = 1;
+	for(int i = 0; i < NUM_BLUR_TAPS_BACKWARD; ++i) 
+	{
+		half4 c = tex2D(ColorBuffer, uv);
+		half weight = w + c.w;
+		outCol += c * weight;
+		totalWeight += weight;
+		uv -= velocity;		
+		w *= 0.95h;
+	}
+	return outCol * (1.0f/totalWeight);
+}
+
+#define MOTION_BLUR_VELOCITY_SCALE 10.0f
+
+
+// Object motion blur:
+// Using the velocity buffer do a directional blur in +- the velocity direction at each pixel.
+float4 MotionBlurFP(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{	
+	float4 velocityMapVal = tex2D(VelocityBuffer, input.uv);
+	//float2 vel = velocityMapVal.wx;
+	
+	float2 vel = (velocityMapVal.xy * 2.0f - 1.0f) * (1.0f/MOTION_BLUR_VELOCITY_SCALE) * VelocityScale;
+	
+//	return velocityMapVal;
+	
+	const float velScale =  (5.0f/1000.0f);
+	vel *= velScale;
+	return DirectionalBlurForwardBackWeighted(input.uv, vel);
+}
+
+
+// Camera motion blur:
+// Using the depth buffer to reconstruct the projection space 3d position of the pixel, then 
+// project back into the previous frame's space and find the velocity in camera space of the pixel. 
+// Then do a directional blur in +- the velocity direction.
+float4 CameraMotionBlurFP(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{	
+	//return h4tex2D(ColorBuffer, input.uv);
+
+	float2 screenPos = input.uv * 2.0f - 1.0f;
+	float depthMapValue = ReadDepth(DepthBuffer,input.uv);
+	float viewSpaceDepth = ConvertDepth(depthMapValue);
+#ifdef ORTHO_CAMERA
+	float4 projPos = float4(screenPos, viewSpaceDepth, 1);
+#else // ORTHO_CAMERA
+	float4 projPos = float4(screenPos * viewSpaceDepth, viewSpaceDepth, 1);
+#endif // ORTHO_CAMERA
+	float4 prevProjPos = mul(ViewToPreviousViewProjection, projPos);
+	prevProjPos.xy /= prevProjPos.w;
+	float2 vel = (screenPos - prevProjPos.xy) * VelocityScale;
+	
+	const float velScale =  (5.0f/1000.0f);
+	vel *= velScale;
+	
+	return DirectionalBlurForwardBackWeighted(input.uv, vel);
+}
+
+
+
+half4 GenerateVelocityBufferFP(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{
+	float2 screenPos = input.uv * 2.0f - 1.0f;
+	half stencil;
+	float depthMapValue = ReadDepthStencil(stencil, DepthBuffer,input.uv);
+#ifndef __SCE_CGC__
+	stencil *= -1.0;
+#endif //! __SCE_CGC__
+
+	stencil = stencil > 0.0;
+		
+	half viewSpaceDepth = ConvertDepth(depthMapValue);
+#ifdef ORTHO_CAMERA
+	half4 projPos = half4(screenPos, viewSpaceDepth, 1);
+#else // ORTHO_CAMERA
+	half4 projPos = half4(screenPos * viewSpaceDepth, viewSpaceDepth, 1);
+#endif // ORTHO_CAMERA
+
+	half4 prevProjPos = stencil ? mul(ObjectViewToPreviousViewProjection, projPos) : mul(ViewToPreviousViewProjection, projPos);
+	prevProjPos.xy /= prevProjPos.w;
+	half2 vel = (screenPos - prevProjPos.xy) * MOTION_BLUR_VELOCITY_SCALE * (1.0f+(stencil*0.5f));
+		
+	return half4(vel * 0.5f + 0.5f, 0, 0);
+}
+
+
+
+technique GaussianBlur
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 GaussianBlurVP();
+		FragmentProgram = compile arbfp1 GaussianBlurFP();
+		depthmask = false;		
+		depthtestenable = false;		
+		cullFaceEnable = false;	
+	}
+}
+technique RenderMotionBlur
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 MotionBlurFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}
+technique RenderMotionBlurInverted
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 FullscreenInvertedVP();
+		FragmentProgram = compile arbfp1 MotionBlurFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}
+technique RenderCameraMotionBlur
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 CameraMotionBlurFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+	}
+}
+technique RenderCameraMotionBlurInverted
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 FullscreenInvertedVP();
+		FragmentProgram = compile arbfp1 CameraMotionBlurFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+	}
+}
+technique GenerateVelocityBuffer
+{
+	pass p0
+	{
+		VertexProgram = compile arbvp1 FullscreenVP();
+		FragmentProgram = compile arbfp1 GenerateVelocityBufferFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+	}
+}

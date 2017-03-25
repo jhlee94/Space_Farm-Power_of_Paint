@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<COMPONENTFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="3/22/2017 8:04:57 PM" />
+  <ASSETBASE path=".." />
+  <ASSETS />
+  <COMPONENT id="47f1551f-ef93-4b10-a5ef-98f87ed27b7a" assetref="ResetStatusTimer" basephyretype="PTimerComponent">
+    <PROPERTY name="m_trigger" typename="PTrigger" value="&lt;NULL_POINTER&gt;" isdynamicprop="True" />
+    <PROPERTY name="m_timeOut" typename="float" value="5" />
+    <PROPERTY name="m_script" typename="PScript" value="&lt;NULL_POINTER&gt;" />
+    <PROPERTY name="m_entryPoint" typename="PString" />
+  </COMPONENT>
+</COMPONENTFILE>

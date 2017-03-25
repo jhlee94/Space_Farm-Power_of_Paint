@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<TEMPLATEFILE>
+  <FILEINFO fileversion="26" appversion="3.18.0.0" creationdate="3/23/2017 2:48:53 PM" />
+  <ASSETBASE path=".." />
+  <ASSETS>
+    <FILE id="c62c8429-142f-449d-9945-ba304cf22157" path="./Models/pickup_1.dae" xst="PhyreLevelEditor.Core.Items.FileClusterItem">
+      <ASSET id="83e046d4-dfc0-4b3f-aa7b-82c02c0b072e" assetref="Models/pickup_1.dae#lambert2" phyretype="PMaterial" instancephyretype="PMaterial" />
+      <ASSET id="4cf42699-58f2-43ab-b732-214c322b96e3" assetref="Models/pickup_1.dae#VisualSceneNode" phyretype="PNode" instancephyretype="PNode" />
+      <ASSET id="12a8b117-926f-4e53-a0c4-0ba0ff98b8d6" assetref="Models/pickup_1.dae#pSphereShape1" phyretype="PMesh" instancephyretype="PMesh" />
+      <ASSET id="af3a53c5-a136-4c3d-ad6e-1df3d24a5c26" assetref="Models/pickup_1.dae#pSphere1" phyretype="PMeshInstance" instancephyretype="PMeshInstance" />
+      <ASSET id="abba6119-7a7d-4383-9253-48c212cf87b3" assetref="Models/pickup_1.dae#AnimationSet" phyretype="PAnimationSet" instancephyretype="PAnimationSet" />
+      <ASSET id="03323bb2-8695-40d6-80bc-fbd77f8e441f" assetref="Models/pickup_1.dae#UnnamedAnimationLibrary0" phyretype="PAnimationClip" instancephyretype="PAnimationClip" />
+    </FILE>
+    <FILE id="366fa294-873c-4727-b243-2783d390d91b" path="./Scripts/DefaultTrigger.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="db295547-5c13-421f-97a8-0231ff97358d" path="./Scripts/DefaultTimer.lua" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="d6e64ee6-2bdf-49aa-881f-d0879196cbec" path="./Components/PickupReceiver.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="575daa87-9586-43a0-a2fa-3cbd91464459" path="./Components/PickupTimer.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="4617bf54-e3ea-4b7e-9ce4-52a7bea65f30" path="./Components/PickupComponent.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+    <FILE id="b1fa4da2-3950-4dee-9a6c-3128bc0e4946" path="./Components/TriggerComponent.plvc" xst="PhyreLevelEditor.Core.Items.FileClusterItem" />
+  </ASSETS>
+  <TEMPLATE id="510b705a-3153-4651-b5f9-e99bc4184dc6" name="Template" phyretype="PLevelInstanceTemplateList" clusterid="00000000-0000-0000-0000-000000000000">
+    <INSTANCE id="31639261-f7f9-4c71-a35c-afa966b699b5" name="Pickup1" assetref="Models/pickup_1.dae#pSphere1">
+      <PROPERTY name="m_rigidBody" typename="PPhysicsRigidBody" editinfo="true">
+        <PROPERTY name="m_enabled" typename="bool" value="False" editinfo="true" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="81109ef7-ccc6-4623-adb7-7cbdbb5de37e" name="PickupReceiver" assetref="PickupReceiver">
+        <PROPERTY name="m_entryHandler" typename="PScriptCallbackHandler">
+          <PROPERTY name="m_entryPoint" typename="PString" value="OnEnter" />
+          <PROPERTY name="m_handler" typename="PTypedObject" value="366fa294-873c-4727-b243-2783d390d91b" linkref="Scripts/DefaultTrigger.lua" />
+        </PROPERTY>
+        <PROPERTY name="m_exitHandler" typename="PScriptCallbackHandler">
+          <PROPERTY name="m_entryPoint" typename="PString" value="OnExit" />
+          <PROPERTY name="m_handler" typename="PTypedObject" value="366fa294-873c-4727-b243-2783d390d91b" linkref="Scripts/DefaultTrigger.lua" />
+        </PROPERTY>
+      </COMPONENTINSTANCE>
+      <COMPONENTINSTANCE id="395a895d-1889-4036-90d1-4a0560747cfe" name="PickupTimer" assetref="PickupTimer">
+        <PROPERTY name="m_property0" typename="PTrigger" value="8b056edf-c2e9-479b-8d6c-abf65811dfc5" linkref="" isdynamicprop="True" />
+        <PROPERTY name="m_timeOut" typename="float" value="10" />
+        <PROPERTY name="m_script" typename="PScript" value="db295547-5c13-421f-97a8-0231ff97358d" linkref="Scripts/DefaultTimer.lua" />
+        <PROPERTY name="m_entryPoint" typename="PString" value="OnAlarm" />
+      </COMPONENTINSTANCE>
+      <COMPONENTINSTANCE id="02df730b-aa70-4b91-bc17-475ff21d50e8" name="PickupComponent" assetref="PickupComponent" />
+      <CHILD>8b056edf-c2e9-479b-8d6c-abf65811dfc5</CHILD>
+    </INSTANCE>
+    <INSTANCE id="8b056edf-c2e9-479b-8d6c-abf65811dfc5" name="Trigger" assetref="Trigger">
+      <PROPERTY name="m_localMatrix" typename="PMatrix4" editinfo="true">
+        <PROPERTY name="m_elements" typename="float[]" value="2.71359992,0,0,0,0,1.13440001,0,0,0,0,2.71359992,0,0,0,-0.0401000008,1" editinfo="true" />
+      </PROPERTY>
+      <PROPERTY name="m_triggerReceivers" typename="PSharray&lt;PTriggerReceiverComponent *&gt;" value="&lt;PHYRE_ARRAY&gt;">
+        <PROPERTY name="ELEMENT" typename="PTriggerReceiverComponent" value="81109ef7-ccc6-4623-adb7-7cbdbb5de37e" linkref="" />
+      </PROPERTY>
+      <COMPONENTINSTANCE id="9f515728-ce15-4875-9449-a5db35832091" name="TriggerComponent" assetref="TriggerComponent" />
+    </INSTANCE>
+  </TEMPLATE>
+</TEMPLATEFILE>

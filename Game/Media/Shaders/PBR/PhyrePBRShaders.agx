@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<agx>
+	<asset>
+		<list name="InputFiles">
+			<file path="PhyrePBRConvolveDiffuse.fx" out_ref="yes"/>
+			<file path="PhyrePBRConvolveDiffuseLowQ.fx" out_ref="yes"/>
+			<file path="PhyrePBRConvolveDiffuseCs.fx" out_ref="yes"/>
+			<file path="PhyrePBRConvolveDiffuseSh.fx" out_ref="yes"/>
+			<file path="PhyrePBRConvolveDiffuseShCs.fx" out_ref="yes"/>
+			<file path="PhyrePBRConvolveSpecular.fx" out_ref="yes"/>
+			<file path="PhyrePBRConvolveSpecularMip0.fx" out_ref="yes"/>
+			<file path="PhyrePBRConvolveSpecularMipNCs.fx" out_ref="yes"/>
+			<file path="PhyrePBRCopyTex.fx" out_ref="yes"/>
+			<file path="PhyrePBRFillPreIntegratedDFG.fx" out_ref="yes"/>
+			<file path="PhyrePBRFlipCubeFace.fx" out_ref="yes"/>
+			<file path="PhyrePBRGenerateSphericalHarmonicCoefficients.fx" out_ref="yes"/>
+			<file path="PhyrePBRGenerateSphericalHarmonicCoefficientsStacked.fx" out_ref="yes"/>
+			<file path="PhyrePBRLinearToSrgb.fx" out_ref="yes"/>
+			<file path="PhyrePBRStridedSphericalHarmonicCopy.fx" out_ref="yes"/>
+		</list>
+	</asset>
+</agx>

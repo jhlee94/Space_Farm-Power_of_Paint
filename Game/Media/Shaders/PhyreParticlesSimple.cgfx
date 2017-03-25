@@ -1,0 +1,148 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+
+float4x4 WorldViewProjection		: WorldViewProjection;	
+
+///////////////////////////////////////////////////////////////
+// structures /////////////////////
+///////////////////////////////////////////////////////////////
+
+struct ParticleVertexIn
+{
+	float3 Position		: POSITION;
+};
+
+struct ParticleVertexOut
+{
+	float4 position		: POSITION;
+	float size			: PSIZE;
+};
+struct ParticleFragIn
+{
+	float4 color		: COLOR0;
+	float2 uv			: TEXCOORD0;
+};
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+ParticleVertexOut RenderParticlesVP(ParticleVertexIn input)
+{
+	ParticleVertexOut output;
+	float4 localPosition = float4(input.Position.xyz,1.0f);	
+	
+	output.position = mul(WorldViewProjection, localPosition);
+	
+	float y = saturate(localPosition.y * 0.4f);
+	y *= y;
+	y *= 1.5f;
+			
+	output.size = 2.0f;
+	
+	return output;
+}
+
+ParticleVertexOut RenderParticleShadowVP(ParticleVertexIn input)
+{
+	ParticleVertexOut output;
+	float4 localPosition = float4(input.Position.xyz,1.0f);	
+	
+	output.position = mul(WorldViewProjection, localPosition);
+	output.size = 2;
+	
+	return output;
+}
+
+half4 RenderParticlesFP(ParticleFragIn input) : FRAG_OUTPUT_COLOR0
+{
+	return half4(0.95, 0.98, 0.98, 1);
+}
+
+half4 RenderParticlesGlowFP(ParticleFragIn input) : FRAG_OUTPUT_COLOR0
+{
+	half2 p = input.uv * 2.0f - 1.0f;
+	half alpha = saturate(1.0f - dot(p,p)*0.8f);
+
+	return half4(0.95, 0.98, 0.98, alpha);
+}
+
+half4 RenderParticleShadowFP(ParticleFragIn input) : FRAG_OUTPUT_COLOR0
+{
+	return 1;
+}
+
+half4 PackNormalAndViewSpaceDepth(half3 normal, float viewSpaceZ)
+{
+	float normalizedViewZ = viewSpaceZ / scene.cameraNearFar.y;
+
+	// Depth is packed into z, w.  W = Most sigificant bits, Z = Least significant bits.
+	// We don't use full range on W so that initial value of 1.0 is clearly beyond far plane.
+	half2 depthPacked = half2(frac(normalizedViewZ * 256.0f), floor(normalizedViewZ * 256.0f) / 255.0f);
+
+	half4 rslt = half4(normal.xy, depthPacked);
+	return rslt;
+}
+
+technique Transparent
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 RenderParticlesVP();
+		FragmentProgram = compile fp40 RenderParticlesFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = true;
+		depthFunc = lessEqual;
+		depthMask = false;
+		pointSize = 6;			
+		blendEnable = true;
+		blendFunc = {srcAlpha, oneMinusSrcAlpha};
+		pointSpriteCoordReplace[0] = true;
+		pointSpriteCoordReplace[1] = false;
+	}
+}
+
+technique Shadow
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 RenderParticleShadowVP();
+		FragmentProgram = compile fp40 RenderParticleShadowFP();	
+		colorMask = bool4(false,false,false,false);
+		cullFaceEnable = false;
+		depthTestEnable = true;
+		depthFunc = lessEqual;
+		depthMask = true;
+		pointSize = 3;			
+		blendEnable = true;
+		blendFunc = {srcAlpha, oneMinusSrcAlpha};
+		pointSpriteCoordReplace[0] = true;
+		pointSpriteCoordReplace[1] = false;
+	}
+}
+
+technique GenerateGlowBuffer
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 RenderParticlesVP();
+		FragmentProgram = compile fp40 RenderParticlesGlowFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthFunc = lessEqual;
+		depthMask = false;
+		pointSize = 6;			
+		blendEnable = true;
+		blendFunc = {srcAlpha, oneMinusSrcAlpha};
+		pointSpriteCoordReplace[0] = true;
+		pointSpriteCoordReplace[1] = false;
+	}
+}

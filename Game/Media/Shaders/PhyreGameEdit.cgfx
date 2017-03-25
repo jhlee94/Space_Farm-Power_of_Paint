@@ -1,0 +1,1338 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+#include "PhyreShaderPlatform.h"
+#include "PhyreSceneWideParameters.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Global shader parameters.
+
+// Un-tweakables
+float4x4 World						: World;		
+float4x4 WorldView					: WorldView;
+float4x4 WorldViewProjection		: WorldViewProjection;
+float selectionIDColor;
+float4 constantColor = {1,1,1,1};
+float4 multipleSelectionIDColor;
+float GridFadeStartDistance;
+float GridFadeDistanceScale;
+
+// Context switches
+bool PhyreContextSwitches 
+< 
+string ContextSwitchNames[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"}; 
+>;
+
+#ifdef __SCE_CGC__
+
+#ifdef SKINNING_ENABLED
+
+#define EvaluateSkinPosition4Bones( position, weights, boneIndices )
+
+#endif // SKINNING_ENABLED
+
+#else // __SCE_CGC__
+
+#ifdef SKINNING_ENABLED
+
+#ifndef NUM_SKIN_TRANSFORMS
+	#define NUM_SKIN_TRANSFORMS 80 // Note: This number is mirrored in Core as PD_MATERIAL_SKINNING_MAX_GPU_BONE_COUNT
+#endif // NUM_SKIN_TRANSFORMS
+float3x4 BoneTransforms[NUM_SKIN_TRANSFORMS] : BONETRANSFORMS;
+
+void EvaluateSkinPosition4Bones( inout float3 position, float4 weights, int4 boneIndices )
+{
+	int indexArray[4] = {boneIndices.x,boneIndices.y,boneIndices.z,boneIndices.w};
+
+	float4 inPosition = float4(position,1);
+	
+ 	position = 
+		mul(BoneTransforms[indexArray[0]], inPosition).xyz * weights.x
+	+	mul(BoneTransforms[indexArray[1]], inPosition).xyz * weights.y
+	+	mul(BoneTransforms[indexArray[2]], inPosition).xyz * weights.z
+	+	mul(BoneTransforms[indexArray[3]], inPosition).xyz * weights.w;
+}
+
+#endif // SKINNING_ENABLED
+
+#endif // __SCE_CGC__
+
+
+#ifdef __psp2__
+#define UNNORMALIZE_SKININDICES(VAR) /* Nothing */ // PlayStation(R)Vita passes unnormalized values
+#else // __psp2__
+#define UNNORMALIZE_SKININDICES(VAR) VAR *= 255.00001
+#endif // __psp2__
+
+#ifdef INSTANCING_ENABLED
+struct InstancingInput
+{
+	float4	InstanceTransform0	: ATTR13;
+	float4	InstanceTransform1	: ATTR14;
+	float4	InstanceTransform2	: ATTR15;
+};
+
+void ApplyInstanceTransformVertex(InstancingInput IN, inout float3 toTransform)
+{
+	float3 instanceTransformedPosition;
+	instanceTransformedPosition.x = dot(IN.InstanceTransform0, float4(toTransform,1));
+	instanceTransformedPosition.y = dot(IN.InstanceTransform1, float4(toTransform,1));
+	instanceTransformedPosition.z = dot(IN.InstanceTransform2, float4(toTransform,1));
+	toTransform = instanceTransformedPosition;
+}
+
+void ApplyInstanceTransformNormal(InstancingInput IN, inout float3 toTransform)
+{
+	float3 instanceTransformedNormal;
+	instanceTransformedNormal.x = dot(IN.InstanceTransform0.xyz, toTransform);
+	instanceTransformedNormal.y = dot(IN.InstanceTransform1.xyz, toTransform);
+	instanceTransformedNormal.z = dot(IN.InstanceTransform2.xyz, toTransform);
+	toTransform = instanceTransformedNormal;
+}
+#endif //! INSTANCING_ENABLED
+
+struct ObjectSelectionVPInput
+{
+	float3 Position			: POSITION;
+};
+
+#ifdef SKINNING_ENABLED
+struct ObjectSelectionVPInputWithSkinning
+{
+	float3 SkinnableVertex	: POSITION;
+	float3 SkinnableNormal	: NORMAL;
+	float4 SkinIndices		: COLOR0;
+	float4 SkinWeights		: TEXCOORD2;
+};
+#endif // SKINNING_ENABLED
+
+// Single Pixel Selection
+
+struct SingleSelectionVPOutput
+{
+	float4 Position		 : POSITION;
+	float3 WorldPosition : TEXCOORD0;
+	float ViewSpaceZ	 : TEXCOORD1;
+};
+
+struct SingleSelectionFPOutput
+{
+	float4 IdColorAndDepth	: FRAG_OUTPUT_COLOR0;
+#ifndef __psp2__
+	float4 FaceNormal		: FRAG_OUTPUT_COLOR1;
+#endif //! __psp2__
+};
+
+#ifdef SKINNING_ENABLED
+// Single selection render vertex shader
+SingleSelectionVPOutput SingleSelectionVP(ObjectSelectionVPInputWithSkinning IN)
+{
+	SingleSelectionVPOutput OUT;
+
+	float3 position = IN.SkinnableVertex.xyz;
+	UNNORMALIZE_SKININDICES(IN.SkinIndices);
+	EvaluateSkinPosition4Bones(position.xyz, IN.SkinWeights, IN.SkinIndices);
+	OUT.Position = mul(scene.ViewProjection, float4(position, 1.0f));
+	OUT.WorldPosition = position;
+	OUT.ViewSpaceZ = mul(scene.View, float4(position, 1.0f)).z;
+	
+	return OUT;
+}
+
+#else // SKINNING_ENABLED
+
+// Single selection render vertex shader
+SingleSelectionVPOutput SingleSelectionVP(ObjectSelectionVPInput IN)
+{
+	SingleSelectionVPOutput OUT;
+
+	float3 position = IN.Position.xyz;
+	OUT.Position = mul(WorldViewProjection, float4(position, 1.0f));
+	OUT.WorldPosition = mul(World, float4(position, 1.0f)).xyz;
+	OUT.ViewSpaceZ = mul(WorldView, float4(position, 1.0f)).z;
+	
+	return OUT;
+}
+#endif // SKINNING_ENABLED
+
+// Single selection render fragment shader
+#if !defined(__psp2__) && !defined(__SCE_CGC__)
+arbfp1 SingleSelectionFPOutput SingleSelectionFP(SingleSelectionVPOutput IN)
+{
+	SingleSelectionFPOutput OUT;
+
+	// Fixed face normal if ddx/ddy is not supported
+	half3 faceNormal = half3(0,1,0);
+
+#ifndef __psp2__
+	OUT.FaceNormal = float4(faceNormal * 0.5f + 0.5f, 1.0f); 
+#endif //! __psp2__
+	OUT.IdColorAndDepth = float4(selectionIDColor, abs(IN.ViewSpaceZ), sign(IN.ViewSpaceZ), 0.0f);
+	return OUT;
+}
+#endif // !defined(__psp2__) && !defined(__SCE_CGC__)
+
+// Single selection render fragment shader
+SingleSelectionFPOutput SingleSelectionFP(SingleSelectionVPOutput IN)
+{
+	SingleSelectionFPOutput OUT;
+	
+	// Face Normal calculation
+	
+	float3 dx = ddx(IN.WorldPosition);
+	float3 dy = ddy(IN.WorldPosition);
+	
+#ifdef __psp2__
+	dy = -dy;
+#endif //! __psp2__
+	float epsilon = 0.00001f;
+	
+	if(length(dx) > epsilon)
+		dx = normalize(dx);
+	if(length(dy) > epsilon)
+		dy = normalize(dy);
+	
+	float3 faceNormal = cross(dx,dy);
+	if(length(faceNormal) > epsilon)
+		faceNormal = normalize(faceNormal);
+
+#ifndef __psp2__
+	OUT.FaceNormal = float4(faceNormal * 0.5f + 0.5f, 1.0f); 
+#endif //! __psp2__
+	OUT.IdColorAndDepth = float4(selectionIDColor, abs(IN.ViewSpaceZ), sign(IN.ViewSpaceZ), 0.0f);
+	return OUT;
+}
+
+technique SingleSelection
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		PolygonMode = Front;
+
+		VertexProgram = compile vp40 SingleSelectionVP();
+		FragmentProgram = compile fp40 SingleSelectionFP();	
+	}
+}
+
+technique SingleSelectionSolid
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		PolygonMode = Solid;
+
+		VertexProgram = compile vp40 SingleSelectionVP();
+		FragmentProgram = compile fp40 SingleSelectionFP();	
+	}
+}
+
+// Multiple Pixel Selection
+
+struct MultipleSelectionVPOutput
+{
+	float4 Position		 : POSITION;
+};
+
+struct MultipleSelectionFPOutput
+{
+	float4 IdColor	     : FRAG_OUTPUT_COLOR0;
+};
+
+#ifdef SKINNING_ENABLED
+
+// Multiple selection render vertex shader
+MultipleSelectionVPOutput MultipleSelectionVP(ObjectSelectionVPInputWithSkinning IN)
+{
+	MultipleSelectionVPOutput OUT;
+
+	float3 position = IN.SkinnableVertex.xyz;
+	UNNORMALIZE_SKININDICES(IN.SkinIndices);
+	EvaluateSkinPosition4Bones(position.xyz, IN.SkinWeights, IN.SkinIndices);
+	OUT.Position = mul(scene.ViewProjection, float4(position, 1.0f));
+	
+	return OUT;
+}
+#else // SKINNING_ENABLED
+
+// Multiple selection render vertex shader
+MultipleSelectionVPOutput MultipleSelectionVP(ObjectSelectionVPInput IN)
+{
+	MultipleSelectionVPOutput OUT;
+
+	OUT.Position = mul(WorldViewProjection, float4(IN.Position.xyz, 1.0f));
+	return OUT;
+}
+#endif // SKINNING_ENABLED
+
+// Multiple selection render fragment shader
+MultipleSelectionFPOutput MultipleSelectionFP()
+{
+	MultipleSelectionFPOutput OUT;
+	
+	OUT.IdColor = multipleSelectionIDColor;
+	return OUT;
+}
+
+technique MultipleSelection
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		PolygonMode = Front;
+
+		VertexProgram = compile vp40 MultipleSelectionVP();
+		FragmentProgram = compile arbfp1 MultipleSelectionFP();
+	}
+}
+
+technique MultipleSelectionSolid
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		PolygonMode = Solid;
+
+		VertexProgram = compile vp40 MultipleSelectionVP();
+		FragmentProgram = compile arbfp1 MultipleSelectionFP();
+	}
+}
+
+/////////////////////////////////////////////////////////////
+
+#ifdef SKINNING_ENABLED
+struct FlatColorVPInputWithSkinning
+{
+#ifdef __SCE_CGC__
+	float3 Position	: POSITION;
+#else //! __SCE__CGC__
+	float3 SkinnableVertex	: POSITION;
+	float3 SkinnableNormal	: NORMAL;
+	float4 SkinIndices		: COLOR0;
+	float4 SkinWeights		: TEXCOORD2;
+#endif //! __SCE_CGC__
+#ifdef INSTANCING_ENABLED
+	InstancingInput instancingInput;
+#endif //! INSTANCING_ENABLED
+};
+
+#ifdef INSTANCING_ENABLED
+void ApplyInstanceTransform(inout FlatColorVPInputWithSkinning IN)
+{
+#ifdef __SCE_CGC__
+	ApplyInstanceTransformVertex(IN.instancingInput, IN.Position);
+#else //! __SCE_CGC__
+	ApplyInstanceTransformVertex(IN.instancingInput, IN.SkinnableVertex.xyz);
+	ApplyInstanceTransformNormal(IN.instancingInput, IN.SkinnableNormal.xyz);
+#endif //! __SCE_CGC__
+}
+#endif //! INSTANCING_ENABLED
+#endif // SKINNING_ENABLED
+
+struct FlatColorVPInput
+{
+	float4 Position			: POSITION;
+#ifdef INSTANCING_ENABLED
+	InstancingInput instancingInput;
+#endif //! INSTANCING_ENABLED
+};
+
+#ifdef INSTANCING_ENABLED
+void ApplyInstanceTransform(inout FlatColorVPInput IN)
+{
+	ApplyInstanceTransformVertex(IN.instancingInput, IN.Position.xyz);
+}
+#endif //! INSTANCING_ENABLED
+
+struct FlatColorVPOutput
+{
+	float4 Position		: POSITION;
+};
+
+
+struct FlatColorFPOutput
+{
+	float4 Color	     : FRAG_OUTPUT_COLOR0;
+};
+
+#ifdef SKINNING_ENABLED
+// Simple vertex shader
+FlatColorVPOutput FlatColorVP(FlatColorVPInputWithSkinning IN)
+{
+	FlatColorVPOutput OUT;
+
+#ifdef __SCE_CGC__
+
+#ifdef INSTANCING_ENABLED
+	ApplyInstanceTransform(IN);
+#endif //! INSTANCING_ENABLED
+	// PlayStation(R)3 does skinning in modifier to object space, so all we need to do here is apply the WorldViewProjection
+	float3 position = IN.Position;
+	OUT.Position = mul(WorldViewProjection, float4(position, 1.0f));
+
+#else //! __SCE_CGC__
+
+	UNNORMALIZE_SKININDICES(IN.SkinIndices);
+	EvaluateSkinPosition4Bones(IN.SkinnableVertex.xyz, IN.SkinWeights, IN.SkinIndices);
+#ifdef INSTANCING_ENABLED
+	ApplyInstanceTransform(IN);
+#endif //! INSTANCING_ENABLED
+	float3 position = IN.SkinnableVertex.xyz;
+	OUT.Position = mul(scene.ViewProjection, float4(position, 1.0f));
+
+#endif //! __SCE_CGC__
+	return OUT;
+}
+
+#else // SKINNING_ENABLED
+
+// Simple vertex shader
+FlatColorVPOutput FlatColorVP(FlatColorVPInput IN)
+{
+	FlatColorVPOutput OUT;
+
+#ifdef INSTANCING_ENABLED
+	ApplyInstanceTransform(IN);
+#endif //! INSTANCING_ENABLED
+
+	OUT.Position = mul(WorldViewProjection, float4(IN.Position.xyz, 1.0f));
+	
+	return OUT;
+}
+#endif // SKINNING_ENABLED
+
+// Simple fragment shader
+FlatColorFPOutput FlatColorFP()
+{
+	FlatColorFPOutput OUT;
+	
+	OUT.Color = constantColor;
+
+	return OUT;
+}
+
+technique FlatColor
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		VertexProgram = compile vp40 FlatColorVP();
+		FragmentProgram = compile fp40 FlatColorFP();	
+	}
+}
+
+technique FlatColorTransparent
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		DepthMask = false;
+		BlendEnable = true;
+		VertexProgram = compile vp40 FlatColorVP();
+		FragmentProgram = compile fp40 FlatColorFP();	
+	}
+}
+
+technique Outline
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		BlendEnable = true;
+		DepthTestEnable = true;
+		DepthFunc = LEqual;
+		PolygonMode = int2(FrontAndBack, Wireframe);
+
+		VertexProgram = compile vp40 FlatColorVP();
+		FragmentProgram = compile fp40 FlatColorFP();	
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+struct ManipulatorVPInput
+{
+	float4 Position		: POSITION;
+};
+
+
+struct ManipulatorVPOutput
+{
+	float4 Position		: POSITION;
+#ifdef __psp2__
+	float Size			: PSIZE;
+#endif //! __psp2__
+};
+
+
+struct ManipulatorFPOutput
+{
+	float4 Color	     : FRAG_OUTPUT_COLOR0;
+};
+
+// Simple vertex shader.
+ManipulatorVPOutput ManipulatorVP(ManipulatorVPInput IN)
+{
+	ManipulatorVPOutput OUT;
+
+	OUT.Position = mul(WorldViewProjection, float4(IN.Position.xyz, 1));
+	OUT.Position.z = 0;
+#ifdef __psp2__
+	OUT.Size = 3.0f;
+#endif //! __psp2__
+	
+	return OUT;
+}
+
+// Simple fragment shader.
+ManipulatorFPOutput ManipulatorFP()
+{
+	ManipulatorFPOutput OUT;
+	
+	OUT.Color = constantColor;
+
+	return OUT;
+}
+
+technique ManipulatorAxis
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		DepthFunc = Always;
+		DepthMask = true;
+		BlendEnable = true;
+		PolygonMode = Solid;
+		CullFaceEnable = false;
+		VertexProgram = compile vp40 ManipulatorVP();
+		FragmentProgram = compile fp40 ManipulatorFP();	
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+// WorldAxes vertex shader
+FlatColorVPOutput WorldAxesVP(FlatColorVPInput IN)
+{
+	FlatColorVPOutput OUT;
+
+	float3x3 WorldViewRot = float3x3(WorldView);
+
+	// Set the rotation matrix
+	OUT.Position = mul(scene.Projection, float4(mul(WorldViewRot, IN.Position.xyz), 1.0f));
+
+	// Offset to bottom left of screen.
+	float aspect = scene.Projection._m11/scene.Projection._m00;
+	float maintainSizeScale = 720.0f/scene.ViewportWidthHeight.y;
+	float inset = 0.2f * maintainSizeScale;
+	float4 screenOffset = float4(-1.0f + inset/aspect, -1.0f + inset, 0.0f, 0.0f);
+	OUT.Position = OUT.Position + screenOffset;
+	OUT.Position.z = -1.0f;
+	
+	return OUT;
+}
+
+technique WorldAxes
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		BlendEnable = true;
+		VertexProgram = compile vp40 WorldAxesVP();
+		FragmentProgram = compile fp40 FlatColorFP();	
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+struct CameraManipulatorVPInput
+{
+	float4 Position		: POSITION;
+	float4 Normal		: NORMAL;
+};
+
+struct CameraManipulatorVPOutput
+{
+	float4 Position		: POSITION;
+	float4 ViewSpacePos	: TEXCOORD0;	
+};
+
+// Camera manipulator vertex shader.
+CameraManipulatorVPOutput CameraManipulatorVP(CameraManipulatorVPInput IN)
+{
+	CameraManipulatorVPOutput OUT;
+
+	// Set the rotation matrix
+	float3x3 WorldViewRot = float3x3(WorldView);
+
+	OUT.ViewSpacePos = float4(mul(WorldViewRot, IN.Position.xyz), 1.0f);
+	OUT.Position = mul(scene.Projection, OUT.ViewSpacePos);
+
+	// Offset to top right of screen.
+	float aspect = scene.Projection._m11/scene.Projection._m00;
+	float maintainSizeScale = 720.0f/scene.ViewportWidthHeight.y;
+	float inset = 0.2f * maintainSizeScale;
+	float4 screenOffset = float4(1.0f - inset/aspect, 1.0f - inset, 0.0f, 0.0f);
+	OUT.Position = OUT.Position + screenOffset;
+
+	// Set the depth value.
+	OUT.Position.z = -OUT.ViewSpacePos.z / 10000.0f;
+
+	return OUT;
+}
+
+// Camera manipulator lit fragment shader
+#if !defined(__psp2__) && !defined(__SCE_CGC__)
+arbfp1 ManipulatorFPOutput CameraManipulatorLitFP(CameraManipulatorVPOutput IN)
+{
+	ManipulatorFPOutput OUT;
+	
+	// Do lighting in camera space.
+	float3 P = IN.ViewSpacePos.xyz;
+	float3 N = float3(0,1,0);	// Fixed face normal if ddx/ddy is not supported
+	float3 L = float3(0,0,1);
+
+	// Taking the absolute value of the dot product because ddy() is flipped on GXM meaning N would be negated.
+	OUT.Color = constantColor * abs(dot(N,L));
+
+	return OUT;
+}
+#endif // !defined(__psp2__) && !defined(__SCE_CGC__)
+
+// Camera manipulator lit fragment shader
+ManipulatorFPOutput CameraManipulatorLitFP(CameraManipulatorVPOutput IN)
+{
+	ManipulatorFPOutput OUT;
+	
+	// Do lighting in camera space.
+	float3 P = IN.ViewSpacePos.xyz;
+	float3 N = cross(normalize(ddx(P)), normalize(ddy(P)));
+	float3 L = float3(0,0,1);
+
+	// Taking the absolute value of the dot product because ddy() is flipped on GXM meaning N would be negated.
+	OUT.Color = constantColor * abs(dot(N,L));
+
+	return OUT;
+}
+/*
+technique CameraManipulatorLit
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		DepthFunc = lessequal;
+		DepthTestEnable = true;
+		DepthMask = true;
+		BlendEnable = false;
+		PolygonMode = Solid;
+		VertexProgram = compile vp40 CameraManipulatorVP();
+		FragmentProgram = compile fp40 CameraManipulatorLitFP();	
+	}
+}
+*/
+// Flat fragment shader
+ManipulatorFPOutput CameraManipulatorFlatFP(CameraManipulatorVPOutput IN)
+{
+	ManipulatorFPOutput OUT;
+	
+	OUT.Color = constantColor;
+
+	return OUT;
+}
+/*
+technique CameraManipulatorFlat
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		DepthFunc = lessequal;
+		DepthTestEnable = true;
+		DepthMask = true;
+		BlendEnable = false;
+		PolygonMode = Solid;
+		VertexProgram = compile vp40 CameraManipulatorVP();
+		FragmentProgram = compile fp40 CameraManipulatorFlatFP();	
+	}
+}
+*/
+// Camera Indicator Selection vertex shader
+SingleSelectionVPOutput CameraIndicatorSelectionVP(ObjectSelectionVPInput IN)
+{
+	SingleSelectionVPOutput OUT;
+
+	float3x3 WorldViewRot = float3x3(WorldView);
+	OUT.WorldPosition = mul(WorldViewRot, IN.Position.xyz);
+	OUT.Position = mul(scene.Projection, float4(OUT.WorldPosition, 1.0f));
+	OUT.Position.z = 0.0f;
+	OUT.ViewSpaceZ = 0.0f;
+
+	return OUT;
+}
+
+// Camera Indicator Selection fragment shader
+SingleSelectionFPOutput CameraIndicatorSelectionFP(SingleSelectionVPOutput IN)
+{
+	SingleSelectionFPOutput OUT;
+
+#ifndef __psp2__
+	OUT.FaceNormal = float4(0.0f, 0.0f, 1.0f, 0.0f);
+#endif //! __psp2__
+	OUT.IdColorAndDepth = float4(selectionIDColor, -1.0f, 0.0f, 0.0f);
+
+	return OUT;
+}
+
+technique SingleSelectionCameraIndicator
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		PolygonMode = Solid;
+
+		VertexProgram = compile vp40 CameraIndicatorSelectionVP();
+		FragmentProgram = compile fp40 CameraIndicatorSelectionFP();	
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+struct ManipulatorHiddenLineVPOutput
+{
+	float4 Position		: POSITION;
+	float3 ViewSpaceCentreToPos : TEXCOORD0;
+	float3 ViewSpaceCentreToCam : TEXCOORD1;
+};
+
+// Simple vertex shader which doesnt project.
+ManipulatorHiddenLineVPOutput ManipulatorHiddenLineVP(ManipulatorVPInput IN)
+{
+	ManipulatorHiddenLineVPOutput OUT;
+	OUT.Position = mul(WorldViewProjection, float4(IN.Position.xyz, 1));
+	OUT.Position.z = 0.0f;
+	OUT.ViewSpaceCentreToPos = normalize( mul(scene.View,float4(normalize( mul(World, float4(IN.Position.xyz, 1)).xyz - mul(World, float4(0,0,0,1)).xyz ),0) ) ).xyz;
+#ifdef ORTHO_CAMERA
+	OUT.ViewSpaceCentreToCam = float3(0,0,1);
+#else // ORTHO_CAMERA
+	OUT.ViewSpaceCentreToCam = -normalize( mul(scene.View,mul(World,float4(0,0,0,1))).xyz);
+#endif // ORTHO_CAMERA
+	return OUT;
+}
+
+// Simple fragment shader
+ManipulatorFPOutput ManipulatorHiddenLineFP(ManipulatorHiddenLineVPOutput IN)
+{
+	ManipulatorFPOutput OUT;
+	
+	half drawMeOrNot = dot(IN.ViewSpaceCentreToPos, IN.ViewSpaceCentreToCam);
+
+	half alpha = saturate(drawMeOrNot * 5.0f);
+	clip(alpha);
+	OUT.Color = constantColor;
+	OUT.Color.w *= alpha;
+	
+	return OUT;
+}
+
+technique ManipulatorAxisHiddenLine
+<
+	string VpIgnoreContextSwitches[] = {"SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		DepthFunc = Always;
+		DepthMask = true;
+		BlendEnable = true;
+		VertexProgram = compile vp40 ManipulatorHiddenLineVP();
+		FragmentProgram = compile fp40 ManipulatorHiddenLineFP();	
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
+struct MultipleSelectionHiddenLineVPOutput
+{
+	float4 Position		 : POSITION;
+	float3 ViewSpaceCentreToPos : TEXCOORD1;
+	float3 ViewSpaceCentreToCam : TEXCOORD2;
+};
+
+struct MultipleSelectionHiddenLineFPOutput
+{
+	float4 IdColor	     : FRAG_OUTPUT_COLOR0;
+};
+
+// Multiple selection render vertex shader
+MultipleSelectionHiddenLineVPOutput MultipleSelectionHiddenLineVP(ObjectSelectionVPInput IN)
+{
+	MultipleSelectionHiddenLineVPOutput OUT;
+
+	// Get the vectors for needed for hidden line clipping
+	OUT.ViewSpaceCentreToPos = normalize( mul(scene.View,float4(normalize( mul(World, float4(IN.Position.xyz, 1)).xyz - mul(World, float4(0,0,0,1)).xyz ),0) ) ).xyz;
+#ifdef ORTHO_CAMERA
+	OUT.ViewSpaceCentreToCam = float3(0,0,1);
+#else // ORTHO_CAMERA
+	OUT.ViewSpaceCentreToCam = -normalize( mul(scene.View,mul(World,float4(0,0,0,1))).xyz);
+#endif // ORTHO_CAMERA
+
+	OUT.Position = mul(WorldViewProjection, float4(IN.Position.xyz, 1.0f));
+	return OUT;
+}
+
+// Multiple selection render fragment shader
+MultipleSelectionHiddenLineFPOutput MultipleSelectionHiddenLineFP(MultipleSelectionHiddenLineVPOutput IN)
+{
+	MultipleSelectionHiddenLineFPOutput OUT;
+
+	// Clip the hidden lines
+	half drawMeOrNot = dot(IN.ViewSpaceCentreToPos, IN.ViewSpaceCentreToCam);
+	half alpha = drawMeOrNot;
+	clip(alpha + 0.1f);
+	
+	OUT.IdColor = multipleSelectionIDColor;
+
+	return OUT;
+}
+
+technique MultipleSelectionHiddenLine
+<
+	string VpIgnoreContextSwitches[] = {"SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		DepthFunc = lessequal;
+		DepthMask = true;
+
+		VertexProgram = compile vp40 MultipleSelectionHiddenLineVP();
+		FragmentProgram = compile fp40 MultipleSelectionHiddenLineFP();
+	}		
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
+struct SingleSelectionHiddenLineVPOutput
+{
+	float4 Position		 : POSITION;
+	float3 WorldPosition : TEXCOORD0;
+	float ViewSpaceZ	 : TEXCOORD1;
+
+	float3 ViewSpaceCentreToPos : TEXCOORD2;
+	float3 ViewSpaceCentreToCam : TEXCOORD3;
+};
+
+struct SingleSelectionHiddenLineFPOutput
+{
+	float IdColor	     : FRAG_OUTPUT_COLOR0;
+#ifndef __psp2__
+	float3 FaceNormal	 : FRAG_OUTPUT_COLOR1;
+	float Depth			 : FRAG_OUTPUT_COLOR2;
+#endif //! __psp2__
+};
+
+// Single selection render vertex shader
+SingleSelectionHiddenLineVPOutput SingleSelectionHiddenLineVP(ObjectSelectionVPInput IN)
+{
+	SingleSelectionHiddenLineVPOutput OUT;
+	
+	OUT.Position = mul(WorldViewProjection, float4(IN.Position.xyz, 1));
+	OUT.Position.z = -1.0f;
+	OUT.ViewSpaceCentreToPos = normalize( mul(scene.View,float4(normalize( mul(World, float4(IN.Position.xyz, 1)).xyz - mul(World, float4(0,0,0,1)).xyz ),0) ) ).xyz;
+#ifdef ORTHO_CAMERA
+	OUT.ViewSpaceCentreToCam = float3(0,0,1);
+#else // ORTHO_CAMERA
+	OUT.ViewSpaceCentreToCam = -normalize( mul(scene.View,mul(World,float4(0,0,0,1))).xyz);
+#endif // ORTHO_CAMERA
+
+	OUT.WorldPosition = mul(World, float4(IN.Position.xyz, 1.0f)).xyz;
+	OUT.ViewSpaceZ = mul(WorldView, float4(IN.Position.xyz, 1)).z;
+	
+	return OUT;
+}
+
+// Single selection render fragment shader
+#if !defined(__psp2__) && !defined(__SCE_CGC__)
+arbfp1 SingleSelectionHiddenLineFPOutput SingleSelectionHiddenLineFP(SingleSelectionHiddenLineVPOutput IN)
+{
+	SingleSelectionHiddenLineFPOutput OUT;
+	
+	half drawMeOrNot = dot(IN.ViewSpaceCentreToPos, IN.ViewSpaceCentreToCam);
+
+	half alpha = drawMeOrNot;
+	clip(alpha);
+	OUT.IdColor = selectionIDColor;
+
+	// Fixed face normal if ddx/ddy is not supported
+	half3 faceNormal = half3(0,1,0);
+#ifndef __psp2__
+	OUT.FaceNormal = float3(faceNormal * 0.5f + 0.5f); 
+	OUT.Depth = abs(IN.ViewSpaceZ);
+#endif //! __psp2
+
+	return OUT;
+}
+#endif // !defined(__psp2__) && !defined(__SCE_CGC__)
+
+// Single selection render fragment shader
+SingleSelectionHiddenLineFPOutput SingleSelectionHiddenLineFP(SingleSelectionHiddenLineVPOutput IN)
+{
+	SingleSelectionHiddenLineFPOutput OUT;
+	
+	half drawMeOrNot = dot(IN.ViewSpaceCentreToPos, IN.ViewSpaceCentreToCam);
+
+	half alpha = drawMeOrNot;
+	clip(alpha);
+	OUT.IdColor = selectionIDColor;
+
+	// Face Normal calculation
+	half3 faceNormal = normalize(cross(normalize(ddx(IN.WorldPosition)), normalize(ddy(IN.WorldPosition))));
+#ifndef __psp2__
+	OUT.FaceNormal = float3(faceNormal * 0.5f + 0.5f); 
+	OUT.Depth = abs(IN.ViewSpaceZ);
+#endif //! __psp2
+
+	return OUT;
+}
+
+technique SingleSelectionHiddenLine
+<
+	string VpIgnoreContextSwitches[] = {"SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		DepthFunc = lessequal;
+		DepthMask = true;
+
+		VertexProgram = compile vp40 SingleSelectionHiddenLineVP();
+		FragmentProgram = compile fp40 SingleSelectionHiddenLineFP();	
+	}		
+}
+//////////////////////////////////////////////////////////////////////////////
+
+// Simple vertex shader.
+struct GridVPOutput
+{
+	float4 Position		: POSITION;
+	float3 ViewPosition : TEXCOORD0;
+	float4 DepthPos		: TEXCOORD1;
+};
+
+GridVPOutput RenderGridVP(float4 Position	: POSITION)
+{
+	GridVPOutput Out;
+	Out.Position = mul(WorldViewProjection, float4(Position.xyz, 1));
+	float4 viewPos = mul(WorldView, float4(Position.xyz, 1));
+	Out.ViewPosition = viewPos.xyz;
+
+	viewPos.z -= 0.1f;
+	Out.DepthPos = mul(scene.Projection, viewPos);
+
+	return Out;
+}
+
+// Simple fragment shader
+float4 RenderGridFP(GridVPOutput In, out float depth : FRAG_OUTPUT_DEPTH) : FRAG_OUTPUT_COLOR0
+{
+	float far=1;
+	float near=0;
+	float ndc_depth = In.DepthPos.z / In.DepthPos.w;
+	depth = (((far-near) * ndc_depth) + near + far) / 2.0;
+	
+	float dist = length(In.ViewPosition);
+	float fadeValue = 1.0f - saturate((dist - GridFadeStartDistance) * GridFadeDistanceScale);
+
+	return constantColor * float4(1.0f,1.0f,1.0f,fadeValue);
+}
+
+technique RenderGrid
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		DepthFunc = less;
+		DepthMask = true;
+		BlendEnable = true;
+		BlendFunc = {SrcAlpha,OneMinusSrcAlpha};
+		VertexProgram = compile vp40 RenderGridVP();
+		FragmentProgram = compile fp40 RenderGridFP();	
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+technique RenderBoundBox
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass main
+	{
+		DepthFunc = lessequal;
+		DepthMask = false;
+		BlendEnable = true;
+		BlendFunc = {SrcAlpha,OneMinusSrcAlpha};
+		VertexProgram = compile vp40 RenderGridVP();
+		FragmentProgram = compile fp40 RenderGridFP();	
+	}
+}
+
+// Simple vertex shader.
+struct RenderTransparentVPOutput
+{
+	float4 Position		: POSITION;
+};
+
+RenderTransparentVPOutput RenderTransparentVP(float4 Position	: POSITION)
+{
+	RenderTransparentVPOutput Out;
+	Out.Position = mul(WorldViewProjection, float4(Position.xyz, 1));
+	return Out;
+}
+// Simple fragment shader
+float4 RenderTransparentFP() : FRAG_OUTPUT_COLOR0
+{
+	return constantColor;
+}
+technique RenderTransparentPass
+<
+	string PhyreRenderPass = "Transparent";
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass pass0
+	{
+		DepthTestEnable=true;
+		DepthFunc = LEqual;
+		DepthMask = true;	
+		BlendEnable = false;
+		colorWriteEnable = bool4(true,true,true,true);
+		VertexProgram = compile vp40 RenderTransparentVP();
+		FragmentProgram = compile fp40 RenderTransparentFP();
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+sampler2D BitmapFontTexture;
+float3 textColor = { 1.0f, 1.0f, 1.0f };
+float CameraAspectRatio;
+
+struct VPInput
+{
+	float2 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct VPOutput
+{
+	float4 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct FPInput
+{
+	float2 uv			: TEXCOORD0;
+};
+
+VPOutput TextVP(VPInput IN)
+{
+	VPOutput OUT;
+	
+	OUT.position = mul(World, float4(IN.position.xy, 0.0f, 1.0f));
+	OUT.position.x *= CameraAspectRatio;
+	OUT.uv = IN.uv;
+	
+	return OUT;
+}
+
+float4 TextFP(FPInput IN) : FRAG_OUTPUT_COLOR0
+{
+	return float4(textColor, tex2D(BitmapFontTexture, IN.uv).r);
+}
+
+technique RenderText_AlphaBlend
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 TextVP();
+		FragmentProgram = compile arbfp1 TextFP();
+		ColorMask = bool4(true, true, true, true);
+		DepthMask = false;
+		DepthTestEnable = false;
+		BlendEnable = true;
+		BlendFunc = {SrcAlpha, OneMinusSrcAlpha};
+	}
+}
+
+////////////////////////////////////
+
+// For copying the postprocess effects to the main screen when game edit is used
+
+sampler2D GEColorBuffer;
+
+struct GEFullscreenVertexIn
+{
+	float3 vertex		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+struct GEFullscreenVertexOut
+{
+	float4 position		: POSITION;
+	float2 uv			: TEXCOORD0;
+};
+struct GEFullscreenFragIn
+{
+	float2	uv			: TEXCOORD0;
+};
+
+GEFullscreenVertexOut GameEditFullscreenVP( GEFullscreenVertexIn input)
+{
+	GEFullscreenVertexOut output;
+
+	output.position = float4(input.vertex.xy, 1, 1);
+	output.uv = input.uv;
+
+	return output;
+}
+
+half4 GameEditCopyBufferFP(GEFullscreenFragIn input) : FRAG_OUTPUT_COLOR0
+{
+	return h4tex2D(GEColorBuffer, input.uv);
+}
+
+technique GameEditCopyBuffer
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass p1
+	{
+		VertexProgram = compile arbvp1 GameEditFullscreenVP();
+		FragmentProgram = compile arbfp1 GameEditCopyBufferFP();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+		blendEnable = false;
+	}
+}
+
+//////////////////////////////////////////////////////////
+
+// For rendering a 2D texture.
+
+sampler2D TextureSampler = sampler_state
+{
+	MagFilter = Linear;
+	MinFilter = LinearMipmapLinear;
+};
+
+struct GETexture2DInput
+{
+	float4 Position		: POSITION;
+	float2 Uv			: TEXCOORD0;
+};
+
+struct GETexture2DOutput
+{
+	float4 Position		: POSITION;
+	float2 Uv			: TEXCOORD0;
+};
+
+GETexture2DOutput GERenderTextureVS(GETexture2DInput IN)
+{
+	GETexture2DOutput OUT;
+	OUT.Uv = IN.Uv;
+	OUT.Position = mul(WorldViewProjection, float4(IN.Position.xyz, 1.0f));
+	
+	return OUT;
+}
+
+half4 GERenderTextureFP(GETexture2DOutput IN) : FRAG_OUTPUT_COLOR0
+{
+	half4 texValue = h4tex2D(TextureSampler, IN.Uv);
+
+	return texValue;
+}
+
+technique GERenderTexture2D
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass pass0
+	{
+		DepthTestEnable = true;
+		DepthMask = true;
+		DepthFunc = LEqual;
+		BlendEnable = true;
+		ColorMask = bool4(true, true, true, true);
+		CullFaceEnable = false;
+		VertexProgram = compile vp40 GERenderTextureVS();
+		FragmentProgram = compile fp40 GERenderTextureFP();
+	}
+}
+
+//////////////////////////////////////////////////////////
+
+// For rendering a 3D texture.
+
+#ifndef __psp2__
+sampler3D GETexture3D;	// PlayStation(R)Vita does not support 3D texture lookups
+#endif //! __psp2__
+
+struct GETexture3DVPInput
+{
+	float3 Vertex	    : POSITION;
+	float3 Uv			: TEXCOORD0;
+};
+
+struct GETexture3DVPOutput
+{
+	float4 Position		: POSITION;
+	float3 Uv			: TEXCOORD0;
+};
+
+struct GETexture3DFPInput
+{
+	float3 Uv			: TEXCOORD0;
+};
+
+GETexture3DVPOutput GERenderTexture3DVP(GETexture3DVPInput IN)
+{
+	GETexture3DVPOutput OUT;
+	OUT.Position = mul(WorldViewProjection, float4(IN.Vertex, 1.0f));
+	OUT.Uv = IN.Uv;
+	return OUT;
+}
+
+float4 GERenderTexture3DFP(GETexture3DFPInput IN) : FRAG_OUTPUT_COLOR0
+{
+#ifndef __psp2__
+	return tex3D(GETexture3D, IN.Uv);
+#else //! __psp2__
+	return float4(0.0f, 0.0f, 0.0f, 1.0f);
+#endif //! __psp2__
+}
+
+technique GERenderTexture3D
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass pass0
+	{
+		VertexProgram = compile vp40 GERenderTexture3DVP();
+		FragmentProgram = compile fp40 GERenderTexture3DFP();
+		DepthMask = true;
+		DepthTestEnable = true;
+		CullFaceEnable = false;
+	}
+}
+
+//////////////////////////////////////////////////////////
+
+// For rendering a cubemap texture.
+
+samplerCUBE GECubemapTexture;
+
+struct GECubemapVPInput
+{
+	float3 vertex	    : POSITION;
+};
+
+struct GECubemapVPOutput
+{
+	float4 position		: POSITION;
+	float3 uv			: TEXCOORD0;
+};
+
+struct GECubemapFPInput
+{
+	float3 uv			: TEXCOORD0;
+};
+
+GECubemapVPOutput GERenderCubemapVP(GECubemapVPInput IN)
+{
+	GECubemapVPOutput OUT;
+	OUT.position = mul(WorldViewProjection, float4(IN.vertex, 1.0f));
+	OUT.uv = IN.vertex.xyz;
+	return OUT;
+}
+
+float4 GERenderCubemapFP(GECubemapFPInput IN) : FRAG_OUTPUT_COLOR0
+{
+	return texCUBE(GECubemapTexture, IN.uv);
+}
+
+technique GERenderTextureCubemap
+<
+	string VpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+	string FpIgnoreContextSwitches[] = {"ORTHO_CAMERA", "SKINNING_ENABLED", "INSTANCING_ENABLED"};
+>
+{
+	pass pass0
+	{
+		VertexProgram = compile vp40 GERenderCubemapVP();
+		FragmentProgram = compile fp40 GERenderCubemapFP();
+		DepthMask = true;
+		DepthTestEnable = true;
+		CullFaceEnable = false;
+	}		
+}

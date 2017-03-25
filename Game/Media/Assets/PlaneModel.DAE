@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>b1032464</author>
+      <authoring_tool>3dsMax 19 - Feeling ColladaMax v3.04C PhyreEngine(TM) 3.18.0.0.</authoring_tool>
+      <comments>ColladaMax Export Options: ExportNormals=1;ExportEPolyAsTriangles=1;ExportXRefs=1;ExportSelected=0;ExportTangents=1;ExportAnimations=0;SampleAnim=1;ExportAnimClip=0;BakeMatrices=0;ExportRelativePaths=1;AnimStart=0;AnimEnd=16000;</comments>
+      <source_data>file:///C:/Users/B1032464/Desktop/Model_Data/Plane_Mine.max</source_data>
+    </contributor>
+    <created>2017-03-10T20:56:42Z</created>
+    <modified>2017-03-10T20:56:46Z</modified>
+    <unit meter="0.025399999693036" name="inch"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_materials>
+    <material id="ColorMaterial_E5A6D700" name="ColorMaterial_E5A6D700">
+      <instance_effect url="#ColorMaterial_E5A6D700-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="ColorMaterial_E5A6D700-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0.8980392217636108 0.6509804129600525 0.843137264251709 1</color>
+            </ambient>
+            <diffuse>
+              <color>0.8980392217636108 0.6509804129600525 0.843137264251709 1</color>
+            </diffuse>
+            <specular>
+              <color>1 1 1 1</color>
+            </specular>
+            <shininess>
+              <float>10</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1</float>
+            </index_of_refraction>
+          </phong>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0.2000000029802322</float>
+              </spec_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="Plane001-mesh" name="Plane001">
+      <mesh>
+        <source id="Plane001-mesh-positions">
+          <float_array id="Plane001-mesh-positions-array" count="12">-0.5 -0.5 0 0.5 -0.5 0 -0.5 0.5 0 0.5 0.5 0</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-positions-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-normals">
+          <float_array id="Plane001-mesh-normals-array" count="12">0 0 1 0 0 1 0 0 1 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-normals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-map-channel1">
+          <float_array id="Plane001-mesh-map-channel1-array" count="12">0 0 0 1 0 0 0 1 0 1 1 0</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-map-channel1-array" count="4" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-map-channel2">
+          <float_array id="Plane001-mesh-map-channel2-array" count="12">0 0 0.5 1 0 0.5 0 1 0.5 1 1 0.5</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-map-channel2-array" count="4" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-map-channel1-tangents">
+          <float_array id="Plane001-mesh-map-channel1-tangents-array" count="12">1 0 0 1 0 0 1 0 0 1 0 0</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-map-channel1-tangents-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-map-channel1-binormals">
+          <float_array id="Plane001-mesh-map-channel1-binormals-array" count="12">0 1 0 0 1 0 0 1 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-map-channel1-binormals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-map-channel2-tangents">
+          <float_array id="Plane001-mesh-map-channel2-tangents-array" count="12">1 0 0 1 0 0 1 0 0 1 0 0</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-map-channel2-tangents-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane001-mesh-map-channel2-binormals">
+          <float_array id="Plane001-mesh-map-channel2-binormals-array" count="12">0 1 0 0 1 0 0 1 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#Plane001-mesh-map-channel2-binormals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Plane001-mesh-vertices">
+          <input semantic="POSITION" source="#Plane001-mesh-positions"/>
+        </vertices>
+        <triangles material="ColorMaterial_E5A6D700" count="2">
+          <input semantic="VERTEX" source="#Plane001-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Plane001-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Plane001-mesh-map-channel1" offset="2" set="1"/>
+          <input semantic="TEXCOORD" source="#Plane001-mesh-map-channel2" offset="3" set="2"/>
+          <input semantic="TEXTANGENT" source="#Plane001-mesh-map-channel1-tangents" offset="4" set="1"/>
+          <input semantic="TEXBINORMAL" source="#Plane001-mesh-map-channel1-binormals" offset="5" set="1"/>
+          <input semantic="TEXTANGENT" source="#Plane001-mesh-map-channel2-tangents" offset="6" set="2"/>
+          <input semantic="TEXBINORMAL" source="#Plane001-mesh-map-channel2-binormals" offset="7" set="2"/>
+          <p>2 0 2 2 0 0 0 0 0 1 0 0 1 1 1 1 3 2 3 3 2 2 2 2 1 3 1 1 3 3 3 3 3 2 3 3 2 2 2 2 0 1 0 0 1 1 1 1</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Plane_Mine.max" name="Plane_Mine_max">
+      <node id="Plane001" name="Plane001" type="NODE">
+        <translate>0 0 0</translate>
+        <rotate sid="RotZ">0 0 1 0</rotate>
+        <rotate sid="RotY">0 1 0 0</rotate>
+        <rotate sid="RotX">1 0 0 0</rotate>
+        <scale>1 1 1</scale>
+        <instance_geometry url="#Plane001-mesh">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="ColorMaterial_E5A6D700" target="#ColorMaterial_E5A6D700"/>
+            </technique_common>
+          </bind_material>
+          <extra>
+            <technique profile="PHYRE">
+              <object_render_properties castsShadows="1" receiveShadows="1" visibleInReflections="1" visibleInRefractions="1" motionBlurEnabled="0"/>
+            </technique>
+          </extra>
+        </instance_geometry>
+        <extra>
+          <technique profile="FCOLLADA">
+            <dynamic_attributes>
+              <mr_DisplacementUseGlobalSettings type="bool">1</mr_DisplacementUseGlobalSettings>
+              <mr_ViewDependentDisplacement type="bool">1</mr_ViewDependentDisplacement>
+              <mr_DisplacementMethod type="int">0</mr_DisplacementMethod>
+              <mr_Smoothing type="bool">1</mr_Smoothing>
+              <mr_DisplacementMaxLevel type="int">6</mr_DisplacementMaxLevel>
+              <mr_DisplacementEdgeLength type="float">2</mr_DisplacementEdgeLength>
+              <mr_MaxDisplace type="float">20</mr_MaxDisplace>
+              <mr_ParametricSubdivisionLevel type="int">5</mr_ParametricSubdivisionLevel>
+            </dynamic_attributes>
+          </technique>
+        </extra>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0</start_time>
+          <end_time>3.333333492279053</end_time>
+        </technique>
+      </extra>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30</frame_rate>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Plane_Mine.max"/>
+  </scene>
+</COLLADA>

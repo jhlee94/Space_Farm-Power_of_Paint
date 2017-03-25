@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<annotations>
+  <!--
+  Configuration file to define new component/property annotations.
+  Usage:
+  <dynamictype name="ComponentName">
+    <annotation name="SemanticName" value="yourvalue" />
+    <member name="m_name">
+      <annotation name="SemanticName" value="yourvalue" />
+    </member>
+  </dynamictype>
+  -->
+</annotations>

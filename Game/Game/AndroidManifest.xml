@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="net.scee.phyre.tutorial1"
+>
+    <uses-sdk
+        android:minSdkVersion="9"
+    />
+    <uses-feature
+        android:glEsVersion="0x00020000" android:required="true"
+    />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <application
+        android:label="Tutorial1"
+        android:hasCode="true"
+	>
+		<activity android:name="net.scee.phyre.PhyreFrameworkActivity"
+              android:label="Tutorial1"
+              android:configChanges="orientation|keyboardHidden"
+              android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <meta-data android:name="android.app.lib_name" android:value="Tutorial1" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>B6041269</author>
+      <authoring_tool>Maya2017 | ColladaMaya v3.04C PhyreEngine(TM) 3.18.0.0</authoring_tool>
+      <comments>Collada Maya Export Options: bakeTransforms=1;exportPolygonMeshes=1;relativePaths=1;bakeLighting=0;isSampling=1;
+curveConstrainSampling=0;removeStaticCurves=0;exportCameraAsLookat=0;
+exportLights=1;exportCameras=1;exportDefaultCameras=0;exportJointsAndSkin=1;
+exportAnimations=1;exportTriangles=0;exportInvisibleNodes=0;
+exportNormals=1;exportTexCoords=1;
+exportVertexColors=1;exportVertexColorsAnimation=0;exportTangents=0;
+exportTexTangents=1;exportConstraints=0;exportPhysics=1;exportXRefs=0;instanceDuplicateCurves=1;
+dereferenceXRefs=1;cameraXFov=0;cameraYFov=1;
+animationTime=0.041667</comments>
+      <source_data>file:///D:/Work/Team Projects/CSC8506/GameProject/Game/Media/Models/lol1.dae</source_data>
+    </contributor>
+    <created>2017-03-16T16:56:25Z</created>
+    <modified>2017-03-16T16:56:25Z</modified>
+    <unit meter="0.0099999997764825" name="centimeter"/>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_animations>
+    <animation id="pCube1.matrix">
+      <source id="pCube1.matrix_pCube1_transform-input">
+        <float_array id="pCube1.matrix_pCube1_transform-input-array" count="2">0.0416666679084301 8.333333015441895</float_array>
+        <technique_common>
+          <accessor source="#pCube1.matrix_pCube1_transform-input-array" count="2" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+        <technique profile="MAYA">
+          <pre_infinity>CONSTANT</pre_infinity>
+          <post_infinity>CONSTANT</post_infinity>
+        </technique>
+      </source>
+      <source id="pCube1.matrix_pCube1_transform-output">
+        <float_array id="pCube1.matrix_pCube1_transform-output-array" count="32">5.109739780426025 0 0 0 0 5.109739780426025 0 0 0 0 5.109739780426025 0 0 0 0 1 5.109739780426025 0 0 0 0 5.109739780426025 0 0 0 0 5.109739780426025 0 0 0 0 1</float_array>
+        <technique_common>
+          <accessor source="#pCube1.matrix_pCube1_transform-output-array" count="2" stride="16">
+            <param name="TRANSFORM" type="float4x4"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="pCube1.matrix_pCube1_transform-interpolations">
+        <Name_array id="pCube1.matrix_pCube1_transform-interpolations-array" count="2">LINEAR LINEAR</Name_array>
+        <technique_common>
+          <accessor source="#pCube1.matrix_pCube1_transform-interpolations-array" count="2" stride="1">
+            <param name="INTERPOLATION" type="Name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="pCube1.matrix_pCube1_transform-sampler">
+        <input semantic="INPUT" source="#pCube1.matrix_pCube1_transform-input"/>
+        <input semantic="OUTPUT" source="#pCube1.matrix_pCube1_transform-output"/>
+        <input semantic="INTERPOLATION" source="#pCube1.matrix_pCube1_transform-interpolations"/>
+      </sampler>
+      <channel source="#pCube1.matrix_pCube1_transform-sampler" target="pCube1/transform"/>
+    </animation>
+  </library_animations>
+  <library_physics_materials>
+    <physics_material id="rigidBody1-material" name="rigidBody1-material">
+      <technique_common>
+        <dynamic_friction>0.2000000029802322</dynamic_friction>
+        <restitution>0.6000000238418579</restitution>
+        <static_friction>0.2000000029802322</static_friction>
+      </technique_common>
+    </physics_material>
+  </library_physics_materials>
+  <library_physics_models>
+    <physics_model id="MayaNativePhysicsModel">
+      <rigid_body name="rigidBody1" sid="rigidBody1">
+        <technique_common>
+          <dynamic>0</dynamic>
+          <mass>1</mass>
+          <mass_frame>
+            <translate>0 0 0</translate>
+            <rotate>1 0 0 0</rotate>
+          </mass_frame>
+          <instance_physics_material url="#rigidBody1-material"/>
+          <shape>
+            <hollow>true</hollow>
+            <mass>1</mass>
+            <instance_geometry url="#pCubeShape1"/>
+          </shape>
+        </technique_common>
+        <technique profile="MAYA">
+          <damping>0</damping>
+        </technique>
+      </rigid_body>
+    </physics_model>
+  </library_physics_models>
+  <library_physics_scenes>
+    <physics_scene id="MayaNativePhysicsScene">
+      <instance_physics_model url="#MayaNativePhysicsModel">
+        <instance_rigid_body target="#pCube1" body="rigidBody1">
+          <technique_common>
+            <angular_velocity>0 0 0</angular_velocity>
+            <velocity>0 0 0</velocity>
+            <dynamic>0</dynamic>
+            <mass>1</mass>
+            <mass_frame>
+              <translate>0 0 0</translate>
+              <rotate>1 0 0 0</rotate>
+            </mass_frame>
+          </technique_common>
+          <technique profile="MAYA">
+            <damping>0</damping>
+          </technique>
+        </instance_rigid_body>
+      </instance_physics_model>
+      <technique_common>
+        <gravity>0 -980 0</gravity>
+        <time_step>0.0299999993294477</time_step>
+      </technique_common>
+    </physics_scene>
+  </library_physics_scenes>
+  <library_materials>
+    <material id="lambert1" name="lambert1">
+      <instance_effect url="#lambert1-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="lambert1-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color>0.5 0.5 0.5 1</color>
+            </diffuse>
+            <transparent opaque="RGB_ZERO">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </lambert>
+          <extra>
+            <technique profile="FCOLLADA"/>
+          </extra>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="pCubeShape1" name="pCubeShape1">
+      <mesh>
+        <source id="pCubeShape1-positions" name="position">
+          <float_array id="pCubeShape1-positions-array" count="24">-0.5 -0.5 0.5 0.5 -0.5 0.5 -0.5 0.5 0.5 0.5 0.5 0.5 -0.5 0.5 -0.5 0.5 0.5 -0.5 -0.5 -0.5 -0.5 0.5 -0.5 -0.5</float_array>
+          <technique_common>
+            <accessor source="#pCubeShape1-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="pCubeShape1-normals" name="normal">
+          <float_array id="pCubeShape1-normals-array" count="72">0 0 1 0 0 1 0 0 1 0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 1 0 0 1 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0</float_array>
+          <technique_common>
+            <accessor source="#pCubeShape1-normals-array" count="24" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="pCubeShape1-map1" name="map1">
+          <float_array id="pCubeShape1-map1-array" count="28">0.7500001788139343 0.4999998807907105 0.7500004172325134 0.7499999403953552 0.5000004172325134 0.7500001192092896 0.5000002384185791 0.5000001788139343 0.0000001192092895 0.7499999403953552 0.0000002384185791 0.4999998807907105 0.2500003576278687 0.5000001192092896 0.2500001192092896 0.7500001192092896 0.2500004172325134 0 0.5000003576278687 0 0.5000004768371582 0.2500000894069672 0.2500004768371582 0.2500000596046448 0.5000005960464478 1.000000238418579 0.2500004172325134 1.000000476837158</float_array>
+          <technique_common>
+            <accessor source="#pCubeShape1-map1-array" count="14" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="pCubeShape1-map1-tangents">
+          <float_array id="pCubeShape1-map1-tangents-array" count="72">0.9999999403953552 0 0 0.9999999403953552 -0.0000001788138632 0 0.9999999403953552 -0.0000002384184796 0 0.9999999403953552 -0.0000001788138632 0 0.9999999403953552 0 0.0000002384185648 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 -0.0000004768369024 0 0.9999999403953552 -0.0000009536738048 0 0.9999999403953552 -0.0000004768369024 0 0.9999999403953552 0 0.0000002980231386 0.9999999403953552 0 0 0.9999999403953552 0 0 0.9999999403953552 0 0 0 -0.9999999403953552 -0.0000011920924407 0 -0.9999999403953552 -0.0000009536741458 0 -0.9999999403953552 -0.0000007152558509 0 -0.9999999403953552 -0.0000009536741458 0 0.9999999403953552 0.0000007152555099 0 0.9999999403953552 0.0000008344648563 0 0.9999999403953552 0.0000009536742595 0 0.9999999403953552 0.0000008344648563</float_array>
+          <technique_common>
+            <accessor source="#pCubeShape1-map1-tangents-array" count="24" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="pCubeShape1-map1-binormals">
+          <float_array id="pCubeShape1-map1-binormals-array" count="72">0 1 0 0.0000001788138774 1 0 0.000000238418508 1 0 0.0000001788138774 1 0 0.0000002384185791 0 -1 0.0000001192092895 0 -1 0 0 -1 0.0000001192092895 0 -1 0 -1 0 -0.0000004768369592 -1 0 -0.0000009536739185 -1 0 -0.0000004768369592 -1 0 -0.000000298023167 0 1 0 0 1 0 0 1 0 0 1 0 0.0000011920925544 -1 0 0.0000009536742595 -1 0 0.0000007152559646 -1 0 0.0000009536742595 -1 0 0.0000007152555667 -1 0 0.00000083446497 -1 0 0.0000009536743164 -1 0 0.00000083446497 -1</float_array>
+          <technique_common>
+            <accessor source="#pCubeShape1-map1-binormals-array" count="24" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="pCubeShape1-vertices">
+          <input semantic="POSITION" source="#pCubeShape1-positions"/>
+        </vertices>
+        <polylist material="initialShadingGroup" count="6">
+          <input semantic="VERTEX" source="#pCubeShape1-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#pCubeShape1-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#pCubeShape1-map1" offset="2" set="0"/>
+          <input semantic="TEXTANGENT" source="#pCubeShape1-map1-tangents" offset="3" set="0"/>
+          <input semantic="TEXBINORMAL" source="#pCubeShape1-map1-binormals" offset="4" set="0"/>
+          <vcount>4 4 4 4 4 4</vcount>
+          <p>0 0 11 0 0 1 1 10 1 1 3 2 3 2 2 2 3 6 3 3 2 4 6 4 4 3 5 3 5 5 5 6 2 6 6 4 7 7 7 7 4 8 7 8 8 5 9 2 9 9 7 10 12 10 10 6 11 13 11 11 6 12 8 12 12 7 13 9 13 13 1 14 10 14 14 0 15 11 15 15 1 16 0 16 16 7 17 1 17 17 5 18 2 18 18 3 19 3 19 19 6 20 4 20 20 0 21 5 21 21 2 22 6 22 22 4 23 7 23 23</p>
+        </polylist>
+      </mesh>
+      <extra>
+        <technique profile="MAYA">
+          <double_sided>1</double_sided>
+        </technique>
+      </extra>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="VisualSceneNode" name="lol">
+      <node id="pCube1" name="pCube1" type="NODE">
+        <matrix sid="transform">5.109739780426025 0 0 0 0 5.109739780426025 0 0 0 0 5.109739780426025 0 0 0 0 1</matrix>
+        <extra>
+          <technique profile="PSSG">
+            <translate_keyed/>
+            <rotate_keyed/>
+          </technique>
+        </extra>
+        <instance_geometry url="#pCubeShape1">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="initialShadingGroup" target="#lambert1"/>
+            </technique_common>
+          </bind_material>
+          <extra>
+            <technique profile="PHYRE">
+              <object_render_properties castsShadows="1" receiveShadows="1" visibleInReflections="1" visibleInRefractions="1" motionBlurEnabled="1"/>
+            </technique>
+          </extra>
+        </instance_geometry>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0.0416666679084301</start_time>
+          <end_time>8.333333015441895</end_time>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_physics_scene url="#MayaNativePhysicsScene"/>
+    <instance_visual_scene url="#VisualSceneNode"/>
+  </scene>
+</COLLADA>

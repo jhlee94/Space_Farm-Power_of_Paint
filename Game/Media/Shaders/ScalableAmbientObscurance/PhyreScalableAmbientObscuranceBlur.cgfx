@@ -1,0 +1,119 @@
+/* SIE CONFIDENTIAL
+PhyreEngine(TM) Package 3.18.0.0
+* Copyright (C) 2016 Sony Interactive Entertainment Inc.
+* All Rights Reserved.
+*/
+
+// Based on blur used in Scalable Ambient Obscurance reference implementation at
+// http://graphics.cs.williams.edu/papers/SAOHPG12/
+//
+// Sony Interactive Entertainment Inc made changes.
+// (C) Copyright 2016 Sony Interactive Entertainment Inc.
+//
+// License information for the original code:
+//===========================================
+
+/** 
+  \file SAO_blur.pix
+  \author Morgan McGuire and Michael Mara, NVIDIA Research
+
+  \brief 7-tap 1D cross-bilateral blur using a packed depth key
+
+  DX11 HLSL port by Leonardo Zide, Treyarch
+  
+  Open Source under the "BSD" license: http://www.opensource.org/licenses/bsd-license.php
+
+  Copyright (c) 2011-2012, NVIDIA
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+
+// Gaussian coefficients
+static const float gaussian[] = 
+	{ 0.356642, 0.239400, 0.072410, 0.009869 };
+
+// Either (1, 0) or (0, 1) for the x or y filter pass.
+float4 blurAxis;
+
+// Paramter to tune the influence of the depth values for the bilateral filter.
+float edgeSharpness;
+
+// Unpacks the view space depth from x and y channel. 
+// Returns a number on (0, 1)
+float unpackKey(float2 p)
+{
+	return p.x * (256.0 / 257.0) + p.y * (1.0 / 257.0);
+}
+
+// Bilateral blur shader. 
+float4 blur(FullscreenFragIn input) : FRAG_OUTPUT_COLOR
+{
+    // Get pixel coord.
+    int2 ssC = int2(input.uv / scene.screenWidthHeightInv);
+
+	float4 colour = float4(1,1,1,1);
+
+	float4 temp = tex2D(BlurBuffer, input.uv);
+
+	colour.yz = temp.yz;
+	float key = unpackKey(colour.gb);
+	float sum = temp.r;
+
+	if (key == 1.0)
+    { 
+		// Sky pixel (if you aren't using depth keying, disable this test)
+		colour.r = sum;
+		return colour;
+	}
+
+	// Base weight for depth falloff.  Increase this for more blurriness,
+	// decrease it for better edge discrimination
+	float baseTab = gaussian[0];
+	float totalWeight = baseTab;
+	sum *= totalWeight;
+
+	for (int r = -3; r <= 3; ++r) 
+	{
+		// We already handled the zero case above.  This loop should be unrolled and the branch discarded
+		if (r != 0) 
+		{
+		    int2 texelCoord  = ssC + blurAxis.xy * r;
+			temp = tex2D(BlurBuffer, texelCoord * scene.screenWidthHeightInv);
+			float tapKey = unpackKey(temp.gb);
+			float value  = temp.r;
+
+			// spatial domain: offset gaussian tap
+			float weight = 0.3 + gaussian[abs((float)r)];
+
+			// range domain (the "bilateral" weight). As depth difference increases, decrease weight.
+			weight *= max(0.0, 1.0 - (2000.0 * edgeSharpness) * abs(tapKey - key));
+
+			sum += value * weight;
+			totalWeight += weight;
+		}
+	}
+
+	const float epsilon = 0.0001;  // Avoid divide by 0.
+
+	colour.r = sum / (totalWeight + epsilon);	
+	return colour;
+}
+
+technique SSA0Blur
+{
+	pass p0
+	{
+		VertexProgram = compile vp40 FullscreenVP();
+		FragmentProgram = compile fp40 blur();	
+		colorMask = bool4(true,true,true,true);
+		cullFaceEnable = false;
+		depthTestEnable = false;
+		depthMask = false;
+	}
+}
